@@ -10,12 +10,13 @@ export const diffusionResults: ResultSet[] = [
       {
         src: "/placeholders/difusion-1.svg",
         model: "Modelo A",
-        time: "12 s",
+        time: 12,
         alt: "Placeholder de resultado de difusión con el modelo A",
       },
       {
         src: "/placeholders/difusion-2.svg",
         model: "Modelo B",
+        time: 301.84,
         alt: "Placeholder de resultado de difusión con el modelo B",
       },
     ],
@@ -33,12 +34,13 @@ export const upscaleResults: ResultSet[] = [
       {
         src: "/placeholders/upscale-original.svg",
         model: "Original",
+        time: 0,
         alt: "Placeholder de imagen original antes del upscale",
       },
       {
         src: "/placeholders/upscale-modelo.svg",
         model: "Modelo de upscale",
-        time: "8 s",
+        time: 8,
         alt: "Placeholder de imagen tras el upscale",
       },
     ],
@@ -57,11 +59,13 @@ export const otherResults: ResultSet[] = [
       {
         src: "/placeholders/recorte-original.svg",
         model: "Original",
+        time: 0,
         alt: "Placeholder de imagen original antes del recorte",
       },
       {
         src: "/placeholders/recorte-modelo.svg",
         model: "Modelo de recorte",
+        time: 3,
         alt: "Placeholder de imagen con fondo transparente",
       },
     ],

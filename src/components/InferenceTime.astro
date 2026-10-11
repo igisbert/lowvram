@@ -1,0 +1,29 @@
+---
+interface Props {
+  seconds: number;
+}
+
+const { seconds } = Astro.props;
+
+// Server-side: no browser JS involved.
+// seconds = 0 means "not generated" (e.g. the Original image):
+// the line is still rendered to reserve space, but shows nothing.
+const approx = seconds < 60 ? null : `~${Math.round(seconds / 60)} min`;
+---
+
+{seconds > 0 ? (
+  <p class="mono time">
+    Tiempo: {seconds} s{approx ? ` (${approx})` : null}
+  </p>
+) : (
+  <p class="mono time" aria-hidden="true">&nbsp;</p>
+)}
+
+<style>
+  .time {
+    font-size: 0.75rem;
+    color: var(--mute);
+    margin: var(--space-sm) 0 0;
+    min-height: 1lh;
+  }
+</style>

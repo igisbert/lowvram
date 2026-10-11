@@ -12,14 +12,26 @@ const { items } = Astro.props;
   {
     items.map((item) => (
       <article class="spot">
-        <div class="shot">
+        <button
+          type="button"
+          class="shot"
+          data-zoom
+          aria-haspopup="dialog"
+          aria-label={`Ampliar captura: ${item.imageAlt}`}
+        >
           <img
             src={item.image}
             alt={item.imageAlt}
             loading="lazy"
             decoding="async"
           />
-        </div>
+        </button>
+        <dialog class="viewer" aria-label={`Captura ampliada: ${item.imageAlt}`}>
+          <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" />
+          <form method="dialog">
+            <button type="submit" class="button">Cerrar</button>
+          </form>
+        </dialog>
         <div class="body">
           <div class="head">
             <h3>{item.name}</h3>
@@ -43,7 +55,7 @@ const { items } = Astro.props;
   .spotlights {
     display: grid;
     gap: var(--space-lg);
-    margin: var(--space-lg) 0 var(--space-2xl);
+    margin: var(--space-lg) 0 0;
   }
 
   .spot {
@@ -57,16 +69,80 @@ const { items } = Astro.props;
   }
 
   .shot {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: var(--radius);
     border: 1px solid var(--hairline);
     background: var(--canvas-soft);
+    padding: 0;
+    font: inherit;
+    cursor: zoom-in;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
+    }
+  }
+
+  .viewer {
+    max-width: min(1200px, 92vw);
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    color: var(--body);
+
+    &::backdrop {
+      background: rgb(0 0 0 / 0.8);
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--radius);
+    }
+
+    form {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: var(--space-lg);
+    }
+  }
+
+  .viewer .button {
+    cursor: pointer;
+  }
+
+  .viewer[open] {
+    animation: viewer-in 160ms ease-out;
+  }
+
+  .viewer[open]::backdrop {
+    animation: backdrop-in 160ms ease-out;
+  }
+
+  @keyframes viewer-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(8px);
+    }
+  }
+
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viewer[open],
+    .viewer[open]::backdrop {
+      animation: none;
     }
   }
 
@@ -118,3 +194,14 @@ const { items } = Astro.props;
     }
   }
 </style>
+
+<script>
+  for (const card of document.querySelectorAll(".spot")) {
+    const trigger = card.querySelector("button[data-zoom]");
+    const viewer = card.querySelector("dialog");
+    trigger?.addEventListener("click", () => viewer?.showModal());
+    viewer?.addEventListener("click", (event) => {
+      if (event.target === viewer) viewer.close();
+    });
+  }
+</script>

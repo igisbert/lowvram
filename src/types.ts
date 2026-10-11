@@ -53,7 +53,7 @@ export type LlmResultRow = {
 export type ResultImage = {
   src: string;
   model: string;
-  time?: string;
+  time: number;
   alt: string;
 };
 
@@ -72,7 +72,7 @@ export type VideoResult = {
   src: string;
   model: string;
   prompt?: string;
-  time?: string;
+  time: number;
   label: string;
 };
 
