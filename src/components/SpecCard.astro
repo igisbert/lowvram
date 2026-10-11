@@ -10,11 +10,16 @@ const { item } = Astro.props;
 ---
 
 <article class="spec">
-  <Placeholder label="TODO: foto real" ratio="4 / 3" />
+  {item.photo ? (
+    <div class="photo">
+      <img src={item.photo} alt={item.photoAlt} loading="lazy" decoding="async" />
+    </div>
+  ) : (
+    <Placeholder label="TODO: foto real" ratio="4 / 3" />
+  )}
   <p class="eyebrow label">{item.label}</p>
   <p class="mono value">{item.value}</p>
   {item.detail && <p class="detail">{item.detail}</p>}
-  <span class="visually-hidden">{item.photoAlt}</span>
 </article>
 
 <style>
@@ -23,6 +28,21 @@ const { item } = Astro.props;
     border: 1px solid var(--hairline);
     border-radius: var(--radius);
     padding: var(--space-xl);
+  }
+
+  .photo {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--hairline);
+    background: var(--canvas-soft);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
   }
 
   .label {

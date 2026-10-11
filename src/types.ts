@@ -13,6 +13,7 @@ export type SpecItem = {
   value: string;
   detail?: string;
   photoAlt: string;
+  photo?: string;
 };
 
 export type SoftwareItem = {
