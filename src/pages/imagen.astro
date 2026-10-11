@@ -1,7 +1,8 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import ModelList from "@/components/ModelList.astro";
+import Info from "@/components/Info.astro";
+import ModelTable from "@/components/ModelTable.astro";
 import ResultCarousel from "@/components/ResultCarousel.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
@@ -12,7 +13,7 @@ import {
   otherResults,
   upscaleResults,
 } from "@/data/image-results";
-import { diffusionModels, otherModels, upscaleModels } from "@/data/models";
+import { diffusionModels, nsfwDiffusionModels, otherModels, upscaleModels } from "@/data/models";
 import {
   diffusionSoftware,
   otherSoftware,
@@ -53,11 +54,26 @@ const anchors = [
       <SoftwareList items={diffusionSoftware} />
       <h3 class="group">Complementos</h3>
       <Spotlight items={diffusionSpotlights} />
-      <h3 class="group">Modelos recomendados para mis specs</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
-      <ModelList items={diffusionModels} />
+      <h3 class="group">Modelos recomendados para 8GB</h3>
+      <Info title="¿Qué son los Turbo?">
+        <p>
+          Versiones destiladas que necesitan pocos pasos. Son
+          mucho más rápidas a cambio de tener menor creatividad. Más repetitivos y responden peor a las ideas raras. 
+        </p>
+      </Info>
+      <ModelTable items={diffusionModels} />
+      <details class="nsfw">
+        <summary>
+          <span class="mono">
+            Modelos NSFW ({nsfwDiffusionModels.length}) —{" "}
+            <span class="show">mostrar</span>
+            <span class="hide">ocultar</span>
+          </span>
+        </summary>
+        <div class="nsfw-body">
+          <ModelTable items={nsfwDiffusionModels} />
+        </div>
+      </details>
       <h3 class="group">Resultados conseguidos</h3>
       {diffusionResults.map((set) => <ResultCarousel set={set} />)}
     </Section>
@@ -69,7 +85,7 @@ const anchors = [
       <p>
         <span class="todo-flag">TODO: sustituir por datos reales</span>
       </p>
-      <ModelList items={upscaleModels} />
+      <ModelTable items={upscaleModels} />
       <h3 class="group">Resultados conseguidos</h3>
       {upscaleResults.map((set) => <ResultCarousel set={set} />)}
     </Section>
@@ -81,7 +97,7 @@ const anchors = [
       <p>
         <span class="todo-flag">TODO: sustituir por datos reales</span>
       </p>
-      <ModelList items={otherModels} />
+      <ModelTable items={otherModels} />
       <h3 class="group">Resultados conseguidos</h3>
       {otherResults.map((set) => <ResultCarousel set={set} />)}
     </Section>
@@ -109,5 +125,45 @@ const anchors = [
 
   .group:first-of-type {
     margin-top: 0;
+  }
+
+  .nsfw {
+    margin-top: var(--space-lg);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    background: var(--canvas-card);
+  }
+
+  .nsfw summary {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: var(--space-md) var(--space-lg);
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--body);
+  }
+
+  .nsfw summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nsfw summary .hide {
+    display: none;
+  }
+
+  .nsfw[open] summary .hide {
+    display: inline;
+  }
+
+  .nsfw[open] summary .show {
+    display: none;
+  }
+
+  .nsfw-body {
+    padding: 0 var(--space-lg) var(--space-lg);
   }
 </style>

@@ -34,6 +34,7 @@ export type SoftwareItem = {
 export type ModelItem = {
   name: string;
   size: string;
+  params: string;
   quantization: string;
   vram: string;
   use: string;

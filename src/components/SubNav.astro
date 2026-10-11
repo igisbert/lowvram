@@ -18,11 +18,11 @@ const { items } = Astro.props;
 
 <style>
   .subnav {
-    border-bottom: 1px solid var(--hairline);
+    margin-top: var(--space-xl);
 
     ul {
       display: flex;
-      gap: var(--space-md);
+      gap: var(--space-sm);
       flex-wrap: wrap;
       list-style: none;
       margin: 0;
@@ -33,9 +33,19 @@ const { items } = Astro.props;
       display: inline-flex;
       align-items: center;
       min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-pill);
+      background: transparent;
       color: var(--body);
       text-decoration: none;
       font-size: 0.875rem;
+      transition: border-color 120ms ease-out, color 120ms ease-out;
+
+      &:hover {
+        border-color: var(--accent);
+        color: var(--ink);
+      }
     }
   }
 </style>

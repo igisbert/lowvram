@@ -1,0 +1,82 @@
+---
+import { Info as InfoIcon } from "@lucide/astro";
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<aside class:list={["info", { titled: title }]}>
+  <InfoIcon size={18} />
+  {title && <p class="mono name">{title}</p>}
+  <div class="body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon name"
+      "icon body";
+    gap: var(--space-sm) var(--space-md);
+    align-items: start;
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+
+    svg {
+      grid-area: icon;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--accent);
+    }
+  }
+
+  .body {
+    grid-area: body;
+    min-width: 0;
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+
+    p + p {
+      margin-top: var(--space-sm);
+    }
+  }
+
+  .name {
+    grid-area: name;
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  @media (min-width: 768px) {
+    .info.titled {
+      grid-template-columns: auto auto 1fr;
+      grid-template-areas: "icon name body";
+      gap: var(--space-md) var(--space-lg);
+    }
+
+    .info.titled .body {
+      border-left: 1px solid var(--hairline);
+      padding-left: var(--space-lg);
+    }
+
+    .info.titled .name {
+      max-width: 12rem;
+      padding-top: 2px;
+    }
+  }
+</style>

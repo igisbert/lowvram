@@ -1,0 +1,207 @@
+---
+import { Link } from "@lucide/astro";
+import type { ModelItem } from "@/types";
+
+interface Props {
+  items: ModelItem[];
+}
+
+const { items } = Astro.props;
+
+const columns = [
+  { key: "name", label: "Modelo", sortable: true },
+  { key: "size", label: "Tamaño", sortable: true },
+  { key: "params", label: "Parámetros", sortable: true },
+  { key: "quantization", label: "Cuantización", sortable: true },
+  { key: "use", label: "Características", sortable: false },
+  { key: "url", label: "Enlace", sortable: false },
+] as const;
+---
+
+{items.length === 0 ? (
+  <div class="empty" role="status">
+    <p class="mono">Sin modelos todavía</p>
+    <p>TODO: sustituir por datos reales. Añade una entrada al array y aparecerá aquí.</p>
+  </div>
+) : (
+  <div class="scroller" tabindex="0" role="region" aria-label="Modelos, tabla con scroll horizontal">
+    <table class="models mono" data-sortable>
+      <thead>
+        <tr>
+          {columns.map((col, i) => (
+            <th scope="col" aria-sort={!col.sortable ? undefined : i === 0 ? "ascending" : "none"}>
+              {col.sortable ? (
+                <button type="button" data-sort={col.key}>
+                  {col.label} <span aria-hidden="true">↕</span>
+                </button>
+              ) : (
+                <span class="col-label">{col.label}</span>
+              )}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {items.map((item) => (
+          <tr>
+            <td>{item.name}</td>
+            <td>{item.size}</td>
+            <td>{item.params}</td>
+            <td>{item.quantization}</td>
+            <td class="use">{item.use}</td>
+            <td>
+              <a
+                class="icon-link"
+                href={item.url}
+                target="_blank"
+                rel="noopener"
+                aria-label={`Descargar ${item.name}`}
+              >
+                <Link size={16} />
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
+<script>
+  for (const table of document.querySelectorAll<HTMLTableElement>("table[data-sortable]")) {
+    const headers = [...table.querySelectorAll<HTMLButtonElement>("th button")];
+    const body = table.querySelector("tbody");
+    if (!body || table.dataset.done) continue;
+    table.dataset.done = "true";
+
+    headers.forEach((button) => {
+      button.addEventListener("click", () => {
+        const index = headers.indexOf(button);
+        const th = button.closest("th");
+        const current = th?.getAttribute("aria-sort") ?? "none";
+        const ascending = current !== "ascending";
+
+        for (const h of table.querySelectorAll("th")) h.setAttribute("aria-sort", "none");
+        th?.setAttribute("aria-sort", ascending ? "ascending" : "descending");
+
+        const rows = [...body.querySelectorAll("tr")];
+        rows.sort((a, b) => {
+          const x = a.children[index]?.textContent?.trim() ?? "";
+          const y = b.children[index]?.textContent?.trim() ?? "";
+          return ascending
+            ? x.localeCompare(y, "es", { numeric: true })
+            : y.localeCompare(x, "es", { numeric: true });
+        });
+        body.replaceChildren(...rows);
+      });
+    });
+  }
+</script>
+
+<style>
+  .scroller {
+    overflow-x: auto;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+  }
+
+  .models {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    background: var(--canvas-card);
+
+    th {
+      background: var(--canvas-soft);
+      text-align: left;
+    }
+
+    th,
+    td {
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--hairline);
+      white-space: nowrap;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    th button {
+      all: unset;
+      cursor: pointer;
+      display: inline-flex;
+      gap: var(--space-xs);
+      align-items: center;
+      font: inherit;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      min-height: 44px;
+    }
+
+    th button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .col-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+    }
+
+    td {
+      color: var(--body);
+    }
+
+    td:first-child {
+      color: var(--ink);
+    }
+
+    .use {
+      white-space: normal;
+      min-width: 220px;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      color: var(--ink);
+    }
+
+    a {
+      color: var(--ink);
+    }
+  }
+
+  .empty {
+    background: var(--canvas-soft);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-3xl);
+    text-align: center;
+
+    p:first-child {
+      color: var(--ink);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+
+    p:last-child {
+      color: var(--mute);
+      font-size: 0.875rem;
+      margin-inline: auto;
+    }
+  }
+</style>

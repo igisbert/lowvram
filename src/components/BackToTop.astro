@@ -1,0 +1,44 @@
+---
+import { ArrowUp } from "@lucide/astro";
+---
+
+<button type="button" class="to-top" data-to-top hidden aria-label="Volver arriba">
+  <ArrowUp size={20} />
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>("[data-to-top]");
+  const toggle = () => {
+    if (button) button.hidden = window.scrollY < 600;
+  };
+  toggle();
+  window.addEventListener("scroll", toggle, { passive: true });
+  button?.addEventListener("click", () => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+  });
+</script>
+
+<style>
+  .to-top {
+    position: fixed;
+    right: var(--space-lg);
+    bottom: var(--space-lg);
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--canvas-card);
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    padding: 0;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+</style>

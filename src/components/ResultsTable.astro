@@ -58,7 +58,8 @@ const columns: { key: keyof LlmResultRow; label: string }[] = [
   for (const table of document.querySelectorAll<HTMLTableElement>("table[data-sortable]")) {
     const headers = [...table.querySelectorAll<HTMLButtonElement>("th button")];
     const body = table.querySelector("tbody");
-    if (!body) continue;
+    if (!body || table.dataset.done) continue;
+    table.dataset.done = "true";
 
     headers.forEach((button) => {
       button.addEventListener("click", () => {
