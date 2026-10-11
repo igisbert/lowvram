@@ -1,0 +1,120 @@
+---
+import type { SpotlightItem } from "@/types";
+
+interface Props {
+  items: SpotlightItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="spotlights">
+  {
+    items.map((item) => (
+      <article class="spot">
+        <div class="shot">
+          <img
+            src={item.image}
+            alt={item.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="body">
+          <div class="head">
+            <h3>{item.name}</h3>
+            <span class="mono badge">Recomendado</span>
+          </div>
+          <p>{item.description}</p>
+          <footer class="foot">
+            {item.links.map((link) => (
+              <a class="button" href={link.href} target="_blank" rel="noopener">
+                {link.label}
+              </a>
+            ))}
+          </footer>
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .spotlights {
+    display: grid;
+    gap: var(--space-lg);
+    margin: var(--space-lg) 0 var(--space-2xl);
+  }
+
+  .spot {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+  }
+
+  .shot {
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--hairline);
+    background: var(--canvas-soft);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      margin: 0 0 var(--space-md);
+    }
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+    margin: 0 0 var(--space-sm);
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-pill);
+    padding: var(--space-xs) var(--space-md);
+    white-space: nowrap;
+    margin-left: auto;
+  }
+
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+    margin-top: auto;
+    padding-top: var(--space-md);
+  }
+
+  @media (min-width: 768px) {
+    .spot {
+      grid-template-columns: 3fr 2fr;
+      align-items: center;
+    }
+  }
+</style>

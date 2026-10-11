@@ -4,39 +4,82 @@ import type { SoftwareItem } from "@/types";
 export const llmSoftware: SoftwareItem[] = [
   {
     name: "Ollama",
-    description: "Ejecuta LLM locales con un solo comando y API compatible con OpenAI.",
-    url: "https://ollama.com",
+    description: "Ejecuta LLM locales con un solo comando y API compatible con OpenAI. Tiene su propio catálogo de modelos y ofrece nube de pago por si un modelo no cabe en tu equipo.",
+    links: [{ label: "Sitio web", href: "https://ollama.com" }],
     audience: "Quien quiere empezar rápido sin configurar nada.",
-    pros: ["Instalación simple", "Buena API local"],
+    pros: ["Instalación simple", "Catálogo propio: un pull y listo", "Buena API local"],
     cons: ["Menos control fino que llama.cpp"],
   },
   {
-    name: "llama.cpp",
-    description: "Motor de inferencia en C++ optimizado para CPU y GPU con offload parcial.",
-    url: "https://github.com/ggerganov/llama.cpp",
-    audience: "Quien quiere exprimir VRAM y medir t/s de verdad.",
+    name: "LM Studio",
+    description: "App de escritorio para buscar, descargar y probar modelos de Hugging Face con chat integrado, y servirlos en red local con API compatible con OpenAI.",
+    links: [{ label: "Sitio web", href: "https://lmstudio.ai" }],
+    audience: "Quien prefiere GUI antes que terminal.",
+    pros: ["Interfaz cuidada, ideal para empezar", "Servidor local con un clic"],
+    cons: ["Más pesado que Ollama", "Menos control fino que llama.cpp"],
   },
   {
-    name: "LM Studio",
-    description: "App de escritorio para descargar, probar y servir modelos con interfaz gráfica.",
-    url: "https://lmstudio.ai",
-    audience: "Quien prefiere GUI antes que terminal.",
+    name: "llama.cpp",
+    description: "Motor de inferencia en C++ que ejecuta modelos GGUF en CPU y GPU, con descarga parcial por capas para exprimir la VRAM disponible.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/ggerganov/llama.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
+    ],
+    audience: "Quien quiere exprimir VRAM y medir t/s de verdad.",
+    pros: ["Offload por capas: decide qué cabe en GPU y qué va a RAM", "Mide t/s reales de generación y de prompt", "Control total sobre parámetros y cuantización"],
+    cons: ["Más difícil de usar que Ollama o LM Studio"],
+    recommended: true,
+  },
+  {
+    name: "vLLM",
+    description: "Motor para servir modelos en servidor, con API compatible con OpenAI y alto rendimiento ante muchas peticiones concurrentes.",
+    links: [{ label: "Ver en GitHub", href: "https://github.com/vllm-project/vllm" }],
+    audience: "Quien quiere montar un servidor local para varias apps o usuarios a la vez.",
+    pros: ["Muy alto rendimiento sirviendo", "API compatible con OpenAI"],
+    cons: ["Pensado para Linux y GPU potentes", "Sobredimensionado para un solo usuario en 8 GB"],
+  },
+];
+
+/* Ficha real de Pi. */
+export const llmAgents: SoftwareItem[] = [
+  {
+    name: "Pi",
+    description: "Agente de terminal mínimo y extensible que funciona con decenas de proveedores, tanto en local como en nube.",
+    links: [
+      { label: "Sitio web", href: "https://pi.dev" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/pi/" },
+    ],
+    audience: "Quien quiere un agente ligero y moldeable para programar con sus modelos.",
+    pros: ["Núcleo mínimo que adaptas a tu flujo", "Al ser tan mínimo, apenas consume contexto de serie"],
+    cons: ["Sin subagentes ni modo plan de serie"],
+    recommended: true,
   },
 ];
 
 /* TODO: sustituir por datos reales. */
 export const diffusionSoftware: SoftwareItem[] = [
   {
-    name: "sd.cpp",
-    description: "Stable Diffusion en C++ para generar imagen sin frameworks pesados.",
-    url: "https://github.com/leejet/stable-diffusion.cpp",
-    audience: "Quien quiere difusión ligera en GPU modesta.",
+    name: "stable-diffusion.cpp",
+    description: "Inferencia de difusión en C++: ligera y rápida, compatible con multitud de modelos y formatos, con cuantización opcional.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/stablediffusioncpp/" },
+    ],
+    audience: "Quien solo quiere generar imágenes rápidamente. ",
+    pros: ["Ligero y rápido, binarios compilados", "No necesita ejecutar Python", "Soporte para CUDA, Vulkan, Metal y CPU"],
+    cons: ["Solo terminal, sin interfaz"],
+    recommended: true,
   },
   {
     name: "ComfyUI",
-    description: "Interfaz por nodos para flujos de difusión reproducibles.",
-    url: "https://github.com/comfyanonymous/ComfyUI",
+    description: "Interfaz por nodos para generar imagen con casi cualquier modelo: montas el flujo a mano, lo guardas y lo reutilizas. Con ComfyUI Desktop viene todo configurado de serie.",
+    links: [
+      { label: "Sitio web", href: "https://www.comfy.org" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/comfyui/" },
+    ],
     audience: "Quien quiere controlar cada paso del pipeline.",
+    pros: ["Flujos reproducibles y compartibles", "Flujos complejos encadenando pasos, no solo generar la foto y ya"],
+    cons: ["Curva de aprendizaje", "Pide más VRAM que sd.cpp para lo mismo"],
   },
 ];
 
@@ -45,7 +88,7 @@ export const upscaleSoftware: SoftwareItem[] = [
   {
     name: "Real-ESRGAN",
     description: "Upscale clásico por línea de comandos, modelos intercambiables.",
-    url: "https://github.com/xinntao/Real-ESRGAN",
+    links: [{ label: "Ver en GitHub", href: "https://github.com/xinntao/Real-ESRGAN" }],
     audience: "Quien quiere ampliar sin interfaz gráfica.",
   },
 ];
@@ -55,7 +98,29 @@ export const otherSoftware: SoftwareItem[] = [
   {
     name: "Rembg",
     description: "Quita el fondo de una imagen en local con modelos U²-Net.",
-    url: "https://github.com/danielgatis/rembg",
+    links: [{ label: "Ver en GitHub", href: "https://github.com/danielgatis/rembg" }],
     audience: "Quien necesita recortes con transparencia.",
+  },
+];
+
+/* TODO: sustituir por datos reales. */
+export const videoSoftware: SoftwareItem[] = [
+  {
+    name: "ComfyUI",
+    description: "Interfaz por nodos que también sirve flujos de vídeo (AnimateDiff y similares).",
+    links: [
+      { label: "Sitio web", href: "https://www.comfy.org" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/comfyui/" },
+    ],
+    audience: "Quien ya lo usa para imagen y quiere probar vídeo.",
+  },
+  {
+    name: "stable-diffusion.cpp",
+    description: "Stable Diffusion en C++ con soporte de vídeo (Stable Video Diffusion) para generar clips en local.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/stablediffusioncpp/" },
+    ],
+    audience: "Quien quiere probar vídeo sin frameworks pesados.",
   },
 ];

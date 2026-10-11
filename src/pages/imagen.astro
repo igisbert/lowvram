@@ -5,22 +5,20 @@ import ModelList from "@/components/ModelList.astro";
 import ResultCarousel from "@/components/ResultCarousel.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
+import Spotlight from "@/components/Spotlight.astro";
 import SubNav from "@/components/SubNav.astro";
 import {
   diffusionResults,
   otherResults,
   upscaleResults,
 } from "@/data/image-results";
-import {
-  diffusionModels,
-  otherModels,
-  upscaleModels,
-} from "@/data/models";
+import { diffusionModels, otherModels, upscaleModels } from "@/data/models";
 import {
   diffusionSoftware,
   otherSoftware,
   upscaleSoftware,
 } from "@/data/software";
+import { diffusionSpotlights } from "@/data/spotlights";
 import Layout from "@/layouts/Layout.astro";
 
 const anchors = [
@@ -46,18 +44,21 @@ const anchors = [
       <SubNav items={anchors} />
     </div>
 
-    <Section eyebrow="Texto a imagen" title="Difusión" id="difusion">
+    <Section
+      eyebrow="Texto a imagen, edición, img2img, inpainting con máscara..."
+      title="Difusión"
+      id="difusion"
+    >
       <h3 class="group">Software</h3>
       <SoftwareList items={diffusionSoftware} />
+      <Spotlight items={diffusionSpotlights} />
       <h3 class="group">Modelos recomendados para mis specs</h3>
       <p>
         <span class="todo-flag">TODO: sustituir por datos reales</span>
       </p>
       <ModelList items={diffusionModels} />
       <h3 class="group">Resultados conseguidos</h3>
-      {diffusionResults.map((set) => (
-        <ResultCarousel set={set} />
-      ))}
+      {diffusionResults.map((set) => <ResultCarousel set={set} />)}
     </Section>
 
     <Section eyebrow="Ampliar sin inventar" title="Upscale" id="upscale">
@@ -69,9 +70,7 @@ const anchors = [
       </p>
       <ModelList items={upscaleModels} />
       <h3 class="group">Resultados conseguidos</h3>
-      {upscaleResults.map((set) => (
-        <ResultCarousel set={set} />
-      ))}
+      {upscaleResults.map((set) => <ResultCarousel set={set} />)}
     </Section>
 
     <Section eyebrow="Retoques útiles" title="Otros modelos" id="otros">
@@ -83,9 +82,7 @@ const anchors = [
       </p>
       <ModelList items={otherModels} />
       <h3 class="group">Resultados conseguidos</h3>
-      {otherResults.map((set) => (
-        <ResultCarousel set={set} />
-      ))}
+      {otherResults.map((set) => <ResultCarousel set={set} />)}
     </Section>
   </main>
   <Footer />

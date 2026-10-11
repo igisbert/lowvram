@@ -55,3 +55,15 @@ export const otherModels: ModelItem[] = [
     url: "https://huggingface.co",
   },
 ];
+
+/* TODO: sustituir por datos reales. */
+export const videoModels: ModelItem[] = [
+  {
+    name: "Modelo de vídeo de ejemplo",
+    size: "2 GB",
+    quantization: "FP16",
+    vram: "~6 GB",
+    use: "Clips cortos de ejemplo para validar el flujo.",
+    url: "https://huggingface.co",
+  },
+];

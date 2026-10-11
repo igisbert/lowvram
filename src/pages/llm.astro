@@ -7,7 +7,7 @@ import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import { llmResults } from "@/data/llm-results";
 import { llmModels } from "@/data/models";
-import { llmSoftware } from "@/data/software";
+import { llmAgents, llmSoftware } from "@/data/software";
 import Layout from "@/layouts/Layout.astro";
 ---
 
@@ -28,6 +28,10 @@ import Layout from "@/layouts/Layout.astro";
 
     <Section eyebrow="Programas" title="Software para usar LLM locales">
       <SoftwareList items={llmSoftware} />
+    </Section>
+
+    <Section eyebrow="Herramientas" title="Agentes">
+      <SoftwareList items={llmAgents} />
     </Section>
 
     <Section eyebrow="Para 8 GB de VRAM" title="Modelos recomendados para mis specs">

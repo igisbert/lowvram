@@ -16,13 +16,19 @@ export type SpecItem = {
   photo?: string;
 };
 
+export type SoftwareLink = {
+  label: string;
+  href: string;
+};
+
 export type SoftwareItem = {
   name: string;
   description: string;
-  url: string;
+  links: SoftwareLink[];
   audience: string;
   pros?: string[];
   cons?: string[];
+  recommended?: boolean;
 };
 
 export type ModelItem = {
@@ -59,4 +65,21 @@ export type ResultSet = {
   images: ResultImage[];
   firstIsOriginal?: boolean;
   checker?: boolean;
+};
+
+export type VideoResult = {
+  id: string;
+  src: string;
+  model: string;
+  prompt?: string;
+  time?: string;
+  label: string;
+};
+
+export type SpotlightItem = {
+  name: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  links: SoftwareLink[];
 };
