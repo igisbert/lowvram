@@ -1,0 +1,30 @@
+---
+import SpecCard from "@/components/SpecCard.astro";
+import type { SpecItem } from "@/types";
+
+interface Props {
+  items: SpecItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="specs">
+  {items.map((item) => (
+    <SpecCard item={item} />
+  ))}
+</div>
+
+<style>
+  .specs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .specs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

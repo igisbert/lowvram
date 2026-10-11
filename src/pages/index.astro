@@ -1,11 +1,89 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Section from "@/components/Section.astro";
+import Specs from "@/components/Specs.astro";
+import WindowsBadge from "@/components/WindowsBadge.astro";
+import { specs } from "@/data/specs";
+import Layout from "@/layouts/Layout.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Inicio"
+  description="Pruebas reales de IA local en una RTX 2070 con 8 GB de VRAM: modelos de texto e imagen funcionando en hardware modesto, sin nube."
+>
+  <Header />
+  <main id="main">
+    <div class="container page-head">
+      <p class="eyebrow">IA local · Hardware modesto</p>
+      <h1>IA local en una GPU de 2018 con 8&nbsp;GB de VRAM</h1>
+      <p class="lead">
+        Esta web recoge pruebas reales hechas en mi propio equipo: qué modelos
+        caben, a qué velocidad van y qué resultados dan. Sin nube, sin suscripciones.
+      </p>
+    </div>
+
+    <Section eyebrow="Privacidad, coste, control" title="Por qué SÍ usar IA local">
+      <p>
+        Lo que escribes no sale de tu casa. Sin cuentas, sin telemetría que no
+        puedas desactivar, sin que tus textos o tus fotos acaben en un servidor
+        ajeno. Para trabajo personal es el argumento que más pesa.
+      </p>
+      <p>
+        Cuesta cero por uso. Pagaste el hardware una vez y cada inferencia sale
+        gratis: puedes probar, equivocarte y repetir cien veces sin mirar el contador.
+      </p>
+      <p>
+        Tú decides la versión del modelo, los parámetros y cuándo actualizar.
+        Nada de cambios silenciosos de comportamiento de un día para otro.
+      </p>
+      <p>
+        Funciona sin conexión. En un tren, en una casa rural o cuando se cae la
+        fibra, tus herramientas siguen ahí.
+      </p>
+    </Section>
+
+    <Section eyebrow="Expectativas honestas" title="Qué NO esperar de la IA local">
+      <p>
+        No esperes el rendimiento de un modelo puntero en la nube como Opus 5.5.
+        Un modelo de 7 u 8 GB cuantizado razona peor, se equivoca más y pierde el
+        hilo antes en contextos largos. Es física, no pesimismo.
+      </p>
+      <p>
+        No todo cabe en 8 GB de VRAM. Algunos modelos entran enteros en la GPU y
+        otros desbordan a RAM y van mucho más lentos. La tabla de resultados
+        muestra exactamente qué cabe y qué no.
+      </p>
+      <p>
+        Generar imagen lleva su tiempo y el upscale no hace milagros: amplía lo
+        que hay, no inventa detalle real. Los ejemplos de esta web lo muestran
+        tal cual, sin retoques.
+      </p>
+    </Section>
+
+    <Section eyebrow="Mi equipo" title="Hardware real, sin humo">
+      <p>
+        <WindowsBadge /> <span class="todo-flag">TODO: sustituir fotos por las reales</span>
+      </p>
+      <Specs items={specs} />
+    </Section>
+  </main>
+  <Footer />
 </Layout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-4xl) var(--space-2xl);
+  }
+
+  .page-head h1 {
+    margin: 0 0 var(--space-lg);
+    max-width: 20ch;
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    color: var(--body);
+    margin: 0;
+  }
+</style>

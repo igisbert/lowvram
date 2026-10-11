@@ -1,0 +1,42 @@
+---
+import Placeholder from "@/components/Placeholder.astro";
+import type { SpecItem } from "@/types";
+
+interface Props {
+  item: SpecItem;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="spec">
+  <Placeholder label="TODO: foto real" ratio="4 / 3" />
+  <p class="eyebrow label">{item.label}</p>
+  <p class="mono value">{item.value}</p>
+  {item.detail && <p class="detail">{item.detail}</p>}
+  <span class="visually-hidden">{item.photoAlt}</span>
+</article>
+
+<style>
+  .spec {
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-xl);
+  }
+
+  .label {
+    margin: var(--space-lg) 0 var(--space-xs);
+  }
+
+  .value {
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .detail {
+    color: var(--mute);
+    font-size: 0.875rem;
+    margin: var(--space-xs) 0 0;
+  }
+</style>

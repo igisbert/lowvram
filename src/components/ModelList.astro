@@ -1,0 +1,30 @@
+---
+import ModelCard from "@/components/ModelCard.astro";
+import type { ModelItem } from "@/types";
+
+interface Props {
+  items: ModelItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="grid">
+  {items.map((item) => (
+    <ModelCard item={item} />
+  ))}
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

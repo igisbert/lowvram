@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#1a1c20"/>
+  <rect x="16" y="16" width="768" height="568" fill="none" stroke="#363a3f" stroke-width="2" stroke-dasharray="12 8"/>
+  <text x="400" y="290" fill="#7d8187" font-family="monospace" font-size="28" text-anchor="middle">TODO: imagen original</text>
+  <text x="400" y="330" fill="#ffd1dc" font-family="monospace" font-size="20" text-anchor="middle">recorte · 4:3</text>
+</svg>

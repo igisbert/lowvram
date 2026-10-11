@@ -1,0 +1,115 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import ModelList from "@/components/ModelList.astro";
+import ResultCarousel from "@/components/ResultCarousel.astro";
+import Section from "@/components/Section.astro";
+import SoftwareList from "@/components/SoftwareList.astro";
+import SubNav from "@/components/SubNav.astro";
+import {
+  diffusionResults,
+  otherResults,
+  upscaleResults,
+} from "@/data/image-results";
+import {
+  diffusionModels,
+  otherModels,
+  upscaleModels,
+} from "@/data/models";
+import {
+  diffusionSoftware,
+  otherSoftware,
+  upscaleSoftware,
+} from "@/data/software";
+import Layout from "@/layouts/Layout.astro";
+
+const anchors = [
+  { label: "Difusión", href: "#difusion" },
+  { label: "Upscale", href: "#upscale" },
+  { label: "Otros modelos", href: "#otros" },
+];
+---
+
+<Layout
+  title="Modelos de imagen"
+  description="Difusión, upscale y otros modelos de imagen ejecutados en local en una RTX 2070 con 8 GB de VRAM, con resultados comparables."
+>
+  <Header />
+  <main id="main">
+    <div class="container page-head">
+      <p class="eyebrow">Imagen · Difusión, upscale y más</p>
+      <h1>Modelos de imagen</h1>
+      <p class="lead">
+        Tres bloques: generar desde cero, ampliar y otros retoques. Cada uno con
+        su software, sus modelos y sus resultados comparables.
+      </p>
+      <SubNav items={anchors} />
+    </div>
+
+    <Section eyebrow="Texto a imagen" title="Difusión" id="difusion">
+      <h3 class="group">Software</h3>
+      <SoftwareList items={diffusionSoftware} />
+      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <ModelList items={diffusionModels} />
+      <h3 class="group">Resultados conseguidos</h3>
+      {diffusionResults.map((set) => (
+        <ResultCarousel set={set} />
+      ))}
+    </Section>
+
+    <Section eyebrow="Ampliar sin inventar" title="Upscale" id="upscale">
+      <h3 class="group">Software</h3>
+      <SoftwareList items={upscaleSoftware} />
+      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <ModelList items={upscaleModels} />
+      <h3 class="group">Resultados conseguidos</h3>
+      {upscaleResults.map((set) => (
+        <ResultCarousel set={set} />
+      ))}
+    </Section>
+
+    <Section eyebrow="Retoques útiles" title="Otros modelos" id="otros">
+      <h3 class="group">Software</h3>
+      <SoftwareList items={otherSoftware} />
+      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <ModelList items={otherModels} />
+      <h3 class="group">Resultados conseguidos</h3>
+      {otherResults.map((set) => (
+        <ResultCarousel set={set} />
+      ))}
+    </Section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-4xl) var(--space-2xl);
+  }
+
+  .page-head h1 {
+    margin: 0 0 var(--space-lg);
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    margin: 0 0 var(--space-xl);
+  }
+
+  .group {
+    margin: var(--space-2xl) 0 var(--space-lg);
+  }
+
+  .group:first-of-type {
+    margin-top: 0;
+  }
+</style>

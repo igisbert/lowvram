@@ -1,0 +1,30 @@
+---
+interface Props {
+  label: string;
+  ratio?: string;
+}
+
+const { label, ratio = "4 / 3" } = Astro.props;
+---
+
+<div class="placeholder" style={`aspect-ratio: ${ratio}`} role="img" aria-label={label}>
+  <span class="mono">{label}</span>
+</div>
+
+<style>
+  .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: var(--canvas-soft);
+    border: 1px dashed var(--hairline);
+    border-radius: var(--radius);
+    color: var(--mute);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: var(--space-lg);
+  }
+</style>

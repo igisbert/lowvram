@@ -1,0 +1,264 @@
+---
+import type { ResultSet } from "@/types";
+
+interface Props {
+  set: ResultSet;
+}
+
+const { set } = Astro.props;
+const regionId = `carousel-${set.id}`;
+---
+
+<figure class="carousel" id={regionId} data-carousel data-ratio={set.ratio}>
+  <div
+    class="viewport"
+    tabindex="0"
+    role="region"
+    aria-roledescription="carrusel"
+    aria-label={set.prompt ?? set.description ?? "Resultados de imagen"}
+  >
+    <ul class="track">
+      {set.images.map((image, i) => (
+        <li class="slide" data-slide hidden={i !== 0}>
+          <div class:list={["frame", { checker: set.checker }]} style={`aspect-ratio: ${set.ratio}`}>
+            <img
+              src={image.src}
+              alt={image.alt}
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+            <span class="mono badge">
+              {set.firstIsOriginal && i === 0 ? "Original" : image.model}
+            </span>
+          </div>
+          {image.time ? (
+            <p class="mono time">Tiempo: {image.time}</p>
+          ) : (
+            <p class="mono time" aria-hidden="true">&nbsp;</p>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <figcaption class="caption">
+    <div class="controls">
+      <button type="button" class="button arrow" data-prev aria-label="Imagen anterior">←</button>
+      <p class="mono position" data-position aria-live="polite">1 / {set.images.length}</p>
+      <button type="button" class="button arrow" data-next aria-label="Imagen siguiente">→</button>
+    </div>
+    <div class="dots" role="tablist" aria-label="Elegir imagen">
+      {set.images.map((image, i) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          aria-label={`Ver imagen ${i + 1}: ${image.model}`}
+          data-dot={i}
+        />
+      ))}
+    </div>
+    <div class="prompt-wrap">
+      {set.prompt ? (
+        <p class="mono prompt">{set.prompt}</p>
+      ) : set.description ? (
+        <p class="description">{set.description}</p>
+      ) : null}
+    </div>
+  </figcaption>
+</figure>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-carousel]")) {
+    const slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
+    const dots = [...root.querySelectorAll<HTMLButtonElement>("[data-dot]")];
+    const position = root.querySelector("[data-position]");
+    const viewport = root.querySelector<HTMLElement>(".viewport");
+    const prev = root.querySelector<HTMLButtonElement>("[data-prev]");
+    const next = root.querySelector<HTMLButtonElement>("[data-next]");
+    let index = 0;
+
+    const show = (nextIndex: number) => {
+      index = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        slide.hidden = i !== index;
+      });
+      dots.forEach((dot, i) => {
+        dot.setAttribute("aria-selected", String(i === index));
+        dot.classList.toggle("current", i === index);
+      });
+      if (position) position.textContent = `${index + 1} / ${slides.length}`;
+    };
+
+    prev?.addEventListener("click", () => show(index - 1));
+    next?.addEventListener("click", () => show(index + 1));
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => show(Number(dot.dataset.dot)));
+    });
+    viewport?.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") show(index - 1);
+      if (event.key === "ArrowRight") show(index + 1);
+    });
+
+    let startX: number | null = null;
+    viewport?.addEventListener("pointerdown", (event) => {
+      startX = event.clientX;
+    });
+    viewport?.addEventListener("pointerup", (event) => {
+      if (startX === null) return;
+      const delta = event.clientX - startX;
+      if (delta > 40) show(index - 1);
+      if (delta < -40) show(index + 1);
+      startX = null;
+    });
+
+    show(0);
+  }
+</script>
+
+<style>
+  .carousel {
+    margin: 0 0 var(--space-2xl);
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+  }
+
+  .viewport {
+    border-radius: var(--radius);
+  }
+
+  .track {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--hairline);
+    background: var(--canvas-soft);
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &.checker {
+      background-image:
+        linear-gradient(45deg, var(--canvas-mid) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--canvas-mid) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--canvas-mid) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--canvas-mid) 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    }
+  }
+
+  .badge {
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    background: rgb(10 10 10 / 0.8);
+    color: var(--ink);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--hairline);
+  }
+
+  .time {
+    font-size: 0.75rem;
+    color: var(--mute);
+    margin: var(--space-sm) 0 0;
+    min-height: 1lh;
+  }
+
+  .caption {
+    margin-top: var(--space-lg);
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .arrow {
+    min-width: 44px;
+    justify-content: center;
+  }
+
+  .position {
+    margin: 0 auto 0 0;
+    font-size: 0.75rem;
+    color: var(--mute);
+  }
+
+  .dots {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+
+    button {
+      width: 44px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      position: relative;
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: 4px;
+        border-radius: var(--radius-pill);
+        background: var(--canvas-mid);
+      }
+
+      &.current::after,
+      &[aria-selected="true"]::after {
+        background: var(--accent);
+      }
+    }
+  }
+
+  /* Fixed footer: prompt/description never moves while slides change */
+  .prompt-wrap {
+    min-height: 3.5em;
+    margin-top: var(--space-md);
+    border-top: 1px solid var(--hairline);
+    padding-top: var(--space-md);
+  }
+
+  .prompt {
+    font-size: 0.8125rem;
+    color: var(--ink);
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .description {
+    font-size: 0.875rem;
+    color: var(--mute);
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .frame img {
+      transition: none;
+    }
+  }
+</style>

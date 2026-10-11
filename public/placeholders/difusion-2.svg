@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <rect width="800" height="800" fill="#1a1c20"/>
+  <rect x="16" y="16" width="768" height="768" fill="none" stroke="#363a3f" stroke-width="2" stroke-dasharray="12 8"/>
+  <text x="400" y="390" fill="#7d8187" font-family="monospace" font-size="28" text-anchor="middle">TODO: resultado real</text>
+  <text x="400" y="430" fill="#ffd1dc" font-family="monospace" font-size="20" text-anchor="middle">difusion-2 · 1:1</text>
+</svg>

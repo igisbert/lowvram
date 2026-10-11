@@ -1,0 +1,142 @@
+---
+import { navigation } from "@/data/navigation";
+
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+function isActive(href: string): boolean {
+  const clean = href.replace(/\/$/, "") || "/";
+  return clean === current;
+}
+---
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand mono" href="/" aria-label="Inicio">lowvram</a>
+    <button
+      class="menu-button"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      Menú
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
+      <ul>
+        {navigation.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={isActive(item.href) ? "page" : undefined}
+              class:list={[{ active: isActive(item.href) }]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector(".menu-button");
+  const nav = document.getElementById("site-nav");
+  button?.addEventListener("click", () => {
+    const open = nav?.classList.toggle("open") ?? false;
+    button.setAttribute("aria-expanded", String(open));
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--canvas);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-block: var(--space-md);
+  }
+
+  .brand {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    margin-right: auto;
+  }
+
+  .menu-button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    padding: var(--space-xs) var(--space-md);
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .site-nav {
+    display: none;
+
+    &.open {
+      display: block;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--body);
+      text-decoration: none;
+      font-size: 0.875rem;
+      border-bottom: 2px solid transparent;
+
+      &.active {
+        color: var(--ink);
+        border-bottom-color: var(--accent);
+      }
+    }
+  }
+
+  .bar:has(.site-nav.open) {
+    flex-wrap: wrap;
+
+    .site-nav {
+      flex-basis: 100%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .menu-button {
+      display: none;
+    }
+
+    .site-nav {
+      display: block;
+
+      ul {
+        flex-direction: row;
+        gap: var(--space-xl);
+      }
+    }
+  }
+</style>

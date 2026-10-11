@@ -1,0 +1,41 @@
+---
+interface Props {
+  items: { label: string; href: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="subnav" aria-label="En esta página">
+  <ul>
+    {items.map((item) => (
+      <li>
+        <a href={item.href}>{item.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .subnav {
+    border-bottom: 1px solid var(--hairline);
+
+    ul {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--body);
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+  }
+</style>

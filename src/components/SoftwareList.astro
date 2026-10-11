@@ -1,0 +1,30 @@
+---
+import SoftwareCard from "@/components/SoftwareCard.astro";
+import type { SoftwareItem } from "@/types";
+
+interface Props {
+  items: SoftwareItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="grid">
+  {items.map((item) => (
+    <SoftwareCard item={item} />
+  ))}
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

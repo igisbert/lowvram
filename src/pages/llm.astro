@@ -1,0 +1,60 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import ModelList from "@/components/ModelList.astro";
+import ResultsTable from "@/components/ResultsTable.astro";
+import Section from "@/components/Section.astro";
+import SoftwareList from "@/components/SoftwareList.astro";
+import { llmResults } from "@/data/llm-results";
+import { llmModels } from "@/data/models";
+import { llmSoftware } from "@/data/software";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="Modelos de texto"
+  description="Software, modelos recomendados y resultados medidos de LLM ejecutados en local en una RTX 2070 con 8 GB de VRAM."
+>
+  <Header />
+  <main id="main">
+    <div class="container page-head">
+      <p class="eyebrow">Texto · LLM locales</p>
+      <h1>Modelos de texto</h1>
+      <p class="lead">
+        Con qué ejecutarlos, cuáles caben en 8 GB de VRAM y a qué velocidad van
+        medidos en mi equipo.
+      </p>
+    </div>
+
+    <Section eyebrow="Programas" title="Software para usar LLM locales">
+      <SoftwareList items={llmSoftware} />
+    </Section>
+
+    <Section eyebrow="Para 8 GB de VRAM" title="Modelos recomendados para mis specs">
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <ModelList items={llmModels} />
+    </Section>
+
+    <Section eyebrow="Mediciones" title="Resultados conseguidos">
+      <ResultsTable rows={llmResults} />
+    </Section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-4xl) var(--space-2xl);
+  }
+
+  .page-head h1 {
+    margin: 0 0 var(--space-lg);
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    margin: 0;
+  }
+</style>

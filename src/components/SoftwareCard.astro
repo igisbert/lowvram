@@ -1,0 +1,85 @@
+---
+import type { SoftwareItem } from "@/types";
+
+interface Props {
+  item: SoftwareItem;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="card">
+  <h3>{item.name}</h3>
+  <p>{item.description}</p>
+  <p class="audience"><span class="mono kicker">Para quién</span> · {item.audience}</p>
+  {item.pros && (
+    <ul class="points">
+      {item.pros.map((pro) => (
+        <li class="pro">{pro}</li>
+      ))}
+    </ul>
+  )}
+  {item.cons && (
+    <ul class="points">
+      {item.cons.map((con) => (
+        <li class="con">{con}</li>
+      ))}
+    </ul>
+  )}
+  <a class="button" href={item.url} rel="noopener">Web del proyecto</a>
+</article>
+
+<style>
+  .card {
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-xl);
+
+    h3 {
+      margin: 0 0 var(--space-sm);
+    }
+
+    p {
+      margin: 0 0 var(--space-md);
+    }
+  }
+
+  .audience {
+    font-size: 0.875rem;
+    color: var(--mute);
+  }
+
+  .kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .points {
+    list-style: none;
+    margin: 0 0 var(--space-md);
+    padding: 0;
+    font-size: 0.875rem;
+
+    li {
+      padding-left: var(--space-lg);
+      position: relative;
+    }
+
+    .pro::before {
+      content: "+";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .con::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--mute);
+    }
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+import type { ModelItem } from "@/types";
+
+interface Props {
+  item: ModelItem;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="card">
+  <h3>{item.name}</h3>
+  <dl class="facts mono">
+    <div>
+      <dt>Tamaño</dt>
+      <dd>{item.size}</dd>
+    </div>
+    <div>
+      <dt>Cuantización</dt>
+      <dd>{item.quantization}</dd>
+    </div>
+    <div>
+      <dt>VRAM aprox.</dt>
+      <dd>{item.vram}</dd>
+    </div>
+  </dl>
+  <p>{item.use}</p>
+  <a class="button" href={item.url} rel="noopener">Descargar</a>
+</article>
+
+<style>
+  .card {
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-xl);
+
+    h3 {
+      margin: 0 0 var(--space-md);
+    }
+
+    p {
+      margin: 0 0 var(--space-lg);
+      font-size: 0.875rem;
+      color: var(--body);
+    }
+  }
+
+  .facts {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0 0 var(--space-lg);
+    font-size: 0.8125rem;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: var(--space-sm);
+    }
+
+    dt {
+      color: var(--mute);
+    }
+
+    dd {
+      color: var(--ink);
+      margin: 0;
+      text-align: right;
+    }
+  }
+</style>
