@@ -56,12 +56,14 @@ export type ResultImage = {
   model: string;
   time: number;
   alt: string;
+  chartCsv?: string;
 };
 
 export type ResultSet = {
   id: string;
   label?: string;
   prompt?: string;
+  seed?: number;
   description?: string;
   ratio: string;
   images: ResultImage[];

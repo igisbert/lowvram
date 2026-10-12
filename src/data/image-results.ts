@@ -1,85 +1,69 @@
 import type { ResultSet } from "@/types";
+import cobainAnimaCsv from "@/data/charts/cobain-cat/anima.csv?raw";
+import cobainFluxCsv from "@/data/charts/cobain-cat/flux2-klein.csv?raw";
+import cobainKreaQ3Csv from "@/data/charts/cobain-cat/krea2-turbo-q3-k-m.csv?raw";
+import cobainKreaQ4Csv from "@/data/charts/cobain-cat/krea2-turbo-q4-k-s.csv?raw";
+import cobainQwenCsv from "@/data/charts/cobain-cat/qwen2-1-q5-k-m.csv?raw";
+import cobainQwenQ6Csv from "@/data/charts/cobain-cat/qwen2-1-q6-k.csv?raw";
+import cobainZTurboCsv from "@/data/charts/cobain-cat/z-image-turbo.csv?raw";
 
-/* TODO: sustituir por datos reales. Placeholders con el ratio correcto.
-   Sets 2-4: solo para probar la galería, borrar al poner datos reales. */
+/* Galería real: un prompt, una foto por modelo. */
 export const diffusionResults: ResultSet[] = [
   {
-    id: "difusion-ejemplo",
-    label: "Comparativa 1 (prueba)",
-    prompt: "TODO: prompt real en monoespaciada",
+    id: "cobain-cat",
+    label: "Cobain Cat",
+    prompt: "Close-up portrait of an anthropomorphic domestic cat looking like Kurt Cobain. Messy, unkempt long blonde hair framing its face, melancholy blue eyes, detailed whiskers. Wearing a vintage, distressed green mohair cardigan over a white t-shirt. Moody, dramatic studio lighting with dark shadows, gritty texture, 90s alternative rock album cover style, highly intricate fur texture, cinematic, sharp focus.",
+    seed: 41,
     ratio: "1 / 1",
     images: [
       {
-        src: "/placeholders/difusion-1.svg",
-        model: "Modelo A",
-        time: 12,
-        alt: "Placeholder de resultado de difusión con el modelo A",
+        src: "/galleries/cobain-cat/anima.png",
+        model: "Anima Turbo",
+        time: 78.91,
+        alt: "Gato Cobain generado con Anima Turbo",
+        chartCsv: cobainAnimaCsv,
       },
       {
-        src: "/placeholders/difusion-2.svg",
-        model: "Modelo B",
-        time: 301.84,
-        alt: "Placeholder de resultado de difusión con el modelo B",
-      },
-    ],
-  },
-  {
-    id: "difusion-prueba-2",
-    label: "Comparativa 2 (prueba)",
-    prompt: "TODO: prompt real en monoespaciada",
-    ratio: "1 / 1",
-    images: [
-      {
-        src: "/placeholders/difusion-1.svg",
-        model: "Modelo A",
-        time: 14,
-        alt: "Placeholder de resultado de difusión con el modelo A",
+        src: "/galleries/cobain-cat/flux2-klein.png",
+        model: "Flux.2 Klein",
+        time: 328.31,
+        alt: "Gato Cobain generado con Flux.2 Klein",
+        chartCsv: cobainFluxCsv,
       },
       {
-        src: "/placeholders/difusion-2.svg",
-        model: "Modelo C",
-        time: 42,
-        alt: "Placeholder de resultado de difusión con el modelo C",
-      },
-    ],
-  },
-  {
-    id: "difusion-prueba-3",
-    label: "Comparativa 3 (prueba)",
-    prompt: "TODO: prompt real en monoespaciada",
-    ratio: "1 / 1",
-    images: [
-      {
-        src: "/placeholders/difusion-2.svg",
-        model: "Modelo B",
-        time: 301.84,
-        alt: "Placeholder de resultado de difusión con el modelo B",
+        src: "/galleries/cobain-cat/krea2-turbo-q3-k-m.png",
+        model: "Krea 2 Turbo Q3",
+        time: 268.09,
+        alt: "Gato Cobain generado con Krea 2 Turbo Q3",
+        chartCsv: cobainKreaQ3Csv,
       },
       {
-        src: "/placeholders/difusion-1.svg",
-        model: "Modelo D",
-        time: 95,
-        alt: "Placeholder de resultado de difusión con el modelo D",
-      },
-    ],
-  },
-  {
-    id: "difusion-prueba-4",
-    label: "Comparativa 4 (prueba)",
-    prompt: "TODO: prompt real en monoespaciada",
-    ratio: "1 / 1",
-    images: [
-      {
-        src: "/placeholders/difusion-1.svg",
-        model: "Modelo A",
-        time: 12,
-        alt: "Placeholder de resultado de difusión con el modelo A",
+        src: "/galleries/cobain-cat/krea2-turbo-q4-k-s.png",
+        model: "Krea 2 Turbo Q4",
+        time: 266.64,
+        alt: "Gato Cobain generado con Krea 2 Turbo Q4",
+        chartCsv: cobainKreaQ4Csv,
       },
       {
-        src: "/placeholders/difusion-2.svg",
-        model: "Modelo B",
-        time: 301.84,
-        alt: "Placeholder de resultado de difusión con el modelo B",
+        src: "/galleries/cobain-cat/qwen2-1-q5-k-m.png",
+        model: "Qwen-Image-2.1 Q5",
+        time: 301.97,
+        alt: "Gato Cobain generado con Qwen-Image-2.1 Q5",
+        chartCsv: cobainQwenCsv,
+      },
+      {
+        src: "/galleries/cobain-cat/qwen2-1-q6-k.png",
+        model: "Qwen-Image-2.1 Q6",
+        time: 344.54,
+        alt: "Gato Cobain generado con Qwen-Image-2.1 Q6",
+        chartCsv: cobainQwenQ6Csv,
+      },
+      {
+        src: "/galleries/cobain-cat/z-image-turbo.png",
+        model: "Z-Image-Turbo",
+        time: 136.81,
+        alt: "Gato Cobain generado con Z-Image-Turbo",
+        chartCsv: cobainZTurboCsv,
       },
     ],
   },

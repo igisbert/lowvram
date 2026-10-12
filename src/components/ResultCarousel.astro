@@ -1,5 +1,8 @@
 ---
+import { ArrowLeft, ArrowRight, ChartLine } from "@lucide/astro";
+import GpuChart from "@/components/GpuChart.astro";
 import InferenceTime from "@/components/InferenceTime.astro";
+import { parseGpuLog } from "@/data/gpu-log";
 import type { ResultSet } from "@/types";
 
 interface Props {
@@ -8,6 +11,9 @@ interface Props {
 
 const { set } = Astro.props;
 const regionId = `carousel-${set.id}`;
+const charts = set.images.map((image) =>
+  image.chartCsv ? parseGpuLog(image.chartCsv) : null,
+);
 ---
 
 <figure class="carousel" id={regionId} data-carousel data-ratio={set.ratio}>
@@ -31,8 +37,27 @@ const regionId = `carousel-${set.id}`;
             <span class="mono badge">
               {set.firstIsOriginal && i === 0 ? "Original" : image.model}
             </span>
+            {image.chartCsv && (
+              <button
+                type="button"
+                class="chart-btn"
+                data-chart={i}
+                aria-haspopup="dialog"
+                aria-label={`Ver gráfico de GPU: ${image.model}`}
+              >
+                <ChartLine size={16} />
+              </button>
+            )}
           </div>
           <InferenceTime seconds={image.time} />
+          {charts[i] && (
+            <dialog class="chart-viewer" data-viewer={i} aria-label={`Gráfico de GPU: ${image.model}`}>
+              <GpuChart title={`GPU durante la generación (${image.model})`} points={charts[i] ?? []} />
+              <form method="dialog">
+                <button type="submit" class="button">Cerrar</button>
+              </form>
+            </dialog>
+          )}
         </li>
       ))}
     </ul>
@@ -40,9 +65,9 @@ const regionId = `carousel-${set.id}`;
 
   <figcaption class="caption">
     <div class="controls">
-      <button type="button" class="button arrow" data-prev aria-label="Imagen anterior">←</button>
+      <button type="button" class="button arrow" data-prev aria-label="Imagen anterior"><ArrowLeft size={20} /></button>
       <p class="mono position" data-position aria-live="polite">1 / {set.images.length}</p>
-      <button type="button" class="button arrow" data-next aria-label="Imagen siguiente">→</button>
+      <button type="button" class="button arrow" data-next aria-label="Imagen siguiente"><ArrowRight size={20} /></button>
     </div>
     <div class="dots" role="tablist" aria-label="Elegir imagen">
       {set.images.map((image, i) => (
@@ -55,12 +80,18 @@ const regionId = `carousel-${set.id}`;
         />
       ))}
     </div>
-    <div class="prompt-wrap">
+    <div class="prompt-wrap" data-prompt>
       {set.prompt ? (
-        <p class="mono prompt">{set.prompt}</p>
+        <>
+          <p class="mono prompt">{set.prompt}</p>
+          <button type="button" class="more" data-more aria-expanded="false">
+            Leer más
+          </button>
+        </>
       ) : set.description ? (
         <p class="description">{set.description}</p>
       ) : null}
+      {set.seed !== undefined && <p class="mono seed">Semilla: {set.seed}</p>}
     </div>
   </figcaption>
 </figure>
@@ -92,6 +123,29 @@ const regionId = `carousel-${set.id}`;
     dots.forEach((dot) => {
       dot.addEventListener("click", () => show(Number(dot.dataset.dot)));
     });
+
+    const promptWrap = root.querySelector("[data-prompt]");
+    const more = root.querySelector<HTMLButtonElement>("[data-more]");
+    more?.addEventListener("click", () => {
+      const open = promptWrap?.classList.toggle("expanded") ?? false;
+      more.setAttribute("aria-expanded", String(open));
+      more.textContent = open ? "Leer menos" : "Leer más";
+    });
+
+    const chartBtns = [...root.querySelectorAll<HTMLElement>("[data-chart]")];
+    chartBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const viewer = root.querySelector(
+          `dialog[data-viewer="${btn.dataset.chart}"]`,
+        ) as HTMLDialogElement | null;
+        viewer?.showModal();
+      });
+    });
+    for (const viewer of root.querySelectorAll("dialog[data-viewer]")) {
+      viewer.addEventListener("click", (event) => {
+        if (event.target === viewer) (viewer as HTMLDialogElement).close();
+      });
+    }
     viewport?.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") show(index - 1);
       if (event.key === "ArrowRight") show(index + 1);
@@ -173,6 +227,47 @@ const regionId = `carousel-${set.id}`;
     border: 1px solid var(--hairline);
   }
 
+  .chart-btn {
+    position: absolute;
+    right: var(--space-md);
+    bottom: var(--space-md);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgb(10 10 10 / 0.8);
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .chart-viewer {
+    max-width: min(860px, 94vw);
+    width: 100%;
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    color: var(--body);
+
+    &::backdrop {
+      background: rgb(0 0 0 / 0.8);
+    }
+
+    form {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: var(--space-lg);
+    }
+
+    .button {
+      cursor: pointer;
+    }
+  }
+
   .caption {
     margin-top: var(--space-lg);
   }
@@ -184,8 +279,16 @@ const regionId = `carousel-${set.id}`;
   }
 
   .arrow {
-    min-width: 44px;
+    width: 48px;
+    height: 48px;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
     justify-content: center;
+
+    svg {
+      flex-shrink: 0;
+    }
   }
 
   .position {
@@ -196,6 +299,7 @@ const regionId = `carousel-${set.id}`;
 
   .dots {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-sm);
     margin-top: var(--space-md);
 
@@ -238,6 +342,34 @@ const regionId = `carousel-${set.id}`;
     color: var(--ink);
     margin: 0;
     overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .prompt-wrap.expanded .prompt {
+    display: block;
+  }
+
+  .more {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin-top: var(--space-sm);
+    min-height: 44px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .seed {
+    font-size: 0.75rem;
+    color: var(--mute);
+    margin: var(--space-sm) 0 0;
   }
 
   .description {
