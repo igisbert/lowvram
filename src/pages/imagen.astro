@@ -4,6 +4,7 @@ import Header from "@/components/Header.astro";
 import Info from "@/components/Info.astro";
 import ModelTable from "@/components/ModelTable.astro";
 import ResultCarousel from "@/components/ResultCarousel.astro";
+import ResultShowcase from "@/components/ResultShowcase.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import Spotlight from "@/components/Spotlight.astro";
@@ -81,7 +82,7 @@ const anchors = [
         </div>
       </details>
       <h3 class="group">Resultados conseguidos</h3>
-      {diffusionResults.map((set) => <ResultCarousel set={set} />)}
+      <ResultShowcase sets={diffusionResults} />
     </Section>
 
     <Section eyebrow="Ampliar sin inventar" title="Upscale" id="upscale">

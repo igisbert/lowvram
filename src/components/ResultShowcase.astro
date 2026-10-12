@@ -1,0 +1,115 @@
+---
+import ResultCarousel from "@/components/ResultCarousel.astro";
+import type { ResultSet } from "@/types";
+
+interface Props {
+  sets: ResultSet[];
+}
+
+const { sets } = Astro.props;
+---
+
+<div class="showcase" data-showcase>
+  {sets.map((set, i) => (
+    <div data-panel hidden={i !== 0}>
+      <ResultCarousel set={set} />
+    </div>
+  ))}
+  {sets.length > 1 && (
+    <div class="strip" role="group" aria-label="Elegir comparativa">
+      {sets.map((set, i) => (
+        <button
+          type="button"
+          data-thumb={i}
+          aria-pressed={i === 0 ? "true" : "false"}
+          aria-label={`Ver comparativa: ${set.label ?? set.images[0]?.model ?? `Comparativa ${i + 1}`}`}
+        >
+          {set.images[0] && (
+            <img
+              src={set.images[0].src}
+              alt=""
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          )}
+          <span class="mono">
+            {set.label ?? set.images[0]?.model ?? `Comparativa ${i + 1}`}
+          </span>
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+<script>
+  for (const root of document.querySelectorAll("[data-showcase]")) {
+    const panels = [...root.querySelectorAll<HTMLElement>("[data-panel]")];
+    const thumbs = [...root.querySelectorAll<HTMLButtonElement>("[data-thumb]")];
+    if (panels.length < 2) continue;
+
+    const show = (next: number) => {
+      panels.forEach((panel, i) => {
+        panel.hidden = i !== next;
+      });
+      thumbs.forEach((thumb, i) => {
+        thumb.setAttribute("aria-pressed", String(i === next));
+      });
+    };
+
+    thumbs.forEach((thumb, i) => {
+      thumb.addEventListener("click", () => show(i));
+    });
+  }
+</script>
+
+<style>
+  .showcase :global(.carousel) {
+    margin-bottom: var(--space-md);
+  }
+
+  .strip {
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-2xl);
+
+    button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      flex-shrink: 0;
+      background: var(--canvas-card);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      padding: var(--space-sm);
+      color: var(--body);
+      font-size: 0.75rem;
+      cursor: pointer;
+      min-width: 120px;
+      max-width: 160px;
+
+      &[aria-pressed="true"] {
+        border-color: var(--accent);
+        color: var(--ink);
+      }
+
+      img {
+        height: 64px;
+        width: auto;
+        max-width: 100%;
+        object-fit: cover;
+        border-radius: var(--radius);
+        display: block;
+      }
+
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+      }
+    }
+  }
+</style>

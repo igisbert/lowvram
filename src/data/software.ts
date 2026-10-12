@@ -35,8 +35,8 @@ export const llmSoftware: SoftwareItem[] = [
     description: "Motor para servir modelos en servidor, con API compatible con OpenAI y alto rendimiento ante muchas peticiones concurrentes.",
     links: [{ label: "Ver en GitHub", href: "https://github.com/vllm-project/vllm" }],
     audience: "Quien quiere montar un servidor local para varias apps o usuarios a la vez.",
-    pros: ["Muy alto rendimiento sirviendo", "API compatible con OpenAI"],
-    cons: ["Pensado para Linux y GPU potentes", "Sobredimensionado para un solo usuario en 8 GB"],
+    pros: ["Rendimiento muy alto", "Ideal para servir modelos en red local o nube"],
+    cons: ["Sobredimensionado para hardware doméstico", "Mucho más complejo de instalar y configurar que llama.cpp"],
   },
 ];
 

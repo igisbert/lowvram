@@ -60,6 +60,7 @@ export type ResultImage = {
 
 export type ResultSet = {
   id: string;
+  label?: string;
   prompt?: string;
   description?: string;
   ratio: string;

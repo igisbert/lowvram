@@ -1,9 +1,71 @@
 import type { ResultSet } from "@/types";
 
-/* TODO: sustituir por datos reales. Placeholders con el ratio correcto. */
+/* TODO: sustituir por datos reales. Placeholders con el ratio correcto.
+   Sets 2-4: solo para probar la galería, borrar al poner datos reales. */
 export const diffusionResults: ResultSet[] = [
   {
     id: "difusion-ejemplo",
+    label: "Comparativa 1 (prueba)",
+    prompt: "TODO: prompt real en monoespaciada",
+    ratio: "1 / 1",
+    images: [
+      {
+        src: "/placeholders/difusion-1.svg",
+        model: "Modelo A",
+        time: 12,
+        alt: "Placeholder de resultado de difusión con el modelo A",
+      },
+      {
+        src: "/placeholders/difusion-2.svg",
+        model: "Modelo B",
+        time: 301.84,
+        alt: "Placeholder de resultado de difusión con el modelo B",
+      },
+    ],
+  },
+  {
+    id: "difusion-prueba-2",
+    label: "Comparativa 2 (prueba)",
+    prompt: "TODO: prompt real en monoespaciada",
+    ratio: "1 / 1",
+    images: [
+      {
+        src: "/placeholders/difusion-1.svg",
+        model: "Modelo A",
+        time: 14,
+        alt: "Placeholder de resultado de difusión con el modelo A",
+      },
+      {
+        src: "/placeholders/difusion-2.svg",
+        model: "Modelo C",
+        time: 42,
+        alt: "Placeholder de resultado de difusión con el modelo C",
+      },
+    ],
+  },
+  {
+    id: "difusion-prueba-3",
+    label: "Comparativa 3 (prueba)",
+    prompt: "TODO: prompt real en monoespaciada",
+    ratio: "1 / 1",
+    images: [
+      {
+        src: "/placeholders/difusion-2.svg",
+        model: "Modelo B",
+        time: 301.84,
+        alt: "Placeholder de resultado de difusión con el modelo B",
+      },
+      {
+        src: "/placeholders/difusion-1.svg",
+        model: "Modelo D",
+        time: 95,
+        alt: "Placeholder de resultado de difusión con el modelo D",
+      },
+    ],
+  },
+  {
+    id: "difusion-prueba-4",
+    label: "Comparativa 4 (prueba)",
     prompt: "TODO: prompt real en monoespaciada",
     ratio: "1 / 1",
     images: [
