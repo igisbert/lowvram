@@ -26,10 +26,20 @@ const { items } = Astro.props;
             decoding="async"
           />
         </button>
-        <dialog class="viewer" aria-label={`Captura ampliada: ${item.imageAlt}`}>
-          <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" />
+        <dialog
+          class="viewer"
+          aria-label={`Captura ampliada: ${item.imageAlt}`}
+        >
+          <img
+            src={item.image}
+            alt={item.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
           <form method="dialog">
-            <button type="submit" class="button">Cerrar</button>
+            <button type="submit" class="button">
+              Cerrar
+            </button>
           </form>
         </dialog>
         <div class="body">
@@ -71,7 +81,6 @@ const { items } = Astro.props;
   .shot {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: var(--radius);
     border: 1px solid var(--hairline);

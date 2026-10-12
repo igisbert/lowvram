@@ -1,0 +1,241 @@
+---
+import type { GpuPoint } from "@/data/gpu-log";
+
+/* Expected CSV format (4 columns, header row ignored):
+   timestamp, uso %, MiB usados, temp
+   2026/10/12 03:34:55, 48 %, 4593 MiB, 61
+   Sampling every 2-3 s is fine. VRAM ceiling (8192 MiB) is fixed in the chart. */
+
+interface Props {
+  points: GpuPoint[];
+  title: string;
+}
+
+const { points, title } = Astro.props;
+
+const W = 720;
+const H = 260;
+const padL = 52;
+const padR = 52;
+const padT = 26;
+const padB = 30;
+const iw = W - padL - padR;
+const ih = H - padT - padB;
+const n = points.length;
+const VRAM_MAX = 8192;
+const RIGHT_MAX = 100;
+
+const x = (i: number) => padL + (n < 2 ? 0 : (i * iw) / (n - 1));
+const yVram = (v: number) => padT + ih - (v / VRAM_MAX) * ih;
+const yPct = (v: number) => padT + ih - (v / RIGHT_MAX) * ih;
+
+const toLine = (pick: (p: GpuPoint) => number, y: (v: number) => number) =>
+  points
+    .map((p, i) => `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(pick(p)).toFixed(1)}`)
+    .join(" ");
+
+const vramLine = toLine((p) => p.vram, yVram);
+const vramArea =
+  n > 0
+    ? `${vramLine} L${x(n - 1).toFixed(1)},${(padT + ih).toFixed(1)} L${x(0).toFixed(1)},${(padT + ih).toFixed(1)} Z`
+    : "";
+const utilLine = toLine((p) => p.util, yPct);
+const tempLine = toLine((p) => p.temp, yPct);
+
+const maxUsed = n > 0 ? Math.max(...points.map((p) => p.vram)) : 0;
+const maxUtil = n > 0 ? Math.max(...points.map((p) => p.util)) : 0;
+const maxTemp = n > 0 ? Math.max(...points.map((p) => p.temp)) : 0;
+
+const clockOf = (s: string) => s.split(" ")[1]?.slice(0, 8) ?? s;
+const t0 = n > 0 ? clockOf(points[0].time) : "";
+const t1 = n > 0 ? clockOf(points[Math.floor((n - 1) / 2)].time) : "";
+const t2 = n > 0 ? clockOf(points[n - 1].time) : "";
+---
+
+{n === 0 ? (
+  <div class="empty" role="status">
+    <p class="mono">Sin datos todavía</p>
+  </div>
+) : (
+  <figure class="chart">
+    <div class="legend mono" aria-hidden="true">
+      <span><i class="sw vram"></i>VRAM máx {maxUsed} MiB</span>
+      <span><i class="sw util"></i>Uso máx {maxUtil} %</span>
+      <span><i class="sw temp"></i>Temp máx {maxTemp} °C</span>
+    </div>
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      role="img"
+      aria-label={`${title}. Máximo: ${maxUsed} MiB de VRAM de 8192, ${maxUtil} por ciento de uso, ${maxTemp} grados.`}
+    >
+      {[0, 4096, 8192].map((v) => (
+        <g>
+          <line x1={padL} x2={W - padR} y1={yVram(v)} y2={yVram(v)} class="grid" />
+          <text x={padL - 8} y={yVram(v) + 4} text-anchor="end" class="tick">
+            {v === 0 ? "0" : `${v / 1024} GiB`}
+          </text>
+        </g>
+      ))}
+      {[0, 50, 100].map((v) => (
+        <text x={W - padR + 8} y={yPct(v) + 4} class="tick">
+          {v}
+        </text>
+      ))}
+      <line
+        x1={padL}
+        x2={W - padR}
+        y1={yVram(VRAM_MAX)}
+        y2={yVram(VRAM_MAX)}
+        class="ceiling"
+      />
+      <text x={padL} y={12} class="axis">VRAM · MiB</text>
+      <text x={W - padR} y={12} text-anchor="end" class="axis">Uso % · Temp °C</text>
+      <path d={vramArea} class="area" />
+      <path d={vramLine} class="series-vram" />
+      <path d={utilLine} class="series-util" />
+      <path d={tempLine} class="series-temp" />
+      {n > 0 && (
+        <g aria-hidden="true">
+          <circle cx={x(n - 1)} cy={yVram(points[n - 1].vram)} r="3.5" class="dot-vram" />
+          <circle cx={x(n - 1)} cy={yPct(points[n - 1].util)} r="3.5" class="dot-util" />
+          <circle cx={x(n - 1)} cy={yPct(points[n - 1].temp)} r="3.5" class="dot-temp" />
+        </g>
+      )}
+      <text x={padL} y={H - 8} class="tick">{t0}</text>
+      <text x={W / 2} y={H - 8} text-anchor="middle" class="tick">{t1}</text>
+      <text x={W - padR} y={H - 8} text-anchor="end" class="tick">{t2}</text>
+    </svg>
+  </figure>
+)}
+<style>
+  .chart {
+    /* Intentional exceptions to the palette: distinct series must read at a glance. */
+    --temp: #ff6b6b;
+    --util: #5eead4;
+    margin: 0;
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+  }
+
+  .chart + .chart {
+    margin-top: var(--space-lg);
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-lg);
+    font-size: 0.75rem;
+    color: var(--body);
+    margin-bottom: var(--space-md);
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+  }
+
+  .sw {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+
+    &.vram {
+      background: rgb(255 209 220 / 0.35);
+      border: 1px solid var(--accent);
+    }
+
+    &.util {
+      background: var(--util);
+    }
+
+    &.temp {
+      background: var(--temp);
+    }
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .grid {
+    stroke: var(--hairline);
+    stroke-width: 1;
+  }
+
+  .ceiling {
+    stroke: var(--accent);
+    stroke-width: 1;
+    stroke-dasharray: 5 4;
+  }
+
+  .tick {
+    fill: var(--mute);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .area {
+    fill: rgb(255 209 220 / 0.18);
+  }
+
+  .series-vram {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+
+  .series-util {
+    fill: none;
+    stroke: var(--util);
+    stroke-width: 2;
+  }
+
+  .series-temp {
+    fill: none;
+    stroke: var(--temp);
+    stroke-width: 2;
+  }
+
+  .dot-vram {
+    fill: var(--accent);
+  }
+
+  .dot-util {
+    fill: var(--util);
+  }
+
+  .dot-temp {
+    fill: var(--temp);
+  }
+
+  .axis {
+    fill: var(--body);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .empty {
+    background: var(--canvas-soft);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-3xl);
+    text-align: center;
+
+    p {
+      color: var(--ink);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      margin: 0;
+    }
+  }
+</style>

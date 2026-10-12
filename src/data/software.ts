@@ -103,13 +103,14 @@ export const upscaleSoftware: SoftwareItem[] = [
       { label: "Ver en GitHub", href: "https://github.com/upscayl/upscayl-ncnn" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/upscaler/" },
     ],
-    audience: "Quien reescala por terminal o automatiza lotes con scripts.",
-    pros: ["Multitud de modelos intercambiables", "Control de tile para VRAM justas", "Modo TTA para máxima calidad"],
-    cons: ["Solo terminal (existe GUI aparte)"],
+    audience: "Quien necesita máximo control sobre el reescalado.",
+    pros: ["Multitud de modelos disponibles", "Modo TTA para máxima calidad"],
+    cons: ["Solo terminal"],
+    recommended: true,
   },
   {
-    name: "stable-diffusion.cpp (modo upscale)",
-    description: "sd-cli reescala con ESRGAN sin salir de la herramienta que genera tus imágenes.",
+    name: "stable-diffusion.cpp ",
+    description: "Reescalado integrado en la herramienta que genera tus imágenes.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/stablediffusioncpp/" },
@@ -117,6 +118,7 @@ export const upscaleSoftware: SoftwareItem[] = [
     audience: "Quien ya genera con sd.cpp y le basta un reescalado general.",
     pros: ["Nada más que instalar si ya usas sd.cpp"],
     cons: ["Menos modelos y opciones que upscayl-bin"],
+    recommended: true,
   },
 ];
 
@@ -124,7 +126,7 @@ export const upscaleSoftware: SoftwareItem[] = [
 export const bgSoftware: SoftwareItem[] = [
   {
     name: "vision.cpp",
-    description: "Visión por computador en C++ al estilo llama.cpp: ejecuta modelos GGUF en GPU o CPU con la mínimo memoria.",
+    description: "Visión por computador en C++ al estilo llama.cpp: ejecuta modelos GGUF en GPU o CPU con la mínima memoria.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/Acly/vision.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/bgremove/" },
