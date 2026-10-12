@@ -13,7 +13,12 @@ import {
   otherResults,
   upscaleResults,
 } from "@/data/image-results";
-import { diffusionModels, nsfwDiffusionModels, otherModels, upscaleModels } from "@/data/models";
+import {
+  diffusionModels,
+  nsfwDiffusionModels,
+  otherModels,
+  upscaleModels,
+} from "@/data/models";
 import {
   diffusionSoftware,
   otherSoftware,
@@ -57,8 +62,9 @@ const anchors = [
       <h3 class="group">Modelos recomendados para 8GB</h3>
       <Info title="¿Qué son los Turbo?">
         <p>
-          Versiones destiladas que necesitan pocos pasos. Son
-          mucho más rápidas a cambio de tener menor creatividad. Más repetitivos y responden peor a las ideas raras. 
+          Versiones destiladas que necesitan pocos pasos. Son mucho más rápidas
+          a cambio de tener menor creatividad. Más repetitivos y responden peor
+          a las ideas raras.
         </p>
       </Info>
       <ModelTable items={diffusionModels} />
@@ -81,7 +87,7 @@ const anchors = [
     <Section eyebrow="Ampliar sin inventar" title="Upscale" id="upscale">
       <h3 class="group">Software</h3>
       <SoftwareList items={upscaleSoftware} />
-      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <h3 class="group">Modelos recomendados para 8GB</h3>
       <p>
         <span class="todo-flag">TODO: sustituir por datos reales</span>
       </p>
@@ -93,7 +99,7 @@ const anchors = [
     <Section eyebrow="Retoques útiles" title="Otros modelos" id="otros">
       <h3 class="group">Software</h3>
       <SoftwareList items={otherSoftware} />
-      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <h3 class="group">Modelos recomendados para 8GB</h3>
       <p>
         <span class="todo-flag">TODO: sustituir por datos reales</span>
       </p>

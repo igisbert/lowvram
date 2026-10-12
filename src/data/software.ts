@@ -83,13 +83,29 @@ export const diffusionSoftware: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. */
+/* Datos reales de la guía de upscaler. */
 export const upscaleSoftware: SoftwareItem[] = [
   {
-    name: "Real-ESRGAN",
-    description: "Upscale clásico por línea de comandos, modelos intercambiables.",
-    links: [{ label: "Ver en GitHub", href: "https://github.com/xinntao/Real-ESRGAN" }],
-    audience: "Quien quiere ampliar sin interfaz gráfica.",
+    name: "upscayl-bin",
+    description: "CLI de reescalado del proyecto Upscayl: usa modelos Real-ESRGAN sobre ncnn con aceleración Vulkan, todo en local.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/upscayl/upscayl-ncnn" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/upscaler/" },
+    ],
+    audience: "Quien reescala por terminal o automatiza lotes con scripts.",
+    pros: ["Multitud de modelos intercambiables", "Control de tile para VRAM justas", "Modo TTA para máxima calidad"],
+    cons: ["Solo terminal (existe GUI aparte)"],
+  },
+  {
+    name: "stable-diffusion.cpp (modo upscale)",
+    description: "sd-cli reescala con ESRGAN sin salir de la herramienta que genera tus imágenes.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/stablediffusioncpp/" },
+    ],
+    audience: "Quien ya genera con sd.cpp y le basta un reescalado general.",
+    pros: ["Nada más que instalar si ya usas sd.cpp"],
+    cons: ["Menos modelos y opciones que upscayl-bin"],
   },
 ];
 

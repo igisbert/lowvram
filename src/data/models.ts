@@ -111,16 +111,34 @@ export const nsfwDiffusionModels: ModelItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. */
+/* Datos reales del `ls`. Tamaños convertidos a MB. */
 export const upscaleModels: ModelItem[] = [
   {
-    name: "Modelo de upscale de ejemplo",
+    name: "4xLSDIRplusN",
     size: "64 MB",
-    params: "TODO",
-    quantization: "FP32",
-    vram: "~2 GB",
-    use: "Ampliar ×4 fotos pequeñas.",
-    url: "https://huggingface.co",
+    params: "16.7M",
+    quantization: "-",
+    vram: "~64 MB",
+    use: "Fotografías",
+    url: "https://huggingface.co/wbruna/upscalers-sdcpp-gguf/blob/main/4xLSDIRplusN.gguf",
+  },
+  {
+    name: "4xUltrasharpV10",
+    size: "64 MB",
+    params: "16.7M",
+    quantization: "-",
+    vram: "~64 MB",
+    use: "General, Nitidez",
+    url: "https://huggingface.co/wbruna/upscalers-sdcpp-gguf/blob/main/4xUltrasharpV10.gguf",
+  },
+  {
+    name: "RealESRGAN_x4plus",
+    size: "64 MB",
+    params: "16.7M",
+    quantization: "-",
+    vram: "~64 MB",
+    use: "General",
+    url: "https://huggingface.co/wbruna/upscalers-sdcpp-gguf/blob/main/RealESRGAN_x4plus.gguf",
   },
 ];
 
