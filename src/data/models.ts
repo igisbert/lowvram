@@ -142,16 +142,25 @@ export const upscaleModels: ModelItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. */
+/* Modelos ONNX para borrado de fondo. */
 export const bgModels: ModelItem[] = [
   {
-    name: "Modelo de recorte de ejemplo",
-    size: "170 MB",
-    params: "TODO",
-    quantization: "FP32",
-    vram: "~1 GB",
-    use: "Quitar el fondo con transparencia.",
-    url: "https://huggingface.co",
+    name: "BEN2",
+    size: "219 MB",
+    params: "94.6M",
+    quantization: "-",
+    vram: "~219 MB",
+    use: "Incluido en imodify-cli",
+    url: "https://huggingface.co/onnx-community/BEN2-ONNX",
+  },
+  {
+    name: "BiRefNet_512x512",
+    size: "473 MB",
+    params: "0.2B",
+    quantization: "-",
+    vram: "~473 MB",
+    use: "Incluido en imodify-cli",
+    url: "https://huggingface.co/onnx-community/BiRefNet_512x512-ONNX",
   },
 ];
 

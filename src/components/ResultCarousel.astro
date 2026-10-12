@@ -49,7 +49,9 @@ const charts = set.images.map((image) =>
               </button>
             )}
           </div>
-          <InferenceTime seconds={image.time} />
+          {set.images.some((item) => item.time > 0) && (
+            <InferenceTime seconds={image.time} />
+          )}
           {charts[i] && (
             <dialog class="chart-viewer" data-viewer={i} aria-label={`Gráfico de GPU: ${image.model}`}>
               <GpuChart title={`GPU durante la generación (${image.model})`} points={charts[i] ?? []} />
@@ -80,19 +82,21 @@ const charts = set.images.map((image) =>
         />
       ))}
     </div>
-    <div class="prompt-wrap" data-prompt>
-      {set.prompt ? (
-        <>
-          <p class="mono prompt">{set.prompt}</p>
-          <button type="button" class="more" data-more aria-expanded="false">
-            Leer más
-          </button>
-        </>
-      ) : set.description ? (
-        <p class="description">{set.description}</p>
-      ) : null}
-      {set.seed !== undefined && <p class="mono seed">Semilla: {set.seed}</p>}
-    </div>
+    {(set.prompt || set.description || set.seed !== undefined) && (
+      <div class="prompt-wrap" data-prompt>
+        {set.prompt ? (
+          <>
+            <p class="mono prompt">{set.prompt}</p>
+            <button type="button" class="more" data-more aria-expanded="false">
+              Leer más
+            </button>
+          </>
+        ) : set.description ? (
+          <p class="description">{set.description}</p>
+        ) : null}
+        {set.seed !== undefined && <p class="mono seed">Semilla: {set.seed}</p>}
+      </div>
+    )}
   </figcaption>
 </figure>
 

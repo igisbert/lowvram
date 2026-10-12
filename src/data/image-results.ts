@@ -138,4 +138,85 @@ export const bgResults: ResultSet[] = [
       },
     ],
   },
+  {
+    id: "fondo-dante",
+    label: "Dante",
+    ratio: "1 / 1",
+    firstIsOriginal: true,
+    checker: true,
+    images: [
+      {
+        src: "/galleries/fondo-dante/original.png",
+        model: "Original",
+        time: 0,
+        alt: "Espadachín de pelo blanco ante una catedral gótica de noche",
+      },
+      {
+        src: "/galleries/fondo-dante/ben2.png",
+        model: "BEN2",
+        time: 0,
+        alt: "Espadachín recortado con BEN2, fondo transparente",
+      },
+      {
+        src: "/galleries/fondo-dante/birefnet-512x512.png",
+        model: "BiRefNet",
+        time: 0,
+        alt: "Espadachín recortado con BiRefNet, fondo transparente",
+      },
+    ],
+  },
+  {
+    id: "fondo-vice-cat",
+    label: "Vice Cat",
+    ratio: "1 / 1",
+    firstIsOriginal: true,
+    checker: true,
+    images: [
+      {
+        src: "/galleries/fondo-vice-cat/original.png",
+        model: "Original",
+        time: 0,
+        alt: "Gato con gafas de sol y camisa hawaiana apoyado en un coche rojo en Miami al atardecer",
+      },
+      {
+        src: "/galleries/fondo-vice-cat/ben2.png",
+        model: "BEN2",
+        time: 0,
+        alt: "Gato recortado con BEN2, fondo transparente",
+      },
+      {
+        src: "/galleries/fondo-vice-cat/birefnet-512x512.png",
+        model: "BiRefNet",
+        time: 0,
+        alt: "Gato recortado con BiRefNet, fondo transparente",
+      },
+    ],
+  },
+  {
+    id: "fondo-raider-cat",
+    label: "Raider Cat",
+    ratio: "1 / 1",
+    firstIsOriginal: true,
+    checker: true,
+    images: [
+      {
+        src: "/galleries/fondo-raider-cat/original.png",
+        model: "Original",
+        time: 0,
+        alt: "Gato con armadura y fusil en un desguace desértico",
+      },
+      {
+        src: "/galleries/fondo-raider-cat/ben2.png",
+        model: "BEN2",
+        time: 0,
+        alt: "Gato recortado con BEN2, fondo transparente",
+      },
+      {
+        src: "/galleries/fondo-raider-cat/birefnet-512x512.png",
+        model: "BiRefNet",
+        time: 0,
+        alt: "Gato recortado con BiRefNet, fondo transparente",
+      },
+    ],
+  },
 ];
