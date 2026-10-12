@@ -271,6 +271,34 @@ const charts = set.images.map((image) =>
     }
   }
 
+  .chart-viewer[open] {
+    animation: viewer-in 160ms ease-out;
+  }
+
+  .chart-viewer[open]::backdrop {
+    animation: backdrop-in 160ms ease-out;
+  }
+
+  @keyframes viewer-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(8px);
+    }
+  }
+
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chart-viewer[open],
+    .chart-viewer[open]::backdrop {
+      animation: none;
+    }
+  }
+
   .caption {
     margin-top: var(--space-lg);
   }

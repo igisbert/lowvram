@@ -1,0 +1,125 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import SubNav from "@/components/SubNav.astro";
+import { glossary } from "@/data/glossary";
+import Layout from "@/layouts/Layout.astro";
+
+const sorted = [...glossary].sort((a, b) =>
+  a.term.localeCompare(b.term, "es", { sensitivity: "base" }),
+);
+
+const groups = new Map<string, typeof sorted>();
+for (const entry of sorted) {
+  const letter = entry.term.charAt(0).toUpperCase();
+  const list = groups.get(letter) ?? [];
+  list.push(entry);
+  groups.set(letter, list);
+}
+
+const letters = [...groups.keys()];
+const anchors = letters.map((letter) => ({ label: letter, href: `#letra-${letter}` }));
+---
+
+<Layout
+  title="Glosario"
+  description="Glosario de IA local de la A a la Z: modelos, VRAM, cuantización, difusión y más, explicado en lenguaje fácil."
+>
+  <Header />
+  <main id="main">
+    <div class="container page-head">
+      <p class="eyebrow">Alfabéticamente</p>
+      <h1>Glosario</h1>
+      <p class="lead">
+        Todo lo que necesitas para entender la IA que se ejecuta en tu propio
+        ordenador, explicado en lenguaje fácil.
+      </p>
+      <div class="letters">
+        <SubNav items={anchors} />
+      </div>
+    </div>
+
+    <div class="container terms">
+      {letters.map((letter) => (
+        <section id={`letra-${letter}`} aria-label={`Letra ${letter}`}>
+          <h2>{letter}</h2>
+          <dl>
+            {(groups.get(letter) ?? []).map((entry) => (
+              <div>
+                <dt>{entry.term}</dt>
+                <dd>{entry.definition}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-4xl) var(--space-2xl);
+  }
+
+  .page-head h1 {
+    margin: 0 0 var(--space-lg);
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    margin: 0 0 var(--space-xl);
+  }
+
+  .letters :global(.subnav) {
+    margin-top: 0;
+  }
+
+  .letters :global(.subnav a) {
+    min-width: 44px;
+    padding: var(--space-sm);
+    justify-content: center;
+  }
+
+  .terms {
+    padding-bottom: var(--space-4xl);
+
+    section {
+      padding-block: var(--space-2xl);
+      border-top: 1px solid var(--hairline);
+      scroll-margin-top: 80px;
+
+      &:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+    }
+
+    h2 {
+      margin: 0 0 var(--space-lg);
+    }
+
+    dl {
+      margin: 0;
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    dl div {
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    dt {
+      color: var(--ink);
+    }
+
+    dd {
+      margin: 0;
+      color: var(--body);
+      font-size: 0.9375rem;
+      max-width: var(--measure);
+    }
+  }
+</style>

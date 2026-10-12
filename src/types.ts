@@ -21,6 +21,10 @@ export type SoftwareLink = {
   href: string;
 };
 
+export type GlossaryTerm = {
+  term: string;
+  definition: string;
+};
 export type SoftwareItem = {
   name: string;
   description: string;

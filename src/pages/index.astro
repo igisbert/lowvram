@@ -1,6 +1,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import Info from "@/components/Info.astro";
 import Section from "@/components/Section.astro";
 import Specs from "@/components/Specs.astro";
 import WindowsBadge from "@/components/WindowsBadge.astro";
@@ -21,6 +22,16 @@ import Layout from "@/layouts/Layout.astro";
         Esta web recoge pruebas reales hechas en mi propio equipo: qué modelos
         caben, a qué velocidad van y qué resultados dan. Sin nube, sin suscripciones.
       </p>
+    </div>
+
+    <div class="container">
+      <Info title="¿Perdido con la jerga?">
+        <p>
+          VRAM, cuantización, Turbo, seed… Si algún término te suena a chino,
+          el <a href="/glosario">glosario</a> lo explica en lenguaje fácil, de
+          la A a la Z.
+        </p>
+      </Info>
     </div>
 
     <Section eyebrow="Privacidad, coste, control" title="Por qué SÍ usar IA local">

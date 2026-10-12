@@ -6,6 +6,8 @@ import cobainKreaQ4Csv from "@/data/charts/cobain-cat/krea2-turbo-q4-k-s.csv?raw
 import cobainQwenCsv from "@/data/charts/cobain-cat/qwen2-1-q5-k-m.csv?raw";
 import cobainQwenQ6Csv from "@/data/charts/cobain-cat/qwen2-1-q6-k.csv?raw";
 import cobainZTurboCsv from "@/data/charts/cobain-cat/z-image-turbo.csv?raw";
+import cobainZCsv from "@/data/charts/cobain-cat/z-image.csv?raw";
+import cobainTunedCsv from "@/data/charts/cobain-cat/flux2-klein-tuned.csv?raw";
 
 /* Galería real: un prompt, una foto por modelo. */
 export const diffusionResults: ResultSet[] = [
@@ -64,6 +66,20 @@ export const diffusionResults: ResultSet[] = [
         time: 136.81,
         alt: "Gato Cobain generado con Z-Image-Turbo",
         chartCsv: cobainZTurboCsv,
+      },
+      {
+        src: "/galleries/cobain-cat/z-image.png",
+        model: "Z-Image",
+        time: 368.81,
+        alt: "Gato Cobain generado con Z-Image",
+        chartCsv: cobainZCsv,
+      },
+      {
+        src: "/galleries/cobain-cat/flux2-klein-tuned.png",
+        model: "Flux 2 Klein tuneado",
+        time: 159.86,
+        alt: "Gato Cobain generado con Flux 2 Klein tuneado",
+        chartCsv: cobainTunedCsv,
       },
     ],
   },
