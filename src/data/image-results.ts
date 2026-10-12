@@ -85,25 +85,69 @@ export const diffusionResults: ResultSet[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. La primera imagen es la original. */
+/* Galería real: original + una ampliación por modelo. */
 export const upscaleResults: ResultSet[] = [
   {
-    id: "upscale-ejemplo",
-    description: "TODO: descripción corta de la comparativa",
-    ratio: "4 / 3",
+    id: "upscale-gato-violin",
+    label: "Gato violín",
+    ratio: "1 / 1",
     firstIsOriginal: true,
     images: [
       {
-        src: "/placeholders/upscale-original.svg",
+        src: "/galleries/upscale-gato-violin/original.png",
         model: "Original",
         time: 0,
-        alt: "Placeholder de imagen original antes del upscale",
+        alt: "Gato naranja tocando el violín en un salón",
       },
       {
-        src: "/placeholders/upscale-modelo.svg",
-        model: "Modelo de upscale",
-        time: 8,
-        alt: "Placeholder de imagen tras el upscale",
+        src: "/galleries/upscale-gato-violin/lsdir-plus-n.png",
+        model: "4xLSDIRplusN",
+        time: 0,
+        alt: "Gato ampliado con 4xLSDIRplusN",
+      },
+      {
+        src: "/galleries/upscale-gato-violin/realesrgan-x4plus.png",
+        model: "RealESRGAN_x4plus",
+        time: 0,
+        alt: "Gato ampliado con RealESRGAN_x4plus",
+      },
+      {
+        src: "/galleries/upscale-gato-violin/ultrasharp-v10.png",
+        model: "4xUltrasharpV10",
+        time: 0,
+        alt: "Gato ampliado con 4xUltrasharpV10",
+      },
+    ],
+  },
+  {
+    id: "upscale-anime-cyberpunk",
+    label: "Anime cyberpunk",
+    ratio: "1 / 1",
+    firstIsOriginal: true,
+    images: [
+      {
+        src: "/galleries/upscale-anime-cyberpunk/original.png",
+        model: "Original",
+        time: 0,
+        alt: "Chico anime en una calle cyberpunk de noche",
+      },
+      {
+        src: "/galleries/upscale-anime-cyberpunk/lsdir-plus-n.png",
+        model: "4xLSDIRplusN",
+        time: 0,
+        alt: "Anime ampliado con 4xLSDIRplusN",
+      },
+      {
+        src: "/galleries/upscale-anime-cyberpunk/realesrgan-general.png",
+        model: "RealESRGAN General",
+        time: 0,
+        alt: "Anime ampliado con RealESRGAN General",
+      },
+      {
+        src: "/galleries/upscale-anime-cyberpunk/ultrasharp-v10.png",
+        model: "4xUltrasharpV10",
+        time: 0,
+        alt: "Anime ampliado con 4xUltrasharpV10",
       },
     ],
   },
