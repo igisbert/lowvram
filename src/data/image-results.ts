@@ -109,26 +109,32 @@ export const upscaleResults: ResultSet[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. checker muestra el fondo de cuadros. */
+/* Galería real: original + un recorte por modelo, con fondo de cuadros. */
 export const bgResults: ResultSet[] = [
   {
-    id: "otros-ejemplo",
-    description: "TODO: descripción corta del recorte",
-    ratio: "4 / 3",
+    id: "fondo-stalker",
+    label: "Stalker",
+    ratio: "1 / 1",
     firstIsOriginal: true,
     checker: true,
     images: [
       {
-        src: "/placeholders/recorte-original.svg",
+        src: "/galleries/fondo-stalker/original.png",
         model: "Original",
         time: 0,
-        alt: "Placeholder de imagen original antes del recorte",
+        alt: "Stalker con máscara antigás ante una ciudad nevada en ruinas",
       },
       {
-        src: "/placeholders/recorte-modelo.svg",
-        model: "Modelo de recorte",
-        time: 3,
-        alt: "Placeholder de imagen con fondo transparente",
+        src: "/galleries/fondo-stalker/ben2.png",
+        model: "BEN2",
+        time: 0,
+        alt: "Stalker recortado con BEN2, fondo transparente",
+      },
+      {
+        src: "/galleries/fondo-stalker/birefnet-512x512.png",
+        model: "BiRefNet",
+        time: 0,
+        alt: "Stalker recortado con BiRefNet, fondo transparente",
       },
     ],
   },

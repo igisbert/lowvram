@@ -3,7 +3,6 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Info from "@/components/Info.astro";
 import ModelTable from "@/components/ModelTable.astro";
-import ResultCarousel from "@/components/ResultCarousel.astro";
 import ResultShowcase from "@/components/ResultShowcase.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
@@ -92,7 +91,7 @@ const anchors = [
 
       <ModelTable items={upscaleModels} />
       <h3 class="group">Resultados conseguidos</h3>
-      {upscaleResults.map((set) => <ResultCarousel set={set} />)}
+      <ResultShowcase sets={upscaleResults} />
     </Section>
 
     <Section eyebrow="Retoques útiles" title="Borrado de fondo" id="fondo">
@@ -104,7 +103,7 @@ const anchors = [
       </p>
       <ModelTable items={bgModels} />
       <h3 class="group">Resultados conseguidos</h3>
-      {bgResults.map((set) => <ResultCarousel set={set} />)}
+      <ResultShowcase sets={bgResults} />
     </Section>
   </main>
   <Footer />
