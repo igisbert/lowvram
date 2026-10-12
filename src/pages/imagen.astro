@@ -30,7 +30,7 @@ import Layout from "@/layouts/Layout.astro";
 const anchors = [
   { label: "Difusión", href: "#difusion" },
   { label: "Upscale", href: "#upscale" },
-  { label: "Otros modelos", href: "#otros" },
+  { label: "Borrado de fondo", href: "#fondo" },
 ];
 ---
 
@@ -96,7 +96,7 @@ const anchors = [
       {upscaleResults.map((set) => <ResultCarousel set={set} />)}
     </Section>
 
-    <Section eyebrow="Retoques útiles" title="Otros modelos" id="otros">
+    <Section eyebrow="Retoques útiles" title="Borrado de fondo" id="fondo">
       <h3 class="group">Software</h3>
       <SoftwareList items={otherSoftware} />
       <h3 class="group">Modelos recomendados para 8GB</h3>

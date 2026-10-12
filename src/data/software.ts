@@ -112,10 +112,25 @@ export const upscaleSoftware: SoftwareItem[] = [
 /* TODO: sustituir por datos reales. */
 export const otherSoftware: SoftwareItem[] = [
   {
-    name: "Rembg",
-    description: "Quita el fondo de una imagen en local con modelos U²-Net.",
-    links: [{ label: "Ver en GitHub", href: "https://github.com/danielgatis/rembg" }],
-    audience: "Quien necesita recortes con transparencia.",
+    name: "vision.cpp",
+    description: "Visión por computador en C++ al estilo llama.cpp: ejecuta modelos GGUF en GPU o CPU con lo mínimo de memoria.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/Acly/vision.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/bgremove/" },
+    ],
+    audience: "Quien quiere la mayor variedad de modelos y más control.",
+    pros: ["Mínimo consumo de memoria", "Muchos modelos disponibles"],
+    recommended: true,
+  },
+  {
+    name: "imodify-cli",
+    description: "CLI para optimizar y retocar imágenes por lotes que quita fondos con ONNX: modo fast con BEN2 o hq con BiRefNet_512x512.",
+    links: [
+      { label: "Ver en npm", href: "https://www.npmjs.com/package/imodify-cli" },
+    ],
+    audience: "Quien quiera una herramienta sencilla para retocar en lote.",
+    pros: ["Modelos automáticos, cero descargas manuales", "También sirve para recortar, redimensionar y convertir formatos"],
+    cons: ["Requiere Node.js"],
   },
 ];
 
