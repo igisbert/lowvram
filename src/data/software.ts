@@ -54,6 +54,17 @@ export const llmAgents: SoftwareItem[] = [
     cons: ["Sin subagentes ni modo plan de serie"],
     recommended: true,
   },
+  {
+    name: "OpenCode",
+    description: "Agente de terminal con más funciones listas para usar, que incluye modelos en nube gratuitos.",
+    links: [
+      { label: "Sitio web", href: "https://opencode.ai" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/opencode" },
+    ],
+    audience: "Quien quiere más funciones y usar modelos en nube.",
+    pros: ["Muchas más funciones que Pi", "Modelos cloud gratuitos incluidos"],
+    cons: ["Menos ligero que Pi", "Consume más contexto de serie"],
+  },
 ];
 
 /* TODO: sustituir por datos reales. */
@@ -110,10 +121,10 @@ export const upscaleSoftware: SoftwareItem[] = [
 ];
 
 /* TODO: sustituir por datos reales. */
-export const otherSoftware: SoftwareItem[] = [
+export const bgSoftware: SoftwareItem[] = [
   {
     name: "vision.cpp",
-    description: "Visión por computador en C++ al estilo llama.cpp: ejecuta modelos GGUF en GPU o CPU con lo mínimo de memoria.",
+    description: "Visión por computador en C++ al estilo llama.cpp: ejecuta modelos GGUF en GPU o CPU con la mínimo memoria.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/Acly/vision.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/bgremove/" },

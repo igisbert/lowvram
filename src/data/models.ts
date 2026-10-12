@@ -143,7 +143,7 @@ export const upscaleModels: ModelItem[] = [
 ];
 
 /* TODO: sustituir por datos reales. */
-export const otherModels: ModelItem[] = [
+export const bgModels: ModelItem[] = [
   {
     name: "Modelo de recorte de ejemplo",
     size: "170 MB",

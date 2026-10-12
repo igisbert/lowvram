@@ -10,19 +10,19 @@ import SoftwareList from "@/components/SoftwareList.astro";
 import Spotlight from "@/components/Spotlight.astro";
 import SubNav from "@/components/SubNav.astro";
 import {
+  bgResults,
   diffusionResults,
-  otherResults,
   upscaleResults,
 } from "@/data/image-results";
 import {
+  bgModels,
   diffusionModels,
   nsfwDiffusionModels,
-  otherModels,
   upscaleModels,
 } from "@/data/models";
 import {
+  bgSoftware,
   diffusionSoftware,
-  otherSoftware,
   upscaleSoftware,
 } from "@/data/software";
 import { diffusionSpotlights } from "@/data/spotlights";
@@ -89,9 +89,7 @@ const anchors = [
       <h3 class="group">Software</h3>
       <SoftwareList items={upscaleSoftware} />
       <h3 class="group">Modelos recomendados para 8GB</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
+
       <ModelTable items={upscaleModels} />
       <h3 class="group">Resultados conseguidos</h3>
       {upscaleResults.map((set) => <ResultCarousel set={set} />)}
@@ -99,14 +97,14 @@ const anchors = [
 
     <Section eyebrow="Retoques útiles" title="Borrado de fondo" id="fondo">
       <h3 class="group">Software</h3>
-      <SoftwareList items={otherSoftware} />
+      <SoftwareList items={bgSoftware} />
       <h3 class="group">Modelos recomendados para 8GB</h3>
       <p>
         <span class="todo-flag">TODO: sustituir por datos reales</span>
       </p>
-      <ModelTable items={otherModels} />
+      <ModelTable items={bgModels} />
       <h3 class="group">Resultados conseguidos</h3>
-      {otherResults.map((set) => <ResultCarousel set={set} />)}
+      {bgResults.map((set) => <ResultCarousel set={set} />)}
     </Section>
   </main>
   <Footer />

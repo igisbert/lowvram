@@ -110,7 +110,7 @@ export const upscaleResults: ResultSet[] = [
 ];
 
 /* TODO: sustituir por datos reales. checker muestra el fondo de cuadros. */
-export const otherResults: ResultSet[] = [
+export const bgResults: ResultSet[] = [
   {
     id: "otros-ejemplo",
     description: "TODO: descripción corta del recorte",
