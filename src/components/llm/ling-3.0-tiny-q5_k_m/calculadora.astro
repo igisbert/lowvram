@@ -1,0 +1,350 @@
+---
+
+---
+
+<div class="calc2-demo" data-calc2>
+  <div class="calculadora" role="application" aria-label="Calculadora">
+    <div class="calculadora__display">
+      <div class="calculadora__expression js-expr" aria-hidden="true"></div>
+      <div class="calculadora__result js-result"></div>
+    </div>
+
+    <div class="calculadora__buttons js-grid">
+      <button
+        class="calculadora__btn calculadora__btn--clear"
+        data-action="clear"
+        aria-label="Limpiar">C</button
+      >
+      <button
+        class="calculadora__btn calculadora__btn--del"
+        data-action="del"
+        aria-label="Borrar último dígito">⌫</button
+      >
+      <button
+        class="calculadora__btn calculadora__btn--operator"
+        data-action="÷"
+        aria-label="Dividir">÷</button
+      >
+      <button
+        class="calculadora__btn calculadora__btn--operator"
+        data-action="×"
+        aria-label="Multiplicar">×</button
+      >
+
+      <button class="calculadora__btn" data-action="7" aria-label="7">7</button>
+      <button class="calculadora__btn" data-action="8" aria-label="8">8</button>
+      <button class="calculadora__btn" data-action="9" aria-label="9">9</button>
+      <button
+        class="calculadora__btn calculadora__btn--operator"
+        data-action="-"
+        aria-label="Restar">−</button
+      >
+
+      <button class="calculadora__btn" data-action="4" aria-label="4">4</button>
+      <button class="calculadora__btn" data-action="5" aria-label="5">5</button>
+      <button class="calculadora__btn" data-action="6" aria-label="6">6</button>
+      <button
+        class="calculadora__btn calculadora__btn--operator"
+        data-action="+"
+        aria-label="Sumar">+</button
+      >
+
+      <button class="calculadora__btn" data-action="1" aria-label="1">1</button>
+      <button class="calculadora__btn" data-action="2" aria-label="2">2</button>
+      <button class="calculadora__btn" data-action="3" aria-label="3">3</button>
+      <button
+        class="calculadora__btn calculadora__btn--operator"
+        data-action="="
+        aria-label="Igual">=</button
+      >
+
+      <button
+        class="calculadora__btn calculadora__btn--decimal"
+        data-action="."
+        aria-label="Punto">.</button
+      >
+      <button class="calculadora__btn" data-action="0" aria-label="0">0</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  for (const root of document.querySelectorAll("[data-calc2]")) {
+    const result = root.querySelector(".js-result");
+    const expression = root.querySelector(".js-expr");
+    const grid = root.querySelector(".js-grid");
+
+    let current = "0";
+    let previous = null;
+    let operation = null;
+
+    function updateDisplay() {
+      if (!result || !expression) return;
+      result.textContent = current;
+      expression.textContent =
+        previous !== null && operation !== null
+          ? `${previous} ${operation} ${current}`.trim()
+          : current;
+    }
+
+    function formatResult(num) {
+      if (num === Infinity) return "Error";
+      const rounded = Math.round(num * 1e10) / 1e10;
+      return rounded.toString();
+    }
+
+    function appendToDisplay(val) {
+      if (current === "Error") {
+        current = "0";
+      }
+      if (val === ".") {
+        if (!current.includes(".")) {
+          current += val;
+        }
+      } else {
+        current += val;
+      }
+      updateDisplay();
+    }
+
+    function handleOp(op) {
+      if (current === "Error") return;
+      if (previous !== null && operation !== null) {
+        const a = parseFloat(previous);
+        const b = parseFloat(current);
+        if (isNaN(b)) {
+          current = "0";
+          return;
+        }
+        let res;
+        switch (op) {
+          case "+":
+            res = a + b;
+            break;
+          case "-":
+            res = a - b;
+            break;
+          case "×":
+            res = a * b;
+            break;
+          case "÷":
+            if (b === 0) {
+              current = "Error";
+              updateDisplay();
+              return;
+            }
+            res = a / b;
+            break;
+          default:
+            return;
+        }
+        current = formatResult(res);
+        previous = current;
+        operation = op;
+        updateDisplay();
+      } else {
+        previous = current;
+        operation = op;
+        current = "0";
+      }
+      updateDisplay();
+    }
+
+    function pressEqual() {
+      if (previous !== null && operation !== null) {
+        const a = parseFloat(previous);
+        const b = parseFloat(current);
+        let res;
+        switch (operation) {
+          case "+":
+            res = a + b;
+            break;
+          case "-":
+            res = a - b;
+            break;
+          case "×":
+            res = a * b;
+            break;
+          case "÷":
+            if (b === 0) {
+              current = "Error";
+              updateDisplay();
+              return;
+            }
+            res = a / b;
+            break;
+          default:
+            return;
+        }
+        current = formatResult(res);
+        previous = null;
+        operation = null;
+        updateDisplay();
+      }
+    }
+
+    function clearAll() {
+      current = "0";
+      previous = null;
+      operation = null;
+      updateDisplay();
+    }
+
+    function deleteLast() {
+      if (current === "Error") {
+        current = "0";
+      } else if (current.length === 1) {
+        current = "0";
+      } else {
+        current = current.slice(0, -1);
+      }
+      updateDisplay();
+    }
+
+    grid?.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-action]");
+      if (!btn) return;
+      const action = btn.dataset.action;
+      if (action === "clear") clearAll();
+      else if (action === "del") deleteLast();
+      else if (action === "=") pressEqual();
+      else if (
+        action === "+" ||
+        action === "-" ||
+        action === "×" ||
+        action === "÷"
+      )
+        handleOp(action);
+      else appendToDisplay(action);
+    });
+
+    updateDisplay();
+  }
+</script>
+
+<style>
+  /* ── Generated artifact, namespaced so nothing leaks ── */
+  .calc2-demo {
+    --c2-bg: #121212;
+    --c2-surface: #1e1e1e;
+    --c2-text: #ffffff;
+    --c2-secondary: #888888;
+    --c2-accent: #00ff88;
+    --c2-danger: #ff4444;
+    --c2-border: #333333;
+
+    display: flex;
+    justify-content: center;
+    padding: var(--space-lg);
+    background: var(--c2-bg);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+
+    .calculadora {
+      background: var(--c2-bg);
+      color: var(--c2-text);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--c2-border);
+      width: 320px;
+      max-width: 95vw;
+      flex-shrink: 0;
+    }
+
+    .calculadora__display {
+      padding: 1.5rem 1rem;
+      text-align: right;
+      min-height: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .calculadora__expression {
+      font-size: 0.9rem;
+      color: var(--c2-secondary);
+      margin-bottom: 0.5rem;
+      min-height: 1.2rem;
+    }
+
+    .calculadora__result {
+      font-family: "Courier New", monospace;
+      font-size: 2.5rem;
+      color: var(--c2-text);
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      word-break: break-all;
+      min-height: 3rem;
+    }
+
+    .calculadora__buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--c2-border);
+    }
+
+    .calculadora__btn {
+      background: var(--c2-surface);
+      color: var(--c2-text);
+      border: none;
+      padding: 1.2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      text-align: center;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calculadora__btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    .calculadora__btn--operator {
+      background: #2a2a2a;
+      color: var(--c2-accent);
+    }
+
+    .calculadora__btn--equals {
+      background: var(--c2-accent);
+      color: #121212;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .calculadora__btn--clear {
+      background: #2a2a2a;
+      color: var(--c2-danger);
+    }
+
+    .calculadora__btn--del {
+      background: #2a2a2a;
+      color: var(--c2-secondary);
+    }
+
+    .calculadora__btn--decimal {
+      background: #2a2a2a;
+      color: var(--c2-text);
+    }
+
+    @media (max-width: 480px) {
+      .calculadora {
+        border-radius: 16px;
+      }
+      .calculadora__result {
+        font-size: 2rem;
+      }
+    }
+  }
+</style>

@@ -25,6 +25,8 @@ export type GlossaryTerm = {
   term: string;
   definition: string;
 };
+
+export type TrialRunner = "Pi" | "OpenCode" | "llama-server";
 export type SoftwareItem = {
   name: string;
   description: string;

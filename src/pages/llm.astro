@@ -1,6 +1,10 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import CalculadoraLing from "@/components/llm/ling-3.0-tiny-q5_k_m/calculadora.astro";
+import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
+import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
+import Trial from "@/components/Trial.astro";
 import ModelList from "@/components/ModelList.astro";
 import ResultsTable from "@/components/ResultsTable.astro";
 import Section from "@/components/Section.astro";
@@ -43,6 +47,42 @@ import Layout from "@/layouts/Layout.astro";
 
     <Section eyebrow="Mediciones" title="Resultados conseguidos">
       <ResultsTable rows={llmResults} />
+    </Section>
+
+    <Section eyebrow="En acción" title="Pruebas">
+      <Trial
+        title="Calculadora"
+        model="Ling 3.0 Tiny"
+        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+        runner="llama-server"
+        tokens="24.503 tokens"
+        duration="3min 58s"
+        speed="102.79 t/s"
+      >
+        <CalculadoraLing />
+      </Trial>
+      <Trial
+        title="MusicPlayer"
+        model="Ling 3.0 Tiny"
+        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+        runner="OpenCode"
+        tokens="27.795 tokens"
+        duration="3m 47s"
+        speed="103 t/s"
+      >
+        <MusicPlayerLing />
+      </Trial>
+      <Trial
+        title="FAQ"
+        model="Ling 3.0 Tiny"
+        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+        runner="llama-server"
+        tokens="22.459 tokens"
+        duration="3min 25s"
+        speed="109.52 t/s"
+      >
+        <FAQLing />
+      </Trial>
     </Section>
   </main>
   <Footer />

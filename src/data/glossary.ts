@@ -55,7 +55,7 @@ export const glossary: GlossaryTerm[] = [
   { term: "Agente", definition: "El sistema que forman un LLM, unas herramientas y un objetivo, trabajando en bucle hasta cumplirlo. El agente no es solo el modelo: es modelo + harness + instrucciones." },
   { term: "MCP", definition: "Estándar para conectar herramientas y servicios a un LLM de forma uniforme." },
   { term: "Harness", definition: "El programa que ejecuta al agente: le da las herramientas y gestiona permisos, memoria e historial. Pi y OpenCode son harnesses, aunque todos los llamemos «agentes»." },
-  { term: "Oneshot / zero-shot", definition: "Resolver la tarea al primer intento, sin ejemplos." },
+  { term: "Oneshot", definition: "Resolver la tarea al primer intento." },
   { term: "Tokens por segundo (t/s)", definition: "Velocidad de un LLM generando texto." },
   { term: "TTFT (Time To First Token)", definition: "Lo que tarda en soltar la primera palabra." },
   { term: "it/s o s/it", definition: "Velocidad en imagen, en iteraciones por segundo o segundos por iteración (cada una es un paso)." },
@@ -68,4 +68,5 @@ export const glossary: GlossaryTerm[] = [
   { term: "ncnn", definition: "Framework de inferencia optimizado para gastar poca memoria en GPU o CPU. Lo usan upscayl-bin y las apps ligeras." },
   { term: "ESRGAN", definition: "Familia clásica de modelos de super-resolución. Real-ESRGAN es la referencia para ampliar ×4." },
   { term: "ControlNet", definition: "Añadido que guía la difusión con una referencia (bordes, pose, profundidad) para controlar la composición." },
+  { term: "Obliteración / Obliterated", definition: "Una técnica para modificar los pesos de un modelo de IA que elimina su tendencia a negarse a responder. Lo hace localizando y borrando las zonas específicas en su funcionamiento interno que controlan las restricciones de seguridad, todo ello sin necesidad de volver a entrenarlo." },
 ];
