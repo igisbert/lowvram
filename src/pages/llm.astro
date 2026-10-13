@@ -3,6 +3,7 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import CalculadoraLing from "@/components/llm/ling-3.0-tiny-q5_k_m/calculadora.astro";
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
+import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
 import Trial from "@/components/Trial.astro";
 import ModelList from "@/components/ModelList.astro";
@@ -50,6 +51,7 @@ import Layout from "@/layouts/Layout.astro";
     </Section>
 
     <Section eyebrow="En acción" title="Pruebas">
+
       <Trial
         title="Calculadora"
         model="Ling 3.0 Tiny"
@@ -82,6 +84,16 @@ import Layout from "@/layouts/Layout.astro";
         speed="109.52 t/s"
       >
         <FAQLing />
+      </Trial>
+      <Trial
+        title="FAQ"
+        model="MiMo 2.6"
+        runner="Pi"
+        tokens="↑19k ↓23k tokens"
+        duration="9m21s"
+        speed="42 t/s"
+      >
+        <FAQMimo />
       </Trial>
     </Section>
   </main>

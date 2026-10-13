@@ -1,0 +1,568 @@
+---
+/**
+ * FAQ.astro
+ *
+ * Acordeón de preguntas frecuentes, autónomo y aislado:
+ * - todo el CSS vive dentro de este fichero (variables en el componente)
+ * - no hay IDs ni clases globales que puedan colisionar con el resto de la web
+ * - el JavaScript es un módulo local: sin variables globales, un único listener delegado
+ */
+---
+
+<!--
+  Estructura por item:
+
+    <li class="faq__item">
+      <button class="faq__item-button" aria-expanded="false" aria-controls="faq-01-panel">
+        <span class="faq__index" aria-hidden="true">01</span>
+        <span class="faq__text">
+          <span class="faq__question" id="faq-01-question">¿Pregunta?</span>
+        </span>
+        <span class="faq__toggle" aria-hidden="true">
+          <span class="faq__mark">
+            <i class="faq__mark-line faq__mark-line--v"></i>
+            <i class="faq__mark-line faq__mark-line--h"></i>
+          </span>
+        </span>
+      </button>
+      <div class="faq__panel" id="faq-01-panel" role="region" aria-labelledby="faq-01-question">
+        <div class="faq__panel-inner">
+          <div class="faq__answer">
+            <p>Respuesta…</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+  El plegado se anima con `grid-template-rows: 0fr → 1fr` (sin medir alturas con JS).
+-->
+<section class="faq" aria-labelledby="faq-title">
+  <p class="faq__eyebrow">FAQ</p>
+  <h2 class="faq__title" id="faq-title">Preguntas frecuentes</h2>
+  <p class="faq__intro">
+    Todo lo que necesitas saber antes de empezar. Si tu duda no está aquí,
+    escríbenos y te respondemos en menos de un día laborable.
+  </p>
+
+  <ul class="faq__list">
+    <!-- 01 -->
+    <article class="faq__item">
+      <button
+        class="faq__item-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="faq-01-panel"
+      >
+        <span class="faq__index" aria-hidden="true">01</span>
+        <span class="faq__text">
+          <span class="faq__question" id="faq-01-question"
+            >¿En qué consiste exactamente el servicio?</span
+          >
+        </span>
+        <span class="faq__toggle" aria-hidden="true">
+          <span class="faq__mark">
+            <i class="faq__mark-line faq__mark-line--v"></i>
+            <i class="faq__mark-line faq__mark-line--h"></i>
+          </span>
+        </span>
+      </button>
+      <div
+        class="faq__panel"
+        id="faq-01-panel"
+        role="region"
+        aria-labelledby="faq-01-question"
+      >
+        <div class="faq__panel-inner">
+          <div class="faq__answer">
+            <p>
+              Es un servicio integral de gestión, análisis y automatización
+              reunido en un único espacio de trabajo. En lugar de tener que
+              conectar cinco herramientas distintas, todo vive en un lugar donde
+              se puede consultar, ajustar y compartir.
+            </p>
+            <p>
+              Incluye la sincronización de tus datos, los informes en tiempo
+              real y las automatizaciones que se activan solas según las reglas
+              que definas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="faq__item">
+      <button
+        class="faq__item-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="faq-02-panel"
+      >
+        <span class="faq__index" aria-hidden="true">02</span>
+        <span class="faq__text">
+          <span class="faq__question" id="faq-02-question"
+            >¿Cómo empiezo de cero?</span
+          >
+        </span>
+        <span class="faq__toggle" aria-hidden="true">
+          <span class="faq__mark">
+            <i class="faq__mark-line faq__mark-line--v"></i>
+            <i class="faq__mark-line faq__mark-line--h"></i>
+          </span>
+        </span>
+      </button>
+      <div
+        class="faq__panel"
+        id="faq-02-panel"
+        role="region"
+        aria-labelledby="faq-02-question"
+      >
+        <div class="faq__panel-inner">
+          <div class="faq__answer">
+            <p>
+              No hace falta ninguna configuración previa. Creas tu cuenta,
+              conectas tus fuentes de datos y ya tienes el panel listo.
+            </p>
+            <p>
+              Desde ahí, cada sección te guía paso a paso: primero conectas,
+              después defines qué quieres medir y al final activas las
+              automatizaciones. En la mayoría de los casos tarda menos de diez
+              minutos llegar a un estado útil.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="faq__item">
+      <button
+        class="faq__item-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="faq-03-panel"
+      >
+        <span class="faq__index" aria-hidden="true">03</span>
+        <span class="faq__text">
+          <span class="faq__question" id="faq-03-question"
+            >¿Qué formatos de archivo admitís?</span
+          >
+        </span>
+        <span class="faq__toggle" aria-hidden="true">
+          <span class="faq__mark">
+            <i class="faq__mark-line faq__mark-line--v"></i>
+            <i class="faq__mark-line faq__mark-line--h"></i>
+          </span>
+        </span>
+      </button>
+      <div
+        class="faq__panel"
+        id="faq-03-panel"
+        role="region"
+        aria-labelledby="faq-03-question"
+      >
+        <div class="faq__panel-inner">
+          <div class="faq__answer">
+            <p>
+              Trabajamos con CSV, XLSX, JSON y archivos comprimidos. También
+              podemos importar directamente desde tu base de datos o desde
+              servicios en la nube con el que ya trabajes.
+            </p>
+            <p>
+              Los archivos que importas se guardan en formato estándar para que
+              puedas descargarlos y seguir manejándolos fuera del servicio en
+              cualquier momento.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 -->
+    <article class="faq__item">
+      <button
+        class="faq__item-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="faq-04-panel"
+      >
+        <span class="faq__index" aria-hidden="true">04</span>
+        <span class="faq__text">
+          <span class="faq__question" id="faq-04-question"
+            >¿Puedo cancelar cuando quiera?</span
+          >
+        </span>
+        <span class="faq__toggle" aria-hidden="true">
+          <span class="faq__mark">
+            <i class="faq__mark-line faq__mark-line--v"></i>
+            <i class="faq__mark-line faq__mark-line--h"></i>
+          </span>
+        </span>
+      </button>
+      <div
+        class="faq__panel"
+        id="faq-04-panel"
+        role="region"
+        aria-labelledby="faq-04-question"
+      >
+        <div class="faq__panel-inner">
+          <div class="faq__answer">
+            <p>
+              Sí, sin permanencia ni penalizaciones. Puedes cancelar desde tu
+              panel de control en cualquier momento y el acceso seguirá activo
+              hasta el final del periodo que ya has pagado.
+            </p>
+            <p>
+              No hace falta escribir a nadie: la acción se confirma sola y
+              recibes un correo de confirmación.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 -->
+    <article class="faq__item">
+      <button
+        class="faq__item-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="faq-05-panel"
+      >
+        <span class="faq__index" aria-hidden="true">05</span>
+        <span class="faq__text">
+          <span class="faq__question" id="faq-05-question"
+            >¿Cómo se gestionan los datos que subo?</span
+          >
+        </span>
+        <span class="faq__toggle" aria-hidden="true">
+          <span class="faq__mark">
+            <i class="faq__mark-line faq__mark-line--v"></i>
+            <i class="faq__mark-line faq__mark-line--h"></i>
+          </span>
+        </span>
+      </button>
+      <div
+        class="faq__panel"
+        id="faq-05-panel"
+        role="region"
+        aria-labelledby="faq-05-question"
+      >
+        <div class="faq__panel-inner">
+          <div class="faq__answer">
+            <p>
+              Los datos se cifran en tránsito y en reposo, y solo están
+              accesibles para tu cuenta. No se utilizan para entrenar modelos ni
+              se comparten con terceros.
+            </p>
+            <p>
+              Puedes exportar una copia completa de tus archivos cuando quieras,
+              y si lo prefieres, borrarlos de forma definitiva al cancelar.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </ul>
+</section>
+
+<style>
+  /**
+   * Estilos del acordeón FAQ.
+   *
+   * Todo el CSS está anclado a los selectores de este componente
+   * (`.faq *`), así que no puede afectar a nada del resto de la página
+   * y no deja selectores globales sueltos por el documento.
+   */
+  .faq {
+    --faq-bg: #0b0b0d;
+    --faq-surface: #101013;
+    --faq-text: #eceae6;
+    --faq-text-muted: #94918b;
+    --faq-text-dim: #5e5c58;
+    --faq-line: rgba(236, 234, 230, 0.1);
+    --faq-line-strong: rgba(236, 234, 230, 0.2);
+    --faq-accent: #e3a63f;
+    --faq-accent-soft: rgba(227, 166, 63, 0.12);
+    --faq-radius: 14px;
+    --faq-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --faq-index-w: 3rem;
+    --faq-gap: 1.5rem;
+    --faq-indent: calc(var(--faq-index-w) + (var(--faq-gap) * 2));
+
+    background: color-mix(in srgb, var(--faq-bg), var(--faq-surface) 55%);
+    border: 1px solid var(--faq-line);
+    border-radius: var(--faq-radius);
+    margin: 0;
+    padding: 2.5rem clamp(1.25rem, 4vw, 3rem);
+  }
+
+  .faq__eyebrow {
+    margin: 0 0 0.75rem;
+    color: var(--faq-accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    line-height: 1;
+  }
+
+  .faq__title {
+    margin: 0 0 0.5rem;
+    color: var(--faq-text);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  .faq__intro {
+    max-width: 58ch;
+    margin: 0 0 2rem;
+    color: var(--faq-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .faq__list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .faq__item {
+    position: relative;
+    border-top: 1px solid var(--faq-line);
+  }
+
+  /* Separador inferior del último elemento */
+  .faq__item:last-child {
+    border-bottom: 1px solid var(--faq-line-strong);
+  }
+
+  /*
+   * Indicador de apertura: una línea vertical de acento que crece
+   * desde el borde superior hasta el inferior de la fila.
+   */
+  .faq__item::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--faq-accent);
+    content: "";
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 380ms var(--faq-ease);
+  }
+
+  .faq__item.is-open::after {
+    transform: scaleY(1);
+  }
+
+  .faq__item-button {
+    display: grid;
+    grid-template-columns: var(--faq-index-w) minmax(0, 1fr) 3rem;
+    align-items: center;
+    gap: var(--faq-gap);
+    width: 100%;
+    padding: 1.75rem 1.25rem 1.75rem 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .faq__item-button:hover {
+    background: var(--faq-accent-soft);
+  }
+
+  .faq__index {
+    color: var(--faq-text-dim);
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    transition: color 180ms ease;
+  }
+
+  .faq__text {
+    min-width: 0;
+  }
+
+  .faq__question {
+    display: block;
+    padding-top: 0.2rem;
+    color: var(--faq-text-muted);
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.35;
+    transition: color 180ms ease;
+  }
+
+  .faq__toggle {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    justify-self: end;
+  }
+
+  .faq__mark {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+
+  .faq__mark-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--faq-text-muted);
+    transform: translate(-50%, -50%);
+    transition: background-color 180ms ease;
+  }
+
+  .faq__mark-line--v {
+    width: 1px;
+    height: 18px;
+  }
+
+  .faq__mark-line--h {
+    width: 18px;
+    height: 1px;
+  }
+
+  .faq__item.is-open .faq__question,
+  .faq__item.is-open .faq__index {
+    color: var(--faq-text);
+  }
+
+  .faq__item.is-open .faq__mark-line--v {
+    opacity: 0;
+  }
+
+  .faq__item:focus-within {
+    background: rgba(227, 166, 63, 0.05);
+  }
+
+  .faq__item-button:focus-visible {
+    outline: 2px solid var(--faq-accent);
+    outline-offset: -2px;
+  }
+
+  /*
+   * Plegado animado con `grid-template-rows`.
+   * El contenido crece de 0fr a 1fr sin necesidad de medir alturas con JS.
+   */
+  .faq__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 380ms var(--faq-ease);
+  }
+
+  .faq__panel-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .faq__item.is-open .faq__panel {
+    grid-template-rows: 1fr;
+  }
+
+  .faq__answer {
+    padding: 0 var(--faq-gap) 2rem var(--faq-indent);
+    max-width: 68ch;
+  }
+
+  .faq__answer p {
+    margin: 0;
+    color: var(--faq-text-muted);
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .faq__answer p + p {
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 900px) {
+    .faq {
+      padding: 3rem clamp(2rem, 5vw, 4rem);
+    }
+
+    .faq__title {
+      max-width: 16ch;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .faq {
+      padding: 1.5rem 1.25rem;
+    }
+
+    .faq__item-button {
+      grid-template-columns: 2.25rem minmax(0, 1fr) 2.25rem;
+      gap: 1rem;
+      padding: 1.25rem 1.25rem 1.25rem 0;
+    }
+
+    .faq__answer {
+      padding: 0 var(--faq-gap) 1.5rem var(--faq-indent);
+    }
+
+    .faq__question {
+      font-size: 1.05rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq__item::after,
+    .faq__panel,
+    .faq__item-button,
+    .faq__question,
+    .faq__index,
+    .faq__mark-line {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+
+  const list = document.querySelector(".faq__list");
+  if (list) {
+    list.addEventListener("click", (event) => {
+      const item = event.target.closest(".faq__item");
+      if (!item) return;
+
+      const isOpen = item.classList.contains("is-open");
+
+      // Cierra los demás, pero sin tocar el elemento que estamos abriendo.
+      item.querySelectorAll(".faq__item").forEach((otherItem) => {
+        if (otherItem === item) return;
+        otherItem.classList.remove("is-open");
+        otherItem
+          .querySelector(".faq__toggle")
+          .setAttribute("aria-expanded", "false");
+      });
+
+      item.classList.toggle("is-open", !isOpen);
+      item
+        .querySelector(".faq__toggle")
+        .setAttribute("aria-expanded", String(!isOpen));
+    });
+  }
+</script>
