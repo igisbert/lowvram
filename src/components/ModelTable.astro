@@ -1,6 +1,7 @@
 ---
 import { Link } from "@lucide/astro";
 import type { ModelItem } from "@/types";
+import { inputsLabel, yesNo } from "@/utils/format";
 
 interface Props {
   items: ModelItem[];
@@ -8,12 +9,19 @@ interface Props {
 
 const { items } = Astro.props;
 
+const showUse = items.some((item) => item.use.trim() !== "");
+const showMoe = items.some((item) => item.moe !== undefined);
+const showMtp = items.some((item) => item.mtp !== undefined);
+const showInput = items.some((item) => item.input !== undefined);
 const columns = [
   { key: "name", label: "Modelo", sortable: true },
   { key: "size", label: "Tamaño", sortable: true },
   { key: "params", label: "Parámetros", sortable: true },
   { key: "quantization", label: "Cuantización", sortable: true },
-  { key: "use", label: "Características", sortable: false },
+  ...(showMoe ? [{ key: "moe", label: "MoE", sortable: false }] : []),
+  ...(showMtp ? [{ key: "mtp", label: "MTP", sortable: false }] : []),
+  ...(showInput ? [{ key: "input", label: "Modalidades", sortable: false }] : []),
+  ...(showUse ? [{ key: "use", label: "Características", sortable: false }] : []),
   { key: "url", label: "Enlace", sortable: false },
 ] as const;
 ---
@@ -48,7 +56,10 @@ const columns = [
             <td>{item.size}</td>
             <td>{item.params}</td>
             <td>{item.quantization}</td>
-            <td class="use">{item.use}</td>
+            {showMoe && <td>{item.moe === undefined ? "—" : yesNo(item.moe)}</td>}
+            {showMtp && <td>{item.mtp === undefined ? "—" : yesNo(item.mtp)}</td>}
+            {showInput && <td>{item.input ? inputsLabel(item.input) : "—"}</td>}
+            {showUse && <td class="use">{item.use}</td>}
             <td>
               <a
                 class="icon-link"
@@ -107,7 +118,7 @@ const columns = [
 
   .models {
     width: 100%;
-    min-width: 640px;
+    min-width: 900px;
     border-collapse: collapse;
     font-size: 0.8125rem;
     background: var(--canvas-card);

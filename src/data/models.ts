@@ -3,22 +3,26 @@ import type { ModelItem } from "@/types";
 /* TODO: sustituir por datos reales. Nombres y cifras de ejemplo para validar el layout. */
 export const llmModels: ModelItem[] = [
   {
-    name: "Modelo de ejemplo 7B",
-    size: "~5 GB",
-    params: "7B",
-    quantization: "Q4_K_M",
-    vram: "~5 GB",
-    use: "Chat general y pruebas de velocidad.",
-    url: "https://huggingface.co",
+    name: "MiMo-V2.6-Distill-Qwen-9B",
+    size: "5.48 GB",
+    params: "9B",
+    quantization: "Q4_K_S",
+    moe: false,
+    mtp: false,
+    input: ["texto", "imagen"],
+    use: "",
+    url: "https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF",
   },
   {
-    name: "Modelo de ejemplo 8B",
-    size: "~6 GB",
+    name: "Ling-3.0-tiny-GGUF",
+    size: "5.64 GB",
     params: "8B",
     quantization: "Q5_K_M",
-    vram: "~6 GB",
-    use: "Instrucciones y contexto medio.",
-    url: "https://huggingface.co",
+    moe: true,
+    mtp: false,
+    input: ["texto"],
+    use: "",
+    url: "https://huggingface.co/inclusionAI/Ling-3.0-tiny-GGUF",
   },
 ];
 

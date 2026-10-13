@@ -31,6 +31,7 @@ export const glossary: GlossaryTerm[] = [
   { term: "Top-p / Top-k / Min-p", definition: "Filtros que limitan entre qué palabras puede elegir. Evitan que se vaya por las ramas." },
   { term: "System prompt", definition: "Instrucciones de fondo que definen cómo se comporta (tono, reglas, rol)." },
   { term: "Modelo denso vs MoE", definition: "Un denso usa todos sus parámetros siempre. Un MoE (mezcla de expertos) tiene muchos pero solo activa una parte en cada palabra, por lo que es rápido para su tamaño." },
+  { term: "MTP", definition: "Predicción de varios tokens de golpe en vez de uno a uno. Más t/s con la misma GPU, solo disponible en modelos preparados para ello." },
   { term: "Modelo de razonamiento (thinking)", definition: "Piensa paso a paso antes de responder. Es más preciso en problemas difíciles, pero más lento y gasta más tokens." },
   { term: "RAG", definition: "Conectar al modelo con tus documentos: antes de responder, busca en ellos y cita lo encontrado en vez de tirar de memoria." },
   { term: "Embeddings", definition: "Convertir texto en números que representan su significado, para buscar por similitud." },

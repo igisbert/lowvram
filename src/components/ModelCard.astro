@@ -1,5 +1,7 @@
 ---
+import { Link as LinkIcon } from "@lucide/astro";
 import type { ModelItem } from "@/types";
+import { inputsLabel, yesNo } from "@/utils/format";
 
 interface Props {
   item: ModelItem;
@@ -23,17 +25,63 @@ const { item } = Astro.props;
       <dt>Cuantización</dt>
       <dd>{item.quantization}</dd>
     </div>
+    {item.vram && (
+      <div>
+        <dt>VRAM aprox.</dt>
+        <dd>{item.vram}</dd>
+      </div>
+    )}
+    {item.moe !== undefined && (
+      <div>
+        <dt>MoE</dt>
+        <dd>{yesNo(item.moe)}</dd>
+      </div>
+    )}
+    {item.mtp !== undefined && (
+      <div>
+        <dt>MTP</dt>
+        <dd>{yesNo(item.mtp)}</dd>
+      </div>
+    )}
+    {item.input && (
+      <div>
+        <dt>Modalidades</dt>
+        <dd class="mods">{inputsLabel(item.input)}</dd>
+      </div>
+    )}
     <div>
-      <dt>VRAM aprox.</dt>
-      <dd>{item.vram}</dd>
+      <dt>Enlace</dt>
+      <dd>
+        <a
+          class="icon-link"
+          href={item.url}
+          target="_blank"
+          rel="noopener"
+          aria-label={`Descargar ${item.name}`}
+        >
+          <LinkIcon size={16} />
+        </a>
+      </dd>
     </div>
   </dl>
   <p>{item.use}</p>
-  <a class="button" href={item.url} target="_blank" rel="noopener">Descargar</a>
+  {item.observations && (
+    <div class="notes">
+      <p class="mono kicker">Observaciones</p>
+      <ul>
+        {item.observations.map((note) => (
+          <li>{note}</li>
+        ))}
+      </ul>
+    </div>
+  )}
 </article>
 
 <style>
   .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background: var(--canvas-card);
     border: 1px solid var(--hairline);
     border-radius: var(--radius);
@@ -44,7 +92,7 @@ const { item } = Astro.props;
     }
 
     p {
-      margin: 0 0 var(--space-lg);
+      margin: 0 0 var(--space-md);
       font-size: 0.875rem;
       color: var(--body);
     }
@@ -59,9 +107,11 @@ const { item } = Astro.props;
     div {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: var(--space-lg);
       border-bottom: 1px solid var(--hairline);
       padding-bottom: var(--space-sm);
+      min-height: 44px;
     }
 
     dt {
@@ -72,6 +122,45 @@ const { item } = Astro.props;
       color: var(--ink);
       margin: 0;
       text-align: right;
+    }
+
+    .mods {
+      text-transform: capitalize;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      color: var(--ink);
+    }
+  }
+
+  .notes {
+    border-top: 1px solid var(--hairline);
+    padding-top: var(--space-md);
+    margin-bottom: var(--space-md);
+
+    .kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 var(--space-sm);
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.875rem;
+      color: var(--body);
+    }
+
+    li + li {
+      margin-top: var(--space-xs);
     }
   }
 </style>

@@ -37,14 +37,20 @@ export type SoftwareItem = {
   recommended?: boolean;
 };
 
+export type ModelInput = "texto" | "imagen" | "video" | "audio";
+
 export type ModelItem = {
   name: string;
   size: string;
   params: string;
   quantization: string;
-  vram: string;
+  vram?: string;
+  moe?: boolean;
+  mtp?: boolean;
+  input?: ModelInput[];
   use: string;
   url: string;
+  observations?: string[];
 };
 
 export type LlmResultRow = {

@@ -6,7 +6,7 @@ import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
 import Trial from "@/components/Trial.astro";
-import ModelList from "@/components/ModelList.astro";
+import ModelTable from "@/components/ModelTable.astro";
 import ResultsTable from "@/components/ResultsTable.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
@@ -39,11 +39,8 @@ import Layout from "@/layouts/Layout.astro";
       <SoftwareList items={llmAgents} />
     </Section>
 
-    <Section eyebrow="Para 8 GB de VRAM" title="Modelos recomendados para mis specs">
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
-      <ModelList items={llmModels} />
+    <Section eyebrow="Para 8 GB de VRAM y 16 GB de RAM" title="Modelos que he probado">
+      <ModelTable items={llmModels} />
     </Section>
 
     <Section eyebrow="Mediciones" title="Resultados conseguidos">
