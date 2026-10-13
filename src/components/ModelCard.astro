@@ -64,7 +64,7 @@ const { item } = Astro.props;
       </dd>
     </div>
   </dl>
-  <p>{item.use}</p>
+  {item.use.trim() !== "" && <p>{item.use}</p>}
   {item.observations && (
     <div class="notes">
       <p class="mono kicker">Observaciones</p>

@@ -1,0 +1,129 @@
+---
+import { Minus, Plus } from "@lucide/astro";
+import type { Verdict } from "@/types";
+
+interface Props {
+  verdict: Verdict;
+}
+
+const { verdict } = Astro.props;
+---
+
+<article class="card">
+  <div class="head">
+    <h3>{verdict.model}</h3>
+    {verdict.avgSpeed && <span class="mono avg">{verdict.avgSpeed}</span>}
+  </div>
+  {verdict.fullModel && <p class="mono full">{verdict.fullModel}</p>}
+  <div class="cols">
+    <div>
+      <p class="mono kicker good">Lo bueno</p>
+      <ul class="points">
+        {verdict.strengths.map((item) => (
+          <li class="pro"><Plus size={14} /><span>{item}</span></li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <p class="mono kicker bad">Lo malo</p>
+      <ul class="points">
+        {verdict.issues.map((item) => (
+          <li class="con"><Minus size={14} /><span>{item}</span></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-xl);
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+    margin: 0 0 var(--space-xs);
+
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .avg {
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin-left: auto;
+  }
+
+  .full {
+    font-size: 0.75rem;
+    color: var(--mute);
+    margin: 0 0 var(--space-lg);
+    overflow-wrap: anywhere;
+  }
+
+  .cols {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 var(--space-sm);
+
+    &.good {
+      color: var(--accent);
+    }
+
+    &.bad {
+      color: var(--accent);
+    }
+  }
+
+  .points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.875rem;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+
+    li + li {
+      margin-top: var(--space-sm);
+    }
+
+    svg {
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .pro svg {
+      color: var(--accent);
+    }
+
+    .con svg {
+      color: var(--mute);
+    }
+  }
+</style>

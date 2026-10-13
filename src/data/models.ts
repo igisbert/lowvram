@@ -168,15 +168,14 @@ export const bgModels: ModelItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. */
+/* Datos reales. */
 export const videoModels: ModelItem[] = [
   {
-    name: "Modelo de vídeo de ejemplo",
-    size: "2 GB",
-    params: "TODO",
-    quantization: "FP16",
-    vram: "~6 GB",
-    use: "Clips cortos de ejemplo para validar el flujo.",
-    url: "https://huggingface.co",
+    name: "Wan2.2-TI2V-5B",
+    size: "5.4 GB",
+    params: "5B",
+    quantization: "Q8_0",
+    use: "",
+    url: "https://huggingface.co/QuantStack/Wan2.2-TI2V-5B-GGUF",
   },
 ];

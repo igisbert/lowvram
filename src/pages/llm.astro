@@ -1,18 +1,19 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import Info from "@/components/Info.astro";
 import CalculadoraLing from "@/components/llm/ling-3.0-tiny-q5_k_m/calculadora.astro";
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
 import Trial from "@/components/Trial.astro";
+import Verdict from "@/components/Verdict.astro";
 import ModelTable from "@/components/ModelTable.astro";
-import ResultsTable from "@/components/ResultsTable.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
-import { llmResults } from "@/data/llm-results";
 import { llmModels } from "@/data/models";
 import { llmAgents, llmSoftware } from "@/data/software";
+import { verdicts } from "@/data/verdicts";
 import Layout from "@/layouts/Layout.astro";
 ---
 
@@ -39,16 +40,14 @@ import Layout from "@/layouts/Layout.astro";
       <SoftwareList items={llmAgents} />
     </Section>
 
-    <Section eyebrow="Para 8 GB de VRAM y 16 GB de RAM" title="Modelos que he probado">
+    <Section
+      eyebrow="Para 8 GB de VRAM y 16 GB de RAM"
+      title="Modelos que he probado"
+    >
       <ModelTable items={llmModels} />
     </Section>
 
-    <Section eyebrow="Mediciones" title="Resultados conseguidos">
-      <ResultsTable rows={llmResults} />
-    </Section>
-
     <Section eyebrow="En acción" title="Pruebas">
-
       <Trial
         title="Calculadora"
         model="Ling 3.0 Tiny"
@@ -93,6 +92,11 @@ import Layout from "@/layouts/Layout.astro";
         <FAQMimo />
       </Trial>
     </Section>
+    <Section eyebrow="Veredicto" title="Resultados conseguidos">
+      <div class="verdicts">
+        {verdicts.map((verdict) => <Verdict verdict={verdict} />)}
+      </div>
+    </Section>
   </main>
   <Footer />
 </Layout>
@@ -109,5 +113,17 @@ import Layout from "@/layouts/Layout.astro";
   .lead {
     font-size: 1.125rem;
     margin: 0;
+  }
+
+  .verdicts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .verdicts {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>

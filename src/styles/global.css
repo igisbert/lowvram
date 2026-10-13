@@ -7,7 +7,7 @@
     url("/fonts/Satoshi-Variable.ttf") format("truetype");
   font-weight: 300 900;
   font-style: normal;
-  font-display: swap;
+  /* font-display: swap; */
 }
 
 :root {
@@ -33,7 +33,8 @@
 
   /* Type */
   --font-sans: "Satoshi", "Inter", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --font-mono:
+    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, Menlo, monospace;
 
   /* Layout */
   --container: 1200px;

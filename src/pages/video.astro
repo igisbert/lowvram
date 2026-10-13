@@ -1,6 +1,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import Info from "@/components/Info.astro";
 import ModelList from "@/components/ModelList.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
@@ -21,7 +22,8 @@ import Layout from "@/layouts/Layout.astro";
       <p class="eyebrow">Vídeo · Generación local</p>
       <h1>Modelos de vídeo</h1>
       <p class="lead">
-        Con qué generarlos, cuáles caben en 8 GB de VRAM y qué clips salen de mi equipo.
+        Con qué generarlos, cuáles caben en 8 GB de VRAM y qué clips salen de mi
+        equipo.
       </p>
     </div>
 
@@ -37,8 +39,8 @@ import Layout from "@/layouts/Layout.astro";
         entender cómo funciona la generación de vídeo en local.
       </p>
       <p>
-        Esta página recoge ese escenario real: con qué intentarlo y qué sale
-        de verdad, sin prometer lo que el hardware no da.
+        Esta página recoge ese escenario real: con qué intentarlo y qué sale de
+        verdad, sin prometer lo que el hardware no da.
       </p>
     </Section>
 
@@ -46,14 +48,17 @@ import Layout from "@/layouts/Layout.astro";
       <SoftwareList items={videoSoftware} />
     </Section>
 
-    <Section eyebrow="Para 8 GB de VRAM" title="Modelos recomendados para mis specs">
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
+    <Section eyebrow="Para 8 GB de VRAM" title="Modelos que he probado">
       <ModelList items={videoModels} />
     </Section>
 
     <Section eyebrow="Clips" title="Resultados conseguidos">
+      <Info title="No compensa">
+        <p>
+          Generar 2 segundos de vídeo puede pasar de los 30 minutos de
+          inferencia. Para ese coste, el resultado no merece la pena.
+        </p>
+      </Info>
       <VideoResults items={videoResults} />
     </Section>
   </main>

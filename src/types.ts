@@ -27,6 +27,15 @@ export type GlossaryTerm = {
 };
 
 export type TrialRunner = "Pi" | "OpenCode" | "llama-server";
+
+export type Verdict = {
+  model: string;
+  fullModel?: string;
+  avgSpeed?: string;
+  strengths: string[];
+  issues: string[];
+  links?: SoftwareLink[];
+};
 export type SoftwareItem = {
   name: string;
   description: string;

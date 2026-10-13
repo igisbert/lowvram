@@ -9,29 +9,36 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-{items.length === 0 ? (
-  <div class="empty" role="status">
-    <p class="mono">Sin resultados todavía</p>
-    <p>TODO: sustituir por datos reales. Cuando generes tus vídeos, añade una entrada al array y aparecerá aquí.</p>
-  </div>
-) : (
-  <div class="videos">
-    {items.map((item) => (
-      <article class="card">
-        <div class="frame">
-          <video src={item.src} controls preload="metadata" aria-label={item.label}>
-            Tu navegador no soporta vídeo HTML5.
-          </video>
-          <span class="mono badge">{item.model}</span>
-        </div>
-        <InferenceTime seconds={item.time} />
-        {item.prompt ? (
-          <p class="mono prompt">{item.prompt}</p>
-        ) : null}
-      </article>
-    ))}
-  </div>
-)}
+{
+  items.length === 0 ? (
+    <div class="empty" role="status">
+      <p class="mono">Sin resultados todavía</p>
+      <p>
+        TODO: sustituir por datos reales. Cuando generes tus vídeos, añade una
+        entrada al array y aparecerá aquí.
+      </p>
+    </div>
+  ) : (
+    <div class="videos">
+      {items.map((item) => (
+        <article class="card">
+          <div class="frame">
+            <video
+              src={item.src}
+              controls
+              preload="metadata"
+              aria-label={item.label}
+            >
+              Tu navegador no soporta vídeo HTML5.
+            </video>
+            <span class="mono badge">{item.model}</span>
+          </div>
+          {item.prompt ? <p class="mono prompt">{item.prompt}</p> : null}
+        </article>
+      ))}
+    </div>
+  )
+}
 
 <style>
   .videos {
@@ -55,7 +62,6 @@ const { items } = Astro.props;
 
   .frame {
     position: relative;
-    aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: var(--radius);
     border: 1px solid var(--hairline);

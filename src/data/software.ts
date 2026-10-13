@@ -151,7 +151,7 @@ export const bgSoftware: SoftwareItem[] = [
 export const videoSoftware: SoftwareItem[] = [
   {
     name: "ComfyUI",
-    description: "Interfaz por nodos que también sirve flujos de vídeo (AnimateDiff y similares).",
+    description: "Interfaz por nodos que también sirve flujos de vídeo.",
     links: [
       { label: "Sitio web", href: "https://www.comfy.org" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/comfyui/" },
@@ -160,11 +160,11 @@ export const videoSoftware: SoftwareItem[] = [
   },
   {
     name: "stable-diffusion.cpp",
-    description: "Stable Diffusion en C++ con soporte de vídeo (Stable Video Diffusion) para generar clips en local.",
+    description: "El mismo motor que puedes usar para generar fotos también genera vídeos.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
-      { label: "Guía", href: "https://ai.manz.dev/learn/setup/stablediffusioncpp/" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/sdcpp-i2v/" },
     ],
-    audience: "Quien quiere probar vídeo sin frameworks pesados.",
+    audience: "Quien quiere probar a generar vídeos con el mismo motor.",
   },
 ];
