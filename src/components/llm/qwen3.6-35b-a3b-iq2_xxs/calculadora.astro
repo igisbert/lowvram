@@ -1,0 +1,411 @@
+---
+---
+
+<!-- calculadora.astro -->
+<div class="calculadora" data-qwencalc role="application" aria-label="Calculadora">
+  <div class="calculadora__display">
+    <span class="calculadora__expresion" aria-hidden="true"></span>
+    <span class="calculadora__resultado" aria-live="polite">0</span>
+  </div>
+
+  <div class="calculadora__teclas">
+    <button class="calculadora__tecla calculadora__tecla--accion" data-action="clear" aria-label="Limpiar">C</button>
+    <button class="calculadora__tecla calculadora__tecla--accion" data-action="backspace" aria-label="Borrar último dígito">⌫</button>
+    <button class="calculadora__tecla calculadora__tecla--operador" data-value="%">%</button>
+    <button class="calculadora__tecla calculadora__tecla--operador" data-value="/">÷</button>
+
+    <button class="calculadora__tecla" data-value="7">7</button>
+    <button class="calculadora__tecla" data-value="8">8</button>
+    <button class="calculadora__tecla" data-value="9">9</button>
+    <button class="calculadora__tecla calculadora__tecla--operador" data-value="×">×</button>
+
+    <button class="calculadora__tecla" data-value="4">4</button>
+    <button class="calculadora__tecla" data-value="5">5</button>
+    <button class="calculadora__tecla" data-value="6">6</button>
+    <button class="calculadora__tecla calculadora__tecla--operador" data-value="-">−</button>
+
+    <button class="calculadora__tecla" data-value="1">1</button>
+    <button class="calculadora__tecla" data-value="2">2</button>
+    <button class="calculadora__tecla" data-value="3">3</button>
+    <button class="calculadora__tecla calculadora__tecla--operador" data-value="+">+</button>
+
+    <button class="calculadora__tecla calculadora__tecla--ampliado" data-value="0">0</button>
+    <button class="calculadora__tecla" data-value=".">.</button>
+    <button class="calculadora__tecla calculadora__tecla--igual" data-action="equals">=</button>
+  </div>
+</div>
+
+<style>
+  .calculadora {
+    --cc-bg: #1a1a1a;
+    --cc-surface: #2a2a2a;
+    --cc-text: #f0f0f0;
+    --cc-muted: #888;
+    --cc-accent: #ff9f43;
+    --cc-accent-hover: #e68a35;
+    --cc-operator: #6c6c6c;
+    --cc-operator-hover: #8a8a8a;
+    --cc-equal: #ff9f43;
+    --cc-equal-hover: #e68a35;
+    --cc-danger: #ff6b6b;
+    --cc-danger-hover: #e05555;
+    --cc-radius: 12px;
+    --cc-gap: 8px;
+    --cc-btn-size: 52px;
+    --cc-display-height: 120px;
+
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--cc-bg);
+    border-radius: var(--cc-radius);
+    padding: 20px;
+    width: 360px;
+    max-width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    color: var(--cc-text);
+    user-select: none;
+  }
+
+  @media (max-width: 420px) {
+    .calculadora {
+      width: 100vw;
+      max-width: 100%;
+      padding: 16px;
+      border-radius: 0;
+    }
+  }
+
+  .calculadora__display {
+    height: var(--cc-display-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+    background: var(--cc-surface);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    word-break: break-all;
+  }
+
+  .calculadora__expresion {
+    display: block;
+    font-size: 14px;
+    color: var(--cc-muted);
+    text-align: right;
+    min-height: 20px;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .calculadora__resultado {
+    display: block;
+    font-size: 36px;
+    font-weight: 300;
+    text-align: right;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: font-size 0.15s ease;
+  }
+
+  .calculadora__teclas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--cc-gap);
+  }
+
+  .calculadora__tecla {
+    height: var(--cc-btn-size);
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family: inherit;
+    cursor: pointer;
+    background: var(--cc-surface);
+    color: var(--cc-text);
+    transition: background 0.15s ease, transform 0.1s ease;
+    outline-offset: 2px;
+  }
+
+  .calculadora__tecla:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 159, 67, 0.5);
+  }
+
+  .calculadora__tecla:hover {
+    filter: brightness(1.1);
+  }
+
+  .calculadora__tecla:active {
+    transform: scale(0.95);
+  }
+
+  .calculadora__tecla--accion {
+    background: var(--cc-danger);
+    color: white;
+  }
+
+  .calculadora__tecla--accion:hover {
+    background: var(--cc-danger-hover);
+  }
+
+  .calculadora__tecla--operador {
+    background: var(--cc-operator);
+    color: white;
+  }
+
+  .calculadora__tecla--operador:hover {
+    background: var(--cc-operator-hover);
+  }
+
+  .calculadora__tecla--operador[data-value="%"] {
+    background: var(--cc-accent);
+  }
+
+  .calculadora__tecla--operador[data-value="%"]:hover {
+    background: var(--cc-accent-hover);
+  }
+
+  .calculadora__tecla--igual {
+    background: var(--cc-equal);
+    color: white;
+  }
+
+  .calculadora__tecla--igual:hover {
+    background: var(--cc-equal-hover);
+  }
+
+  .calculadora__tecla--ampliado {
+    grid-column: span 2;
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  for (const root of document.querySelectorAll("[data-qwencalc]")) {
+    const display = root.querySelector(".calculadora__display");
+    const expresionEl = display.querySelector(".calculadora__expresion");
+    const resultadoEl = display.querySelector(".calculadora__resultado");
+    const teclas = root.querySelectorAll(".calculadora__tecla");
+
+    let currentInput = "0";
+    let expression = "";
+    let waitingForOperand = false;
+    let lastResult = null;
+    let lastOperator = null;
+
+    function formatNumber(num) {
+      if (num === Infinity || num === -Infinity) {
+        return "∞";
+      }
+      if (Number.isNaN(num)) {
+        return "Error";
+      }
+
+      const rounded = roundFloat(num);
+      const str = rounded.toString();
+
+      if (str.replace(/[^0-9.]/g, "").length > 14) {
+        const exp = rounded.toExponential(10);
+        return exp.replace(/e\+?0*/, "e+");
+      }
+
+      return str;
+    }
+
+    function roundFloat(num) {
+      if (typeof num !== "number") return num;
+      return Math.round(num * 1e12) / 1e12;
+    }
+
+    function updateDisplay() {
+      resultadoEl.textContent = formatNumber(currentInput);
+
+      const fontSize = resultadoEl.textContent.length > 12 ? 28 : resultadoEl.textContent.length > 8 ? 32 : 36;
+      resultadoEl.style.fontSize = fontSize + "px";
+
+      if (expresionEl.textContent !== expression) {
+        expresionEl.textContent = expression;
+      }
+    }
+
+    function handleNumber(value) {
+      if (waitingForOperand) {
+        currentInput = value;
+        waitingForOperand = false;
+      } else {
+        if (value === ".") {
+          if (currentInput.includes(".")) return;
+          currentInput += ".";
+        } else {
+          if (currentInput === "0" && value === "0") return;
+          if (currentInput === "0") {
+            currentInput = value;
+          } else {
+            currentInput += value;
+          }
+        }
+      }
+      updateDisplay();
+    }
+
+    function handleOperator(op) {
+      if (currentInput === "Error") {
+        return;
+      }
+
+      const current = parseFloat(currentInput);
+
+      if (lastResult !== null && lastOperator !== null && !waitingForOperand) {
+        const result = calculate(lastResult, current, lastOperator);
+        expression = formatNumber(result) + " " + op;
+        currentInput = formatNumber(result);
+        lastResult = result;
+      } else {
+        expression = currentInput + " " + op;
+        lastResult = current;
+      }
+
+      lastOperator = op;
+      waitingForOperand = true;
+      updateDisplay();
+    }
+
+    function calculate(a, b, op) {
+      switch (op) {
+        case "+":
+          return roundFloat(a + b);
+        case "-":
+          return roundFloat(a - b);
+        case "×":
+          return roundFloat(a * b);
+        case "÷":
+          if (b === 0) {
+            currentInput = "Error";
+            expression = "";
+            lastResult = null;
+            lastOperator = null;
+            waitingForOperand = false;
+            updateDisplay();
+            return NaN;
+          }
+          return roundFloat(a / b);
+        case "%":
+          return roundFloat(a % b);
+        default:
+          return b;
+      }
+    }
+
+    function handleEquals() {
+      if (lastResult === null) {
+        return;
+      }
+
+      const current = parseFloat(currentInput);
+      const result = calculate(lastResult, current, lastOperator);
+
+      if (Number.isNaN(result)) {
+        return;
+      }
+
+      expression = formatNumber(lastResult) + " " + lastOperator + " " + currentInput + " =";
+      currentInput = formatNumber(result);
+      lastResult = result;
+      lastOperator = null;
+      waitingForOperand = true;
+      updateDisplay();
+    }
+
+    function handleClear() {
+      currentInput = "0";
+      expression = "";
+      waitingForOperand = false;
+      lastResult = null;
+      lastOperator = null;
+      updateDisplay();
+    }
+
+    function handleBackspace() {
+      if (waitingForOperand) return;
+
+      if (currentInput.length === 1 || (currentInput.length === 2 && currentInput.startsWith("-"))) {
+        currentInput = "0";
+      } else {
+        currentInput = currentInput.slice(0, -1);
+      }
+      updateDisplay();
+    }
+
+    function evaluate(key) {
+      if (key === "Escape") {
+        handleClear();
+      } else if (key === "Backspace") {
+        handleBackspace();
+      } else if (key === "Enter" || key === "=") {
+        handleEquals();
+      } else if (key === "%") {
+        handleOperator("%");
+      } else if (key === "+") {
+        handleOperator("+");
+      } else if (key === "-") {
+        handleOperator("-");
+      } else if (key === "*") {
+        handleOperator("×");
+      } else if (key === "/") {
+        handleOperator("÷");
+      } else if (key === ".") {
+        handleNumber(".");
+      } else if (key >= "0" && key <= "9") {
+        handleNumber(key);
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (!(e.target instanceof Element) || !e.target.closest("[data-qwencalc]")) return;
+      if (e.key === "Escape" || e.key === "Backspace" || e.key === "Enter" ||
+          e.key === "=" || e.key === "%" || e.key === "+" ||
+          e.key === "-" || e.key === "*" || e.key === "/" ||
+          e.key === ".") {
+        e.preventDefault();
+        evaluate(e.key);
+      } else if (e.key >= "0" && e.key <= "9") {
+        e.preventDefault();
+        evaluate(e.key);
+      }
+    });
+
+    teclas.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const action = btn.dataset.action;
+        const value = btn.dataset.value;
+
+        if (action === "clear") {
+          handleClear();
+        } else if (action === "backspace") {
+          handleBackspace();
+        } else if (action === "equals") {
+          handleEquals();
+        } else if (value) {
+          if (value === "%") {
+            handleOperator("%");
+          } else if (value === "+") {
+            handleOperator("+");
+          } else if (value === "-") {
+            handleOperator("-");
+          } else if (value === "×") {
+            handleOperator("×");
+          } else if (value === "÷") {
+            handleOperator("÷");
+          } else {
+            handleNumber(value);
+          }
+        }
+      });
+    });
+
+    updateDisplay();
+  }
+</script>

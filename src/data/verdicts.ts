@@ -14,6 +14,7 @@ export const verdicts: Verdict[] = [
     issues: [
       "Ignora restricciones explícitas del prompt.",
       "A veces deja botones sin cablear: están en el markup pero no hacen nada.",
+      "A veces se interrumpte y tienes que decirle que siga",
       "Construye HTML con template strings, que Astro pinta como texto.",
       "Alucina con seguridad total (sintaxis de otros frameworks, siglas inventadas).",
       "Confunde Svelte (y hasta Vue) con Astro aunque se le pida un componente Astro.",
@@ -32,6 +33,19 @@ export const verdicts: Verdict[] = [
       "Entrega componentes sin ni un listener: nada responde.",
       "Inventa APIs (useState, createContext…) y mezcla sintaxis Svelte en componentes de Astro.",
       "Ficheros que no compilan tal como salen.",
+    ],
+  },
+  {
+    model: "Qwen3.6-35B",
+    avgSpeed: "~30 t/s de media",
+    strengths: [
+      "Todo cableado a la primera: ni un botón muerto.",
+      "CSS sin fugas de serie y detalles de accesibilidad (aria-live, foco, reduced-motion).",
+      "Extras bien resueltos: operador %, formato exponencial, ∞ controlado.",
+    ],
+    issues: [
+      "Enorme incluso en Q2: hace offload y no cabe en 8 GB.",
+      "Consultas y teclado globales: hubo que encapsularlo.",
     ],
   },
 ];

@@ -24,6 +24,38 @@ export const llmModels: ModelItem[] = [
     use: "",
     url: "https://huggingface.co/inclusionAI/Ling-3.0-tiny-GGUF",
   },
+  {
+    name: "Qwen3.6-35B-A3B",
+    size: "10.8 GB",
+    params: "35B",
+    quantization: "UD-IQ2_XXS",
+    moe: true,
+    mtp: false,
+    input: ["texto", "imagen"],
+    use: "",
+    url: "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF",
+  },
+  {
+    name: "Qwen3.6-35B-A3B-MTP",
+    size: "11.8 GB",
+    params: "35B",
+    quantization: "UD-IQ2_XXS",
+    moe: true,
+    mtp: true,
+    input: ["texto", "imagen"],
+    use: "",
+    url: "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF",
+  },
+  {
+    name: "Qwen3.6-35B-A3B-MTP",
+    size: "11.8 GB",
+    params: "35B",
+    quantization: "UD-IQ2_XXS",
+    moe: true,
+    mtp: true,
+    use: "",
+    url: "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF",
+  },
 ];
 
 /* Datos reales de data.md. Tamaños del `ls` convertidos a GB. VRAM aprox. = tamaño en disco. */
