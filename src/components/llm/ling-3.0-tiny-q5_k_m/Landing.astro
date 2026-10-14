@@ -4,23 +4,8 @@
 // Sin elementos externos, sin frameworks, sin JavaScript
 ---
 
-<!-- Navegación -->
-<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
-<label for="nav-toggle" class="hamburger" aria-label="Menú de navegación">
-  <span></span><span></span><span></span>
-</label>
-<nav class="nav" aria-label="Navegación principal" role="navigation">
-  <ul class="nav__list">
-    <li><a href="#inicio">Inicio</a></li>
-    <li><a href="#valor">Valor</a></li>
-    <li><a href="#concepto">Concepto</a></li>
-    <li><a href="#visual">Visual</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-</nav>
-
 <!-- Sección 1: Hero -->
-<section id="inicio" class="section hero">
+<section class="section hero">
   <div class="hero__bg">
     <div class="hero__circle hero__circle--1"></div>
     <div class="hero__circle hero__circle--2"></div>
@@ -30,12 +15,12 @@
     <h1 class="hero__title">AURA</h1>
     <p class="hero__tagline">Luz que define</p>
     <p class="hero__subtitle">Presencia lumínica en cada punto de contacto</p>
-    <a href="#valor" class="hero__cta">Descubrir la diferencia</a>
+    <a class="hero__cta">Descubrir la diferencia</a>
   </div>
 </section>
 
 <!-- Sección 2: Valor -->
-<section id="valor" class="section valor">
+<section class="section valor">
   <div class="valor__grid">
     <div class="valor__block valor__block--1">
       <div class="valor__circle"></div>
@@ -56,7 +41,7 @@
 </section>
 
 <!-- Sección 3: Concepto -->
-<section id="concepto" class="section concepto">
+<section class="section concepto">
   <div class="concepto__grid">
     <div class="concepto__text">
       <h2 class="concepto__heading">La idea que nos define</h2>
@@ -67,7 +52,7 @@
 </section>
 
 <!-- Sección 4: Visual -->
-<section id="visual" class="section visual">
+<section class="section visual">
   <div class="visual__poster">
     <div class="visual__layer visual__layer--1"></div>
     <div class="visual__layer visual__layer--2"></div>
@@ -81,10 +66,10 @@
 </section>
 
 <!-- Sección 5: Cierre -->
-<section id="contacto" class="section cierre">
+<section class="section cierre">
   <div class="cierre__content">
     <p class="cierre__message">Tu transformación comienza aquí</p>
-    <a href="#inicio" class="cierre__cta">Iniciar ahora</a>
+    <a class="cierre__cta">Iniciar ahora</a>
   </div>
 </section>
 
@@ -108,106 +93,6 @@
   --card-bg: #12121a;
   --border: rgba(200,150,90,0.12);
   --nav-h: 96px;
-}
-
-/* ========== NAVIGACIÓN ========== */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
-  padding: 1rem 2rem;
-  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-toggle:checked ~ .nav {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: all;
-}
-
-.nav__list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav__list a {
-  color: var(--white);
-  font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  text-decoration: none;
-  position: relative;
-  padding: 0.25rem 0;
-  transition: color 0.3s ease;
-}
-
-.nav__list a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent);
-  transition: width 0.3s ease;
-}
-
-.nav__list a:hover::after,
-.nav__list a:focus::after { width: 100%; }
-
-.nav__list a:focus { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
-
-@media (min-width: 769px) {
-  .hamburger { display: none; }
-  .nav { transform: translateY(0); opacity: 1; pointer-events: all; }
-}
-
-.hamburger {
-  display: none;
-  position: fixed;
-  top: 1rem;
-  left: 1.5rem;
-  z-index: 110;
-  width: 44px;
-  height: 44px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-}
-
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.hamburger span:nth-child(1) { transform: translateY(7px) rotate(0deg); }
-.hamburger span:nth-child(2) { transform: translateY(0); opacity: 1; }
-.hamburger span:nth-child(3) { transform: translateY(-7px) rotate(0deg); }
-
-.hamburger:checked ~ .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger:checked ~ .hamburger span:nth-child(2) { opacity: 0; }
-.hamburger:checked ~ .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-@media (max-width: 768px) {
-  .hamburger { display: flex; }
 }
 
 /* ========== SECCIÓN 1: HERO ========== */

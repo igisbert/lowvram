@@ -25,14 +25,15 @@ export const verdicts: Verdict[] = [
     fullModel: "MiMo-V2.6-Distill-Qwen-9B-Q4_K_S",
     avgSpeed: "~43 t/s de media",
     strengths: [
-      "CSS namespaced y accesibilidad de base correctos a la primera.",
-      "Estructura de componentes ordenada.",
+      
     ],
     issues: [
       "Ignora restricciones explícitas del prompt.",
+      "Le cuesta mucho usar tools y ejecutar comandos, al menos en Windows.",
+      "A veces se interrumpte y tienes que decirle que siga",
+      "Le cuesta mucho cumplir tareas sin cometer errores",
       "Entrega componentes sin ni un listener: nada responde.",
       "Inventa APIs (useState, createContext…) y mezcla sintaxis Svelte en componentes de Astro.",
-      "Ficheros que no compilan tal como salen.",
     ],
   },
   {
@@ -46,6 +47,16 @@ export const verdicts: Verdict[] = [
     issues: [
       "Enorme incluso en Q2: hace offload y no cabe en 8 GB.",
       "Consultas y teclado globales: hubo que encapsularlo.",
+    ],
+  },
+  {
+    model: "Qwen3.8-27B",
+    avgSpeed: "~4 t/s de media",
+    strengths: [
+      "Es de los mejores modelos que se pueden utilizar en local.",
+    ],
+    issues: [
+      "Inusable en mi equipo (~4 t/s).",
     ],
   },
 ];

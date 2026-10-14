@@ -2,24 +2,14 @@
 const title = "NOCTIS";
 ---
 
-<nav class="nav" aria-label="Navegación principal">
-  <a href="#inicio" class="nav__brand">NOCTIS</a>
-  <ul class="nav__links">
-    <li><a href="#valor">Origen</a></li>
-    <li><a href="#concepto">Filosofía</a></li>
-    <li><a href="#visual">Espacio</a></li>
-    <li><a href="#contacto">Adquirir</a></li>
-  </ul>
-</nav>
-
-<section id="inicio" class="hero">
+<section class="hero">
   <div class="hero__content">
     <h1 class="hero__title">
       <span class="hero__title-accent">La</span> luz que nace
       <br>de la oscuridad
     </h1>
     <p class="hero__subtitle">Velas artesanales de carbono puro. Cada pieza se funde en silencio, liberando aromas extraídos de bosques antiguos y resinas raras.</p>
-    <a href="#contacto" class="btn btn--primary">Descubrir la colección</a>
+    <a class="btn btn--primary">Descubrir la colección</a>
   </div>
   <div class="hero__visual">
     <div class="hero__form">
@@ -29,7 +19,7 @@ const title = "NOCTIS";
   </div>
 </section>
 
-<section id="valor" class="value">
+<section class="value">
   <div class="value__intro">
     <p class="value__lead">Noctis no fabrica velas. Libera lo que la oscuridad ha guardado durante siglos.</p>
   </div>
@@ -61,7 +51,7 @@ const title = "NOCTIS";
   </div>
 </section>
 
-<section id="concepto" class="concept">
+<section class="concept">
   <div class="concept__wrapper">
     <div class="concept__axis">
       <span class="concept__label">Eje central</span>
@@ -80,7 +70,7 @@ const title = "NOCTIS";
   </div>
 </section>
 
-<section id="visual" class="poster">
+<section class="poster">
   <div class="poster__grid">
     <div class="poster__block poster__block--text">
       <span class="poster__mega">NOCTIS</span>
@@ -102,7 +92,7 @@ const title = "NOCTIS";
   </div>
 </section>
 
-<section id="contacto" class="closing">
+<section class="closing">
   <div class="closing__content">
     <p class="closing__tag">Colección 2025 — 12 piezas</p>
     <h2 class="closing__heading">La noche tiene su propia<br>llamada.</h2>
@@ -122,106 +112,12 @@ const title = "NOCTIS";
 
 <style>
   /* ===== RESET & BASE ===== */
-  .nav,
   .hero,
   .value,
   .concept,
   .poster,
   .closing {
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  }
-
-  /* ===== NAV ===== */
-  .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 2rem;
-    background: rgba(11, 11, 11, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .nav__brand {
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    color: #f5f0e8;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  .nav__brand:focus-visible {
-    outline: 2px solid #c8a86e;
-    outline-offset: 4px;
-    border-radius: 2px;
-  }
-
-  .nav__links {
-    display: flex;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .nav__links a {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: rgba(245, 240, 232, 0.55);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.25s;
-  }
-
-  .nav__links a:hover,
-  .nav__links a:focus-visible {
-    color: #f5f0e8;
-  }
-
-  @media (max-width: 640px) {
-    .nav {
-      flex-direction: column;
-      gap: 0.75rem;
-      padding: 1rem 1.25rem;
-      background: rgba(11, 11, 11, 0.85);
-    }
-
-    .nav__links {
-      gap: 1.25rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  }
-
-  /* ===== SCROLL OFFSET ===== */
-  .nav {
-    scroll-margin-top: 0;
-  }
-
-  .hero,
-  .value,
-  .concept,
-  .poster,
-  .closing {
-    scroll-margin-top: 5.5rem;
-  }
-
-  @media (max-width: 640px) {
-    .hero,
-    .value,
-    .concept,
-    .poster,
-    .closing {
-      scroll-margin-top: 7rem;
-    }
   }
 
   /* ===== HERO ===== */
