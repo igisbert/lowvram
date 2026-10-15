@@ -8,6 +8,15 @@ import cobainQwenQ6Csv from "@/data/charts/cobain-cat/qwen2-1-q6-k.csv?raw";
 import cobainZTurboCsv from "@/data/charts/cobain-cat/z-image-turbo.csv?raw";
 import cobainZCsv from "@/data/charts/cobain-cat/z-image.csv?raw";
 import cobainTunedCsv from "@/data/charts/cobain-cat/flux2-klein-tuned.csv?raw";
+import peliAnimaCsv from "@/data/charts/pelirroja/anima.csv?raw";
+import peliFluxCsv from "@/data/charts/pelirroja/flux2-klein.csv?raw";
+import peliKreaQ3Csv from "@/data/charts/pelirroja/krea2-turbo-q3-k-m.csv?raw";
+import peliKreaQ4Csv from "@/data/charts/pelirroja/krea2-turbo-q4-k-s.csv?raw";
+import peliTunedCsv from "@/data/charts/pelirroja/flux2-klein-tuned.csv?raw";
+import peliQwenQ5Csv from "@/data/charts/pelirroja/qwen2-1-q5-k-m.csv?raw";
+import peliQwenQ6Csv from "@/data/charts/pelirroja/qwen2-1-q6-k.csv?raw";
+import peliZCsv from "@/data/charts/pelirroja/z-image.csv?raw";
+import peliZTurboCsv from "@/data/charts/pelirroja/z-image-turbo.csv?raw";
 
 /* Galería real: un prompt, una foto por modelo. */
 export const diffusionResults: ResultSet[] = [
@@ -80,6 +89,78 @@ export const diffusionResults: ResultSet[] = [
         time: 159.86,
         alt: "Gato Cobain generado con Flux 2 Klein tuneado",
         chartCsv: cobainTunedCsv,
+      },
+    ],
+  },
+  {
+    id: "pelirroja",
+    label: "Pelirroja",
+    prompt: "Close-up portrait of a captivating young woman with flowing copper-red hair and vivid olive-green eyes, playing an acoustic guitar with quiet, absorbed intensity. Her slender fingers rest with graceful pressure on the steel strings of a dark rosewood fretboard. Warm, directional side light sculpts the refined bone structure of her face — high cheekbones, delicate nose, soft full lips parted in concentration — revealing the subtle texture of her luminous skin and catching soft highlights on the polished spruce top of the guitar. Shallow depth of field melts the background into a smooth, velvety dark bokeh, creating a deeply intimate and atmospheric musical moment.",
+    seed: 41,
+    ratio: "1 / 1",
+    images: [
+      {
+        src: "/galleries/pelirroja/anima.png",
+        model: "Anima Turbo",
+        time: 80.68,
+        alt: "Pelirroja con guitarra generada con Anima Turbo",
+        chartCsv: peliAnimaCsv,
+      },
+      {
+        src: "/galleries/pelirroja/flux2-klein.png",
+        model: "Flux.2 Klein",
+        time: 324.34,
+        alt: "Pelirroja con guitarra generada con Flux.2 Klein",
+        chartCsv: peliFluxCsv,
+      },
+      {
+        src: "/galleries/pelirroja/krea2-turbo-q3-k-m.png",
+        model: "Krea 2 Turbo Q3",
+        time: 243.24,
+        alt: "Pelirroja con guitarra generada con Krea 2 Turbo Q3",
+        chartCsv: peliKreaQ3Csv,
+      },
+      {
+        src: "/galleries/pelirroja/krea2-turbo-q4-k-s.png",
+        model: "Krea 2 Turbo Q4",
+        time: 235.43,
+        alt: "Pelirroja con guitarra generada con Krea 2 Turbo Q4",
+        chartCsv: peliKreaQ4Csv,
+      },
+      {
+        src: "/galleries/pelirroja/qwen2-1-q5-k-m.png",
+        model: "Qwen-Image-2.1 Q5",
+        time: 679.59,
+        alt: "Pelirroja con guitarra generada con Qwen-Image-2.1 Q5",
+        chartCsv: peliQwenQ5Csv,
+      },
+      {
+        src: "/galleries/pelirroja/qwen2-1-q6-k.png",
+        model: "Qwen-Image-2.1 Q6",
+        time: 639.21,
+        alt: "Pelirroja con guitarra generada con Qwen-Image-2.1 Q6",
+        chartCsv: peliQwenQ6Csv,
+      },
+      {
+        src: "/galleries/pelirroja/z-image-turbo.png",
+        model: "Z-Image-Turbo",
+        time: 132.4,
+        alt: "Pelirroja con guitarra generada con Z-Image-Turbo",
+        chartCsv: peliZTurboCsv,
+      },
+      {
+        src: "/galleries/pelirroja/z-image.png",
+        model: "Z-Image",
+        time: 409.73,
+        alt: "Pelirroja con guitarra generada con Z-Image",
+        chartCsv: peliZCsv,
+      },
+      {
+        src: "/galleries/pelirroja/flux2-klein-tuned.png",
+        model: "Flux 2 Klein tuneado",
+        time: 128.61,
+        alt: "Pelirroja con guitarra generada con Flux 2 Klein tuneado",
+        chartCsv: peliTunedCsv,
       },
     ],
   },
