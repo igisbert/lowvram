@@ -249,15 +249,15 @@ export const videoModels: ModelItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */
+/* Datos reales. */
 export const ocrModels: ModelItem[] = [
   {
-    name: "Modelo de OCR de ejemplo",
-    size: "1 GB",
-    params: "TODO",
-    quantization: "TODO",
+    name: "GLM-OCR",
+    size: "1.79 GB",
+    params: "0.9B",
+    quantization: "F16",
     use: "",
-    url: "https://huggingface.co",
+    url: "https://huggingface.co/ggml-org/GLM-OCR-GGUF",
   },
 ];
 

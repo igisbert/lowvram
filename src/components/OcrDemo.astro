@@ -1,0 +1,259 @@
+---
+import { Clock, Cpu, Gauge, ScrollText } from "@lucide/astro";
+import type { TrialRunner } from "@/types";
+
+interface Props {
+  image: string;
+  imageAlt: string;
+  output: string;
+  model?: string;
+  fullModel?: string;
+  runner?: TrialRunner;
+  tokens?: string;
+  duration?: string;
+  speed?: string;
+}
+
+const {
+  image,
+  imageAlt,
+  output,
+  model,
+  fullModel,
+  runner,
+  tokens,
+  duration,
+  speed,
+} = Astro.props;
+---
+
+<article class="ocr" data-ocr>
+  {
+    (model || fullModel || runner || tokens || duration || speed) && (
+      <header class="head">
+        {model && <h3>{model}</h3>}
+        {fullModel && <p class="mono full">{fullModel}</p>}
+        <div class="facts mono">
+          {runner && (
+            <span>
+              <Cpu size={14} />
+              {runner}
+            </span>
+          )}
+          {tokens && (
+            <span>
+              <ScrollText size={14} />
+              {tokens}
+            </span>
+          )}
+          {duration && (
+            <span>
+              <Clock size={14} />
+              {duration}
+            </span>
+          )}
+          {speed && (
+            <span>
+              <Gauge size={14} />
+              {speed}
+            </span>
+          )}
+        </div>
+      </header>
+    )
+  }
+  <div class="grid">
+    <button
+      type="button"
+      class="shot"
+      data-zoom
+      aria-haspopup="dialog"
+      aria-label={`Ampliar imagen: ${imageAlt}`}
+    >
+      <img src={image} alt={imageAlt} loading="lazy" decoding="async" />
+    </button>
+    <dialog class="viewer" aria-label={`Imagen ampliada: ${imageAlt}`}>
+      <img src={image} alt={imageAlt} loading="lazy" decoding="async" />
+      <form method="dialog">
+        <button type="submit" class="button">Cerrar</button>
+      </form>
+    </dialog>
+    <div class="out">
+      <pre class="mono text">{output}</pre>
+    </div>
+  </div>
+</article>
+
+<script>
+  for (const root of document.querySelectorAll("[data-ocr]")) {
+    const trigger = root.querySelector("[data-zoom]");
+    const viewer = root.querySelector("dialog");
+    trigger?.addEventListener("click", () => viewer?.showModal());
+    viewer?.addEventListener("click", (event) => {
+      if (event.target === viewer) viewer.close();
+    });
+  }
+</script>
+
+<style>
+  .ocr {
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .head {
+    margin-bottom: var(--space-lg);
+
+    h3 {
+      margin: 0 0 var(--space-xs);
+    }
+  }
+
+  .full {
+    font-size: 0.75rem;
+    color: var(--mute);
+    margin: 0 0 var(--space-sm);
+    overflow-wrap: anywhere;
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-xl);
+    font-size: 0.8125rem;
+    color: var(--ink);
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+  }
+
+  .grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .shot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 20rem;
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--hairline);
+    background: var(--canvas-soft);
+    padding: var(--space-md);
+    font: inherit;
+    cursor: zoom-in;
+    max-height: 24rem;
+
+    img {
+      width: auto;
+      max-width: 100%;
+      max-height: 24rem;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .viewer {
+    max-width: min(1000px, 94vw);
+    max-height: 90vh;
+    overflow: auto;
+    width: 100%;
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+    color: var(--body);
+
+    &::backdrop {
+      background: rgb(0 0 0 / 0.8);
+    }
+
+    img {
+      width: auto;
+      max-width: 100%;
+      max-height: 70vh;
+      height: auto;
+      display: block;
+      margin-inline: auto;
+      border-radius: var(--radius);
+    }
+
+    form {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: var(--space-lg);
+    }
+
+    .button {
+      cursor: pointer;
+    }
+  }
+
+  .viewer[open] {
+    animation: viewer-in 160ms ease-out;
+  }
+
+  .viewer[open]::backdrop {
+    animation: backdrop-in 160ms ease-out;
+  }
+
+  @keyframes viewer-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(8px);
+    }
+  }
+
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viewer[open],
+    .viewer[open]::backdrop {
+      animation: none;
+    }
+  }
+
+  .out {
+    min-width: 0;
+  }
+
+  .text {
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--canvas-soft);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    font-size: 0.8125rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 24rem;
+    overflow: auto;
+  }
+</style>

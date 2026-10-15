@@ -235,9 +235,9 @@ export const classifierSoftware: SoftwareItem[] = [
 /* TODO: sustituir por datos reales. Ejemplos para validar el layout. */
 export const appSoftware: SoftwareItem[] = [
   {
-    name: "VoiceMod",
+    name: "Voicebox",
     description: "App que usa modelos de voz para cambiarla en tiempo real.",
-    links: [{ label: "Sitio web", href: "https://www.voicemod.net" }],
+    links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
     audience: "Quien quiere jugar con su voz sin tocar modelos.",
   },
   {

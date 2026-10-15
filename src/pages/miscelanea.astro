@@ -2,11 +2,14 @@
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import ModelTable from "@/components/ModelTable.astro";
+import OcrDemo from "@/components/OcrDemo.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import SubNav from "@/components/SubNav.astro";
 import { classifierModels, ocrModels } from "@/data/models";
 import { classifierSoftware, ocrSoftware } from "@/data/software";
+import cuchilloOutput from "@/data/ocr/un-carnivoro-cuchillo.txt?raw";
+import emosidoOutput from "@/data/ocr/emosido.txt?raw";
 import Layout from "@/layouts/Layout.astro";
 
 const anchors = [
@@ -35,10 +38,28 @@ const anchors = [
       <h3 class="group">Software</h3>
       <SoftwareList items={ocrSoftware} />
       <h3 class="group">Modelos recomendados para mis specs</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
       <ModelTable items={ocrModels} />
+      <h3 class="group">Pruebas reales</h3>
+      <OcrDemo
+        image="/galleries/ocr/un-carnivoro-cuchillo.webp"
+        imageAlt="Poema impreso con tipografía antigua sobre papel amarillento"
+        output={cuchilloOutput.trim()}
+        model="GLM-OCR"
+        runner="llama-server"
+        tokens="145 tokens"
+        duration="1.0s"
+        speed="151,63 t/s"
+      />
+      <OcrDemo
+        image="/galleries/ocr/emosido.webp"
+        imageAlt="Pintada en una pared que dice EMOSIDO ENGAÑADO"
+        output={emosidoOutput.trim()}
+        model="GLM-OCR"
+        runner="llama-server"
+        tokens="12 tokens"
+        duration="0.1s"
+        speed="156,24 t/s"
+      />
     </Section>
 
     <Section
