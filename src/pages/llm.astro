@@ -50,6 +50,12 @@ import Layout from "@/layouts/Layout.astro";
       eyebrow="Para 8 GB de VRAM y 16 GB de RAM"
       title="Modelos que he probado"
     >
+      <Info title="Ojo con la visión">
+        <p>
+          Para que un modelo pueda usar sus capacidades de ver imágenes, hay que
+          cargar además su proyector multimodal (mmproj) correspondiente.
+        </p>
+      </Info>
       <ModelTable items={llmModels} />
     </Section>
 
@@ -147,7 +153,6 @@ import Layout from "@/layouts/Layout.astro";
       >
         <LandingLing />
       </Trial>
-
     </Section>
     <Section eyebrow="Veredicto" title="Resultados conseguidos">
       <div class="verdicts">

@@ -59,6 +59,42 @@ export const llmModels: ModelItem[] = [
   },
 ];
 
+/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
+export const transcriptionModels: ModelItem[] = [
+  {
+    name: "Modelo de transcripción de ejemplo",
+    size: "1 GB",
+    params: "TODO",
+    quantization: "TODO",
+    use: "",
+    url: "https://huggingface.co",
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
+export const voiceModels: ModelItem[] = [
+  {
+    name: "Modelo de voz de ejemplo",
+    size: "1 GB",
+    params: "TODO",
+    quantization: "TODO",
+    use: "",
+    url: "https://huggingface.co",
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
+export const musicModels: ModelItem[] = [
+  {
+    name: "Modelo de música de ejemplo",
+    size: "1 GB",
+    params: "TODO",
+    quantization: "TODO",
+    use: "",
+    url: "https://huggingface.co",
+  },
+];
+
 /* Datos reales de data.md. Tamaños del `ls` convertidos a GB. VRAM aprox. = tamaño en disco. */
 export const diffusionModels: ModelItem[] = [
   {
@@ -210,5 +246,29 @@ export const videoModels: ModelItem[] = [
     quantization: "Q8_0",
     use: "",
     url: "https://huggingface.co/QuantStack/Wan2.2-TI2V-5B-GGUF",
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */
+export const ocrModels: ModelItem[] = [
+  {
+    name: "Modelo de OCR de ejemplo",
+    size: "1 GB",
+    params: "TODO",
+    quantization: "TODO",
+    use: "",
+    url: "https://huggingface.co",
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */
+export const classifierModels: ModelItem[] = [
+  {
+    name: "Modelo de clasificación de ejemplo",
+    size: "1 GB",
+    params: "TODO",
+    quantization: "TODO",
+    use: "",
+    url: "https://huggingface.co",
   },
 ];

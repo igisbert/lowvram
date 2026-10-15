@@ -1,0 +1,57 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Info from "@/components/Info.astro";
+import Section from "@/components/Section.astro";
+import SoftwareList from "@/components/SoftwareList.astro";
+import { appSoftware } from "@/data/software";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="Aplicaciones"
+  description="Apps que usan IA en local sin tocar modelos: instalas, abres y funciona."
+>
+  <Header />
+  <main id="main">
+    <div class="container page-head">
+      <p class="eyebrow">Usar sin configurar</p>
+      <h1>Aplicaciones</h1>
+      <p class="lead">
+        Programas que llevan la IA dentro: no eliges modelos ni tocas la
+        terminal, los usas y punto.
+      </p>
+    </div>
+
+    <Section eyebrow="Motores vs aplicaciones" title="Apps que usan IA">
+      <Info title="La diferencia">
+        <p>
+          Los <a href="/llm">motores</a> ejecutan modelos que tú eliges y
+          configuras. Estas aplicaciones traen sus modelos puestos: si lo que
+          quieres es trabajar con voz en local, mira también
+          <a href="/audio">Audio</a>.
+        </p>
+      </Info>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <SoftwareList items={appSoftware} />
+    </Section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-4xl) var(--space-2xl);
+  }
+
+  .page-head h1 {
+    margin: 0 0 var(--space-lg);
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    margin: 0;
+  }
+</style>

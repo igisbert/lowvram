@@ -1,0 +1,94 @@
+---
+import { Info as InfoIcon } from "@lucide/astro";
+
+interface Props {
+  text: string;
+  label?: string;
+}
+
+let counter = 0;
+
+const { text, label = "Más información" } = Astro.props;
+const id = `note-${++counter}`;
+const anchor = `--${id}`;
+---
+
+<span class="note">
+  <button
+    type="button"
+    class="note-btn"
+    popovertarget={id}
+    aria-label={label}
+    style={`anchor-name: ${anchor}`}
+  >
+    <InfoIcon size={14} />
+  </button>
+  <span
+    class="note-pop"
+    id={id}
+    popover
+    style={`position-anchor: ${anchor}`}
+  >
+    {text}
+  </span>
+</span>
+
+<style>
+  .note {
+    display: inline;
+  }
+
+  .note-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4em;
+    height: 1.4em;
+    margin-inline: 0.15em;
+    padding: 0;
+    vertical-align: -0.25em;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: var(--accent);
+    cursor: pointer;
+  }
+
+  .note-pop {
+    margin: auto;
+    padding: var(--space-md) var(--space-lg);
+    max-width: min(22rem, 90vw);
+    max-height: min(16rem, 80vh);
+    overflow: auto;
+    overflow-wrap: anywhere;
+    background: var(--canvas-card);
+    color: var(--body);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  @supports (top: anchor(bottom)) {
+    .note-pop {
+      position: fixed;
+      inset: auto;
+      top: anchor(bottom);
+      left: anchor(center);
+      translate: -50% 0;
+      margin: 0.5rem 0 0 0;
+      position-try-fallbacks: flip-block;
+    }
+  }
+
+  @supports (position-area: bottom center) {
+    .note-pop {
+      position-area: bottom center;
+      top: auto;
+      left: auto;
+      translate: none;
+      margin: 0.5rem 0.75rem 0.75rem;
+      position-try-fallbacks: top center;
+    }
+  }
+</style>

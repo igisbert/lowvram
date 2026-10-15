@@ -94,6 +94,44 @@ export const diffusionSoftware: SoftwareItem[] = [
   },
 ];
 
+/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
+export const transcriptionSoftware: SoftwareItem[] = [
+  {
+    name: "Programa de transcripción de ejemplo",
+    description: "Descripción corta de ejemplo para validar la ficha.",
+    links: [{ label: "Sitio web", href: "https://example.com" }],
+    audience: "Ejemplo de para quién es.",
+  },
+  {
+    name: "WhisperW",
+    description: "Transcribe en tu navegador con Whisper en ONNX (modelos Tiny, Base y Small), sin instalar nada.",
+    links: [{ label: "Sitio web", href: "https://whisperw.pages.dev" }],
+    audience: "Quien quiere transcribir cosas pequeñas sin descargar nada manualmente.",
+    pros: ["Cero instalación, todo en el navegador", "Modelos pequeños y rápidos"],
+    cons: ["Anclado a las limitaciones de los navegadores"],
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
+export const voiceSoftware: SoftwareItem[] = [
+  {
+    name: "Programa de síntesis de ejemplo",
+    description: "Descripción corta de ejemplo para validar la ficha.",
+    links: [{ label: "Sitio web", href: "https://example.com" }],
+    audience: "Ejemplo de para quién es.",
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
+export const musicSoftware: SoftwareItem[] = [
+  {
+    name: "Programa de música de ejemplo",
+    description: "Descripción corta de ejemplo para validar la ficha.",
+    links: [{ label: "Sitio web", href: "https://example.com" }],
+    audience: "Ejemplo de para quién es.",
+  },
+];
+
 /* Datos reales de la guía de upscaler. */
 export const upscaleSoftware: SoftwareItem[] = [
   {
@@ -166,5 +204,46 @@ export const videoSoftware: SoftwareItem[] = [
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/sdcpp-i2v/" },
     ],
     audience: "Quien quiere probar a generar vídeos con el mismo motor.",
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */
+export const ocrSoftware: SoftwareItem[] = [
+  {
+    name: "llama.cpp",
+    description: "No solo sirve para texto: carga modelos multimodales que entienden imágenes, y también modelos dedicados solo a OCR.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/ggerganov/llama.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
+    ],
+    audience: "Quien ya lo usa para LLM y quiere OCR sin instalar nada más.",
+    pros: ["Nada más que instalar si ya lo usas", "Mismo flujo que ya conoces del texto"],
+    recommended: true,
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */
+export const classifierSoftware: SoftwareItem[] = [
+  {
+    name: "Programa de clasificación de ejemplo",
+    description: "Descripción corta de ejemplo para validar la ficha.",
+    links: [{ label: "Sitio web", href: "https://example.com" }],
+    audience: "Ejemplo de para quién es.",
+  },
+];
+
+/* TODO: sustituir por datos reales. Ejemplos para validar el layout. */
+export const appSoftware: SoftwareItem[] = [
+  {
+    name: "VoiceMod",
+    description: "App que usa modelos de voz para cambiarla en tiempo real.",
+    links: [{ label: "Sitio web", href: "https://www.voicemod.net" }],
+    audience: "Quien quiere jugar con su voz sin tocar modelos.",
+  },
+  {
+    name: "Pinokio",
+    description: "Lanzador que instala y ejecuta apps de IA con un clic.",
+    links: [{ label: "Sitio web", href: "https://pinokio.co" }],
+    audience: "Quien quiere probar herramientas sin pelearse con la terminal.",
   },
 ];

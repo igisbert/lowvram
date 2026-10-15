@@ -1,0 +1,97 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import ModelTable from "@/components/ModelTable.astro";
+import Section from "@/components/Section.astro";
+import SoftwareList from "@/components/SoftwareList.astro";
+import SubNav from "@/components/SubNav.astro";
+import { musicModels, transcriptionModels, voiceModels } from "@/data/models";
+import { musicSoftware, transcriptionSoftware, voiceSoftware } from "@/data/software";
+import Layout from "@/layouts/Layout.astro";
+
+const anchors = [
+  { label: "Transcripción", href: "#transcripcion" },
+  { label: "Síntesis de voz", href: "#sintesis" },
+  { label: "Música", href: "#musica" },
+];
+---
+
+<Layout
+  title="Modelos de audio"
+  description="Software y modelos de audio ejecutados en local: transcripción, síntesis de voz y música sin nube."
+>
+  <Header />
+  <main id="main">
+    <div class="container page-head">
+      <p class="eyebrow">Audio · Voz y sonido locales</p>
+      <h1>Modelos de audio</h1>
+      <p class="lead">
+        Transcribir, sintetizar voz y generar música, todo en local.
+      </p>
+      <SubNav items={anchors} />
+    </div>
+
+    <Section eyebrow="Voz a texto" title="Transcripción" id="transcripcion">
+      <h3 class="group">Software</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <SoftwareList items={transcriptionSoftware} />
+      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <ModelTable items={transcriptionModels} />
+    </Section>
+
+    <Section eyebrow="Texto a voz" title="Síntesis de voz" id="sintesis">
+      <h3 class="group">Software</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <SoftwareList items={voiceSoftware} />
+      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <ModelTable items={voiceModels} />
+    </Section>
+
+    <Section eyebrow="Sonido generado" title="Música" id="musica">
+      <h3 class="group">Software</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <SoftwareList items={musicSoftware} />
+      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <ModelTable items={musicModels} />
+    </Section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-head {
+    padding-block: var(--space-4xl) var(--space-2xl);
+  }
+
+  .page-head h1 {
+    margin: 0 0 var(--space-lg);
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    margin: 0 0 var(--space-xl);
+  }
+
+  .group {
+    margin: var(--space-2xl) 0 var(--space-lg);
+  }
+
+  .group:first-of-type {
+    margin-top: 0;
+  }
+</style>
