@@ -259,6 +259,14 @@ export const ocrModels: ModelItem[] = [
     use: "",
     url: "https://huggingface.co/ggml-org/GLM-OCR-GGUF",
   },
+  {
+    name: "PaddleOCR-VL-1.6",
+    size: "936 MB",
+    params: "0.5B",
+    quantization: "-",
+    use: "",
+    url: "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF",
+  },
 ];
 
 /* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */

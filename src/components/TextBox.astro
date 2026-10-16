@@ -1,0 +1,39 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="textbox">
+  {title && <p class="mono name">{title}</p>}
+  <slot />
+</div>
+
+<style>
+  .textbox {
+    max-width: var(--measure);
+    margin-top: var(--space-2xl);
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-xl);
+  }
+
+  .name {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .textbox :global(p:not(.name)) {
+    margin: 0;
+  }
+
+  .textbox :global(p:not(.name) + p:not(.name)) {
+    margin-top: var(--space-md);
+  }
+</style>

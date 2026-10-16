@@ -3,13 +3,16 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import ModelTable from "@/components/ModelTable.astro";
 import OcrDemo from "@/components/OcrDemo.astro";
+import TextBox from "@/components/TextBox.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import SubNav from "@/components/SubNav.astro";
+import Info from "@/components/Info.astro";
 import { classifierModels, ocrModels } from "@/data/models";
 import { classifierSoftware, ocrSoftware } from "@/data/software";
 import cuchilloOutput from "@/data/ocr/un-carnivoro-cuchillo.txt?raw";
 import emosidoOutput from "@/data/ocr/emosido.txt?raw";
+import ticketOutput from "@/data/ocr/ticket.txt?raw";
 import Layout from "@/layouts/Layout.astro";
 
 const anchors = [
@@ -38,6 +41,15 @@ const anchors = [
       <h3 class="group">Software</h3>
       <SoftwareList items={ocrSoftware} />
       <h3 class="group">Modelos recomendados para mis specs</h3>
+      <Info title="Cuidado con los PDF">
+        <p>
+          Al adjuntar un fichero PDF para el OCR, llama-server lo convierte
+          automáticamente a imagen para procesarlo. Si los PDF tienen más de una
+          página, prácticamente todas los intentos me ha devuelto el contenido
+          de una página o, en algunas ocasiones, se ha quedado en bucle
+          infinito.
+        </p>
+      </Info>
       <ModelTable items={ocrModels} />
       <h3 class="group">Pruebas reales</h3>
       <OcrDemo
@@ -60,6 +72,24 @@ const anchors = [
         duration="0.1s"
         speed="156,24 t/s"
       />
+      <OcrDemo
+        image="/galleries/ocr/ticket.webp"
+        imageAlt="Ticket de compra arrugado"
+        output={ticketOutput.trim()}
+        model="GLM-OCR"
+        runner="llama-server"
+        tokens="273 tokens"
+        duration="1.8s"
+        speed="155,63 t/s"
+      />
+      <TextBox title="Conclusión">
+        <p>
+          Para fotos con texto legible, en general, todos cumplen. En fotos muy
+          complicadas (texto en espiral, papeles arrugados, fuentes
+          ininteligibles) fallan. Y en documentos de varias páginas funciona
+          regular.
+        </p>
+      </TextBox>
     </Section>
 
     <Section
