@@ -40,13 +40,12 @@ export const verdicts: Verdict[] = [
     model: "Qwen3.6-35B",
     avgSpeed: "~30 t/s de media",
     strengths: [
-      "Todo cableado a la primera: ni un botón muerto.",
-      "CSS sin fugas de serie y detalles de accesibilidad (aria-live, foco, reduced-motion).",
-      "Extras bien resueltos: operador %, formato exponencial, ∞ controlado.",
+      "Artefactos funcionales completos, no suele equivocarse. ",
+      "En razonamiento es superior a otros modelos que se pueden usar en un equipo como el mío.",
     ],
     issues: [
-      "Enorme incluso en Q2: hace offload y no cabe en 8 GB.",
-      "Consultas y teclado globales: hubo que encapsularlo.",
+      "Enorme incluso en Q2: hace offload y no cabe en 8 GB, por lo que la velocidad no es óptima.",
+      "Al tener una cuantización muy agresiva puede cometer pequeños errores o entrar en bucle. ",
     ],
   },
   {

@@ -40,7 +40,6 @@ export const llmSoftware: SoftwareItem[] = [
   },
 ];
 
-/* Ficha real de Pi. */
 export const llmAgents: SoftwareItem[] = [
   {
     name: "Pi",
@@ -51,7 +50,7 @@ export const llmAgents: SoftwareItem[] = [
     ],
     audience: "Quien quiere un agente ligero y moldeable para programar con sus modelos.",
     pros: ["Núcleo mínimo que adaptas a tu flujo", "Al ser tan mínimo, apenas consume contexto de serie"],
-    cons: ["Sin subagentes ni modo plan de serie"],
+    cons: ["No incluye, de serie, características que otros agentes sí traen"],
     recommended: true,
   },
   {
@@ -64,6 +63,15 @@ export const llmAgents: SoftwareItem[] = [
     audience: "Quien quiere más funciones y usar modelos en nube.",
     pros: ["Muchas más funciones que Pi", "Modelos cloud gratuitos incluidos"],
     cons: ["Menos ligero que Pi", "Consume más contexto de serie"],
+  },
+  {
+    name: "llama-server",
+    description: "Chat web y API integrados en llama.cpp para usar el modelo directamente, sin agente. Ollama y LM Studio incluyen su propio servidor equivalente.",
+    links: [],
+    audience: "Quien quiere usar el modelo de forma conversacional.",
+    pros: ["Viene integrado en el motor"],
+    cons: ["No tiene el mismo acceso, funciones y capacidades que un agente"],
+    recommended: true,
   },
 ];
 
@@ -90,11 +98,10 @@ export const diffusionSoftware: SoftwareItem[] = [
     ],
     audience: "Quien quiere controlar cada paso del pipeline.",
     pros: ["Flujos reproducibles y compartibles", "Flujos complejos encadenando pasos, no solo generar la foto y ya"],
-    cons: ["Curva de aprendizaje", "Pide más VRAM que sd.cpp para lo mismo"],
+    cons: ["Curva de aprendizaje", "Consume más recursos que Stable Diffusion.cpp"],
   },
 ];
 
-/* TODO: completar con datos reales. WhisperW es real. */
 export const transcriptionSoftware: SoftwareItem[] = [
   {
     name: "whisper.cpp",
@@ -103,9 +110,10 @@ export const transcriptionSoftware: SoftwareItem[] = [
       { label: "Repositorio", href: "https://github.com/ggml-org/whisper.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/whispercpp/" },
     ],
-    audience: "Quien quiere transcribir audio en su propio equipo.",
-    pros: ["Funciona sin conexión"],
-    cons: ["Solo acepta WAV de 16 bits, hay que convertir antes", "No tiene binarios compilados para Windows, hay que compilarlo"],
+    audience: "Quien necesita transcribir un volumen considerable de audio en su propio equipo.",
+    pros: ["Funciona sin conexión", "Con acceso a todos los modelos de Whisper"],
+    cons: ["Solo acepta WAV de 16 bits, hay que convertir antes"],
+    recommended: true,
   },
   {
     name: "WhisperW",
@@ -113,7 +121,7 @@ export const transcriptionSoftware: SoftwareItem[] = [
     links: [{ label: "Sitio web", href: "https://whisperw.pages.dev" }],
     audience: "Quien quiere transcribir cosas pequeñas sin descargar nada manualmente.",
     pros: ["Cero instalación, todo en el navegador", "Modelos pequeños y rápidos"],
-    cons: ["Anclado a las limitaciones de los navegadores"],
+    cons: ["Anclado a las limitaciones de los navegadores", "Sin acceso a los modelos más grandes y precisos"],
   },
 ];
 
@@ -186,7 +194,7 @@ export const bgSoftware: SoftwareItem[] = [
     ],
     audience: "Quien quiera una herramienta sencilla para retocar en lote.",
     pros: ["Modelos automáticos, cero descargas manuales", "También sirve para recortar, redimensionar y convertir formatos"],
-    cons: ["Requiere Node.js"],
+    cons: ["Requiere Node.js", "Solo dos modelos disponibles"],
   },
 ];
 
@@ -241,15 +249,20 @@ export const classifierSoftware: SoftwareItem[] = [
 export const appSoftware: SoftwareItem[] = [
   {
     name: "Voicebox",
-    description: "App que usa modelos de voz para cambiarla en tiempo real.",
+    description: "App que automatiza el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
     links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
     audience: "Quien quiere jugar con su voz sin tocar modelos.",
+    pros:["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfico muy fácil de usar"],
+    cons: ["Dependencia de terceros. Si se lanza un modelo mejor no lo puedes utilizar hasta que los creadores actualicen"]
   },
   {
     name: "Pinokio",
     description: "Lanzador que instala y ejecuta apps de IA con un clic.",
     links: [{ label: "Sitio web", href: "https://pinokio.co" }],
-    audience: "Quien quiere probar herramientas sin pelearse con la terminal.",
+    audience: "Quien quiere probar herramientas sin pelearse con Python u otras herramientas.",
+    pros: ["Puedes ejecutar aplicaciones de IA sin complicaciones", "Un catálogo enorme donde elegir"],
+    cons: ["Consume mucho espacio en disco", "Consume más recursos que motores de inferencia sueltos"],
+    recommended: true
   },
 ];
 
@@ -258,7 +271,7 @@ export const pinokioApps: PinokioApp[] = [
   {
     name: "FaceFusion",
     purpose:
-      "Intercambio y mejora de caras en fotos y vídeos.",
-    url: "https://github.com/facefusion/facefusion",
+      "Intercambio y edición de caras en fotos y vídeos.",
+    url: "https://pinokio.co/apps/github-com-facefusion-facefusion-pinokio",
   },
 ];

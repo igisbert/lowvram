@@ -13,6 +13,7 @@ import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro
 import FAQQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
 import Trial from "@/components/Trial.astro";
+import TextBox from "@/components/TextBox.astro";
 import Verdict from "@/components/Verdict.astro";
 import ModelTable from "@/components/ModelTable.astro";
 import Section from "@/components/Section.astro";
@@ -38,11 +39,14 @@ import Layout from "@/layouts/Layout.astro";
       </p>
     </div>
 
-    <Section eyebrow="Programas" title="Software para usar LLM locales">
+    <Section
+      eyebrow="Motores de inferencia y aplicaciones"
+      title="Software para usar LLM locales"
+    >
       <SoftwareList items={llmSoftware} />
     </Section>
 
-    <Section eyebrow="Herramientas" title="Agentes">
+    <Section eyebrow="Donde se utiliza el modelo" title="Agentes y servidor">
       <SoftwareList items={llmAgents} />
     </Section>
 
@@ -158,6 +162,11 @@ import Layout from "@/layouts/Layout.astro";
       <div class="verdicts">
         {verdicts.map((verdict) => <Verdict verdict={verdict} />)}
       </div>
+      <TextBox title="Conclusión">
+        La forma de trabajar con LLM locales es diferente a la de los modelos
+        cloud. No puedes lanzar una tarea gigante y esperar que el modelo haga
+        un 'one shot'. Tienes que dividir las tareas e ir ayudando al agente.
+      </TextBox>
     </Section>
   </main>
   <Footer />

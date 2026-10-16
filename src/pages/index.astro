@@ -20,59 +20,68 @@ import Layout from "@/layouts/Layout.astro";
       <h1>IA local en una GPU de 2018 con 8&nbsp;GB de VRAM</h1>
       <p class="lead">
         Esta web recoge pruebas reales hechas en mi propio equipo: qué modelos
-        caben, a qué velocidad van y qué resultados dan. Sin nube, sin suscripciones.
+        caben, a qué velocidad van y qué resultados dan. Sin nube, sin
+        suscripciones.
       </p>
     </div>
 
     <div class="container">
       <Info title="¿Perdido con la jerga?">
         <p>
-          VRAM, cuantización, Turbo, seed… Si algún término te suena a chino,
-          el <a href="/glosario">glosario</a> lo explica en lenguaje fácil, de
-          la A a la Z.
+          VRAM, cuantización, Turbo, seed… Si algún término te suena a chino, el <a
+            href="/glosario">glosario</a
+          > lo explica en lenguaje fácil, de la A a la Z.
         </p>
       </Info>
     </div>
 
-    <Section eyebrow="Privacidad, coste, control" title="Por qué SÍ usar IA local">
+    <Section
+      eyebrow="Privacidad, coste, control"
+      title="Por qué SÍ usar IA local"
+    >
       <p>
-        Lo que escribes no sale de tu casa. Sin cuentas, sin telemetría que no
-        puedas desactivar, sin que tus textos o tus fotos acaben en un servidor
-        ajeno. Para trabajo personal es el argumento que más pesa.
+        Tus datos no salen de tu equipo. Sin cuentas, sin telemetría, sin
+        entrenamiento, sin que tus textos o tus fotos acaben en un servidor
+        ajeno. Si trabajas con datos sensibles es un argumento de peso.
       </p>
       <p>
-        Cuesta cero por uso. Pagaste el hardware una vez y cada inferencia sale
-        gratis: puedes probar, equivocarte y repetir cien veces sin mirar el contador.
+        Sin preocuparte por tokens, suscripciones, créditos ni límites de uso.
+        Ya pagaste por el hardware, no pagas nada por usarlo.
       </p>
       <p>
-        Tú decides la versión del modelo, los parámetros y cuándo actualizar.
-        Nada de cambios silenciosos de comportamiento de un día para otro.
+        Tú decides la versión del modelo y su configuración. Nada de cambios
+        silenciosos de comportamiento de un día para otro. Aquí nadie decide por
+        ti.
       </p>
       <p>
-        Funciona sin conexión. En un tren, en una casa rural o cuando se cae la
-        fibra, tus herramientas siguen ahí.
-      </p>
-    </Section>
-
-    <Section eyebrow="Expectativas honestas" title="Qué NO esperar de la IA local">
-      <p>
-        No esperes el rendimiento de un modelo puntero en la nube como Opus 5.5.
-        Un modelo de 7 u 8 GB cuantizado razona peor, se equivoca más y pierde el
-        hilo antes en contextos largos. Es física, no pesimismo.
-      </p>
-      <p>
-        No todo cabe en 8 GB de VRAM. Algunos modelos entran enteros en la GPU y
-        otros desbordan a RAM y van mucho más lentos. La tabla de resultados
-        muestra exactamente qué cabe y qué no.
-      </p>
-      <p>
-        Generar imagen lleva su tiempo y el upscale no hace milagros: amplía lo
-        que hay, no inventa detalle real. Los ejemplos de esta web lo muestran
-        tal cual, sin retoques.
+        Escapas de los límites, de la censura y el copyright de los proveedores
+        de IA cloud. Puedes usar modelos obliterados para asuntos de
+        ciberseguridad o pedir que genere imágenes con derechos de autor.
       </p>
     </Section>
 
-    <Section eyebrow="Mi equipo" title="Hardware real, sin humo">
+    <Section
+      eyebrow="Limitaciones de la IA local"
+      title="Qué NO esperar de la IA local"
+    >
+      <p>
+        No esperes el rendimiento de un modelo frontera en la nube como Opus o
+        Sol. Un modelo pequeño cuantizado razona peor, se equivoca más y pierde
+        el hilo antes en contextos largos. No esperes lanzar un prompt enorme y
+        que el resultado sea perfecto.
+      </p>
+      <p>
+        No todo cabe en 8 GB de VRAM. Si un modelo es demasiado grande puede
+        hacer offload en RAM, lo que ralentiza mucho la generación. Muchos
+        modelos, los más grandes, ni siquiera caben en RAM.
+      </p>
+      <p>
+        Generar imágenes lleva más tiempo que los modelos cloud que se ejecutan
+        en hardware tope gama de última generación.
+      </p>
+    </Section>
+
+    <Section eyebrow="Mi equipo" title="Mis especificaciones">
       <p>
         <WindowsBadge />
       </p>

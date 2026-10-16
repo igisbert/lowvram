@@ -5,9 +5,16 @@ import ModelTable from "@/components/ModelTable.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import SubNav from "@/components/SubNav.astro";
+import TranscriptionDemo from "@/components/TranscriptionDemo.astro";
 import { musicModels, transcriptionModels, voiceModels } from "@/data/models";
-import { musicSoftware, transcriptionSoftware, voiceSoftware } from "@/data/software";
+import {
+  musicSoftware,
+  transcriptionSoftware,
+  voiceSoftware,
+} from "@/data/software";
 import Layout from "@/layouts/Layout.astro";
+import tinyOutput from "@/data/audios/edgar-allan-poe-corazon-delator-tiny.txt?raw";
+import smallOutput from "@/data/audios/edgar-allan-poe-corazon-delator-small.txt?raw";
 
 const anchors = [
   { label: "Transcripción", href: "#transcripcion" },
@@ -33,15 +40,28 @@ const anchors = [
 
     <Section eyebrow="Voz a texto" title="Transcripción" id="transcripcion">
       <h3 class="group">Software</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
+
       <SoftwareList items={transcriptionSoftware} />
-      <h3 class="group">Modelos recomendados para mis specs</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
+      <h3 class="group">Modelos disponibles</h3>
+
       <ModelTable items={transcriptionModels} />
+      <h3 class="group">Pruebas reales</h3>
+      <TranscriptionDemo
+        audio="/audios/edgar-allan-poe-corazon-delator.mp3"
+        audioLabel="Fragmento de El corazón delator, de Edgar Allan Poe"
+        output={tinyOutput.trim()}
+        model="Whisper tiny"
+        runner="WhisperW"
+        duration="5.03s"
+      />
+      <TranscriptionDemo
+        audio="/audios/edgar-allan-poe-corazon-delator.mp3"
+        audioLabel="Fragmento de El corazón delator, de Edgar Allan Poe"
+        output={smallOutput.trim()}
+        model="Whisper small"
+        runner="WhisperW"
+        duration="34.53s"
+      />
     </Section>
 
     <Section eyebrow="Texto a voz" title="Síntesis de voz" id="sintesis">

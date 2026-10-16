@@ -1,0 +1,79 @@
+---
+interface Props {
+  audio: string;
+  audioLabel?: string;
+  output: string;
+  model: string;
+  runner?: string;
+  duration?: string;
+}
+
+const { audio, audioLabel, output, model, runner, duration } = Astro.props;
+
+const meta = [runner, duration].filter(Boolean).join(" · ");
+---
+
+<figure class="demo">
+  <div class="head">
+    <p class="mono model">{model}</p>
+    {meta && <p class="mono meta">{meta}</p>}
+  </div>
+  <audio controls src={audio}>
+    {audioLabel ?? "Audio transcrito"}
+  </audio>
+  <pre class="output">{output}</pre>
+</figure>
+
+<style>
+  .demo {
+    margin: 0 0 var(--space-xl);
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--space-lg);
+  }
+
+  .demo:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .model {
+    margin: 0;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .meta {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+  }
+
+  audio {
+    width: 100%;
+    margin-bottom: var(--space-md);
+  }
+
+  .output {
+    margin: 0;
+    max-height: 20rem;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 80ch;
+    margin: 0 auto;
+  }
+</style>
