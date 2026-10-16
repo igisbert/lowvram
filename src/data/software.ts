@@ -117,7 +117,7 @@ export const transcriptionSoftware: SoftwareItem[] = [
   },
   {
     name: "WhisperW",
-    description: "Transcribe en tu navegador con Whisper en ONNX (modelos Tiny, Base y Small), sin instalar nada.",
+    description: "Transcribe en tu navegador versiones de Whisper (modelos Tiny, Base y Small) de la ONNX Community, sin instalar nada.",
     links: [{ label: "Sitio web", href: "https://whisperw.pages.dev" }],
     audience: "Quien quiere transcribir cosas pequeñas sin descargar nada manualmente.",
     pros: ["Cero instalación, todo en el navegador", "Modelos pequeños y rápidos"],
@@ -231,17 +231,32 @@ export const ocrSoftware: SoftwareItem[] = [
     ],
     audience: "Quien ya lo usa para LLM y quiere OCR sin instalar nada más.",
     pros: ["Nada más que instalar si ya lo usas", "Mismo flujo que ya conoces del texto"],
-    recommended: true,
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */
+/* Datos reales de las guías de laya.cpp y llama.cpp. */
 export const classifierSoftware: SoftwareItem[] = [
   {
-    name: "Programa de clasificación de ejemplo",
-    description: "Descripción corta de ejemplo para validar la ficha.",
-    links: [{ label: "Sitio web", href: "https://example.com" }],
-    audience: "Ejemplo de para quién es.",
+    name: "laya.cpp",
+    description: "Motor para clasificar y decidir, no para generar texto: le pasas un estado y preguntas tipadas y devuelve probabilidades calibradas.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/lkarlslund/laya.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/layacpp/" },
+    ],
+    audience: "Quien necesita decisiones automáticas rápidas sin gastar tokens de un LLM.",
+    pros: ["Modelos de menos de 1 GB", "API compatible con Jev"],
+    cons: ["Sin binarios precompilados, hay que compilarlo"],
+  },
+  {
+    name: "llama.cpp",
+    description: "Motor usado en las pruebas con los modelos GGUF de decisión.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/ggml-org/llama.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
+    ],
+    audience: "Quien ya lo usa para LLM y quiere probar decisión.",
+    pros: ["Ya instalado si vienes de LLM", "Sirve los GGUF por API con llama-server"],
+    cons: ["Más pesado que un clasificador dedicado"],
   },
 ];
 
@@ -261,7 +276,7 @@ export const appSoftware: SoftwareItem[] = [
     links: [{ label: "Sitio web", href: "https://pinokio.co" }],
     audience: "Quien quiere probar herramientas sin pelearse con Python u otras herramientas.",
     pros: ["Puedes ejecutar aplicaciones de IA sin complicaciones", "Un catálogo enorme donde elegir"],
-    cons: ["Consume mucho espacio en disco", "Consume más recursos que motores de inferencia sueltos"],
+    cons: ["Consume mucho espacio en disco", "Consume más recursos que los motores de inferencia sueltos", "Las aplicaciones no verificadas pueden contener malware"],
     recommended: true
   },
 ];
@@ -273,5 +288,35 @@ export const pinokioApps: PinokioApp[] = [
     purpose:
       "Intercambio y edición de caras en fotos y vídeos.",
     url: "https://pinokio.co/apps/github-com-facefusion-facefusion-pinokio",
+  },
+  {
+    name: "LivePortrait",
+    purpose:
+      "Convierte un retrato a vídeo usando otro vídeo como referencia.",
+    url: "https://pinokio.co/apps/github-com-pinokiofactory-liveportrait",
+  },
+  {
+    name: "RMBG-2-Studio",
+    purpose:
+      "Borra el fondo de una imagen con BRIA-RMBG-2.0.",
+    url: "https://pinokio.co/apps/github-com-pinokiofactory-rmbg-2-studio",
+  },
+  {
+    name: "Whisper-WebUI",
+    purpose:
+      "Utiliza Whisper en local.",
+    url: "https://beta.pinokio.co/apps/github-com-pinokiofactory-whisper-webui",
+  },
+  {
+    name: "Clarity Refiners UI",
+    purpose:
+      "Mejora la calidad de las imágenes. No reescala, reinterpreta.",
+    url: "https://pinokio.co/apps/github-com-pinokiofactory-clarity-refiners-ui",
+  },
+  {
+    name: "LightOnOCR-2-1B",
+    purpose:
+      "Para hacer OCR a fotos y documentos.",
+    url: "https://pinokio.co/apps/github-com-theawaken1-lightonocr-2-1b-pinokio",
   },
 ];

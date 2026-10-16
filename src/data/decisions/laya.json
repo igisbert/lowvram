@@ -1,0 +1,19 @@
+{
+  "model": "models\\Laya-BF16.gguf",
+  "answers": {
+    "route": {
+      "type": "choice",
+      "choice": "three shot",
+      "probabilities": {
+        "three shot": 0.812853072915536,
+        "dunk": 0.0847136635719876,
+        "foul": 0.10243326351247646
+      },
+      "confidence": 0.7192796093733039
+    }
+  },
+  "usage": {
+    "input_tokens": 115,
+    "output_tokens": 0
+  }
+}

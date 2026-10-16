@@ -9,30 +9,30 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="table-scroll">
-  <table>
-    <caption class="sr-only">Apps recomendadas dentro de Pinokio</caption>
+<div class="scroller" tabindex="0" role="region" aria-label="Apps de Pinokio, tabla con scroll horizontal">
+  <table class="apps mono">
     <thead>
       <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Para qué sirve</th>
-        <th scope="col"><span class="sr-only">Enlace</span></th>
+        <th scope="col"><span class="col-label">Nombre</span></th>
+        <th scope="col"><span class="col-label">Para qué sirve</span></th>
+        <th scope="col"><span class="col-label">Enlace</span></th>
       </tr>
     </thead>
     <tbody>
       {
         items.map((app) => (
           <tr>
-            <th scope="row">{app.name}</th>
-            <td>{app.purpose}</td>
-            <td class="link-cell">
+            <td>{app.name}</td>
+            <td class="purpose">{app.purpose}</td>
+            <td>
               <a
+                class="icon-link"
                 href={app.url}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 aria-label={`${app.name}: abrir enlace externo`}
               >
-                <Link size={18} aria-hidden="true" />
+                <Link size={16} />
               </a>
             </td>
           </tr>
@@ -43,48 +43,68 @@ const { items } = Astro.props;
 </div>
 
 <style>
-  .table-scroll {
+  .scroller {
     overflow-x: auto;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
   }
 
-  table {
+  .apps {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9375rem;
-  }
+    font-size: 0.8125rem;
+    background: var(--canvas-card);
 
-  th,
-  td {
-    text-align: left;
-    padding: var(--space-sm) var(--space-md);
-    border-bottom: 1px solid var(--hairline);
-    vertical-align: top;
-  }
+    th {
+      background: var(--canvas-soft);
+      text-align: left;
+    }
 
-  thead th {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    white-space: nowrap;
-  }
+    th,
+    td {
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--hairline);
+      white-space: nowrap;
+    }
 
-  tbody th[scope="row"] {
-    white-space: nowrap;
-  }
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
 
-  .link-cell {
-    width: 3rem;
-    text-align: center;
-  }
+    .col-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+    }
 
-  .link-cell a {
-    display: inline-flex;
-    color: var(--ink-soft);
-  }
+    td {
+      color: var(--body);
+    }
 
-  .link-cell a:hover {
-    color: var(--accent);
+    td:first-child {
+      color: var(--ink);
+    }
+
+    .purpose {
+      white-space: normal;
+      min-width: 220px;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      color: var(--ink);
+    }
+
+    a {
+      color: var(--ink);
+    }
   }
 </style>

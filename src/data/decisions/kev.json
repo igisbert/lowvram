@@ -1,0 +1,19 @@
+{
+  "model": "models\\Kev-4B-Q4_K_M.gguf",
+  "answers": {
+    "route": {
+      "type": "choice",
+      "choice": "three shot",
+      "probabilities": {
+        "three shot": 0.60723628242146,
+        "dunk": 0.16481763635369814,
+        "foul": 0.22794608122484195
+      },
+      "confidence": 0.41085442363219
+    }
+  },
+  "usage": {
+    "input_tokens": 115,
+    "output_tokens": 0
+  }
+}

@@ -10,6 +10,7 @@ interface Props {
 const { items } = Astro.props;
 
 const showUse = items.some((item) => item.use.trim() !== "");
+const showLanguage = items.some((item) => item.language !== undefined);
 const showMoe = items.some((item) => item.moe !== undefined);
 const showMtp = items.some((item) => item.mtp !== undefined);
 const showInput = items.some((item) => item.input !== undefined);
@@ -21,6 +22,7 @@ const columns = [
   ...(showMoe ? [{ key: "moe", label: "MoE", sortable: false }] : []),
   ...(showMtp ? [{ key: "mtp", label: "MTP", sortable: false }] : []),
   ...(showInput ? [{ key: "input", label: "Modalidades", sortable: false }] : []),
+  ...(showLanguage ? [{ key: "language", label: "Idioma", sortable: false }] : []),
   ...(showUse ? [{ key: "use", label: "Características", sortable: false }] : []),
   { key: "url", label: "Enlace", sortable: false },
 ] as const;
@@ -59,6 +61,7 @@ const columns = [
             {showMoe && <td>{item.moe === undefined ? "—" : yesNo(item.moe)}</td>}
             {showMtp && <td>{item.mtp === undefined ? "—" : yesNo(item.mtp)}</td>}
             {showInput && <td>{item.input ? inputsLabel(item.input) : "—"}</td>}
+            {showLanguage && <td>{item.language ?? "—"}</td>}
             {showUse && <td class="use">{item.use}</td>}
             <td>
               <a

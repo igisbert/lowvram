@@ -1,0 +1,19 @@
+{
+  "model": "models\\Julia-1-BF16.gguf",
+  "answers": {
+    "route": {
+      "type": "choice",
+      "choice": "three shot",
+      "probabilities": {
+        "three shot": 0.9890353205605054,
+        "dunk": 0.0007660179563491939,
+        "foul": 0.010198661483145391
+      },
+      "confidence": 0.983552980840758
+    }
+  },
+  "usage": {
+    "input_tokens": 107,
+    "output_tokens": 0
+  }
+}

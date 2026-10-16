@@ -301,14 +301,33 @@ export const ocrModels: ModelItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */
+/* Modelos de decisión probados en local. */
 export const classifierModels: ModelItem[] = [
   {
-    name: "Modelo de clasificación de ejemplo",
-    size: "1 GB",
-    params: "TODO",
-    quantization: "TODO",
+    name: "Julia-1-BF16",
+    size: "303 MB",
+    params: "0.1B",
+    quantization: "BF16",
+    language: "+50 idiomas",
     use: "",
-    url: "https://huggingface.co",
+    url: "https://huggingface.co/ggml-org/Julia-1-GGUF",
+  },
+  {
+    name: "Laya-BF16",
+    size: "844 MB",
+    params: "0.4B",
+    quantization: "BF16",
+    language: "Inglés",
+    use: "",
+    url: "https://huggingface.co/ggml-org/Laya-GGUF",
+  },
+  {
+    name: "Kev-4B-Q4_K_M",
+    size: "3.03 GB",
+    params: "4B",
+    quantization: "Q4_K_M",
+    language: "Inglés",
+    use: "",
+    url: "https://huggingface.co/ggml-org/Kev-4B-GGUF",
   },
 ];

@@ -59,6 +59,7 @@ export type ModelItem = {
   size: string;
   params: string;
   quantization: string;
+  language?: string;
   vram?: string;
   moe?: boolean;
   mtp?: boolean;

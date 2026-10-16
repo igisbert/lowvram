@@ -1,0 +1,14 @@
+{
+  "state": "Basketball game: we are losing by 3 points and there are 5 seconds left on the clock. We have possession of the ball.",
+  "questions": {
+    "route": {
+      "type": "choice",
+      "instructions": "What should we do on this last possession to give ourselves the best chance of winning?",
+      "criteria": {
+        "three shot": "Shoot a three-pointer: the only option that can tie the game with one possession",
+        "dunk": "Go for a dunk: scores only 2 points, not enough to tie",
+        "foul": "Get fouled to shoot two free throws: scores at most 2 points, not enough to tie"
+      }
+    }
+  }
+}

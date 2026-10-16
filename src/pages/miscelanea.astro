@@ -1,4 +1,5 @@
 ---
+import DecisionDemo from "@/components/DecisionDemo.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import ModelTable from "@/components/ModelTable.astro";
@@ -13,6 +14,10 @@ import { classifierSoftware, ocrSoftware } from "@/data/software";
 import cuchilloOutput from "@/data/ocr/un-carnivoro-cuchillo.txt?raw";
 import emosidoOutput from "@/data/ocr/emosido.txt?raw";
 import ticketOutput from "@/data/ocr/ticket.txt?raw";
+import decisionInput from "@/data/decisions/input.json?raw";
+import juliaOutput from "@/data/decisions/julia.json?raw";
+import kevOutput from "@/data/decisions/kev.json?raw";
+import layaOutput from "@/data/decisions/laya.json?raw";
 import Layout from "@/layouts/Layout.astro";
 
 const anchors = [
@@ -98,15 +103,36 @@ const anchors = [
       id="clasificadores"
     >
       <h3 class="group">Software</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
+
       <SoftwareList items={classifierSoftware} />
       <h3 class="group">Modelos recomendados para mis specs</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
+
       <ModelTable items={classifierModels} />
+      <h3 class="group">Pruebas reales</h3>
+      <DecisionDemo
+        input={decisionInput.trim()}
+        output={juliaOutput.trim()}
+        model="Julia-1-BF16"
+        runner="llama-server"
+        duration="<1s"
+        conclusion="TODO: escribir conclusión"
+      />
+      <DecisionDemo
+        input={decisionInput.trim()}
+        output={layaOutput.trim()}
+        model="Laya-BF16"
+        runner="llama-server"
+        duration="<1s"
+        conclusion="TODO: escribir conclusión"
+      />
+      <DecisionDemo
+        input={decisionInput.trim()}
+        output={kevOutput.trim()}
+        model="Kev-4B-Q4_K_M"
+        runner="llama-server"
+        duration="<1s"
+        conclusion="TODO: escribir conclusión"
+      />
     </Section>
   </main>
   <Footer />
