@@ -46,6 +46,12 @@ export type SoftwareItem = {
   recommended?: boolean;
 };
 
+export type PinokioApp = {
+  name: string;
+  purpose: string;
+  url: string;
+};
+
 export type ModelInput = "texto" | "imagen" | "video" | "audio";
 
 export type ModelItem = {

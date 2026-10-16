@@ -1,0 +1,90 @@
+---
+import { Link } from "@lucide/astro";
+import type { PinokioApp } from "@/types";
+
+interface Props {
+  items: PinokioApp[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="table-scroll">
+  <table>
+    <caption class="sr-only">Apps recomendadas dentro de Pinokio</caption>
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Para qué sirve</th>
+        <th scope="col"><span class="sr-only">Enlace</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        items.map((app) => (
+          <tr>
+            <th scope="row">{app.name}</th>
+            <td>{app.purpose}</td>
+            <td class="link-cell">
+              <a
+                href={app.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${app.name}: abrir enlace externo`}
+              >
+                <Link size={18} aria-hidden="true" />
+              </a>
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+  }
+
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  tbody th[scope="row"] {
+    white-space: nowrap;
+  }
+
+  .link-cell {
+    width: 3rem;
+    text-align: center;
+  }
+
+  .link-cell a {
+    display: inline-flex;
+    color: var(--ink-soft);
+  }
+
+  .link-cell a:hover {
+    color: var(--accent);
+  }
+</style>

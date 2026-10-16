@@ -2,9 +2,10 @@
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Info from "@/components/Info.astro";
+import PinokioTable from "@/components/PinokioTable.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
-import { appSoftware } from "@/data/software";
+import { appSoftware, pinokioApps } from "@/data/software";
 import Layout from "@/layouts/Layout.astro";
 ---
 
@@ -36,6 +37,14 @@ import Layout from "@/layouts/Layout.astro";
         <span class="todo-flag">TODO: sustituir por datos reales</span>
       </p>
       <SoftwareList items={appSoftware} />
+    </Section>
+
+    <Section eyebrow="Dentro de Pinokio" title="Apps recomendadas en Pinokio">
+      <p>
+        Pinokio es un lanzador: dentro tiene su propio catálogo de apps que se
+        instalan con un clic. Estas son las que recomiendo.
+      </p>
+      <PinokioTable items={pinokioApps} />
     </Section>
   </main>
   <Footer />

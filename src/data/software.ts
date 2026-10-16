@@ -1,4 +1,4 @@
-import type { SoftwareItem } from "@/types";
+import type { PinokioApp, SoftwareItem } from "@/types";
 
 /* TODO: sustituir por datos reales. Ejemplos conocidos para validar el componente. */
 export const llmSoftware: SoftwareItem[] = [
@@ -94,13 +94,18 @@ export const diffusionSoftware: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
+/* TODO: completar con datos reales. WhisperW es real. */
 export const transcriptionSoftware: SoftwareItem[] = [
   {
-    name: "Programa de transcripción de ejemplo",
-    description: "Descripción corta de ejemplo para validar la ficha.",
-    links: [{ label: "Sitio web", href: "https://example.com" }],
-    audience: "Ejemplo de para quién es.",
+    name: "whisper.cpp",
+    description: "Motor de transcripción de audio en local: convierte voz a texto sin nube.",
+    links: [
+      { label: "Repositorio", href: "https://github.com/ggml-org/whisper.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/whispercpp/" },
+    ],
+    audience: "Quien quiere transcribir audio en su propio equipo.",
+    pros: ["Funciona sin conexión"],
+    cons: ["Solo acepta WAV de 16 bits, hay que convertir antes", "No tiene binarios compilados para Windows, hay que compilarlo"],
   },
   {
     name: "WhisperW",
@@ -245,5 +250,15 @@ export const appSoftware: SoftwareItem[] = [
     description: "Lanzador que instala y ejecuta apps de IA con un clic.",
     links: [{ label: "Sitio web", href: "https://pinokio.co" }],
     audience: "Quien quiere probar herramientas sin pelearse con la terminal.",
+  },
+];
+
+/* TODO: completar con las apps reales recomendadas dentro de Pinokio. */
+export const pinokioApps: PinokioApp[] = [
+  {
+    name: "FaceFusion",
+    purpose:
+      "Intercambio y mejora de caras en fotos y vídeos.",
+    url: "https://github.com/facefusion/facefusion",
   },
 ];

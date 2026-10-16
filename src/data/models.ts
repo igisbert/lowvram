@@ -59,15 +59,47 @@ export const llmModels: ModelItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
+/* Tamaños de la guía de whisper.cpp. */
 export const transcriptionModels: ModelItem[] = [
   {
-    name: "Modelo de transcripción de ejemplo",
-    size: "1 GB",
-    params: "TODO",
-    quantization: "TODO",
+    name: "Whisper tiny",
+    size: "273 MB",
+    params: "39M",
+    quantization: "-",
     use: "",
-    url: "https://huggingface.co",
+    url: "https://huggingface.co/ggerganov/whisper.cpp/tree/main",
+  },
+  {
+    name: "Whisper base",
+    size: "388 MB",
+    params: "74M",
+    quantization: "-",
+    use: "",
+    url: "https://huggingface.co/ggerganov/whisper.cpp/tree/main",
+  },
+  {
+    name: "Whisper small",
+    size: "852 MB",
+    params: "244M",
+    quantization: "-",
+    use: "",
+    url: "https://huggingface.co/ggerganov/whisper.cpp/tree/main",
+  },
+  {
+    name: "Whisper medium",
+    size: "2.1 GB",
+    params: "769M",
+    quantization: "-",
+    use: "",
+    url: "https://huggingface.co/ggerganov/whisper.cpp/tree/main",
+  },
+  {
+    name: "Whisper large",
+    size: "3.9 GB",
+    params: "1550M",
+    quantization: "-",
+    use: "",
+    url: "https://huggingface.co/ggerganov/whisper.cpp/tree/main",
   },
 ];
 
