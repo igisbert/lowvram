@@ -1,6 +1,5 @@
 import type { PinokioApp, SoftwareItem } from "@/types";
 
-/* TODO: sustituir por datos reales. Ejemplos conocidos para validar el componente. */
 export const llmSoftware: SoftwareItem[] = [
   {
     name: "Ollama",
@@ -75,7 +74,6 @@ export const llmAgents: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. */
 export const diffusionSoftware: SoftwareItem[] = [
   {
     name: "stable-diffusion.cpp",
@@ -125,7 +123,6 @@ export const transcriptionSoftware: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
 export const voiceSoftware: SoftwareItem[] = [
   {
     name: "Programa de síntesis de ejemplo",
@@ -135,7 +132,6 @@ export const voiceSoftware: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
 export const musicSoftware: SoftwareItem[] = [
   {
     name: "Programa de música de ejemplo",
@@ -145,7 +141,6 @@ export const musicSoftware: SoftwareItem[] = [
   },
 ];
 
-/* Datos reales de la guía de upscaler. */
 export const upscaleSoftware: SoftwareItem[] = [
   {
     name: "upscayl-bin",
@@ -173,7 +168,6 @@ export const upscaleSoftware: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. */
 export const bgSoftware: SoftwareItem[] = [
   {
     name: "vision.cpp",
@@ -198,7 +192,6 @@ export const bgSoftware: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. */
 export const videoSoftware: SoftwareItem[] = [
   {
     name: "ComfyUI",
@@ -220,7 +213,6 @@ export const videoSoftware: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplo inventado para validar el layout. */
 export const ocrSoftware: SoftwareItem[] = [
   {
     name: "llama.cpp",
@@ -234,7 +226,6 @@ export const ocrSoftware: SoftwareItem[] = [
   },
 ];
 
-/* Datos reales de las guías de laya.cpp y llama.cpp. */
 export const classifierSoftware: SoftwareItem[] = [
   {
     name: "laya.cpp",
@@ -260,28 +251,34 @@ export const classifierSoftware: SoftwareItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplos para validar el layout. */
 export const appSoftware: SoftwareItem[] = [
   {
-    name: "Voicebox",
-    description: "App que automatiza el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
-    links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
-    audience: "Quien quiere jugar con su voz sin tocar modelos.",
-    pros:["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfico muy fácil de usar"],
-    cons: ["Dependencia de terceros. Si se lanza un modelo mejor no lo puedes utilizar hasta que los creadores actualicen"]
-  },
-  {
     name: "Pinokio",
-    description: "Lanzador que instala y ejecuta apps de IA con un clic.",
+    description: "Lanzador que instala y ejecuta apps de IA con un clic. Automatiza toda la instalación y te olvidas de las dependencias.",
     links: [{ label: "Sitio web", href: "https://pinokio.co" }],
     audience: "Quien quiere probar herramientas sin pelearse con Python u otras herramientas.",
     pros: ["Puedes ejecutar aplicaciones de IA sin complicaciones", "Un catálogo enorme donde elegir"],
     cons: ["Consume mucho espacio en disco", "Consume más recursos que los motores de inferencia sueltos", "Las aplicaciones no verificadas pueden contener malware"],
     recommended: true
   },
+  {
+    name: "Voicebox",
+    description: "App que automatiza el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
+    links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
+    audience: "Quien quiere jugar con su voz sin tocar modelos.",
+    pros:["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar"],
+    cons: ["Dependencia de terceros. Si se lanza un modelo mejor no lo puedes utilizar hasta que los creadores actualicen"]
+  },
+  {
+    name: "Upscayl Desktop",
+    description: "Programa que permite usar modelos de reescalado sin configurar nada.",
+    links: [{ label: "Sitio web", href: "https://upscayl.org/download" }],
+    audience: "Quien quiere jugar agrandar imágenes sin complicarse.",
+    pros:["No te preocupas por qué modelos utilizas", "Interfaz gráfica muy simple"],
+    cons: ["No controlas el modelo que utilizas", "Algunos modelos que incluyen tienen licencia para uso comercial"]
+  },
 ];
 
-/* TODO: completar con las apps reales recomendadas dentro de Pinokio. */
 export const pinokioApps: PinokioApp[] = [
   {
     name: "FaceFusion",
@@ -298,7 +295,7 @@ export const pinokioApps: PinokioApp[] = [
   {
     name: "RMBG-2-Studio",
     purpose:
-      "Borra el fondo de una imagen con BRIA-RMBG-2.0.",
+      "Borra el fondo de una imagen con BRIA-RMBG-2.0 (licencia no comercial). ",
     url: "https://pinokio.co/apps/github-com-pinokiofactory-rmbg-2-studio",
   },
   {

@@ -36,27 +36,30 @@ import Layout from "@/layouts/Layout.astro";
     </div>
 
     <Section
-      eyebrow="Privacidad, coste, control"
+      eyebrow="Privacidad, coste, control, libertad"
       title="Por qué SÍ usar IA local"
     >
       <p>
         Tus datos no salen de tu equipo. Sin cuentas, sin telemetría, sin
         entrenamiento, sin que tus textos o tus fotos acaben en un servidor
-        ajeno. Si trabajas con datos sensibles es un argumento de peso.
+        ajeno. Si trabajas con datos sensibles o valoras tu privacidad es un
+        argumento de peso.
       </p>
       <p>
         Sin preocuparte por tokens, suscripciones, créditos ni límites de uso.
-        Ya pagaste por el hardware, no pagas nada por usarlo.
+        Ya pagaste por el hardware, no pagas nada por usarlo. Además, varias de
+        las herramientas que podemos usar gratis tienen versión comercial en la
+        nube.
       </p>
       <p>
         Tú decides la versión del modelo y su configuración. Nada de cambios
-        silenciosos de comportamiento de un día para otro. Aquí nadie decide por
-        ti.
+        silenciosos de comportamiento de un día para otro. En tu PC nadie decide
+        por ti.
       </p>
       <p>
         Escapas de los límites, de la censura y el copyright de los proveedores
         de IA cloud. Puedes usar modelos obliterados para asuntos de
-        ciberseguridad o pedir que genere imágenes con derechos de autor.
+        ciberseguridad o pedir imágenes con derechos de autor.
       </p>
     </Section>
 
@@ -80,6 +83,18 @@ import Layout from "@/layouts/Layout.astro";
         en hardware tope gama de última generación.
       </p>
     </Section>
+
+    <section class="band">
+      <div class="container">
+        <aside class="disclaimer">
+          <p>
+            Soy un aficionado trasteando con estas herramientas, no soy un
+            experto. Lo que muestro puede no ser del todo correcto y las pruebas
+            que hago pueden no ser ideales.
+          </p>
+        </aside>
+      </div>
+    </section>
 
     <Section eyebrow="Mi equipo" title="Mis especificaciones">
       <p>
@@ -105,5 +120,17 @@ import Layout from "@/layouts/Layout.astro";
     font-size: 1.125rem;
     color: var(--body);
     margin: 0;
+  }
+
+  .disclaimer {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: var(--space-lg) var(--space-xl);
+
+    p {
+      margin: 0;
+      font-size: 1.25em;
+    }
   }
 </style>
