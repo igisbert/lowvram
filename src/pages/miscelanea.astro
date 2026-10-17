@@ -33,11 +33,11 @@ const anchors = [
   <Header />
   <main id="main">
     <div class="container page-head">
-      <p class="eyebrow">De todo un poco</p>
+      <p class="eyebrow">Funcionalidades variadas</p>
       <h1>Miscelánea</h1>
       <p class="lead">
-        Modelos que no llenan una página propia pero resuelven cosas útiles en
-        local.
+        Categorías que no llenarían una página propia pero que tienen su
+        utilidad.
       </p>
       <SubNav items={anchors} />
     </div>
@@ -45,7 +45,7 @@ const anchors = [
     <Section eyebrow="Texto en imágenes y documentos" title="OCR" id="ocr">
       <h3 class="group">Software</h3>
       <SoftwareList items={ocrSoftware} />
-      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <h3 class="group">Modelos que he probado</h3>
       <Info title="Cuidado con los PDF">
         <p>
           Al adjuntar un fichero PDF para el OCR, llama-server lo convierte
@@ -105,7 +105,7 @@ const anchors = [
       <h3 class="group">Software</h3>
 
       <SoftwareList items={classifierSoftware} />
-      <h3 class="group">Modelos recomendados para mis specs</h3>
+      <h3 class="group">Modelos que he probado</h3>
 
       <ModelTable items={classifierModels} />
       <h3 class="group">Pruebas reales</h3>
@@ -115,7 +115,7 @@ const anchors = [
         model="Julia-1-BF16"
         runner="llama-server"
         duration="<1s"
-        conclusion="TODO: escribir conclusión"
+        conclusion="Julia es el que más seguridad tiene en la opción correcta. Además, ha sido consistente al eleminar la palabra 'shot' del criterio 'three shot'. "
       />
       <DecisionDemo
         input={decisionInput.trim()}
@@ -123,7 +123,7 @@ const anchors = [
         model="Laya-BF16"
         runner="llama-server"
         duration="<1s"
-        conclusion="TODO: escribir conclusión"
+        conclusion="Laya, aunque acierta, no tiene la seguridad de Julia. Además, al eliminar la palabra 'shot' del criterio 'three shot', la probabilidad se desplomaba, subiendo mucho la probabilidad de las opciones que no son correctas. "
       />
       <DecisionDemo
         input={decisionInput.trim()}
@@ -131,7 +131,7 @@ const anchors = [
         model="Kev-4B-Q4_K_M"
         runner="llama-server"
         duration="<1s"
-        conclusion="TODO: escribir conclusión"
+        conclusion="Kev es el que menos seguridad tiene en la respuesta correcta. Al igual que Laya, al eliminar la palabra 'shot' del criterio fallaba más, prácticamente igualando las tres puntuaciones. "
       />
     </Section>
   </main>

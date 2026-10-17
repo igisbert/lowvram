@@ -1,6 +1,5 @@
 import type { ModelItem } from "@/types";
 
-/* TODO: sustituir por datos reales. Nombres y cifras de ejemplo para validar el layout. */
 export const llmModels: ModelItem[] = [
   {
     name: "MiMo-V2.6-Distill-Qwen-9B",
@@ -59,7 +58,6 @@ export const llmModels: ModelItem[] = [
   },
 ];
 
-/* Tamaños de la guía de whisper.cpp. */
 export const transcriptionModels: ModelItem[] = [
   {
     name: "Whisper tiny",
@@ -103,7 +101,6 @@ export const transcriptionModels: ModelItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
 export const voiceModels: ModelItem[] = [
   {
     name: "Modelo de voz de ejemplo",
@@ -115,7 +112,6 @@ export const voiceModels: ModelItem[] = [
   },
 ];
 
-/* TODO: sustituir por datos reales. Ejemplos inventados para validar el layout. */
 export const musicModels: ModelItem[] = [
   {
     name: "Modelo de música de ejemplo",
@@ -127,7 +123,6 @@ export const musicModels: ModelItem[] = [
   },
 ];
 
-/* Datos reales de data.md. Tamaños del `ls` convertidos a GB. VRAM aprox. = tamaño en disco. */
 export const diffusionModels: ModelItem[] = [
   {
     name: "Anima Turbo",
@@ -203,7 +198,6 @@ export const diffusionModels: ModelItem[] = [
   },
 ];
 
-/* Modelo tuneado con LoRA propia. Nombre original explícito omitido en la tabla. */
 export const nsfwDiffusionModels: ModelItem[] = [
   {
     name: "PornMaster Klein 9B",
@@ -216,7 +210,6 @@ export const nsfwDiffusionModels: ModelItem[] = [
   },
 ];
 
-/* Datos reales del `ls`. Tamaños convertidos a MB. */
 export const upscaleModels: ModelItem[] = [
   {
     name: "4xLSDIRplusN",
@@ -247,7 +240,6 @@ export const upscaleModels: ModelItem[] = [
   },
 ];
 
-/* Modelos ONNX para borrado de fondo. */
 export const bgModels: ModelItem[] = [
   {
     name: "BEN2",
@@ -269,7 +261,6 @@ export const bgModels: ModelItem[] = [
   },
 ];
 
-/* Datos reales. */
 export const videoModels: ModelItem[] = [
   {
     name: "Wan2.2-TI2V-5B",
@@ -281,7 +272,6 @@ export const videoModels: ModelItem[] = [
   },
 ];
 
-/* Datos reales. */
 export const ocrModels: ModelItem[] = [
   {
     name: "GLM-OCR",
@@ -301,7 +291,6 @@ export const ocrModels: ModelItem[] = [
   },
 ];
 
-/* Modelos de decisión probados en local. */
 export const classifierModels: ModelItem[] = [
   {
     name: "Julia-1-BF16",

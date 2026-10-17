@@ -2,7 +2,7 @@
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Info from "@/components/Info.astro";
-import ModelList from "@/components/ModelList.astro";
+import ModelTable from "@/components/ModelTable.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import VideoResults from "@/components/VideoResults.astro";
@@ -19,7 +19,7 @@ import Layout from "@/layouts/Layout.astro";
   <Header />
   <main id="main">
     <div class="container page-head">
-      <p class="eyebrow">Vídeo · Generación local</p>
+      <p class="eyebrow">Generación de vídeo</p>
       <h1>Modelos de vídeo</h1>
       <p class="lead">
         Con qué generarlos, cuáles caben en 8 GB de VRAM y qué clips salen de mi
@@ -49,7 +49,7 @@ import Layout from "@/layouts/Layout.astro";
     </Section>
 
     <Section eyebrow="Para 8 GB de VRAM" title="Modelos que he probado">
-      <ModelList items={videoModels} />
+      <ModelTable items={videoModels} />
     </Section>
 
     <Section eyebrow="Clips" title="Resultados conseguidos">
