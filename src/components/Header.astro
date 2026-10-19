@@ -11,7 +11,9 @@ function isActive(href: string): boolean {
 <a class="skip-link" href="#main">Saltar al contenido</a>
 <header class="site-header">
   <div class="container bar">
-    <a class="brand mono" href="/" aria-label="Inicio">lowvram</a>
+    <a class="brand" href="/" aria-label="lowvram, inicio">
+      <img src="/logo.svg" alt="" loading="eager" />
+    </a>
     <button
       class="menu-button"
       type="button"
@@ -22,17 +24,19 @@ function isActive(href: string): boolean {
     </button>
     <nav id="site-nav" class="site-nav" aria-label="Navegación principal">
       <ul>
-        {navigation.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              class:list={[{ active: isActive(item.href) }]}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
+        {
+          navigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                class:list={[{ active: isActive(item.href) }]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </div>
@@ -72,11 +76,13 @@ function isActive(href: string): boolean {
   }
 
   .brand {
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 0.875rem;
-    letter-spacing: 0.08em;
     margin-right: auto;
+  }
+
+  .brand img {
+    display: block;
+    height: 44px;
+    width: auto;
   }
 
   .menu-button {

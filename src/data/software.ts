@@ -115,7 +115,7 @@ export const transcriptionSoftware: SoftwareItem[] = [
   },
   {
     name: "WhisperW",
-    description: "Transcribe en tu navegador versiones de Whisper (modelos Tiny, Base y Small) de la ONNX Community, sin instalar nada.",
+    description: "Transcribe en tu navegador con versiones de Whisper (modelos Tiny, Base y Small) de la ONNX Community, sin instalar nada.",
     links: [{ label: "Sitio web", href: "https://whisperw.pages.dev" }],
     audience: "Quien quiere transcribir cosas pequeñas sin descargar nada manualmente.",
     pros: ["Cero instalación, todo en el navegador", "Modelos pequeños y rápidos"],
