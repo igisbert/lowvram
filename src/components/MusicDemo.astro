@@ -1,4 +1,6 @@
 ---
+import { Clock, Cpu } from "@lucide/astro";
+
 interface Props {
   src: string;
   model: string;
@@ -10,29 +12,44 @@ interface Props {
 }
 
 const { src, model, runner, duration, caption, lyrics, params } = Astro.props;
-
-const meta = [runner, duration].filter(Boolean).join(" · ");
-const paramsLine = params?.join(" · ");
 ---
 
-<figure class="demo">
-  <div class="head">
-    <div>
-      <p class="mono model">{model}</p>
-      {paramsLine && <p class="mono params">{paramsLine}</p>}
-    </div>
-    {meta && <p class="mono meta">{meta}</p>}
+<figure class="demo-card">
+  <div class="demo-head">
+    <p class="demo-model">{model}</p>
+    {(runner || duration) && (
+      <div class="demo-facts">
+        {runner && (
+          <span>
+            <Cpu size={14} />
+            {runner}
+          </span>
+        )}
+        {duration && (
+          <span>
+            <Clock size={14} />
+            {duration}
+          </span>
+        )}
+      </div>
+    )}
   </div>
   {caption && (
-    <div class="caption-wrap">
-      <p class="mono label">Estilo</p>
+    <div class="block">
+      <p class="demo-label">Estilo</p>
       <p class="caption">{caption}</p>
     </div>
   )}
   {lyrics && (
-    <div class="lyrics-wrap">
-      <p class="mono label">Letra</p>
-      <pre class="output">{lyrics}</pre>
+    <div class="block">
+      <p class="demo-label">Letra</p>
+      <pre class="demo-output">{lyrics}</pre>
+    </div>
+  )}
+  {params && (
+    <div class="block">
+      <p class="demo-label">Parámetros</p>
+      <p class="params">{params.join(" · ")}</p>
     </div>
   )}
   <audio controls src={src}>
@@ -41,86 +58,27 @@ const paramsLine = params?.join(" · ");
 </figure>
 
 <style>
-  .demo {
-    margin: 0 0 var(--space-xl);
-    background: var(--canvas-card);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
-    padding: var(--space-lg);
-  }
-
-  .demo:last-of-type {
-    margin-bottom: 0;
-  }
-
-  .head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-  }
-
-  .model {
-    margin: 0;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  .params {
-    margin: var(--space-xs) 0 0;
-    font-size: 0.8125rem;
-    color: var(--body);
-  }
-
-  .meta {
-    margin: 0;
-    font-size: 0.8125rem;
-  }
-
-  .label {
-    margin: 0 0 var(--space-xs);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .caption-wrap {
-    margin-bottom: var(--space-md);
+  .block {
+    margin-bottom: var(--space-lg);
   }
 
   .caption {
     margin: 0;
-    font-style: italic;
     background: var(--canvas-soft);
     border: 1px solid var(--hairline);
     border-radius: var(--radius);
     padding: var(--space-md) var(--space-lg);
   }
 
-  .lyrics-wrap {
-    margin-bottom: var(--space-md);
-  }
-
-  .output {
+  .params {
     margin: 0;
-    background: var(--canvas-soft);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
-    padding: var(--space-md) var(--space-lg);
-    max-height: 20rem;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    word-break: break-word;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
-    line-height: 1.6;
+    color: var(--body);
   }
 
   audio {
     width: 100%;
     display: block;
-    margin-top: var(--space-lg);
   }
 </style>

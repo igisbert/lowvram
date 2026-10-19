@@ -8,6 +8,8 @@ import cobainQwenQ6Csv from "@/data/charts/cobain-cat/qwen2-1-q6-k.csv?raw";
 import cobainZTurboCsv from "@/data/charts/cobain-cat/z-image-turbo.csv?raw";
 import cobainZCsv from "@/data/charts/cobain-cat/z-image.csv?raw";
 import cobainTunedCsv from "@/data/charts/cobain-cat/flux2-klein-tuned.csv?raw";
+import cobainIrisCsv from "@/data/charts/cobain-cat/iris.csv?raw";
+import cobainFlux3Csv from "@/data/charts/cobain-cat/flux3-klein.csv?raw";
 import peliAnimaCsv from "@/data/charts/pelirroja/anima.csv?raw";
 import peliFluxCsv from "@/data/charts/pelirroja/flux2-klein.csv?raw";
 import peliKreaQ3Csv from "@/data/charts/pelirroja/krea2-turbo-q3-k-m.csv?raw";
@@ -42,6 +44,20 @@ export const diffusionResults: ResultSet[] = [
         chartCsv: cobainFluxCsv,
       },
       {
+        src: "/galleries/cobain-cat/flux3-klein.png",
+        model: "Flux.3 Klein",
+        time: 398.05,
+        alt: "Gato Cobain generado con Flux.3 Klein",
+        chartCsv: cobainFlux3Csv,
+      },
+      {
+        src: "/galleries/cobain-cat/iris.png",
+        model: "Iris 3B",
+        time: 567.29,
+        alt: "Gato Cobain generado con Iris 3B",
+        chartCsv: cobainIrisCsv,
+      },
+      {
         src: "/galleries/cobain-cat/krea2-turbo-q3-k-m.png",
         model: "Krea 2 Turbo Q3",
         time: 268.09,
@@ -54,6 +70,13 @@ export const diffusionResults: ResultSet[] = [
         time: 266.64,
         alt: "Gato Cobain generado con Krea 2 Turbo Q4",
         chartCsv: cobainKreaQ4Csv,
+      },
+      {
+        src: "/galleries/cobain-cat/flux2-klein-tuned.png",
+        model: "PornMaster Klein 9B",
+        time: 159.86,
+        alt: "Gato Cobain generado con PornMaster Klein 9B",
+        chartCsv: cobainTunedCsv,
       },
       {
         src: "/galleries/cobain-cat/qwen2-1-q5-k-m.png",
@@ -70,13 +93,6 @@ export const diffusionResults: ResultSet[] = [
         chartCsv: cobainQwenQ6Csv,
       },
       {
-        src: "/galleries/cobain-cat/z-image-turbo.png",
-        model: "Z-Image-Turbo",
-        time: 136.81,
-        alt: "Gato Cobain generado con Z-Image-Turbo",
-        chartCsv: cobainZTurboCsv,
-      },
-      {
         src: "/galleries/cobain-cat/z-image.png",
         model: "Z-Image",
         time: 368.81,
@@ -84,11 +100,11 @@ export const diffusionResults: ResultSet[] = [
         chartCsv: cobainZCsv,
       },
       {
-        src: "/galleries/cobain-cat/flux2-klein-tuned.png",
-        model: "Flux 2 Klein tuneado",
-        time: 159.86,
-        alt: "Gato Cobain generado con Flux 2 Klein tuneado",
-        chartCsv: cobainTunedCsv,
+        src: "/galleries/cobain-cat/z-image-turbo.png",
+        model: "Z-Image-Turbo",
+        time: 136.81,
+        alt: "Gato Cobain generado con Z-Image-Turbo",
+        chartCsv: cobainZTurboCsv,
       },
     ],
   },
@@ -128,6 +144,13 @@ export const diffusionResults: ResultSet[] = [
         chartCsv: peliKreaQ4Csv,
       },
       {
+        src: "/galleries/pelirroja/flux2-klein-tuned.png",
+        model: "PornMaster Klein 9B",
+        time: 128.61,
+        alt: "Pelirroja con guitarra generada con PornMaster Klein 9B",
+        chartCsv: peliTunedCsv,
+      },
+      {
         src: "/galleries/pelirroja/qwen2-1-q5-k-m.png",
         model: "Qwen-Image-2.1 Q5",
         time: 679.59,
@@ -142,13 +165,6 @@ export const diffusionResults: ResultSet[] = [
         chartCsv: peliQwenQ6Csv,
       },
       {
-        src: "/galleries/pelirroja/z-image-turbo.png",
-        model: "Z-Image-Turbo",
-        time: 132.4,
-        alt: "Pelirroja con guitarra generada con Z-Image-Turbo",
-        chartCsv: peliZTurboCsv,
-      },
-      {
         src: "/galleries/pelirroja/z-image.png",
         model: "Z-Image",
         time: 409.73,
@@ -156,11 +172,11 @@ export const diffusionResults: ResultSet[] = [
         chartCsv: peliZCsv,
       },
       {
-        src: "/galleries/pelirroja/flux2-klein-tuned.png",
-        model: "Flux 2 Klein tuneado",
-        time: 128.61,
-        alt: "Pelirroja con guitarra generada con Flux 2 Klein tuneado",
-        chartCsv: peliTunedCsv,
+        src: "/galleries/pelirroja/z-image-turbo.png",
+        model: "Z-Image-Turbo",
+        time: 132.4,
+        alt: "Pelirroja con guitarra generada con Z-Image-Turbo",
+        chartCsv: peliZTurboCsv,
       },
     ],
   },

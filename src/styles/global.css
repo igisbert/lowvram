@@ -202,3 +202,75 @@ a {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* Demo base: shell, header, label and output shared by every demo component */
+.demo-card {
+  margin: 0 0 var(--space-xl);
+  background: var(--canvas-card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.demo-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: 0 0 var(--space-lg);
+}
+
+.demo-model {
+  margin: 0;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.demo-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-xl);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ink);
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  svg {
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+}
+
+.demo-label {
+  margin: 0 0 var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.demo-output {
+  margin: 0;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--canvas-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--body);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-height: 20rem;
+  overflow: auto;
+}

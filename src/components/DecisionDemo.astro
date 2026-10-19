@@ -1,4 +1,5 @@
 ---
+import { Clock, Cpu } from "@lucide/astro";
 import { highlightJson } from "@/utils/highlight";
 
 interface Props {
@@ -11,61 +12,42 @@ interface Props {
 }
 
 const { input, output, model, runner, duration, conclusion } = Astro.props;
-
-const meta = [runner, duration].filter(Boolean).join(" · ");
 ---
 
-<figure class="demo">
-  <div class="head">
-    <p class="mono model">{model}</p>
-    {meta && <p class="mono meta">{meta}</p>}
+<figure class="demo-card">
+  <div class="demo-head">
+    <p class="demo-model">{model}</p>
+    {(runner || duration) && (
+      <div class="demo-facts">
+        {runner && (
+          <span>
+            <Cpu size={14} />
+            {runner}
+          </span>
+        )}
+        {duration && (
+          <span>
+            <Clock size={14} />
+            {duration}
+          </span>
+        )}
+      </div>
+    )}
   </div>
   <div class="panels">
     <div class="panel">
-      <p class="mono label">Entrada</p>
-      <pre class="output" set:html={highlightJson(input)} />
+      <p class="demo-label">Entrada</p>
+      <pre class="demo-output" set:html={highlightJson(input)} />
     </div>
     <div class="panel">
-      <p class="mono label">Salida</p>
-      <pre class="output" set:html={highlightJson(output)} />
+      <p class="demo-label">Salida</p>
+      <pre class="demo-output" set:html={highlightJson(output)} />
     </div>
   </div>
   {conclusion && <p class="conclusion">{conclusion}</p>}
 </figure>
 
 <style>
-  .demo {
-    margin: 0 0 var(--space-xl);
-    background: var(--canvas-card);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
-    padding: var(--space-lg);
-  }
-
-  .demo:last-of-type {
-    margin-bottom: 0;
-  }
-
-  .head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-  }
-
-  .model {
-    margin: 0;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  .meta {
-    margin: 0;
-    font-size: 0.8125rem;
-  }
-
   .panels {
     display: grid;
     gap: var(--space-md);
@@ -77,40 +59,21 @@ const meta = [runner, duration].filter(Boolean).join(" · ");
     }
   }
 
-  .label {
-    margin: 0 0 var(--space-sm);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .output {
-    margin: 0;
-    max-height: 20rem;
-    overflow: auto;
-    white-space: pre-wrap;
-    word-break: break-word;
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    padding-inline: var(--space-md);
-  }
-
-  .output :global(.tok-key) {
+  .demo-output :global(.tok-key) {
     color: var(--accent);
   }
 
-  .output :global(.tok-num) {
+  .demo-output :global(.tok-num) {
     color: #5eead4;
   }
 
-  .output :global(.tok-kw) {
+  .demo-output :global(.tok-kw) {
     color: #ff6b6b;
   }
 
   .conclusion {
-    margin: var(--space-md) 0 0;
-    padding-top: var(--space-md);
+    margin: var(--space-lg) 0 0;
+    padding-top: var(--space-lg);
     border-top: 1px solid var(--hairline);
     color: var(--ink);
   }

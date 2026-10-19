@@ -27,13 +27,13 @@ const {
 } = Astro.props;
 ---
 
-<article class="ocr" data-ocr>
+<article class="demo-card" data-ocr>
   {
     (model || fullModel || runner || tokens || duration || speed) && (
-      <header class="head">
-        {model && <h3>{model}</h3>}
+      <header class="demo-head">
+        {model && <p class="demo-model">{model}</p>}
         {fullModel && <p class="mono full">{fullModel}</p>}
-        <div class="facts mono">
+        <div class="demo-facts">
           {runner && (
             <span>
               <Cpu size={14} />
@@ -79,7 +79,7 @@ const {
       </form>
     </dialog>
     <div class="out">
-      <pre class="mono text">{output}</pre>
+      <pre class="demo-output">{output}</pre>
     </div>
   </div>
 </article>
@@ -96,46 +96,10 @@ const {
 </script>
 
 <style>
-  .ocr {
-    background: var(--canvas-card);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
-    padding: var(--space-xl);
-    margin-bottom: var(--space-lg);
-  }
-
-  .head {
-    margin-bottom: var(--space-lg);
-
-    h3 {
-      margin: 0 0 var(--space-xs);
-    }
-  }
-
   .full {
     font-size: 0.75rem;
     color: var(--mute);
-    margin: 0 0 var(--space-sm);
     overflow-wrap: anywhere;
-  }
-
-  .facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm) var(--space-xl);
-    font-size: 0.8125rem;
-    color: var(--ink);
-
-    span {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-xs);
-    }
-
-    svg {
-      color: var(--accent);
-      flex-shrink: 0;
-    }
   }
 
   .grid {
@@ -242,18 +206,5 @@ const {
 
   .out {
     min-width: 0;
-  }
-
-  .text {
-    margin: 0;
-    padding: var(--space-md) var(--space-lg);
-    background: var(--canvas-soft);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
-    font-size: 0.8125rem;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    max-height: 24rem;
-    overflow: auto;
   }
 </style>
