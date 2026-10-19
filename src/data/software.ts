@@ -121,23 +121,75 @@ export const transcriptionSoftware: SoftwareItem[] = [
     pros: ["Cero instalación, todo en el navegador", "Modelos pequeños y rápidos"],
     cons: ["Anclado a las limitaciones de los navegadores", "Sin acceso a los modelos más grandes y precisos"],
   },
+  {
+    name: "audio.cpp",
+    description: "Motor todo en uno para modelos de audio en C++ sobre ggml: además de música y voz, incluye transcripción, con UI web y sin Python.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/0xShug0/audio.cpp" },
+      { label: "Modelos", href: "https://huggingface.co/audio-cpp/audio.cpp-gguf" },
+    ],
+    audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
+    pros: ["Sin dependencias de Python", "UI web y binarios precompilados", "Muchas familias de modelos de transcripción"],
+    cons: ["Catálogo y opciones más amplios de lo necesario si solo quieres transcribir"],
+  },
 ];
 
 export const voiceSoftware: SoftwareItem[] = [
   {
-    name: "Programa de síntesis de ejemplo",
-    description: "Descripción corta de ejemplo para validar la ficha.",
-    links: [{ label: "Sitio web", href: "https://example.com" }],
-    audience: "Ejemplo de para quién es.",
+    name: "qwentts.cpp",
+    description: "Motor de inferencia para pasar texto a voz en local con el modelo Qwen3-TTS: clonar una voz, usar voces integradas o diseñar una desde una descripción.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/ServeurpersoCom/qwentts.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/qwen-tts/" },
+    ],
+    audience: "Quien quiere generar voz en su equipo, clonarla o diseñarla.",
+    pros: ["Clonación desde unos segundos de audio", "Servidor con API compatible con OpenAI", "Modelos pequeños de 0.6B y 1.7B"],
+    cons: ["Hay que compilarlo"],
+  },
+  {
+    name: "audio.cpp",
+    description: "Motor todo en uno para modelos de audio en C++ sobre ggml: además de música y transcripción, incluye síntesis de voz y clonación, con UI web y sin Python.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/0xShug0/audio.cpp" },
+      { label: "Modelos", href: "https://huggingface.co/audio-cpp/audio.cpp-gguf" },
+    ],
+    audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
+    pros: ["Sin dependencias de Python", "UI web y binarios precompilados", "Muchas familias de modelos de voz"],
+    cons: ["Catálogo y opciones más amplios de lo necesario si solo quieres voz"],
+  },
+  {
+    name: "Voicebox",
+    description: "App que automatiza el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
+    links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
+    audience: "Quien quiere jugar con su voz sin tocar modelos.",
+    pros: ["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar"],
+    cons: ["Dependencia de terceros: si sale un modelo mejor, no puedes usarlo hasta que lo actualicen"],
   },
 ];
 
 export const musicSoftware: SoftwareItem[] = [
   {
-    name: "Programa de música de ejemplo",
-    description: "Descripción corta de ejemplo para validar la ficha.",
-    links: [{ label: "Sitio web", href: "https://example.com" }],
-    audience: "Ejemplo de para quién es.",
+    name: "acestep.cpp",
+    description: "Motor de inferencia para generar música en local a partir de un prompt y una letra, con servidor y web propia.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/ServeurpersoCom/acestep.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/acestepcpp/" },
+    ],
+    audience: "Quien quiere generar canciones sin depender de la nube.",
+    pros: ["Prompt, letra, BPM e idioma configurables", "Web local con todos los pasos"],
+    cons: ["Hay que compilarlo", "Necesita varios modelos cargados por separado"],
+    recommended: true,
+  },
+  {
+    name: "audio.cpp",
+    description: "Motor todo en uno para modelos de audio en C++ sobre ggml: música, voz y transcripción, con UI web y sin Python.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/0xShug0/audio.cpp" },
+      { label: "Modelos", href: "https://huggingface.co/audio-cpp/audio.cpp-gguf" },
+    ],
+    audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
+    pros: ["Sin dependencias de Python", "UI web y binarios precompilados", "Cubre música, TTS y ASR"],
+    cons: ["Catálogo y opciones más amplios de lo necesario si solo quieres música"],
   },
 ];
 

@@ -2,6 +2,7 @@
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import ModelTable from "@/components/ModelTable.astro";
+import MusicDemo from "@/components/MusicDemo.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import SubNav from "@/components/SubNav.astro";
@@ -66,9 +67,6 @@ const anchors = [
 
     <Section eyebrow="Texto a voz" title="Síntesis de voz" id="sintesis">
       <h3 class="group">Software</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
       <SoftwareList items={voiceSoftware} />
       <h3 class="group">Modelos que he probado</h3>
       <p>
@@ -79,15 +77,41 @@ const anchors = [
 
     <Section eyebrow="Sonido generado" title="Música" id="musica">
       <h3 class="group">Software</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
       <SoftwareList items={musicSoftware} />
       <h3 class="group">Modelos que he probado</h3>
       <p>
         <span class="todo-flag">TODO: sustituir por datos reales</span>
       </p>
       <ModelTable items={musicModels} />
+      <h3 class="group">Pruebas reales</h3>
+      <p>
+        <span class="todo-flag">TODO: sustituir por datos reales</span>
+      </p>
+      <MusicDemo
+        src="/audios/acestep-placeholder.mp3"
+        model="AceStep XL Base"
+        runner="acestep.cpp"
+        duration="3m 12s"
+        params={["Tempo: 118 BPM", "Tonalidad: Re menor"]}
+        caption="Dark synthwave de energía nocturna, con bajo junto, arpegios analógicos y melancolía retro ochentera."
+        lyrics={`[verse]
+Luces de neón sobre el asfalto mojado
+la ciudad respira bajo el humo gris
+cada farola es un falso desierto
+donde tan solo soñamos dormir
+
+[chorus]
+Gira el reloj contra la corriente
+en este esquema hecho de vidrio y alambre
+nada es real, pero duele igual
+cuando la noche toma el control
+
+[verse]
+Cosmocisrudo insomnio en mi pensar
+el eco de un motor lejano
+pasado de sonido quemado
+que ya no quiere despertar`.trim()}
+      />
     </Section>
   </main>
   <Footer />

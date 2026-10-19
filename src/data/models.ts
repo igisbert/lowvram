@@ -143,6 +143,15 @@ export const diffusionModels: ModelItem[] = [
     url: "https://huggingface.co/unsloth/FLUX.2-klein-9B-GGUF",
   },
   {
+    name: "Flux.3 Klein",
+    size: "3.93 GB",
+    params: "5.6B",
+    quantization: "UD-Q4_K_XL",
+    vram: "~3.9 GB",
+    use: "Realismo, edición, texto",
+    url: "https://huggingface.co/unsloth/flux-3-image-klein-GGUF",
+  },
+  {
     name: "Krea 2 Turbo",
     size: "5.6 GB",
     params: "13B",
@@ -195,6 +204,15 @@ export const diffusionModels: ModelItem[] = [
     vram: "~6.1 GB",
     use: "Realismo, rapidez, variedad",
     url: "https://huggingface.co/unsloth/Z-Image-GGUF",
+  },
+  {
+    name: "Sakura Iris 3B",
+    size: "4.46 GB",
+    params: "3B",
+    quantization: "Q8_0",
+    vram: "~4.5 GB",
+    use: "",
+    url: "https://huggingface.co/webmp3/Sakura-Iris-3B-GGUF",
   },
 ];
 
