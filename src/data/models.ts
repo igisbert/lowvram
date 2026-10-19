@@ -175,7 +175,7 @@ export const diffusionModels: ModelItem[] = [
     params: "7B",
     quantization: "Q5_K_M",
     vram: "~5.0 GB",
-    use: "Realismo, Texto, Edición",
+    use: "Realismo, texto, edición",
     url: "https://huggingface.co/unsloth/Qwen-Image-2.1-GGUF",
   },
   {
@@ -184,7 +184,7 @@ export const diffusionModels: ModelItem[] = [
     params: "7B",
     quantization: "Q6_K",
     vram: "~5.6 GB",
-    use: "Realismo, Texto, Edición",
+    use: "Realismo, texto, edición",
     url: "https://huggingface.co/unsloth/Qwen-Image-2.1-GGUF",
   },
   {
@@ -244,7 +244,7 @@ export const upscaleModels: ModelItem[] = [
     params: "16.7M",
     quantization: "-",
     vram: "~64 MB",
-    use: "General, Nitidez",
+    use: "General, nitidez",
     url: "https://huggingface.co/wbruna/upscalers-sdcpp-gguf/blob/main/4xUltrasharpV10.gguf",
   },
   {
