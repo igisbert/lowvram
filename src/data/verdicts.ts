@@ -25,7 +25,7 @@ export const verdicts: Verdict[] = [
     fullModel: "MiMo-V2.6-Distill-Qwen-9B-Q4_K_S",
     avgSpeed: "~43 t/s de media",
     strengths: [
-      
+      "Crea estilos bastante decentes."
     ],
     issues: [
       "Ignora restricciones explícitas del prompt.",

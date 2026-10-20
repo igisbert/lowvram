@@ -12,6 +12,8 @@ import cobainIrisCsv from "@/data/charts/cobain-cat/iris.csv?raw";
 import cobainFlux3Csv from "@/data/charts/cobain-cat/flux3-klein.csv?raw";
 import peliAnimaCsv from "@/data/charts/pelirroja/anima.csv?raw";
 import peliFluxCsv from "@/data/charts/pelirroja/flux2-klein.csv?raw";
+import peliFlux3Csv from "@/data/charts/pelirroja/flux3-klein.csv?raw";
+import peliIrisCsv from "@/data/charts/pelirroja/iris.csv?raw";
 import peliKreaQ3Csv from "@/data/charts/pelirroja/krea2-turbo-q3-k-m.csv?raw";
 import peliKreaQ4Csv from "@/data/charts/pelirroja/krea2-turbo-q4-k-s.csv?raw";
 import peliTunedCsv from "@/data/charts/pelirroja/flux2-klein-tuned.csv?raw";
@@ -128,6 +130,20 @@ export const diffusionResults: ResultSet[] = [
         time: 324.34,
         alt: "Pelirroja con guitarra generada con Flux.2 Klein",
         chartCsv: peliFluxCsv,
+      },
+      {
+        src: "/galleries/pelirroja/flux3-klein.png",
+        model: "Flux.3 Klein",
+        time: 372.04,
+        alt: "Pelirroja con guitarra generada con Flux.3 Klein",
+        chartCsv: peliFlux3Csv,
+      },
+      {
+        src: "/galleries/pelirroja/iris.png",
+        model: "Iris 3B",
+        time: 565.2,
+        alt: "Pelirroja con guitarra generada con Iris 3B",
+        chartCsv: peliIrisCsv,
       },
       {
         src: "/galleries/pelirroja/krea2-turbo-q3-k-m.png",

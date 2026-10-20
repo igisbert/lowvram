@@ -6,7 +6,6 @@ import CalculadoraLing from "@/components/llm/ling-3.0-tiny-q5_k_m/calculadora.a
 import CalculadoraQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/calculadora.astro";
 import MusicPlayerQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/MusicPlayer.astro";
 import LandingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Landing.astro";
-import CalculadoraN from "@/components/llm/n/Calculadora.astro";
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
 import LandingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Landing.astro";
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
@@ -157,6 +156,16 @@ import Layout from "@/layouts/Layout.astro";
       >
         <LandingLing />
       </Trial>
+      <!--       <Trial
+        title="Calculadors"
+        runner="Pi"
+        model="N"
+        tokens="101.051 tokens"
+        duration="9 min 3 s"
+        speed="92 t/s"
+      >
+        <CalculadoraN />
+      </Trial> -->
     </Section>
     <Section eyebrow="Veredicto" title="Resultados conseguidos">
       <div class="verdicts">
