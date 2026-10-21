@@ -110,7 +110,17 @@ const {
   @media (min-width: 768px) {
     .grid {
       grid-template-columns: 1fr 1fr;
-      align-items: start;
+      align-items: stretch;
+    }
+
+    .out {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .out .demo-output {
+      flex: 1 1 auto;
+      max-height: 24rem;
     }
   }
 
