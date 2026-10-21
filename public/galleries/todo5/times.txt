@@ -1,0 +1,12 @@
+SEED: 41
+anima:  
+flux2: 
+flux2 Uncensored: 
+flux3: 
+Krea2 q3: 
+Krea2 Q4: 
+Qwen 2.1 Q5: 
+Qwen 2.1 Q6: 
+Z-Image: 
+ZTurbo: 
+Iris: 
