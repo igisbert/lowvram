@@ -4,12 +4,13 @@ import type { ResultSet } from "@/types";
 
 interface Props {
   sets: ResultSet[];
+  scrollTarget?: string;
 }
 
-const { sets } = Astro.props;
+const { sets, scrollTarget } = Astro.props;
 ---
 
-<div class="showcase" data-showcase>
+<div class="showcase" data-showcase data-scroll-target={scrollTarget}>
   {sets.map((set, i) => (
     <div data-panel hidden={i !== 0}>
       <ResultCarousel set={set} />
@@ -42,7 +43,7 @@ const { sets } = Astro.props;
 </div>
 
 <script>
-  for (const root of document.querySelectorAll("[data-showcase]")) {
+  for (const root of document.querySelectorAll<HTMLElement>("[data-showcase]")) {
     const panels = [...root.querySelectorAll<HTMLElement>("[data-panel]")];
     const thumbs = [...root.querySelectorAll<HTMLButtonElement>("[data-thumb]")];
     if (panels.length < 2) continue;
@@ -57,7 +58,17 @@ const { sets } = Astro.props;
     };
 
     thumbs.forEach((thumb, i) => {
-      thumb.addEventListener("click", () => show(i));
+      thumb.addEventListener("click", () => {
+        show(i);
+        const target = root.dataset.scrollTarget
+          ? document.getElementById(root.dataset.scrollTarget)
+          : root;
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        target?.scrollIntoView({
+          behavior: reduced ? "auto" : "smooth",
+          block: "start",
+        });
+      });
     });
   }
 </script>

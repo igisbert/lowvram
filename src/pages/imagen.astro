@@ -80,8 +80,8 @@ const anchors = [
           <ModelTable items={nsfwDiffusionModels} />
         </div>
       </details>
-      <h3 class="group">Resultados conseguidos</h3>
-      <ResultShowcase sets={diffusionResults} />
+      <h3 class="group" id="resultados-difusion">Resultados conseguidos</h3>
+      <ResultShowcase sets={diffusionResults} scrollTarget="resultados-difusion" />
     </Section>
 
     <Section eyebrow="Ampliar sin inventar" title="Upscale" id="upscale">
@@ -90,8 +90,8 @@ const anchors = [
       <h3 class="group">Modelos que he probado</h3>
 
       <ModelTable items={upscaleModels} />
-      <h3 class="group">Resultados conseguidos</h3>
-      <ResultShowcase sets={upscaleResults} />
+      <h3 class="group" id="resultados-upscale">Resultados conseguidos</h3>
+      <ResultShowcase sets={upscaleResults} scrollTarget="resultados-upscale" />
     </Section>
 
     <Section eyebrow="Retoques útiles" title="Borrado de fondo" id="fondo">
@@ -99,8 +99,8 @@ const anchors = [
       <SoftwareList items={bgSoftware} />
       <h3 class="group">Modelos que he probado</h3>
       <ModelTable items={bgModels} />
-      <h3 class="group">Resultados conseguidos</h3>
-      <ResultShowcase sets={bgResults} />
+      <h3 class="group" id="resultados-fondo">Resultados conseguidos</h3>
+      <ResultShowcase sets={bgResults} scrollTarget="resultados-fondo" />
     </Section>
   </main>
   <Footer />
@@ -126,6 +126,10 @@ const anchors = [
 
   .group:first-of-type {
     margin-top: 0;
+  }
+
+  .group[id] {
+    scroll-margin-top: 80px;
   }
 
   .nsfw {
