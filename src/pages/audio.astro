@@ -6,6 +6,7 @@ import MusicDemo from "@/components/MusicDemo.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import SubNav from "@/components/SubNav.astro";
+import TextBox from "@/components/TextBox.astro";
 import TranscriptionDemo from "@/components/TranscriptionDemo.astro";
 import { musicModels, transcriptionModels, voiceModels } from "@/data/models";
 import {
@@ -18,6 +19,10 @@ import tinyOutput from "@/data/audios/edgar-allan-poe-corazon-delator-tiny.txt?r
 import smallOutput from "@/data/audios/edgar-allan-poe-corazon-delator-small.txt?raw";
 import hardbassCaption from "@/data/music/hardbass/caption.txt?raw";
 import hardbassLyrics from "@/data/music/hardbass/lyrics.txt?raw";
+import industrialCaption from "@/data/music/industrialmetal/caption.txt?raw";
+import industrialLyrics from "@/data/music/industrialmetal/lyrics.txt?raw";
+import punkCaption from "@/data/music/punk/caption.txt?raw";
+import punkLyrics from "@/data/music/punk/lyrics.txt?raw";
 
 const anchors = [
   { label: "Transcripción", href: "#transcripcion" },
@@ -84,6 +89,7 @@ const anchors = [
       <ModelTable items={musicModels} />
       <h3 class="group">Pruebas reales</h3>
       <MusicDemo
+        title="Hardbass"
         src="/music/hardbass/audio.mp3"
         model="ACE-Step 1.5 SFT/Turbo"
         runner="acestep.cpp"
@@ -97,6 +103,50 @@ const anchors = [
         caption={hardbassCaption.trim()}
         lyrics={hardbassLyrics.trim()}
       />
+      <MusicDemo
+        title="Industrial metal"
+        src="/music/industrialmetal/audio.mp3"
+        model="ACE-Step 1.5 SFT/Turbo"
+        runner="acestep.cpp"
+        duration="1 min 35 s"
+        params={[
+          "BPM: 120",
+          "Tonalidad: Fa menor",
+          "Idioma: Español",
+          "Seed: 1598211684",
+        ]}
+        caption={industrialCaption.trim()}
+        lyrics={industrialLyrics.trim()}
+      />
+      <MusicDemo
+        title="Punk"
+        src="/music/punk/audio.mp3"
+        model="ACE-Step 1.5 SFT/Turbo"
+        runner="acestep.cpp"
+        duration="1 min 35 s"
+        params={[
+          "BPM: 120",
+          "Tonalidad: Fa menor",
+          "Idioma: Español",
+          "Seed: 1598211684",
+        ]}
+        caption={punkCaption.trim()}
+        lyrics={punkLyrics.trim()}
+      />
+      <TextBox title="Conclusión">
+        <p>
+          En general el modelo funciona bien, saca canciones completas, con
+          estructura y una letra reconocible. Pero a veces se cuela algún error
+          en una palabra y toca volver a generar la canción entera. La
+          generación es bastante rápida, así que podemos hacer muchas pruebas.
+        </p>
+        <p>
+          Acertar con el género es otra historia. Puedes tener una idea muy
+          clara y querer que suene como un grupo concreto, pero acercarse ahí me
+          ha sido prácticamente imposible. Es probable que con conocimientos de
+          música sea más sencillo guiar al modelo.
+        </p>
+      </TextBox>
     </Section>
   </main>
   <Footer />

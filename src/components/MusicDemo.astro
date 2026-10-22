@@ -1,8 +1,10 @@
 ---
-import { Clock, Cpu } from "@lucide/astro";
+import AudioPlayer from "@/components/AudioPlayer.astro";
+import { Brain, Clock, Cpu } from "@lucide/astro";
 
 interface Props {
   src: string;
+  title?: string;
   model: string;
   runner?: string;
   duration?: string;
@@ -11,18 +13,25 @@ interface Props {
   params?: string[];
 }
 
-const { src, model, runner, duration, caption, lyrics, params } = Astro.props;
+const { src, title, model, runner, duration, caption, lyrics, params } =
+  Astro.props;
 ---
 
 <figure class="demo-card">
   <div class="demo-head">
-    <p class="demo-model">{model}</p>
-    {(runner || duration) && (
+    <p class="demo-model">{title ?? model}</p>
+    {(runner || duration || title) && (
       <div class="demo-facts">
         {runner && (
           <span>
             <Cpu size={14} />
             {runner}
+          </span>
+        )}
+        {title && (
+          <span>
+            <Brain size={14} />
+            {model}
           </span>
         )}
         {duration && (
@@ -52,9 +61,7 @@ const { src, model, runner, duration, caption, lyrics, params } = Astro.props;
       <p class="params">{params.join(" · ")}</p>
     </div>
   )}
-  <audio controls src={src}>
-    Audio generado con {model}
-  </audio>
+  <AudioPlayer src={src} label={`Audio generado con ${model}`} />
 </figure>
 
 <style>
@@ -75,10 +82,5 @@ const { src, model, runner, duration, caption, lyrics, params } = Astro.props;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     color: var(--body);
-  }
-
-  audio {
-    width: 100%;
-    display: block;
   }
 </style>

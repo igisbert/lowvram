@@ -1,4 +1,5 @@
 ---
+import AudioPlayer from "@/components/AudioPlayer.astro";
 import { Clock, Cpu } from "@lucide/astro";
 
 interface Props {
@@ -33,16 +34,14 @@ const { audio, audioLabel, output, model, runner, duration } = Astro.props;
       </div>
     )}
   </div>
-  <audio controls src={audio}>
-    {audioLabel ?? "Audio transcrito"}
-  </audio>
+  <div class="audio-slot">
+    <AudioPlayer src={audio} label={audioLabel ?? "Audio transcrito"} />
+  </div>
   <pre class="demo-output">{output}</pre>
 </figure>
 
 <style>
-  audio {
-    width: 100%;
-    display: block;
+  .audio-slot {
     margin-bottom: var(--space-lg);
   }
 </style>

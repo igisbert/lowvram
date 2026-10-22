@@ -1,0 +1,418 @@
+---
+import { Pause, Play, Volume2, VolumeX } from "@lucide/astro";
+
+interface Props {
+  src: string;
+  label?: string;
+  class?: string;
+}
+
+const { src, label = "Audio", class: className } = Astro.props;
+const volumeId = `volume-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<figure class:list={["audio-player", className]} data-audio-player>
+  <audio data-audio preload="metadata" controls src={src}>{label}</audio>
+
+  <div class="ui">
+    <button class="play" type="button" data-action="play" aria-label="Reproducir">
+      <span class="icon icon-play"><Play size={16} /></span>
+      <span class="icon icon-pause"><Pause size={16} /></span>
+    </button>
+
+    <div class="track">
+      <input
+        class="seek range"
+        type="range"
+        min="0"
+        max="1000"
+        step="1"
+        value="0"
+        aria-label="Progreso"
+      />
+      <div class="times">
+        <span class="current" data-time="current">0:00</span>
+        <span class="sep">/</span>
+        <span class="total" data-time="total">0:00</span>
+      </div>
+    </div>
+
+    <div class="volume">
+      <button
+        class="volume-btn"
+        type="button"
+        data-action="volume"
+        aria-label="Volumen"
+        aria-expanded="false"
+        aria-controls={volumeId}
+      >
+        <span class="icon icon-volume"><Volume2 size={16} /></span>
+        <span class="icon icon-muted"><VolumeX size={16} /></span>
+      </button>
+
+      <div class="volume-panel" id={volumeId} hidden>
+        <input
+          class="volume-slider range"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+          aria-label="Volumen"
+        />
+      </div>
+    </div>
+  </div>
+</figure>
+
+<script>
+  const formatTime = (value: number) => {
+    if (!Number.isFinite(value) || value < 0) return "0:00";
+    const total = Math.floor(value);
+    const seconds = String(total % 60).padStart(2, "0");
+    const minutes = Math.floor(total / 60) % 60;
+    const hours = Math.floor(total / 3600);
+    return hours > 0
+      ? `${hours}:${String(minutes).padStart(2, "0")}:${seconds}`
+      : `${minutes}:${seconds}`;
+  };
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    "[data-audio-player]",
+  )) {
+    const audio = root.querySelector<HTMLAudioElement>("audio");
+    const playBtn = root.querySelector<HTMLButtonElement>('[data-action="play"]');
+    const volumeBtn =
+      root.querySelector<HTMLButtonElement>('[data-action="volume"]');
+    const volumePanel = root.querySelector<HTMLElement>(".volume-panel");
+    const seek = root.querySelector<HTMLInputElement>(".seek");
+    const volumeSlider =
+      root.querySelector<HTMLInputElement>(".volume-slider");
+    const current = root.querySelector<HTMLElement>('[data-time="current"]');
+    const total = root.querySelector<HTMLElement>('[data-time="total"]');
+
+    if (
+      !audio ||
+      !playBtn ||
+      !volumeBtn ||
+      !volumePanel ||
+      !seek ||
+      !volumeSlider ||
+      !current ||
+      !total
+    ) {
+      continue;
+    }
+
+    root.dataset.enhanced = "";
+
+    const render = () => {
+      const duration = Number.isFinite(audio.duration) ? audio.duration : 0;
+      const progress = duration > 0 ? audio.currentTime / duration : 0;
+      seek.value = String(Math.round(progress * 1000));
+      seek.style.setProperty("--fill", `${progress * 100}%`);
+      current.textContent = formatTime(audio.currentTime);
+      total.textContent = formatTime(duration);
+      seek.setAttribute(
+        "aria-valuetext",
+        `${formatTime(audio.currentTime)} de ${formatTime(duration)}`,
+      );
+    };
+
+    const syncVolume = () => {
+      const muted = audio.muted || audio.volume === 0;
+      root.toggleAttribute("data-muted", muted);
+      volumeSlider.value = String(audio.volume);
+      volumeSlider.style.setProperty("--fill", `${audio.volume * 100}%`);
+      volumeSlider.setAttribute(
+        "aria-valuetext",
+        `${Math.round(audio.volume * 100)}%`,
+      );
+    };
+
+    const closeVolume = (restoreFocus = false) => {
+      if (volumePanel.hidden) return;
+      volumePanel.hidden = true;
+      volumeBtn.setAttribute("aria-expanded", "false");
+      if (restoreFocus) volumeBtn.focus();
+    };
+
+    playBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        void audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
+    volumeBtn.addEventListener("click", () => {
+      const willOpen = volumePanel.hidden;
+      volumePanel.hidden = !willOpen;
+      volumeBtn.setAttribute("aria-expanded", String(willOpen));
+      if (willOpen) volumeSlider.focus();
+    });
+
+    volumeSlider.addEventListener("input", () => {
+      audio.volume = Number(volumeSlider.value);
+      syncVolume();
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (
+        !volumePanel.hidden &&
+        target instanceof Node &&
+        !volumePanel.parentElement?.contains(target)
+      ) {
+        closeVolume();
+      }
+    });
+
+    root.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeVolume(true);
+    });
+
+    seek.addEventListener("input", () => {
+      if (!Number.isFinite(audio.duration)) return;
+      audio.currentTime = (Number(seek.value) / 1000) * audio.duration;
+      render();
+    });
+
+    audio.addEventListener("loadedmetadata", render);
+    audio.addEventListener("durationchange", render);
+    audio.addEventListener("timeupdate", render);
+    audio.addEventListener("volumechange", syncVolume);
+
+    audio.addEventListener("play", () => {
+      root.dataset.playing = "";
+      playBtn.setAttribute("aria-label", "Pausar");
+    });
+
+    audio.addEventListener("pause", () => {
+      delete root.dataset.playing;
+      playBtn.setAttribute("aria-label", "Reproducir");
+    });
+
+    audio.addEventListener("ended", () => {
+      delete root.dataset.playing;
+      playBtn.setAttribute("aria-label", "Reproducir");
+      render();
+    });
+
+    render();
+    syncVolume();
+  }
+</script>
+
+<style>
+  .audio-player {
+    margin: 0;
+    min-height: 40px;
+
+    & > audio {
+      display: block;
+      width: 100%;
+    }
+
+    &[data-enhanced] > audio {
+      display: none;
+    }
+
+    &[data-enhanced] .ui {
+      display: grid;
+    }
+
+    &[data-playing] .icon-play {
+      display: none;
+    }
+
+    &[data-playing] .icon-pause {
+      display: grid;
+    }
+
+    &[data-muted] .icon-volume {
+      display: none;
+    }
+
+    &[data-muted] .icon-muted {
+      display: grid;
+    }
+  }
+
+  .ui {
+    display: none;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: 40px auto;
+    align-items: center;
+    column-gap: var(--space-md);
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .play {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: var(--accent-on-dark);
+    transition: background-color 150ms ease;
+
+    &:hover {
+      background: color-mix(in srgb, var(--accent), white 16%);
+    }
+  }
+
+  .icon {
+    display: grid;
+    place-items: center;
+
+    :global(svg) {
+      display: block;
+    }
+  }
+
+  .icon-pause,
+  .icon-muted {
+    display: none;
+  }
+
+  .track {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    min-width: 0;
+    display: grid;
+    grid-template-rows: 40px auto;
+    align-items: center;
+    row-gap: var(--space-xxs);
+  }
+
+  .range {
+    --fill: 0%;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    &::-webkit-slider-runnable-track {
+      height: 2px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(
+        to right,
+        var(--accent) 0 var(--fill),
+        var(--hairline) var(--fill) 100%
+      );
+    }
+
+    &::-webkit-slider-thumb {
+      width: 9px;
+      height: 9px;
+      margin-top: -3.5px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--accent);
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    &::-moz-range-track {
+      height: 2px;
+      border-radius: var(--radius-pill);
+      background: var(--hairline);
+    }
+
+    &::-moz-range-progress {
+      height: 2px;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+    }
+
+    &::-moz-range-thumb {
+      width: 9px;
+      height: 9px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+  }
+
+  .seek {
+    width: 100%;
+  }
+
+  .volume {
+    position: relative;
+    grid-area: 1 / 3;
+    display: grid;
+    place-items: center;
+  }
+
+  .volume-btn {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    color: var(--body);
+    transition:
+      border-color 150ms ease,
+      color 150ms ease;
+
+    &:hover,
+    &[aria-expanded="true"] {
+      border-color: var(--canvas-mid);
+      color: var(--ink);
+    }
+  }
+
+  .volume-panel {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + var(--space-sm));
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--canvas-soft);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.35);
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .volume-slider {
+    width: 96px;
+  }
+
+  .times {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--mute);
+
+    .current {
+      color: var(--ink);
+    }
+  }
+
+</style>
