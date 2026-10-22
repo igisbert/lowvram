@@ -120,6 +120,7 @@ export const transcriptionSoftware: SoftwareItem[] = [
     audience: "Quien quiere transcribir cosas pequeñas sin descargar nada manualmente.",
     pros: ["Cero instalación, todo en el navegador", "Modelos pequeños y rápidos"],
     cons: ["Anclado a las limitaciones de los navegadores", "Sin acceso a los modelos más grandes y precisos"],
+    recommended: true
   },
   {
     name: "audio.cpp",

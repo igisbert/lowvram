@@ -16,6 +16,8 @@ import {
 import Layout from "@/layouts/Layout.astro";
 import tinyOutput from "@/data/audios/edgar-allan-poe-corazon-delator-tiny.txt?raw";
 import smallOutput from "@/data/audios/edgar-allan-poe-corazon-delator-small.txt?raw";
+import hardbassCaption from "@/data/music/hardbass/caption.txt?raw";
+import hardbassLyrics from "@/data/music/hardbass/lyrics.txt?raw";
 
 const anchors = [
   { label: "Transcripción", href: "#transcripcion" },
@@ -79,38 +81,21 @@ const anchors = [
       <h3 class="group">Software</h3>
       <SoftwareList items={musicSoftware} />
       <h3 class="group">Modelos que he probado</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
       <ModelTable items={musicModels} />
       <h3 class="group">Pruebas reales</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
       <MusicDemo
-        src="/audios/acestep-placeholder.mp3"
-        model="AceStep XL Base"
+        src="/music/hardbass/audio.mp3"
+        model="ACE-Step 1.5 SFT/Turbo"
         runner="acestep.cpp"
-        duration="3 min 12 s"
-        params={["Tempo: 118 BPM", "Tonalidad: Re menor"]}
-        caption="Dark synthwave de energía nocturna, con bajo junto, arpegios analógicos y melancolía retro ochentera."
-        lyrics={`[verse]
-Luces de neón sobre el asfalto mojado
-la ciudad respira bajo el humo gris
-cada farola es un falso desierto
-donde tan solo soñamos dormir
-
-[chorus]
-Gira el reloj contra la corriente
-en este esquema hecho de vidrio y alambre
-nada es real, pero duele igual
-cuando la noche toma el control
-
-[verse]
-Cosmocisrudo insomnio en mi pensar
-el eco de un motor lejano
-pasado de sonido quemado
-que ya no quiere despertar`.trim()}
+        duration="1 min 30 s"
+        params={[
+          "BPM: 105",
+          "Tonalidad: Fa menor",
+          "Idioma: Español",
+          "Seed: 191744199",
+        ]}
+        caption={hardbassCaption.trim()}
+        lyrics={hardbassLyrics.trim()}
       />
     </Section>
   </main>

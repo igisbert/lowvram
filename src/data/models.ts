@@ -114,12 +114,12 @@ export const voiceModels: ModelItem[] = [
 
 export const musicModels: ModelItem[] = [
   {
-    name: "Modelo de música de ejemplo",
-    size: "1 GB",
-    params: "TODO",
-    quantization: "TODO",
-    use: "",
-    url: "https://huggingface.co",
+    name: "ACE-Step 1.5 SFT/Turbo",
+    size: "2.55 GB",
+    params: "2B",
+    quantization: "Q8_0",
+    use: "Música, letras",
+    url: "https://huggingface.co/Serveurperso/ACE-Step-1.5-GGUF/blob/main/acestep-v15-sftturbo50-Q8_0.gguf",
   },
 ];
 
