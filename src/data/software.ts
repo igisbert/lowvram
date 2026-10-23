@@ -62,6 +62,7 @@ export const llmAgents: SoftwareItem[] = [
     audience: "Quien quiere más funciones y usar modelos en nube.",
     pros: ["Muchas más funciones que Pi", "Modelos cloud gratuitos incluidos"],
     cons: ["Menos ligero que Pi", "Consume más contexto de serie"],
+    recommended: true
   },
   {
     name: "llama-server",

@@ -18,7 +18,7 @@ const columns = [
   { key: "name", label: "Modelo", sortable: true },
   { key: "size", label: "Tamaño", sortable: true },
   { key: "params", label: "Parámetros", sortable: true },
-  { key: "quantization", label: "Cuantización", sortable: true },
+  { key: "quantization", label: "Cuantización", sortable: false },
   ...(showMoe ? [{ key: "moe", label: "MoE", sortable: false }] : []),
   ...(showMtp ? [{ key: "mtp", label: "MTP", sortable: false }] : []),
   ...(showInput ? [{ key: "input", label: "Modalidades", sortable: false }] : []),
