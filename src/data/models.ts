@@ -74,7 +74,7 @@ export const llmModels: ModelItem[] = [
     quantization: "UD-Q4_K_XL",
     moe: false,
     mtp: false,
-    input: ["texto"],
+    input: ["texto", "imagen"],
     use: "",
     url: "https://huggingface.co/unsloth/NVIDIA-Nemotron-3.5-Bolt-E4B-GGUF",
   },
