@@ -1,0 +1,31 @@
+{
+  "nombre_cliente": "Marina Ejemplo García",
+  "servicios": [
+    {
+      "concepto": "Fibra óptica",
+      "descripcion": "Conexión de fibra de 600 Mb",
+      "importe": "29,90 €"
+    },
+    {
+      "concepto": "Tarifa móvil",
+      "descripcion": "Plan móvil con 30 GB de datos",
+      "importe": "12,00 €"
+    },
+    {
+      "concepto": "Llamadas adicionales",
+      "descripcion": "Consumo fuera de la tarifa incluida",
+      "importe": "1,35 €"
+    },
+    {
+      "concepto": "Descuento promocional",
+      "descripcion": "Oferta de bienvenida (3 primeros meses)",
+      "importe": "-5,00 €"
+    }
+  ],
+  "precio_base_imponible": "38,25 €",
+  "iva": "8,03 €",
+  "total_a_pagar": "46,28 €",
+  "forma_pago": "Domiciliación bancaria (ES00 0000 0000 0000 0000 0000)",
+  "importe_pendiente": "46,28 €",
+  "estado_pago": "Pendiente de pago"
+}

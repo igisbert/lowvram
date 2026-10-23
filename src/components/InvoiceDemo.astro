@@ -1,0 +1,162 @@
+---
+import { ExternalLink, FileText } from "@lucide/astro";
+import { highlightJson } from "@/utils/highlight";
+
+interface Props {
+  pdf: string;
+  pdfName?: string;
+  prompt?: string;
+  output: string;
+}
+
+const { pdf, pdfName = "factura.pdf", prompt, output } = Astro.props;
+---
+
+{prompt && (
+  <div class="prompt-block">
+    <p class="demo-label">Prompt</p>
+    <p class="prompt">{prompt}</p>
+  </div>
+)}
+
+<div class="panels">
+  <div class="panel">
+    <p class="demo-label">Factura</p>
+    <a
+      class="pdf"
+      href={pdf}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Abrir ${pdfName} en una pestaña nueva`}
+    >
+      <FileText size={20} class="pdf-icon" aria-hidden="true" />
+      <span class="pdf-text">
+        <span class="pdf-name">{pdfName}</span>
+        <span class="pdf-action">
+          Abrir PDF en una pestaña nueva
+          <ExternalLink size={14} aria-hidden="true" />
+        </span>
+      </span>
+    </a>
+    <p class="note">
+      El modelo procesa el texto del PDF. El enlace abre el documento original.
+    </p>
+  </div>
+  <div class="panel">
+    <p class="demo-label">JSON</p>
+    <pre class="demo-output" set:html={highlightJson(output)} />
+  </div>
+</div>
+
+<style>
+  .prompt-block {
+    margin-bottom: var(--space-lg);
+  }
+
+  .prompt {
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--canvas-soft);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    color: var(--body);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .panels {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .panel {
+    min-width: 0;
+  }
+
+  .pdf {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--canvas-soft);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    color: var(--ink);
+    text-decoration: none;
+    transition:
+      border-color 160ms ease-out,
+      background-color 160ms ease-out;
+  }
+
+  .pdf:hover {
+    border-color: var(--accent);
+    background: var(--canvas-card);
+  }
+
+  .pdf:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .pdf-icon {
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  .pdf-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .pdf-name {
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  .pdf-action {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--mute);
+  }
+
+  .pdf:hover .pdf-action {
+    color: var(--body);
+  }
+
+  .note {
+    margin: var(--space-sm) 0 0;
+    font-size: 0.8125rem;
+    color: var(--mute);
+  }
+
+  .demo-output :global(.tok-key) {
+    color: var(--accent);
+  }
+
+  .demo-output :global(.tok-num) {
+    color: #5eead4;
+  }
+
+  .demo-output :global(.tok-kw) {
+    color: #ff6b6b;
+  }
+
+  @media (min-width: 48rem) {
+    .panels {
+      grid-template-columns: 35fr 65fr;
+      align-items: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pdf {
+      transition: none;
+    }
+  }
+</style>

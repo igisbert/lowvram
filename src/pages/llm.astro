@@ -2,6 +2,7 @@
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Info from "@/components/Info.astro";
+import InvoiceDemo from "@/components/InvoiceDemo.astro";
 import CalculadoraLing from "@/components/llm/ling-3.0-tiny-q5_k_m/calculadora.astro";
 import CalculadoraQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/calculadora.astro";
 import MusicPlayerQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/MusicPlayer.astro";
@@ -9,11 +10,13 @@ import LandingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Landing.astro"
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
 import LandingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Landing.astro";
 import WritingLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Writing.astro";
+import WritingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Writing.astro";
 import WritingMiMo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/Writing.astro";
 import WritingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Writing.astro";
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import FAQQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
+import Snake from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Snake.astro";
 import Trial from "@/components/Trial.astro";
 import TextBox from "@/components/TextBox.astro";
 import Verdict from "@/components/Verdict.astro";
@@ -23,7 +26,14 @@ import SoftwareList from "@/components/SoftwareList.astro";
 import { llmModels } from "@/data/models";
 import { llmAgents, llmSoftware } from "@/data/software";
 import { verdicts } from "@/data/verdicts";
+import invoiceLfm from "@/data/invoices/lfm2.5-24b-a2b.json?raw";
+import invoiceLing from "@/data/invoices/ling-3.0-tiny.json?raw";
+import invoiceMiMo from "@/data/invoices/mimo-v2.6-distill-qwen-9b.json";
+import invoiceQwen from "@/data/invoices/qwen3.6-35b-a3b.json?raw";
+import invoicePrompt from "@/data/invoices/prompt.txt?raw";
 import Layout from "@/layouts/Layout.astro";
+
+const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
 ---
 
 <Layout
@@ -190,16 +200,90 @@ import Layout from "@/layouts/Layout.astro";
       >
         <WritingQwen />
       </Trial>
-      <!--       <Trial
-        title="Calculadors"
+      <Trial
+        title="Correo: corrección, formal y resumen"
+        model="Ling 3.0 Tiny"
+        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
         runner="Pi"
-        model="N"
-        tokens="101.051 tokens"
-        duration="9 min 3 s"
-        speed="92 t/s"
+        tokens="7.804 tokens"
+        duration="1 min 9 s"
+        speed="113 t/s"
       >
-        <CalculadoraN />
-      </Trial> -->
+        <WritingLing />
+      </Trial>
+      <Trial
+        title="Factura a JSON"
+        model="LFM2.5-24B-A2B"
+        fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+        runner="llama-server"
+        tokens="600 tokens"
+        duration="14 s"
+        speed="40,93 t/s"
+      >
+        <InvoiceDemo
+          pdf="/invoices/invoice.pdf"
+          pdfName="invoice.pdf"
+          prompt={invoicePrompt.trim()}
+          output={invoiceLfm.trim()}
+        />
+      </Trial>
+      <Trial
+        title="Factura a JSON"
+        model="Ling 3.0 Tiny"
+        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+        runner="llama-server"
+        tokens="618 tokens"
+        duration="6,0 s"
+        speed="103,58 t/s"
+      >
+        <InvoiceDemo
+          pdf="/invoices/invoice.pdf"
+          pdfName="invoice.pdf"
+          prompt={invoicePrompt.trim()}
+          output={invoiceLing.trim()}
+        />
+      </Trial>
+      <Trial
+        title="Factura a JSON"
+        model="Qwen3.6-35B"
+        runner="llama-server"
+        tokens="947 tokens"
+        duration="24 s"
+        speed="39,33 t/s"
+      >
+        <InvoiceDemo
+          pdf="/invoices/invoice.pdf"
+          pdfName="invoice.pdf"
+          prompt={invoicePrompt.trim()}
+          output={invoiceQwen.trim()}
+        />
+      </Trial>
+      <Trial
+        title="Factura a JSON"
+        model="MiMo 2.6"
+        runner="llama-server"
+        tokens="526 tokens"
+        duration="10 s"
+        speed="48,09 t/s"
+      >
+        <InvoiceDemo
+          pdf="/invoices/invoice.pdf"
+          pdfName="invoice.pdf"
+          prompt={invoicePrompt.trim()}
+          output={invoiceMiMoJson}
+        />
+      </Trial>
+      <Trial
+        title="Snake"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="Pi"
+        tokens="4.300 tokens"
+        duration="1 min 11 s"
+        speed="61 t/s"
+      >
+        <Snake />
+      </Trial>
     </Section>
     <Section eyebrow="Veredicto" title="Resultados conseguidos">
       <div class="verdicts">

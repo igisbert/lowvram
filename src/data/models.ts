@@ -67,6 +67,17 @@ export const llmModels: ModelItem[] = [
     use: "",
     url: "https://huggingface.co/unsloth/LFM2.5-24B-A2B-GGUF",
   },
+  {
+    name: "NVIDIA-Nemotron-3.5-Bolt-E4B",
+    size: "4.76 GB",
+    params: "8B",
+    quantization: "UD-Q4_K_XL",
+    moe: false,
+    mtp: false,
+    input: ["texto"],
+    use: "",
+    url: "https://huggingface.co/unsloth/NVIDIA-Nemotron-3.5-Bolt-E4B-GGUF",
+  },
 ];
 
 export const transcriptionModels: ModelItem[] = [

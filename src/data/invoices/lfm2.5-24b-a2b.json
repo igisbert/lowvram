@@ -1,0 +1,19 @@
+{
+  "cliente": "Marina Ejemplo García",
+  "servicios": [
+    {
+      "nombre": "Fibra óptica - Conexión de fibra de 600 Mb",
+      "precio": "29,90 €"
+    },
+    {
+      "nombre": "Tarifa móvil - Plan móvil con 30 GB de datos",
+      "precio": "12,00 €"
+    },
+    {
+      "nombre": "Llamadas adicionales - Consumo fuera de la tarifa incluida",
+      "precio": "1,35 €"
+    }
+  ],
+  "totalAPagar": "46,28 €",
+  "formaPago": "Domiciliación bancaria"
+}

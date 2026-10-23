@@ -1,0 +1,454 @@
+<style>
+  .snake-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: sans-serif;
+    padding: 10px;
+    border: 2px solid #333;
+    user-select: none;
+    touch-action: manipulation; /* Improves responsiveness on touch devices */
+  }
+
+  .game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .score-board {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+
+  .game-canvas {
+    border: 1px solid #555;
+    background-color: #0d0d0d;
+    /* Canvas will be sized dynamically by JS, but this ensures responsiveness */
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+
+  .controls {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .touch-controls {
+    display: none; /* Hidden by default, shown on narrow/touch screens */
+    margin-top: 15px;
+  }
+
+  .touch-buttons {
+    display: grid;
+    grid-template-areas:
+      ". up ."
+      "left . right"
+      ". down .";
+    gap: 10px;
+    width: 180px;
+  }
+
+  .touch-btn {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 15px 0; /* Ensure > 44px touch area */
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 8px;
+    min-width: 44px;
+    text-align: center;
+    box-shadow: 0 4px #222;
+    transition:
+      transform 0.1s,
+      box-shadow 0.1s;
+  }
+
+  .touch-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px #222;
+  }
+
+  .touch-btn:focus-visible {
+    outline: 3px solid #00ff88; /* Visible focus state */
+    outline-offset: 2px;
+  }
+
+  .touch-up {
+    grid-area: up;
+  }
+  .touch-down {
+    grid-area: down;
+  }
+  .touch-left {
+    grid-area: left;
+  }
+  .touch-right {
+    grid-area: right;
+  }
+
+  @media (max-width: 600px) {
+    .touch-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .touch-buttons {
+      display: grid;
+    }
+  }
+</style>
+
+<div class="snake-game" tabindex="0" role="application">
+  <div class="game-container">
+    <div class="score-board">
+      Score: <span data-score>0</span> | High Score: <span data-high-score
+        >0</span
+      >
+    </div>
+    <canvas
+      class="game-canvas"
+      width="400"
+      height="400"
+      role="img"
+      aria-label="Snake Game Grid"></canvas>
+    <div class="message" data-status="start">Click or press a key to start</div>
+  </div>
+  <div class="controls">
+    <div class="touch-controls">
+      <div class="touch-buttons">
+        <button class="touch-btn touch-up" data-direction="up">↑</button>
+        <button class="touch-btn touch-left" data-direction="left">←</button>
+        <button class="touch-btn touch-right" data-direction="right">→</button>
+        <button class="touch-btn touch-down" data-direction="down">↓</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Component state variables, isolated from global scope
+  let snakeGameRoot = document.querySelector(".snake-game");
+  let canvas = document.querySelector(".game-canvas");
+  let ctx = canvas.getContext("2d");
+  let messageDisplay = document.querySelector(".message");
+  let scoreDisplay = document.querySelector("[data-score]");
+  let highScoreDisplay = document.querySelector("[data-high-score]");
+  let touchButtons = document.querySelectorAll(".touch-btn");
+
+  // Game constants
+  const GRID_SIZE = 20;
+  const TILE_SIZE = canvas.width / GRID_SIZE; // 20 pixels if canvas is 400x400
+  const INITIAL_SPEED = 150; // ms
+  const SPEED_INCREASE_INTERVAL = 5; // Score threshold for speed increase
+
+  // Game state
+  let snake = [{ x: 10, y: 10 }]; // Initial position
+  let food = {};
+  let direction = { x: 1, y: 0 }; // Initial direction: right
+  let nextDirection = { x: 1, y: 0 }; // Buffer for smooth input
+  let gameLoopInterval = null;
+  let gameSpeed = INITIAL_SPEED;
+  let isGameRunning = false;
+  let isPaused = true;
+  let score = 0;
+  let highScore = localStorage.getItem("snakeHighScore")
+    ? parseInt(localStorage.getItem("snakeHighScore"))
+    : 0;
+
+  // --- Initialization and Setup ---
+
+  function initGame() {
+    // Reset state
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    nextDirection = { x: 1, y: 0 };
+    gameSpeed = INITIAL_SPEED;
+    score = 0;
+    isGameRunning = false;
+    isPaused = true;
+
+    // Update UI
+    scoreDisplay.textContent = score;
+    highScoreDisplay.textContent = highScore;
+    messageDisplay.textContent = "Click or press a key to start";
+    messageDisplay.dataset.status = "start";
+
+    // Set initial food
+    generateFood();
+
+    // Clear previous interval if exists
+    if (gameLoopInterval) {
+      clearInterval(gameLoopInterval);
+      gameLoopInterval = null;
+    }
+
+    // Draw initial state
+    draw();
+  }
+
+  function generateFood() {
+    let newFood;
+    do {
+      newFood = {
+        x: Math.floor(Math.random() * GRID_SIZE),
+        y: Math.floor(Math.random() * GRID_SIZE),
+      };
+    } while (isSnakeBodyOccupying(newFood));
+
+    food = newFood;
+  }
+
+  function isSnakeBodyOccupying(pos) {
+    return snake.some((segment) => segment.x === pos.x && segment.y === pos.y);
+  }
+
+  // --- Drawing ---
+
+  function draw() {
+    // Clear canvas
+    ctx.fillStyle = "#0d0d0d";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw food
+    ctx.fillStyle = "#ff4d4d"; // Food color (contrasting)
+    ctx.fillRect(
+      food.x * TILE_SIZE,
+      food.y * TILE_SIZE,
+      TILE_SIZE - 1,
+      TILE_SIZE - 1,
+    );
+
+    // Draw snake
+    snake.forEach((segment, index) => {
+      ctx.fillStyle = index === 0 ? "#00ff88" : "#444"; // Head color different
+      ctx.fillRect(
+        segment.x * TILE_SIZE,
+        segment.y * TILE_SIZE,
+        TILE_SIZE - 1,
+        TILE_SIZE - 1,
+      );
+    });
+  }
+
+  // --- Game Logic ---
+
+  function checkCollision(head) {
+    // Wall collision
+    if (
+      head.x < 0 ||
+      head.x >= GRID_SIZE ||
+      head.y < 0 ||
+      head.y >= GRID_SIZE
+    ) {
+      return true;
+    }
+    // Self collision (check against body excluding the head itself)
+    return snake
+      .slice(1)
+      .some((segment) => segment.x === head.x && segment.y === head.y);
+  }
+
+  function moveSnake() {
+    // Apply buffered direction
+    direction = nextDirection;
+
+    // Calculate new head position
+    const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+
+    // Check Game Over conditions
+    if (checkCollision(head)) {
+      gameOver();
+      return;
+    }
+
+    // Add new head
+    snake.unshift(head);
+
+    // Check for food consumption
+    if (head.x === food.x && head.y === food.y) {
+      score++;
+      scoreDisplay.textContent = score;
+
+      // Check for speed increase
+      if (
+        score > 0 &&
+        score % SPEED_INCREASE_INTERVAL === 0 &&
+        gameSpeed > 50
+      ) {
+        gameSpeed = Math.max(
+          50,
+          INITIAL_SPEED - Math.floor(score / SPEED_INCREASE_INTERVAL) * 15,
+        );
+      }
+
+      generateFood(); // Generate new food
+      // Do NOT pop tail, allowing growth
+    } else {
+      snake.pop(); // Move snake normally
+    }
+
+    draw();
+  }
+
+  function startGame() {
+    if (isGameRunning) return;
+    isGameRunning = true;
+    isPaused = false;
+    messageDisplay.textContent = "";
+    messageDisplay.dataset.status = "running";
+
+    // Start the loop
+    gameLoopInterval = setInterval(moveSnake, gameSpeed);
+  }
+
+  function pauseGame() {
+    if (!isGameRunning || isPaused) return;
+
+    isPaused = true;
+    clearInterval(gameLoopInterval);
+    gameLoopInterval = null;
+    messageDisplay.textContent = "Game Paused (Focus lost or Space)";
+    messageDisplay.dataset.status = "paused";
+  }
+
+  function resumeGame() {
+    if (!isGameRunning || !isPaused) return;
+
+    isPaused = false;
+    gameLoopInterval = setInterval(moveSnake, gameSpeed);
+    messageDisplay.textContent = "";
+    messageDisplay.dataset.status = "running";
+  }
+
+  function gameOver() {
+    isGameRunning = false;
+    isPaused = true;
+    clearInterval(gameLoopInterval);
+    gameLoopInterval = null;
+
+    // Update High Score
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem("snakeHighScore", highScore);
+      highScoreDisplay.textContent = highScore;
+    }
+
+    messageDisplay.textContent = `Game Over! Score: ${score}. Press Enter to restart.`;
+    messageDisplay.dataset.status = "gameover";
+  }
+
+  // --- Input Handling ---
+
+  function handleKeyDown(event) {
+    // Only process keydown if the game is running or paused and we are listening
+    if (!snakeGameRoot.matches(":focus")) return;
+
+    switch (event.key) {
+      case "ArrowUp":
+      case "w":
+      case "W":
+        if (direction.y !== 1) nextDirection = { x: 0, y: -1 };
+        break;
+      case "ArrowDown":
+      case "s":
+      case "S":
+        if (direction.y !== -1) nextDirection = { x: 0, y: 1 };
+        break;
+      case "ArrowLeft":
+      case "a":
+      case "A":
+        if (direction.x !== 1) nextDirection = { x: -1, y: 0 };
+        break;
+      case "ArrowRight":
+      case "d":
+      case "D":
+        if (direction.x !== -1) nextDirection = { x: 1, y: 0 };
+        break;
+      case " ": // Space for Pause
+        event.preventDefault(); // Prevent scrolling
+        if (isGameRunning) {
+          isPaused ? resumeGame() : pauseGame();
+        }
+        break;
+      case "Enter": // Enter for Start/Restart
+        event.preventDefault();
+        if (!isGameRunning) {
+          initGame(); // Ensure state is clean
+          startGame();
+        } else if (messageDisplay.dataset.status === "gameover") {
+          initGame();
+          startGame();
+        }
+        break;
+    }
+  }
+
+  // --- Event Listeners Setup ---
+
+  // 1. Keyboard listener on the component root (must be focused)
+  snakeGameRoot.addEventListener("keydown", handleKeyDown);
+
+  // 2. Focus management: Pause when focus is lost, resume when regained (if running)
+  snakeGameRoot.addEventListener("focus", () => {
+    if (isGameRunning && isPaused) {
+      resumeGame();
+    }
+  });
+  snakeGameRoot.addEventListener("blur", () => {
+    if (isGameRunning && !isPaused) {
+      pauseGame();
+    }
+  });
+
+  // 3. Touch button listeners
+  touchButtons.forEach((button) => {
+    const directionStr = button.dataset.direction;
+    const directionObj = {
+      up: { x: 0, y: -1 },
+      down: { x: 0, y: 1 },
+      left: { x: -1, y: 0 },
+      right: { x: 1, y: 0 },
+    }[directionStr];
+
+    // Use mousedown/touchstart to register direction change immediately
+    const handleTouch = (e) => {
+      e.preventDefault();
+      if (isGameRunning && !isPaused) {
+        // Only update nextDirection if not reversing
+        const currentDir = direction;
+        const newDir = directionObj;
+        if (currentDir.x !== -newDir.x && currentDir.y !== -newDir.y) {
+          nextDirection = newDir;
+        }
+      }
+    };
+    button.addEventListener("touchstart", handleTouch);
+    button.addEventListener("mousedown", handleTouch);
+  });
+
+  // 4. Initial trigger (Click/Touch Start)
+  snakeGameRoot.addEventListener("click", () => {
+    if (!isGameRunning) {
+      initGame();
+      startGame();
+    }
+  });
+  snakeGameRoot.addEventListener("touchstart", (e) => {
+    // Trigger start if not running
+    if (!isGameRunning) {
+      e.preventDefault();
+      initGame();
+      startGame();
+    }
+  });
+
+  // Initialize game state on load
+  initGame();
+</script>

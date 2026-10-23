@@ -1,0 +1,1 @@
+Extrae el nombre del cliente, los servicios y el precio, el total a pagar y la forma de pago. Salida en formato JSON

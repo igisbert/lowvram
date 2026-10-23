@@ -1,0 +1,23 @@
+{
+  "cliente": "Marina Ejemplo García",
+  "servicios": [
+    {
+      "nombre": "Fibra óptica",
+      "precio": "29,90 €"
+    },
+    {
+      "nombre": "Tarifa móvil",
+      "precio": "12,00 €"
+    },
+    {
+      "nombre": "Llamadas adicionales",
+      "precio": "1,35 €"
+    },
+    {
+      "nombre": "Descuento promocional",
+      "precio": "-5,00 €"
+    }
+  ],
+  "total_a_pagar": "46,28 €",
+  "forma_pago": "Domiciliación bancaria"
+}
