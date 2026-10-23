@@ -1,0 +1,7 @@
+---
+import WritingResult from "@/components/WritingResult.astro";
+import source from "@/data/writing/mailtest.txt?raw";
+import response from "@/data/writing/mimo-v2.6-distill-qwen-9b-q4_k_s/mailtest-response.txt?raw";
+---
+
+<WritingResult source={source.trim()} response={response.trim()} />

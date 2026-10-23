@@ -8,6 +8,9 @@ import MusicPlayerQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/MusicPlaye
 import LandingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Landing.astro";
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
 import LandingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Landing.astro";
+import WritingLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Writing.astro";
+import WritingMiMo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/Writing.astro";
+import WritingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Writing.astro";
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import FAQQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
@@ -155,6 +158,37 @@ import Layout from "@/layouts/Layout.astro";
         speed="92 t/s"
       >
         <LandingLing />
+      </Trial>
+      <Trial
+        title="Correo: corrección, formal y resumen"
+        model="LFM2.5-24B-A2B"
+        fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+        runner="Pi"
+        tokens="5.508 tokens"
+        duration="2 min 2 s"
+        speed="42 t/s"
+      >
+        <WritingLfm />
+      </Trial>
+      <Trial
+        title="Correo: corrección, formal y resumen"
+        model="MiMo 2.6"
+        runner="Pi"
+        tokens="1.304 tokens"
+        duration="27 s"
+        speed="49 t/s"
+      >
+        <WritingMiMo />
+      </Trial>
+      <Trial
+        title="Correo: corrección, formal y resumen"
+        model="Qwen3.6-35B"
+        runner="Pi"
+        tokens="4.367 tokens"
+        duration="1 min 7 s"
+        speed="33 t/s"
+      >
+        <WritingQwen />
       </Trial>
       <!--       <Trial
         title="Calculadors"

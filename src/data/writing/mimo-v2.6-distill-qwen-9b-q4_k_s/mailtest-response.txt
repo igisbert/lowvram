@@ -1,0 +1,89 @@
+ Aquí tienes la respuesta completa, organizada en las seis secciones solicitadas.
+
+ ────────────────────────────────────────────────────────────────────────────────
+
+ 1. Texto corregido
+
+ │ Hola Rubén,
+ │
+ │ Te escribo para contarte cómo fue el cierre del proyecto de la tienda online, porque creo que deberíamos hacer
+ │ balance antes de que se nos olvide.
+ │
+ │ Teníamos que entregárselo al cliente el martes 13 de octubre, pero al final no lo entregamos hasta el lunes 19. La
+ │ causa principal fue que la pasarela de pago falló en las pruebas finales y hubo que rehacer casi todo el flujo de
+ │ compra.
+ │
+ │ Yo ya le avisé a Marcos hace semanas, pero no me hizo caso; le dije que había que probarla antes y él pensaba que no
+ │ hacía falta.
+ │
+ │ Además, el presupuesto inicial era de 12.500 € y al final nos pasamos un 8 %, sobre todo por las horas extra del
+ │ equipo de desarrollo. Me alegra que el cliente se haya mostrado comprensivo, aunque sé que no habrá una segunda
+ │ oportunidad si volvemos a fallar. Si no mejoramos la planificación, tendremos los mismos problemas el próximo
+ │ trimestre.
+ │
+ │ Por último, quiero proponerte una reunión con todo el equipo, a ser posible la semana que viene, para hablar acerca
+ │ de cómo evitar que esto se repita. Hay que decidir qué herramientas usamos y quién se encarga de cada tarea, sobre
+ │ todo en las fases finales. Ya me dirás qué día te viene mejor.
+ │
+ │ Un abrazo,
+ │ Elena
+
+ ────────────────────────────────────────────────────────────────────────────────
+
+ 2. Versión formal
+
+ Asunto: Balance del cierre del proyecto de la tienda online
+
+ │ Estimado Rubén,
+ │
+ │ Le escribo para informarle del cierre del proyecto de la tienda online y para proponerle un balance conjunto antes
+ │ de que el asunto se quede sin tratar.
+ │
+ │ La entrega prevista al cliente era el martes 13 de octubre, pero el proyecto no se entregó hasta el lunes 19. La
+ │ causa principal fue que la pasarela de pago no superó las pruebas finales, lo que obligó a rehacer casi todo el
+ │ flujo de compra.
+ │
+ │ Le informé de este riesgo a Marcos hace semanas, pero no se tomó en cuenta; le indiqué que habría que probar la
+ │ pasarela antes de finalizar, y él consideró que no era necesario.
+ │
+ │ El presupuesto inicial fue de 12.500 €, y el coste final se situó un 8 % por encima, principalmente por las horas
+ │ extraordinarias del equipo de desarrollo. El cliente se ha mostrado comprensivo, aunque es consciente de que no
+ │ habrá una segunda oportunidad si volvemos a fallar.
+ │
+ │ Considero imprescindible mejorar la planificación antes de que se repitan estos problemas en el próximo trimestre.
+ │
+ │ En ese sentido, quisiera proponerle una reunión con todo el equipo, a ser posible la semana que viene, para acordar
+ │ las herramientas que emplearemos y la distribución de tareas, con especial atención a las fases finales. Le
+ │ agradecería que me indicara qué día le viene mejor.
+ │
+ │ Le saludo muy atentamente,
+ │ Elena
+
+ ────────────────────────────────────────────────────────────────────────────────
+
+ 3. Resumen
+
+ │ El proyecto de la tienda online se entregó seis días después de la fecha acordada con el cliente.
+ │
+ │ La causa fue el fallo de la pasarela de pago durante las pruebas finales, que obligó a rehacer el flujo de compra.
+ │
+ │ El coste final superó en un 8 % el presupuesto inicial, y conviene revisar la planificación y las tareas antes del
+ │ próximo trimestre.
+
+ ────────────────────────────────────────────────────────────────────────────────
+
+ 4. Preguntas sobre el texto
+
+ a) Días entre la entrega prevista y la real
+
+ Fecha prevista: martes 13 de octubre. Fecha real: lunes 19 de octubre.
+
+ - Días naturales: 19 − 13 = 6 días
+ - Días laborables (lunes a viernes):
+     - Miércoles 14, jueves 15 y viernes 16 (3 días), más el lunes 19 donde se hizo la entrega = 4 días laborables
+
+ b) Coste final del proyecto
+
+ - Presupuesto inicial: 12.500 €
+ - Superávit: 12.500 × 8 % = 1.000 €
+ - Coste final: 12.500 + 1.000 = 13.500 €

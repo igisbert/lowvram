@@ -1,0 +1,38 @@
+---
+interface Props {
+  source: string;
+  response: string;
+}
+
+const { source, response } = Astro.props;
+---
+
+<div class="writing">
+  <div>
+    <p class="demo-label">Entrada</p>
+    <p class="panel source">{source}</p>
+  </div>
+  <div>
+    <p class="demo-label">Respuesta</p>
+    <p class="panel response">{response}</p>
+  </div>
+</div>
+
+<style>
+  .writing {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .panel {
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--canvas-soft);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    color: var(--body);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+</style>

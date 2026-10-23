@@ -1,0 +1,67 @@
+ 1. Texto corregido
+
+ Hola Rubén,
+
+ Te escribo para contarte cómo fue el cierre del proyecto de la tienda online. Creo que deberíamos hacer balance antes
+ de que se nos olvide. Teníamos que entregárselo al cliente el martes 13 de Octubre, pero al final no lo entregamos
+ hasta el lunes 19. La causa principal fue que la pasarela de pago falló en las pruebas finales y hubo que rehacer casi
+ todo el flujo de compra. Ya le avise a Marcos hace semanas, pero no me hizo caso; dije que había que probarla antes, y
+ yo pensaba que no hacía falta.
+
+ Además, el presupuesto inicial era de 12.500 € y al final nos pasamos un 8 %, sobretodo por las horas extra del equipo
+ de desarrollo. Me alegro de que el cliente se hubiera mostrado comprensivo, aunque se que no abra una segunda
+ oportunidad si volvemos a fallar. Si no mejoramos la planificación, tendremos los mismos problemas el próximo
+ trimestre.
+
+ Por último, quiero proponerte una reunión con todo el equipo, a ser posible la semana que viene, para hablar a cerca
+ de cómo evitar que esto se repita. Hay que decidir qué herramientas usamos y quién se encarga de cada tarea, sobretodo
+ en las fases finales. Ya me dirás qué día te viene mejor.
+
+ Un abrazo,
+ Elena
+
+ ────────────────────────────────────────────────────────────────────────────────
+
+ 2. Versión formal
+
+ Estimado/a Rubén,
+
+ Me dirijo a usted para compartir los resultados del cierre del proyecto de la tienda online. El cliente debía recibir
+ la entrega el martes 13 de Octubre, pero la entrega se realizó el lunes 19 de Octubre. La causa fue que la pasarela de
+ pago falló en las pruebas finales, lo que obligó a rehacer casi todo el flujo de compra.
+
+ El presupuesto inicial era de 12.500 € y el coste final fue de 13.500 €, un sobrecoste del 8 % que se debió
+ principalmente a las horas extra del equipo de desarrollo. Le informo también que el cliente se mostró comprensivo con
+ la situación.
+
+ Proponemos reunirnos con todo el equipo en la semana que viene para analizar las causas y establecer un plan de acción
+ que evite que se repita. Quedando atento/a a su respuesta sobre el día que resulte más conveniente.
+
+ Agradezco su atención y quedo a la disposición de cualquier consulta.
+
+ Atentamente,
+ Elena
+
+ ────────────────────────────────────────────────────────────────────────────────
+
+ 3. Resumen
+
+ 1. El proyecto se completó con un ajuste de seis días respecto a la fecha prevista de entrega.
+ 2. El sobrecoste se elevó en ocho por ciento por las horas extra del equipo de desarrollo.
+ 3. Se propone una reunión para analizar cómo evitar que esta situación se repita.
+
+ ────────────────────────────────────────────────────────────────────────────────
+
+ 4. Preguntas sobre el texto
+
+ a) ¿Cuántos días naturales y cuántos días laborables (lunes a viernes) pasaron entre la fecha prevista de entrega y la
+ entrega real?
+
+ - Días naturales: 6 (del martes 13 al lunes 19, la diferencia entre ambas fechas es de 6 días).
+ - Días laborables (lunes a viernes): 4 (miércoles 14, jueves 15, viernes 16 y lunes 19 — considerando que la fecha
+   prevista era martes 13 y la real fue lunes 19, los días laborables entre ellas son 13, 14, 15 y 16, que equivalen a
+   4 días laborables).
+
+ b) ¿Cuál fue aproximadamente el coste final del proyecto?
+
+ - Coste final: 13.500 € (presupuesto inicial de 12.500 € + 8 % de sobrecoste = 12.500 × 1,08 = 13.500 €).

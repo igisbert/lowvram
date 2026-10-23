@@ -1,0 +1,49 @@
+ 1. Texto corregido:
+    Hola Rubén,
+
+ Te escribo para contarte cómo fue el cierre del proyecto de la tienda online, porque creo que deberíamos hacer balance
+ antes de que se nos olvide. Teníamos que entregárselo al cliente el martes 13 de octubre, pero al final no lo
+ entregamos hasta el lunes 19. La causa principal fue que la pasarela de pago falló en las pruebas finales y hubo que
+ rehacer casi todo el flujo de compra. Yo ya le avisé a Marcos hace semanas, pero no me hizo caso; le dije que había
+ que probarla antes y él pensaba que no hacía falta.
+
+ Además, el presupuesto inicial era de 12.500 € y al final nos pasamos un 8%, sobre todo por las horas extra del equipo
+ de desarrollo. Me alegra que el cliente se haya mostrado comprensivo, aunque sé que no habrá una segunda oportunidad
+ si volvemos a fallar. Si no mejoramos la planificación, tendremos los mismos problemas el próximo trimestre.
+
+ Por último, quiero proponerte una reunión con todo el equipo, a ser posible la semana que viene, para hablar acerca de
+ cómo evitar que esto se repita. Hay que decidir qué herramientas usamos y quién se encarga de cada tarea, sobre todo
+ en las fases finales. Ya me dirás qué día te viene mejor.
+
+ Un abrazo,
+ Elena
+
+ 2. Versión formal:
+    Estimado/a Rubén:
+
+ Le escribo para revisar el cierre del proyecto de la tienda online, ya que considero oportuno realizar un balance
+ antes de que se nos olvide algún detalle. La fecha de entrega prevista para el cliente era el martes 13 de octubre,
+ pero finalmente la entrega se realizó el lunes 19. El motivo principal fue que la pasarela de pago falló durante las
+ pruebas finales, lo que obligó a rehacer casi todo el flujo de compra. Le advertí a Marcos con antelación sobre la
+ necesidad de probarla, pero no me hizo caso, ya que consideraba que no era necesario.
+
+ El presupuesto inicial era de 12.500 € y, en definitiva, superamos esa cifra en un 8%, principalmente debido a las
+ horas extra del equipo de desarrollo. Si bien me alegra que el cliente haya mostrado comprensión, es importante
+ recordar que no habrá una segunda oportunidad si volvemos a incidir en estos errores. Para evitar que esto se repita
+ en el próximo trimestre, es imprescindible mejorar la planificación.
+
+ Por ello, propongo organizar una reunión con todo el equipo, idealmente la semana que viene, para discutir cómo
+ evitaremos que esto vuelva a ocurrir. Debemos definir qué herramientas utilizaremos y quién asumirá la responsabilidad
+ de cada tarea, especialmente en las fases finales. Quedo a la espera de su disponibilidad para fijar la fecha.
+
+ Atentamente,
+ Elena
+
+ 3. Resumen:
+    El cierre de la tienda se entregó el lunes 19, seis días después de la fecha prevista del 13 de octubre. La
+    pasarela de pago tuvo que reconfigurarse, obligando a rehacer el flujo y aumentando el presupuesto un 8%. Propongo
+    una reunión con el equipo la semana próxima para definir herramientas y responsabilidades en las fases finales.
+
+ 4. Preguntas:
+    a) Días naturales: 6 días (19 - 13 = 6). Días laborables: 4 días (miércoles 14, jueves 15, viernes 16 y lunes 19).
+    b) Coste final aproximado: 13.500 €. Operación: 12.500 € × 1,08 = 13.500 €.

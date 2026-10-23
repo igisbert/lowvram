@@ -124,14 +124,13 @@ export const transcriptionSoftware: SoftwareItem[] = [
   },
   {
     name: "audio.cpp",
-    description: "Motor todo en uno para modelos de audio en C++ sobre ggml: además de música y voz, incluye transcripción, con UI web y sin Python.",
+    description: "Motor todo en uno para modelos de audio. Incluye transcripción, generación de música y voz, con UI web y sin configurar nada.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/0xShug0/audio.cpp" },
-      { label: "Modelos", href: "https://huggingface.co/audio-cpp/audio.cpp-gguf" },
     ],
     audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
-    pros: ["Sin dependencias de Python", "UI web y binarios precompilados", "Muchas familias de modelos de transcripción"],
-    cons: ["Catálogo y opciones más amplios de lo necesario si solo quieres transcribir"],
+    pros: ["Sin dependencias, es un binario precompilado", "Interfaz web", "Muchos modelos que se descargan con un clic"],
+    cons: ["La interfaz gráfica es horrible y poco clara.", "Cero información o contexto sobre los modelos disponibles"],
   },
 ];
 
@@ -147,24 +146,24 @@ export const voiceSoftware: SoftwareItem[] = [
     pros: ["Clonación desde unos segundos de audio", "Servidor con API compatible con OpenAI", "Modelos pequeños de 0.6B y 1.7B"],
     cons: ["Hay que compilarlo"],
   },
-  {
-    name: "audio.cpp",
-    description: "Motor todo en uno para modelos de audio en C++ sobre ggml: además de música y transcripción, incluye síntesis de voz y clonación, con UI web y sin Python.",
-    links: [
-      { label: "Ver en GitHub", href: "https://github.com/0xShug0/audio.cpp" },
-      { label: "Modelos", href: "https://huggingface.co/audio-cpp/audio.cpp-gguf" },
-    ],
-    audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
-    pros: ["Sin dependencias de Python", "UI web y binarios precompilados", "Muchas familias de modelos de voz"],
-    cons: ["Catálogo y opciones más amplios de lo necesario si solo quieres voz"],
-  },
-  {
+    {
     name: "Voicebox",
     description: "App que automatiza el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
     links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
     audience: "Quien quiere jugar con su voz sin tocar modelos.",
-    pros: ["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar"],
+    pros: ["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar", "Incluye una API para automatizar creaciones con la terminal"],
     cons: ["Dependencia de terceros: si sale un modelo mejor, no puedes usarlo hasta que lo actualicen"],
+    recommended: true
+  },
+{
+    name: "audio.cpp",
+    description: "Motor todo en uno para modelos de audio. Incluye transcripción, generación de música y voz, con UI web y sin configurar nada.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/0xShug0/audio.cpp" },
+    ],
+    audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
+    pros: ["Sin dependencias, es un binario precompilado", "Interfaz web", "Muchos modelos que se descargan con un clic"],
+    cons: ["La interfaz gráfica es horrible y poco clara.", "Cero información o contexto sobre los modelos disponibles"],
   },
 ];
 
@@ -183,14 +182,13 @@ export const musicSoftware: SoftwareItem[] = [
   },
   {
     name: "audio.cpp",
-    description: "Motor todo en uno para modelos de audio en C++ sobre ggml: música, voz y transcripción, con UI web y sin Python.",
+    description: "Motor todo en uno para modelos de audio. Incluye transcripción, generación de música y voz, con UI web y sin configurar nada.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/0xShug0/audio.cpp" },
-      { label: "Modelos", href: "https://huggingface.co/audio-cpp/audio.cpp-gguf" },
     ],
     audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
-    pros: ["Sin dependencias de Python", "UI web y binarios precompilados", "Cubre música, TTS y ASR"],
-    cons: ["Catálogo y opciones más amplios de lo necesario si solo quieres música"],
+    pros: ["Sin dependencias, es un binario precompilado", "Interfaz web", "Muchos modelos que se descargan con un clic"],
+    cons: ["La interfaz gráfica es horrible y poco clara.", "Cero información o contexto sobre los modelos disponibles"],
   },
 ];
 
@@ -319,7 +317,7 @@ export const appSoftware: SoftwareItem[] = [
     description: "App que automatiza el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
     links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
     audience: "Quien quiere jugar con su voz sin tocar modelos.",
-    pros:["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar"],
+    pros:["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar", "Incluye una API para automatizar creaciones con la terminal"],
     cons: ["Dependencia de terceros. Si se lanza un modelo mejor no lo puedes utilizar hasta que los creadores actualicen"]
   },
   {

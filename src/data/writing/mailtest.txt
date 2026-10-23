@@ -1,0 +1,20 @@
+Tienes este correo:
+
+"Hola Rubén,
+
+Te escribo para contarte como fue el cierre del proyecto de la tienda online, por que creo que deveriamos hacer balance antes de que se nos olbide. Teniamos que entregarselo al cliente el martes 13 de Octubre, pero al final no lo entregamos hasta el lunes 19. La causa principal fue, que la pasarela de pago fallo en las pruebas finales y hubieron que rehacer casi todo el flujo de compra. Yo ya le avise a Marcos hace semanas, pero no me hiso caso; la dije que habia que probarla antes y el pensaba de que no hacia falta.
+
+Ademas, el presupuesto inicial era de 12.500 € y al final nos pasamos un 8 %, sobretodo por las horas extra del equipo de desarrollo. Me alegro que el cliente se halla mostrado comprensivo, aunque se que no abra una segunda oportunidad si volvemos a fallar. Si no mejoramos la planificacion, tendremos los mismos problemas el proximo trimestre.
+
+Por ultimo, quiero proponerte una reunion con todo el equipo, a ser posible la semana que viene, para hablar a cerca de como evitar que esto se repita. Hay que decidir que herramientas usamos y quien se encarga de cada tarea, sobretodo en las fases finales. Ya me diras que dia te viene mejor.
+
+Un abrazo,
+Elena"
+
+Responde con estas seis secciones, numeradas y en este orden:
+1. Texto corregido: devuelve el correo completo corrigiendo ortografía, tildes, puntuación y gramática. No cambies el contenido, el estilo ni el orden de las frases.
+2. Versión formal: reescribe el correo para enviarlo a la dirección de la empresa, en tono formal y con saludo y despedida formales. Conserva todas las fechas y cifras y no inventes datos.
+3. Resumen: exactamente 3 frases, de máximo 25 palabras cada una, sin usar las palabras "problema", "retraso" ni "fallo".
+4. Preguntas sobre el texto (responde con el dato y, si hay cálculo, la operación):
+   a) ¿Cuántos días naturales y cuántos días laborables (lunes a viernes) pasaron entre la fecha prevista de entrega y la entrega real?
+   b) ¿Cuál fue aproximadamente el coste final del proyecto?

@@ -56,6 +56,17 @@ export const llmModels: ModelItem[] = [
     use: "",
     url: "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
   },
+  {
+    name: "LFM2.5-24B-A2B",
+    size: "10.9 GB",
+    params: "24B",
+    quantization: "UD-Q3_K_XL",
+    moe: true,
+    mtp: false,
+    input: ["texto"],
+    use: "",
+    url: "https://huggingface.co/unsloth/LFM2.5-24B-A2B-GGUF",
+  },
 ];
 
 export const transcriptionModels: ModelItem[] = [
