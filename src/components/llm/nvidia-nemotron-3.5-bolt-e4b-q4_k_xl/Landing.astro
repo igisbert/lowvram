@@ -1,0 +1,363 @@
+<div class="landing-component">
+  <nav class="nav">
+    <a href="#hero" class="nav-link">Vértice</a>
+    <a href="#valor" class="nav-link" aria-label="Propuesta de Valor">Valor</a>
+    <a href="#cierre" class="nav-link">Comenzar</a>
+  </nav>
+
+  <section id="hero" class="section hero">
+    <div class="hero-content">
+      <h1 class="hero-title">VÉRTICE</h1>
+      <p class="hero-tagline">
+        El espacio donde la idea encuentra su forma definitiva.
+      </p>
+      <p class="hero-description">
+        Diseño enfocado, pensamiento puro. Creamos la estructura invisible que
+        sostiene lo esencial, liberando el potencial sin ruido.
+      </p>
+      <a href="#valor" class="cta primary">Descubre la Esencia</a>
+    </div>
+  </section>
+
+  <section id="valor" class="section value-prop">
+    <div class="value-item">
+      <h3 class="value-title">Foco Irrestricto</h3>
+      <p>Eliminamos la distracción. Solo lo necesario, con máxima intención.</p>
+    </div>
+    <div class="value-item">
+      <h3 class="value-title">Estructura Orgánica</h3>
+      <p>
+        Diseños que respiran con el usuario, nunca forzados en cuadrículas
+        rígidas.
+      </p>
+    </div>
+    <div class="value-item">
+      <h3 class="value-title">Impacto Sostenido</h3>
+      <p>Soluciones duraderas que trascienden tendencias pasajeras.</p>
+    </div>
+  </section>
+
+  <section class="section conceptual">
+    <h2 class="conceptual-text">
+      NO SOMOS UNA HERRAMIENTA. SOMOS EL PUNTO DE PARTIDA.
+    </h2>
+    <p class="conceptual-subtext">
+      La claridad no es ausencia de complejidad; es la gestión consciente de
+      ella.
+    </p>
+  </section>
+
+  <section class="section aesthetic-pause">
+    <div class="aesthetic-block"></div>
+    <h3 class="aesthetic-text">FORMA. TENSION. SILENCIO.</h3>
+  </section>
+
+  <section id="cierre" class="section closing">
+    <p class="closing-message">
+      Deja de construir lo superfluo. Construye lo ineludible.
+    </p>
+    <a href="#hero" class="cta secondary">Iniciar el Proyecto Vértice</a>
+  </section>
+</div>
+
+<style>
+  /* Base styles and reset */
+  .landing-component * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Root Scope */
+  .landing-component {
+    /* Limited palette: Black, White, Charcoal */
+    background-color: #ffffff;
+    color: #111111;
+    font-family: "serif", "sans-serif", monospace; /* System stacks */
+    line-height: 1.4;
+    overflow-x: hidden; /* Prevent horizontal scroll from asymmetry */
+    min-height: 100vh;
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    gap: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+  }
+  .nav-link {
+    text-decoration: none;
+    color: #333;
+    transition:
+      color 0.2s,
+      opacity 0.2s;
+  }
+  .nav-link:hover,
+  .nav-link:focus {
+    color: #000;
+    opacity: 0.8;
+    outline: 2px solid #111; /* Visible focus */
+  }
+
+  /* Sections Layout */
+  .section {
+    padding: 6vw 5vw;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Hero */
+  .hero {
+    display: flex;
+    align-items: center;
+    min-height: 80vh;
+    /* Asymmetry: content shifted slightly to the left */
+    padding-left: 10vw;
+    padding-top: 8vw;
+  }
+  .hero-content {
+    max-width: 700px;
+  }
+  .hero-title {
+    font-size: 6rem; /* Expressive typography */
+    font-weight: 900;
+    line-height: 0.9;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  .hero-tagline {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+  .hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #555;
+  }
+
+  /* Value Prop (Non-card layout - Staggered/Asymmetric alignment) */
+  .value-prop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw 5vw;
+    align-items: start;
+    padding-top: 10vw;
+    padding-bottom: 10vw;
+  }
+  .value-item {
+    /* Staggering the items visually */
+    padding-top: 3vw;
+  }
+  .value-item:nth-child(1) {
+    align-self: start;
+  }
+  .value-item:nth-child(2) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    align-self: end;
+    padding-left: 5vw; /* Visual shift */
+  }
+  .value-item:nth-child(3) {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+
+  .value-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  .value-item p {
+    font-size: 1rem;
+    color: #444;
+  }
+
+  /* Conceptual Section (Typographic focus) */
+  .conceptual {
+    text-align: left;
+    padding: 12vw 5vw;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  .conceptual-text {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 0.85;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .conceptual-subtext {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #555;
+    letter-spacing: 0.03em;
+  }
+
+  /* Aesthetic Pause (Pure CSS geometry) */
+  .aesthetic-pause {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15vw 5vw;
+    min-height: 50vh;
+    /* High contrast, asymmetrical balance */
+    background-color: #000;
+  }
+  .aesthetic-block {
+    width: 50vw;
+    height: 80vh;
+    background-color: #000; /* Solid block */
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .aesthetic-text {
+    font-size: 7rem;
+    font-weight: 300;
+    color: #fff;
+    position: relative;
+    z-index: 10;
+    /* Positioning over the block, but outside the strict bounds for tension */
+    margin-left: 15vw;
+    line-height: 0.8;
+    letter-spacing: 0.15em;
+  }
+
+  /* Closing */
+  .closing {
+    text-align: center;
+    padding: 10vw 5vw;
+    background-color: #f9f9f9;
+  }
+  .closing-message {
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    color: #333;
+  }
+
+  /* CTA Buttons */
+  .cta {
+    display: inline-block;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    border: 2px solid #111;
+    cursor: pointer;
+  }
+  .primary {
+    background-color: #111;
+    color: #fff;
+  }
+  .secondary {
+    background-color: transparent;
+    color: #111;
+  }
+  .cta:hover,
+  .cta:focus {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    outline: 3px solid #111; /* Strong focus indicator */
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .hero {
+      padding-left: 5vw;
+      min-height: 60vh;
+    }
+    .hero-title {
+      font-size: 4rem;
+    }
+    .hero-tagline {
+      font-size: 1.4rem;
+    }
+    .section {
+      padding: 5vw 4vw;
+    }
+    .value-prop {
+      grid-template-columns: 1fr;
+      gap: 4vw;
+    }
+    .value-item {
+      padding-top: 0;
+      text-align: center;
+      grid-column: auto;
+      align-self: center;
+    }
+    .value-item:nth-child(2),
+    .value-item:nth-child(3) {
+      grid-column: auto;
+      align-self: center;
+    }
+    .conceptual {
+      padding: 8vw 4vw;
+    }
+    .conceptual-text {
+      font-size: 3rem;
+    }
+    .aesthetic-pause {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 10vw 4vw;
+    }
+    .aesthetic-block {
+      width: 80%;
+      height: 40vh;
+      position: static; /* Remove absolute positioning on small screens */
+      margin-bottom: 2rem;
+    }
+    .aesthetic-text {
+      font-size: 3rem;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .nav {
+      padding: 1rem 0.5rem;
+      gap: 1rem;
+      font-size: 0.7rem;
+    }
+    .hero-title {
+      font-size: 3rem;
+    }
+    .hero-tagline {
+      font-size: 1.2rem;
+    }
+    .cta {
+      padding: 0.8rem 2rem;
+      font-size: 0.9rem;
+    }
+    .conceptual-text {
+      font-size: 2.2rem;
+    }
+    .closing-message {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* Accessibility: Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link,
+    .cta {
+      transition: none;
+    }
+    .cta:hover,
+    .cta:focus {
+      transform: none;
+    }
+  }
+</style>

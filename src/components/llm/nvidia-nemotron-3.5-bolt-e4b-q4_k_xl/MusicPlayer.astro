@@ -1,0 +1,404 @@
+<style>
+  .music-player {
+    font-family: sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .music-player h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #1db954;
+    text-align: center;
+  }
+
+  .song-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid #282828;
+  }
+
+  .song-list li {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.95em;
+  }
+
+  .song-list li:hover {
+    background-color: #1f1f1f;
+  }
+
+  .song-list li.active {
+    background-color: #1db954;
+    color: #121212;
+    font-weight: bold;
+  }
+
+  .track-info {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .track-title {
+    font-size: 1.4em;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .control-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 10px;
+    min-width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.1s;
+    outline-offset: 2px;
+  }
+
+  .control-button:hover,
+  .control-button:focus-visible {
+    background-color: #282828;
+    outline: 2px solid #1db954;
+  }
+
+  .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .progress-bar-wrapper {
+    flex-grow: 1;
+    height: 8px;
+    background-color: #282828;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #1db954;
+    border-radius: 4px;
+  }
+
+  .time-display {
+    font-size: 0.85em;
+    color: #aaa;
+    min-width: 60px;
+    text-align: right;
+  }
+
+  .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .volume-slider {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 4px;
+    background: #282828;
+    border-radius: 2px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1db954;
+    cursor: pointer;
+    outline: 2px solid #1db954;
+  }
+
+  .error-message {
+    color: #ff4d4d;
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+    min-height: 20px;
+  }
+</style>
+
+<div class="music-player" tabindex="0">
+  <h2 class="music-player-title">Astro Music Player</h2>
+
+  <ul class="song-list" role="list">
+    <li data-track-index="0" role="listitem">Free To Use 1</li>
+    <li data-track-index="1" role="listitem">Free To Use 2</li>
+    <li data-track-index="2" role="listitem">Free To Use 5</li>
+  </ul>
+
+  <div class="track-info">
+    <p class="track-title" aria-live="polite">Loading track...</p>
+  </div>
+
+  <div class="controls">
+    <button
+      class="control-button"
+      data-action="prev"
+      aria-label="Cancion anterior">«</button
+    >
+    <button
+      class="control-button"
+      data-action="play-pause"
+      aria-label="Reproducir o pausar">▶</button
+    >
+    <button
+      class="control-button"
+      data-action="next"
+      aria-label="Cancion siguiente">»</button
+    >
+  </div>
+
+  <div class="progress-container">
+    <div
+      class="progress-bar-wrapper"
+      role="slider"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      tabindex="0"
+    >
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="time-display" id="time-display">0:00 / 0:00</div>
+  </div>
+
+  <div class="volume-control">
+    <span>🔊</span>
+    <input
+      type="range"
+      class="volume-slider"
+      min="0"
+      max="1"
+      step="0.01"
+      value="0.8"
+      aria-label="Control de volumen"
+    />
+  </div>
+
+  <div class="error-message" id="error-message"></div>
+
+  <!-- Audio element is internal and not exposed via ID/inline handlers -->
+  <audio id="audio-player" preload="auto"></audio>
+</div>
+
+<script>
+  // @ts-nocheck
+  const audio = document.getElementById("audio-player");
+  const playerRoot = document.querySelector(".music-player");
+  const playPauseBtn = playerRoot.querySelector('[data-action="play-pause"]');
+  const prevBtn = playerRoot.querySelector('[data-action="prev"]');
+  const nextBtn = playerRoot.querySelector('[data-action="next"]');
+  const trackListItems = playerRoot.querySelectorAll(".song-list li");
+  const progressBarWrapper = playerRoot.querySelector(".progress-bar-wrapper");
+  const progressBar = playerRoot.querySelector("#progress-bar");
+  const timeDisplay = playerRoot.querySelector("#time-display");
+  const volumeSlider = playerRoot.querySelector(".volume-slider");
+  const trackTitleDisplay = playerRoot.querySelector(".track-title");
+  const errorMessageDisplay = playerRoot.querySelector("#error-message");
+
+  const tracks = [
+    {
+      url: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Monplaisir_-_01_-_Free_To_Use_1.ogg",
+      title: "Free To Use 1",
+    },
+    {
+      url: "https://upload.wikimedia.org/wikipedia/commons/8/84/Monplaisir_-_02_-_Free_To_Use_2.ogg",
+      title: "Free To Use 2",
+    },
+    {
+      url: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Monplaisir_-_05_-_Free_To_Use_5.ogg",
+      title: "Free To Use 5",
+    },
+  ];
+  let currentTrackIndex = 0;
+  let isPlaying = false;
+
+  // --- Utility Functions ---
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  }
+
+  function loadTrack(index) {
+    if (index < 0 || index >= tracks.length) return;
+
+    currentTrackIndex = index;
+    const track = tracks[index];
+    audio.src = track.url;
+    trackTitleDisplay.textContent = track.title;
+
+    // Update UI highlighting
+    trackListItems.forEach((li) => li.classList.remove("active"));
+    trackListItems[index].classList.add("active");
+
+    // Reset audio state
+    audio.load();
+    audio.pause();
+    isPlaying = false;
+    playPauseBtn.textContent = "▶";
+
+    // Clear previous errors
+    errorMessageDisplay.textContent = "";
+    timeDisplay.textContent = "0:00 / 0:00";
+    progressBar.style.width = "0%";
+
+    // Attempt to play if it was previously playing (e.g., resuming)
+    if (isPlaying) {
+      audio.play().catch((e) => console.error("Autoplay blocked:", e));
+    }
+  }
+
+  function playTrack() {
+    audio
+      .play()
+      .then(() => {
+        isPlaying = true;
+        playPauseBtn.textContent = "❚❚";
+      })
+      .catch((e) => {
+        // Handle potential browser autoplay block
+        errorMessageDisplay.textContent =
+          "Reproduccion bloqueada. Haga clic para iniciar.";
+        isPlaying = false;
+        playPauseBtn.textContent = "▶";
+      });
+  }
+
+  function pauseTrack() {
+    audio.pause();
+    isPlaying = false;
+    playPauseBtn.textContent = "▶";
+  }
+
+  function nextTrack() {
+    const nextIndex = (currentTrackIndex + 1) % tracks.length;
+    loadTrack(nextIndex);
+    playTrack();
+  }
+
+  function prevTrack() {
+    const prevIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+    loadTrack(prevIndex);
+    playTrack();
+  }
+
+  // --- Event Handlers ---
+
+  // 1. Play/Pause Button
+  playPauseBtn.addEventListener("click", () => {
+    if (isPlaying) {
+      pauseTrack();
+    } else {
+      playTrack();
+    }
+  });
+
+  // 2. Next/Prev Buttons
+  nextBtn.addEventListener("click", nextTrack);
+  prevBtn.addEventListener("click", prevTrack);
+
+  // 3. Song List Selection
+  trackListItems.forEach((li) => {
+    li.addEventListener("click", (e) => {
+      const index = parseInt(e.target.dataset.trackIndex);
+      if (index !== currentTrackIndex) {
+        loadTrack(index);
+        playTrack();
+      }
+    });
+  });
+
+  // 4. Audio Events (Time update, End, Error)
+  audio.addEventListener("timeupdate", () => {
+    if (!isNaN(audio.duration)) {
+      const progressPercent = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+      timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+    }
+  });
+
+  audio.addEventListener("ended", nextTrack);
+
+  audio.addEventListener("error", () => {
+    errorMessageDisplay.textContent =
+      "Error de reproducción. Verifique la fuente.";
+    pauseTrack();
+  });
+
+  // 5. Volume Control
+  volumeSlider.addEventListener("input", () => {
+    audio.volume = volumeSlider.value;
+  });
+
+  // 6. Progress Bar Interaction (Click/Touch)
+  progressBarWrapper.addEventListener("click", (e) => {
+    const wrapperRect = progressBarWrapper.getBoundingClientRect();
+    // Calculate click position relative to the wrapper width
+    const clickX = e.clientX - wrapperRect.left;
+    const percentage = clickX / wrapperRect.width;
+
+    // Set new time
+    audio.currentTime = audio.duration * percentage;
+  });
+
+  // 7. Keyboard Controls (Only if playerRoot has focus)
+  playerRoot.addEventListener("keydown", (e) => {
+    if (e.key === " " || e.key === "k" || e.key === "ArrowRight") {
+      e.preventDefault();
+      if (isPlaying) {
+        pauseTrack();
+      } else {
+        playTrack();
+      }
+    } else if (e.key === "ArrowLeft" || e.key === "j") {
+      e.preventDefault();
+      prevTrack();
+    } else if (e.key === "ArrowDown" || e.key === "l") {
+      e.preventDefault();
+      nextTrack();
+    }
+  });
+
+  // --- Initialization ---
+  loadTrack(currentTrackIndex);
+  audio.volume = volumeSlider.value; // Set initial volume
+</script>

@@ -16,7 +16,11 @@ import WritingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Writing.astro"
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import FAQQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
-import Snake from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Snake.astro";
+import SnakeNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Snake.astro";
+import CalculadoraNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Calculadora.astro";
+import MusicPlayerNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/MusicPlayer.astro";
+import FAQNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/FAQ.astro";
+import LandingNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Landing.astro";
 import Trial from "@/components/Trial.astro";
 import TextBox from "@/components/TextBox.astro";
 import Verdict from "@/components/Verdict.astro";
@@ -282,7 +286,51 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         duration="1 min 11 s"
         speed="61 t/s"
       >
-        <Snake />
+        <SnakeNemotron />
+      </Trial>
+      <Trial
+        title="Calculadora"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="Pi"
+        tokens="4.234 tokens"
+        duration="1 min 1 s"
+        speed="63 t/s"
+      >
+        <CalculadoraNemotron />
+      </Trial>
+      <Trial
+        title="MusicPlayer"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="llama-server"
+        tokens="4.163 tokens"
+        duration="1 min 10 s"
+        speed="60 t/s"
+      >
+        <MusicPlayerNemotron />
+      </Trial>
+      <Trial
+        title="FAQ"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="Pi"
+        tokens="2.829 tokens"
+        duration="41 s"
+        speed="63 t/s"
+      >
+        <FAQNemotron />
+      </Trial>
+      <Trial
+        title="Landing"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="llama-server"
+        tokens="3.794 tokens"
+        duration="1 min 5 s"
+        speed="58 t/s"
+      >
+        <LandingNemotron />
       </Trial>
     </Section>
     <Section eyebrow="Veredicto" title="Resultados conseguidos">

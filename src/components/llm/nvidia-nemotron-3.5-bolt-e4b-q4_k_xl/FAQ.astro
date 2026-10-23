@@ -1,0 +1,260 @@
+<style>
+  .faq-container {
+    --faq-bg: #1a1a1a;
+    --faq-text: #e0e0e0;
+    --faq-accent: #8888ff;
+    --faq-border: #333333;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    background-color: var(--faq-bg);
+    color: var(--faq-text);
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--faq-border);
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+
+  .faq-question:hover {
+    background-color: #242424;
+  }
+
+  .faq-question:focus-visible {
+    outline: 2px solid var(--faq-accent);
+    outline-offset: -2px;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.3s ease-out,
+      padding 0.3s ease-out;
+    padding: 0 1.5rem;
+  }
+
+  .faq-answer.open {
+    /* Set a sufficiently large max-height based on expected content size */
+    max-height: 500px;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+  }
+
+  .faq-answer p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  .faq-toggle-indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--faq-text);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+  }
+
+  .faq-question[aria-expanded="true"] .faq-toggle-indicator {
+    transform: rotate(0deg);
+  }
+
+  @media (max-width: 600px) {
+    .faq-question {
+      padding: 1rem 1rem;
+      font-size: 1rem;
+    }
+    .faq-answer {
+      padding: 0 1rem;
+    }
+    .faq-answer.open {
+      padding: 0.75rem 1rem;
+    }
+  }
+</style>
+
+<div class="faq-container">
+  <div class="faq-item">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-1"
+    >
+      ¿Qué es Astro y cómo se diferencia de otros frameworks?
+      <div class="faq-toggle-indicator"></div>
+    </button>
+    <div
+      id="faq-panel-1"
+      class="faq-answer"
+      role="region"
+      aria-labelledby="faq-panel-1-question"
+    >
+      <p>
+        Astro es un framework de sitios web que se centra en la entrega de
+        contenido pre-renderizado, priorizando el rendimiento. Permite usar
+        componentes de diversos frameworks (React, Vue, Svelte) pero por defecto
+        renderiza HTML puro, enviando menos JavaScript al cliente.
+      </p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-2"
+    >
+      ¿Por qué usar JavaScript vanilla en un proyecto moderno?
+      <div class="faq-toggle-indicator"></div>
+    </button>
+    <div
+      id="faq-panel-2"
+      class="faq-answer"
+      role="region"
+      aria-labelledby="faq-panel-2-question"
+    >
+      <p>
+        JavaScript vanilla garantiza la mínima sobrecarga, mejor rendimiento y
+        menor dependencia de librerías externas, manteniendo el código simple,
+        legible y autónomo, tal como se requiere.
+      </p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-3"
+    >
+      ¿Cómo se implementa la transición fluida de altura?
+      <div class="faq-toggle-indicator"></div>
+    </button>
+    <div
+      id="faq-panel-3"
+      class="faq-answer"
+      role="region"
+      aria-labelledby="faq-panel-3-question"
+    >
+      <p>
+        Se utiliza la propiedad CSS `max-height` en lugar de `display: none;`
+        para permitir que el navegador calcule y anime la transición de altura
+        de manera suave al cambiar el estado a 'open'.
+      </p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-4"
+    >
+      ¿Qué es la encapsulación de estilos en componentes?
+      <div class="faq-toggle-indicator"></div>
+    </button>
+    <div
+      id="faq-panel-4"
+      class="faq-answer"
+      role="region"
+      aria-labelledby="faq-panel-4-question"
+    >
+      <p>
+        Es la práctica de limitar los selectores CSS a un ámbito específico
+        (como una clase raíz), previniendo así colisiones de estilos o efectos
+        secundarios no deseados en el resto de la aplicación web.
+      </p>
+    </div>
+  </div>
+  <div class="faq-item">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-5"
+    >
+      ¿Qué debo hacer si el usuario tiene preferencia reducida de movimiento?
+      <div class="faq-toggle-indicator"></div>
+    </button>
+    <div
+      id="faq-panel-5"
+      class="faq-answer"
+      role="region"
+      aria-labelledby="faq-panel-5-question"
+    >
+      <p>
+        Se debe verificar la media query `prefers-reduced-motion` en CSS y, si
+        está activada, anular las transiciones de altura para garantizar una
+        experiencia sin movimientos bruscos.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  const faqContainer = document.querySelector(".faq-container");
+
+  const FAQ_PREFIX = "faq-panel-";
+
+  const handleToggle = (event) => {
+    const button = event.currentTarget;
+    const controlsId = button.getAttribute("aria-controls");
+    const panel = document.getElementById(controlsId);
+
+    if (!panel) return;
+
+    const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+    // 1. Toggle ARIA state and visual indicator
+    button.setAttribute("aria-expanded", !isExpanded);
+
+    // 2. Toggle content state (CSS class)
+    panel.classList.toggle("open", !isExpanded);
+
+    // 3. Handle reduced motion preference
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    // If reduced motion is active, remove the transition timing for instant change
+    if (prefersReducedMotion) {
+      panel.style.transition = "none";
+    } else {
+      // Restore standard transition timing
+      panel.style.transition =
+        "max-height 0.3s ease-out, padding 0.3s ease-out";
+    }
+  };
+
+  // Attach listeners to all question buttons
+  faqContainer.querySelectorAll(".faq-question").forEach((button) => {
+    button.addEventListener("click", handleToggle);
+  });
+</script>

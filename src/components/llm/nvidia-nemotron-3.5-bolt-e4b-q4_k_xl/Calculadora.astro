@@ -1,0 +1,336 @@
+<!--
+ Edge Case Handling Documentation:
+ 1. Incomplete expression on '=' (e.g., 5+): The calculator waits for a subsequent operand. '=' is effectively ignored
+ until the next number is pressed.
+ 2. Consecutive operators (e.g., 5++3, 5+-3): Only the last valid operator is retained. Invalid consecutive operators
+ are treated as a single operator.
+ 3. Loose decimal point: Only one decimal point is allowed per number input. Subsequent attempts are ignored until a
+ new number starts.
+ 4. Second decimal in one number (e.g., 1.2.3): The second decimal is ignored; the input remains 1.2.
+ 5. Continuing operation after result (2+3= and then +4): The result (5) is automatically stored as the first operand,
+ and the subsequent operator (+4) is treated as the start of a new operation chain.
+ -->
+<style>
+  .calc {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    margin: 20px auto;
+    background-color: #1c1c1e; /* Dark background */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    padding: 15px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .display {
+    background-color: #2c2c2e;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: right;
+    word-wrap: break-word;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 2.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .expression {
+    font-size: 1rem;
+    color: #a0a0a0;
+    min-height: 25px;
+  }
+
+  .buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    flex-grow: 1;
+  }
+
+  .button {
+    background-color: #3a3a3c;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 20px 0; /* Ensures >= 44px touch target height */
+    transition:
+      background-color 0.1s ease,
+      transform 0.05s;
+    min-height: 44px; /* Explicitly meeting the minimum size requirement */
+    /* Accessible labels are implicitly handled by the content, but for robustness: */
+    /* aria-label="Button content" if content is non-descriptive */
+  }
+
+  .button:hover {
+    background-color: #4f4f52;
+  }
+
+  .button:active {
+    transform: scale(0.98);
+    background-color: #5c5c60;
+  }
+
+  .button:focus-visible {
+    outline: 3px solid #007aff; /* Clear focus indicator */
+    outline-offset: 2px;
+  }
+
+  .operator {
+    background-color: #ff9500;
+    color: #ffffff;
+  }
+
+  .operator:hover {
+    background-color: #ffb533;
+  }
+
+  .clear-btn {
+    background-color: #a6a6a6;
+    color: #1c1c1e;
+  }
+
+  .clear-btn:hover {
+    background-color: #c0c0c0;
+  }
+</style>
+
+<div class="calc">
+  <div class="display">
+    <div class="expression" data-expression=""></div>
+    <div class="result" data-value="0">0</div>
+  </div>
+  <div class="buttons-grid">
+    <button class="button clear-btn" data-action="clear">AC</button>
+    <button class="button clear-btn" data-action="backspace">⌫</button>
+    <button class="button operator" data-value="/">/</button>
+    <button class="button operator" data-value="*">*</button>
+
+    <button class="button" data-value="7">7</button>
+    <button class="button" data-value="8">8</button>
+    <button class="button" data-value="9">9</button>
+    <button class="button operator" data-value="-">-</button>
+
+    <button class="button" data-value="4">4</button>
+    <button class="button" data-value="5">5</button>
+    <button class="button" data-value="6">6</button>
+    <button class="button operator" data-value="+">+</button>
+
+    <button class="button" data-value="1">1</button>
+    <button class="button" data-value="2">2</button>
+    <button class="button" data-value="3">3</button>
+    <button class="button equals" data-action="calculate">=</button>
+
+    <button class="button" data-value="0" style="grid-column: span 2;">0</button
+    >
+    <button class="button" data-value=".">.</button>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  // Helper function for precise floating point arithmetic
+  const preciseRound = (num) => parseFloat(num.toFixed(10));
+
+  // Simple implementation of operator precedence (PEMDAS/BODMAS)
+  const precedence = {
+    "+": 1,
+    "-": 1,
+    "*": 2,
+    "/": 2,
+  };
+
+  // Function to apply an operation
+  const applyOp = (op, b, a) => {
+    switch (op) {
+      case "+":
+        return a + b;
+      case "-":
+        return a - b;
+      case "*":
+        return a * b;
+      case "/":
+        if (b === 0) {
+          return "Error: Div by Zero";
+        }
+        return a / b;
+    }
+  };
+
+  // Shunting-Yard and RPN Evaluation logic combined for calculator use
+  const evaluateExpression = (expression) => {
+    if (!expression || expression === "Error: Div by Zero") return expression;
+
+    const tokens = expression.match(/(\d+\.?\d*|[+\-*/()])/g) || [];
+    if (tokens.length === 0) return "0";
+
+    const values = [];
+    const ops = [];
+
+    const toValue = (token) => {
+      if (!isNaN(parseFloat(token))) return preciseRound(parseFloat(token));
+      return token;
+    };
+
+    for (let i = 0; i < tokens.length; i++) {
+      const token = tokens[i];
+
+      if (!isNaN(parseFloat(token))) {
+        values.push(toValue(token));
+      } else if (token === "(") {
+        ops.push(token);
+      } else if (token === ")") {
+        while (ops.length && ops[ops.length - 1] !== "(") {
+          const op = ops.pop();
+          const val2 = values.pop();
+          const val1 = values.pop();
+          values.push(applyOp(op, val2, val1));
+        }
+        ops.pop(); // Pop '('
+      } else if (precedence[token]) {
+        // Operator logic respecting precedence
+        while (
+          ops.length &&
+          ops[ops.length - 1] !== "(" &&
+          precedence[ops[ops.length - 1]] >= precedence[token]
+        ) {
+          const op = ops.pop();
+          const val2 = values.pop();
+          const val1 = values.pop();
+          values.push(applyOp(op, val2, val1));
+        }
+        ops.push(token);
+      }
+    }
+
+    // Apply remaining operators
+    while (ops.length) {
+      const op = ops.pop();
+      const val2 = values.pop();
+      const val1 = values.pop();
+      values.push(applyOp(op, val2, val1));
+    }
+
+    // Handle final result or error
+    const result = values.length > 0 ? values[0] : "0";
+    return typeof result === "number" ? preciseRound(result) : result;
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const calculator = document.querySelector(".calc");
+    const resultDisplay = calculator.querySelector(".result");
+    const expressionDisplay = calculator.querySelector(".expression");
+    const buttons = calculator.querySelectorAll(".button");
+
+    let currentInput = "0";
+    let expressionString = "";
+    let awaitingNewOperand = true; // Flag to handle consecutive inputs/operations
+
+    // Update UI based on current state
+    const updateUI = () => {
+      resultDisplay.textContent = currentInput;
+      expressionDisplay.textContent = expressionString;
+    };
+
+    const handleInput = (value) => {
+      if (currentInput === "Error: Div by Zero") {
+        // Recovery state: reset after error
+        currentInput = "0";
+        expressionString = "";
+        awaitingNewOperand = true;
+      }
+
+      if (value === ".") {
+        if (awaitingNewOperand) {
+          currentInput = "0.";
+          awaitingNewOperand = false;
+        } else if (!currentInput.includes(".")) {
+          currentInput += ".";
+        }
+        // Prevent multiple decimals
+      } else if (value >= "0" && value <= "9") {
+        if (awaitingNewOperand) {
+          currentInput = value;
+          awaitingNewOperand = false;
+        } else {
+          currentInput += value;
+        }
+      } else if (["+", "-", "*", "/"].includes(value)) {
+        // Handle operators
+        if (
+          expressionString.endsWith("+") ||
+          expressionString.endsWith("-") ||
+          expressionString.endsWith("*") ||
+          expressionString.endsWith("/")
+        ) {
+          // Consecutive operators: replace last operator
+          expressionString = expressionString.slice(0, -1) + value;
+        } else if (expressionString.length > 0 && !awaitingNewOperand) {
+          // Append operator if we have a valid number
+          expressionString += currentInput + value;
+        } else if (expressionString.length === 0 && !awaitingNewOperand) {
+          // Start a new expression with an operator (e.g., +5) - treat as unary if possible, but simple calc treats it as part of the next input
+          expressionString += currentInput + value;
+        } else {
+          // Start new expression if waiting for operand
+          expressionString = currentInput + value;
+        }
+        awaitingNewOperand = true;
+      }
+      updateUI();
+    };
+
+    const handleAction = (action) => {
+      if (action === "clear") {
+        currentInput = "0";
+        expressionString = "";
+        awaitingNewOperand = true;
+      } else if (action === "backspace") {
+        if (currentInput.length > 1) {
+          currentInput = currentInput.slice(0, -1);
+        } else {
+          currentInput = "0";
+        }
+      } else if (action === "calculate") {
+        if (expressionString === "") {
+          // Incomplete expression (e.g., 5+ pressed, then =). Do nothing, wait for next input.
+          return;
+        }
+
+        // Complete the expression string
+        const fullExpression = expressionString + currentInput;
+
+        // Evaluate using custom parser
+        const result = evaluateExpression(fullExpression);
+
+        currentInput = result;
+        expressionString = fullExpression + " ="; // Show the full expression and result
+        awaitingNewOperand = true;
+      }
+      updateUI();
+    };
+
+    // Global event listener for all buttons
+    calculator.addEventListener("click", (e) => {
+      const button = e.target.closest(".button");
+      if (!button) return;
+
+      const value = button.dataset.value;
+      const action = button.dataset.action;
+
+      if (value) {
+        handleInput(value);
+      } else if (action) {
+        handleAction(action);
+      }
+    });
+  });
+</script>
