@@ -16,7 +16,6 @@ import {
 import {
   bgModels,
   diffusionModels,
-  nsfwDiffusionModels,
   upscaleModels,
 } from "@/data/models";
 import {
@@ -68,18 +67,16 @@ const anchors = [
         </p>
       </Info>
       <ModelTable items={diffusionModels} />
-      <details class="nsfw">
-        <summary>
-          <span class="mono">
-            Modelos NSFW ({nsfwDiffusionModels.length}) —{" "}
-            <span class="show">mostrar</span>
-            <span class="hide">ocultar</span>
-          </span>
-        </summary>
-        <div class="nsfw-body">
-          <ModelTable items={nsfwDiffusionModels} />
-        </div>
-      </details>
+      <div class="lora-note">
+        <Info title="Modificar comportamiento del modelo">
+          <p>
+            Una LoRA es un parche pequeño que modifica un modelo sin
+            reentrenarlo. Puede darle un estilo o una capacidad que no tiene, o
+            acelerarlo para que funcione en pocos pasos (por ejemplo, una LoRA
+            megaturbo).
+          </p>
+        </Info>
+      </div>
       <h3 class="group" id="resultados-difusion">Resultados conseguidos</h3>
       <ResultShowcase sets={diffusionResults} scrollTarget="resultados-difusion" />
     </Section>
@@ -132,43 +129,7 @@ const anchors = [
     scroll-margin-top: 80px;
   }
 
-  .nsfw {
+  .lora-note {
     margin-top: var(--space-lg);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
-    background: var(--canvas-card);
-  }
-
-  .nsfw summary {
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-    padding: var(--space-md) var(--space-lg);
-    cursor: pointer;
-    list-style: none;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--body);
-  }
-
-  .nsfw summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .nsfw summary .hide {
-    display: none;
-  }
-
-  .nsfw[open] summary .hide {
-    display: inline;
-  }
-
-  .nsfw[open] summary .show {
-    display: none;
-  }
-
-  .nsfw-body {
-    padding: 0 var(--space-lg) var(--space-lg);
   }
 </style>

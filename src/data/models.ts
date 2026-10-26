@@ -238,18 +238,6 @@ export const diffusionModels: ModelItem[] = [
   },
 ];
 
-export const nsfwDiffusionModels: ModelItem[] = [
-  {
-    name: "PornMaster Klein 9B",
-    size: "4.9 GB",
-    params: "9B",
-    quantization: "Q4_K",
-    vram: "~4.9 GB",
-    use: "Edición (mejor que Klein base), rapidez, NSFW",
-    url: "https://huggingface.co/rectangleworm/PornMaster_Klein-9b",
-  },
-];
-
 export const upscaleModels: ModelItem[] = [
   {
     name: "4xLSDIRplusN",

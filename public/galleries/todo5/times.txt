@@ -1,7 +1,6 @@
 SEED: 41
 anima:  
 flux2: 
-flux2 Uncensored: 
 flux3: 
 Krea2 q3: 
 Krea2 Q4: 
