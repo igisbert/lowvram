@@ -103,7 +103,7 @@
   }
 </style>
 
-<div class="calc">
+<div class="calc" data-calc="nemotron">
   <div class="display">
     <div class="expression" data-expression=""></div>
     <div class="result" data-value="0">0</div>
@@ -225,7 +225,7 @@
   };
 
   document.addEventListener("DOMContentLoaded", () => {
-    const calculator = document.querySelector(".calc");
+    const calculator = document.querySelector('[data-calc="nemotron"]');
     const resultDisplay = calculator.querySelector(".result");
     const expressionDisplay = calculator.querySelector(".expression");
     const buttons = calculator.querySelectorAll(".button");

@@ -2,7 +2,7 @@
 // MusicPlayer.astro
 ---
 
-<div class="music-player">
+<div class="music-player" data-player="qwen">
   <div class="player-header">
     <div class="track-info">
       <div class="track-title">Selecciona una pista</div>
@@ -324,7 +324,7 @@
 <script>
   // @ts-nocheck
   (() => {
-    const root = document.querySelector(".music-player");
+    const root = document.querySelector('[data-player="qwen"]');
     if (!root) return;
 
     const audio = root.querySelector("audio");

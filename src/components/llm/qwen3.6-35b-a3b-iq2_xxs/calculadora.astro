@@ -131,7 +131,7 @@
   }
 </style>
 
-<div class="calc">
+<div class="calc" data-calc="qwen">
   <div class="calc__display">
     <div class="calc__expr" aria-hidden="true"></div>
     <div class="calc__result" aria-live="polite">0</div>
@@ -255,7 +255,7 @@
 
 <script>
   (() => {
-    const root = document.querySelector(".calc");
+    const root = document.querySelector('[data-calc="qwen"]');
     if (!root) return;
 
     let current = "";

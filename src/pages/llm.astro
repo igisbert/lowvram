@@ -93,15 +93,18 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
       >
         <Test />
       </Trial>
+
+      <h3 class="group">Artefactos</h3>
       <Trial
         title="Calculadora"
-        model="Qwen3.6-35B"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
         runner="Pi"
-        tokens="21.683 tokens"
-        duration="8 min 40 s"
-        speed="30 t/s"
+        tokens="4.234 tokens"
+        duration="1 min 1 s"
+        speed="63 t/s"
       >
-        <CalculadoraQwen />
+        <CalculadoraNemotron />
       </Trial>
       <Trial
         title="Calculadora"
@@ -115,6 +118,27 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         <CalculadoraLing />
       </Trial>
       <Trial
+        title="Calculadora"
+        model="Qwen3.6-35B"
+        runner="Pi"
+        tokens="21.683 tokens"
+        duration="8 min 40 s"
+        speed="30 t/s"
+      >
+        <CalculadoraQwen />
+      </Trial>
+      <Trial
+        title="MusicPlayer"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="llama-server"
+        tokens="4.163 tokens"
+        duration="1 min 10 s"
+        speed="60 t/s"
+      >
+        <MusicPlayerNemotron />
+      </Trial>
+      <Trial
         title="MusicPlayer"
         model="Ling 3.0 Tiny"
         fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
@@ -124,6 +148,37 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         speed="103 t/s"
       >
         <MusicPlayerLing />
+      </Trial>
+      <Trial
+        title="MusicPlayer"
+        runner="llama-server"
+        model="Qwen3.6-35B"
+        tokens="5461 tokens"
+        duration="2 min 30 s"
+        speed="36,18 t/s"
+      >
+        <MusicPlayerQwen />
+      </Trial>
+      <Trial
+        title="FAQ"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="Pi"
+        tokens="2.829 tokens"
+        duration="41 s"
+        speed="63 t/s"
+      >
+        <FAQNemotron />
+      </Trial>
+      <Trial
+        title="FAQ"
+        model="MiMo 2.6"
+        runner="Pi"
+        tokens="42.143 tokens"
+        duration="9 min 21 s"
+        speed="42 t/s"
+      >
+        <FAQMimo />
       </Trial>
       <Trial
         title="FAQ"
@@ -138,27 +193,6 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
       </Trial>
       <Trial
         title="FAQ"
-        model="MiMo 2.6"
-        runner="Pi"
-        tokens="42.143 tokens"
-        duration="9 min 21 s"
-        speed="42 t/s"
-      >
-        <FAQMimo />
-      </Trial>
-      <Trial
-        title="MusicPlayer"
-        runner="llama-server"
-        model="Qwen3.6-35B"
-        tokens="5461 tokens"
-        duration="2 min 30 s"
-        speed="36,18 t/s"
-      >
-        <MusicPlayerQwen />
-      </Trial>
-
-      <Trial
-        title="FAQ"
         runner="Pi"
         model="Qwen3.6-35B"
         tokens="3.036 tokens"
@@ -169,13 +203,14 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
       </Trial>
       <Trial
         title="Landing Page"
-        runner="Pi"
-        model="Qwen3.6-35B"
-        tokens="6.736 tokens"
-        duration="2 min 49 s"
-        speed="38 t/s"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="llama-server"
+        tokens="3.794 tokens"
+        duration="1 min 5 s"
+        speed="58 t/s"
       >
-        <LandingQwen />
+        <LandingNemotron />
       </Trial>
       <Trial
         title="Landing Page"
@@ -188,15 +223,38 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         <LandingLing />
       </Trial>
       <Trial
-        title="Correo: corrección, formal y resumen"
-        model="LFM2.5-24B-A2B"
-        fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+        title="Landing Page"
         runner="Pi"
-        tokens="5.508 tokens"
-        duration="2 min 2 s"
-        speed="42 t/s"
+        model="Qwen3.6-35B"
+        tokens="6.736 tokens"
+        duration="2 min 49 s"
+        speed="38 t/s"
       >
-        <WritingLfm />
+        <LandingQwen />
+      </Trial>
+      <Trial
+        title="Snake"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="Pi"
+        tokens="4.300 tokens"
+        duration="1 min 11 s"
+        speed="61 t/s"
+      >
+        <SnakeNemotron />
+      </Trial>
+
+      <h3 class="group">Texto y datos</h3>
+      <Trial
+        title="Correo: corrección, formal y resumen"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="llama-server"
+        tokens="1.893 tokens"
+        duration="29 s"
+        speed="63,28 t/s"
+      >
+        <WritingNemotron />
       </Trial>
       <Trial
         title="Correo: corrección, formal y resumen"
@@ -207,16 +265,6 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         speed="49 t/s"
       >
         <WritingMiMo />
-      </Trial>
-      <Trial
-        title="Correo: corrección, formal y resumen"
-        model="Qwen3.6-35B"
-        runner="Pi"
-        tokens="4.367 tokens"
-        duration="1 min 7 s"
-        speed="33 t/s"
-      >
-        <WritingQwen />
       </Trial>
       <Trial
         title="Correo: corrección, formal y resumen"
@@ -231,29 +279,54 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
       </Trial>
       <Trial
         title="Correo: corrección, formal y resumen"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="llama-server"
-        tokens="1.893 tokens"
-        duration="29 s"
-        speed="63,28 t/s"
+        model="Qwen3.6-35B"
+        runner="Pi"
+        tokens="4.367 tokens"
+        duration="1 min 7 s"
+        speed="33 t/s"
       >
-        <WritingNemotron />
+        <WritingQwen />
+      </Trial>
+      <Trial
+        title="Correo: corrección, formal y resumen"
+        model="LFM2.5-24B-A2B"
+        fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+        runner="Pi"
+        tokens="5.508 tokens"
+        duration="2 min 2 s"
+        speed="42 t/s"
+      >
+        <WritingLfm />
       </Trial>
       <Trial
         title="Factura a JSON"
-        model="LFM2.5-24B-A2B"
-        fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
         runner="llama-server"
-        tokens="600 tokens"
-        duration="14 s"
-        speed="40,93 t/s"
+        tokens="1.042 tokens"
+        duration="15 s"
+        speed="65,28 t/s"
       >
         <InvoiceDemo
           pdf="/invoices/invoice.pdf"
           pdfName="invoice.pdf"
           prompt={invoicePrompt.trim()}
-          output={invoiceLfm.trim()}
+          output={invoiceNemotron.trim()}
+        />
+      </Trial>
+      <Trial
+        title="Factura a JSON"
+        model="MiMo 2.6"
+        runner="llama-server"
+        tokens="526 tokens"
+        duration="10 s"
+        speed="48,09 t/s"
+      >
+        <InvoiceDemo
+          pdf="/invoices/invoice.pdf"
+          pdfName="invoice.pdf"
+          prompt={invoicePrompt.trim()}
+          output={invoiceMiMoJson}
         />
       </Trial>
       <Trial
@@ -289,90 +362,28 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
       </Trial>
       <Trial
         title="Factura a JSON"
-        model="MiMo 2.6"
+        model="LFM2.5-24B-A2B"
+        fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
         runner="llama-server"
-        tokens="526 tokens"
-        duration="10 s"
-        speed="48,09 t/s"
+        tokens="600 tokens"
+        duration="14 s"
+        speed="40,93 t/s"
       >
         <InvoiceDemo
           pdf="/invoices/invoice.pdf"
           pdfName="invoice.pdf"
           prompt={invoicePrompt.trim()}
-          output={invoiceMiMoJson}
+          output={invoiceLfm.trim()}
         />
       </Trial>
-      <Trial
-        title="Factura a JSON"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="llama-server"
-        tokens="1.042 tokens"
-        duration="15 s"
-        speed="65,28 t/s"
-      >
-        <InvoiceDemo
-          pdf="/invoices/invoice.pdf"
-          pdfName="invoice.pdf"
-          prompt={invoicePrompt.trim()}
-          output={invoiceNemotron.trim()}
-        />
-      </Trial>
-      <Trial
-        title="Snake"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="Pi"
-        tokens="4.300 tokens"
-        duration="1 min 11 s"
-        speed="61 t/s"
-      >
-        <SnakeNemotron />
-      </Trial>
-      <Trial
-        title="Calculadora"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="Pi"
-        tokens="4.234 tokens"
-        duration="1 min 1 s"
-        speed="63 t/s"
-      >
-        <CalculadoraNemotron />
-      </Trial>
-      <Trial
-        title="MusicPlayer"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="llama-server"
-        tokens="4.163 tokens"
-        duration="1 min 10 s"
-        speed="60 t/s"
-      >
-        <MusicPlayerNemotron />
-      </Trial>
-      <Trial
-        title="FAQ"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="Pi"
-        tokens="2.829 tokens"
-        duration="41 s"
-        speed="63 t/s"
-      >
-        <FAQNemotron />
-      </Trial>
-      <Trial
-        title="Landing"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="llama-server"
-        tokens="3.794 tokens"
-        duration="1 min 5 s"
-        speed="58 t/s"
-      >
-        <LandingNemotron />
-      </Trial>
+      <TextBox title="Sobre los artefactos interactivos">
+        <p>
+          Los artefactos interactivos se han aislado entre sí para que cada uno
+          reciba sus propios eventos. El cambio es solo de integración: no toca
+          la lógica, el diseño ni el resultado de los modelos. Si un artefacto
+          falla, el fallo se queda visible porque forma parte de la prueba.
+        </p>
+      </TextBox>
     </Section>
     <Section eyebrow="Veredicto" title="Resultados conseguidos">
       <div class="verdicts">
@@ -408,6 +419,10 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
   .lead {
     font-size: 1.125rem;
     margin: 0;
+  }
+
+  .group {
+    margin: var(--space-2xl) 0 var(--space-lg);
   }
 
   .verdicts {

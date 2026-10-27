@@ -155,7 +155,7 @@
   }
 </style>
 
-<div class="music-player" tabindex="0">
+<div class="music-player" tabindex="0" data-player="nemotron">
   <h2 class="music-player-title">Astro Music Player</h2>
 
   <ul class="song-list" role="list">
@@ -221,7 +221,7 @@
 <script>
   // @ts-nocheck
   const audio = document.getElementById("audio-player");
-  const playerRoot = document.querySelector(".music-player");
+  const playerRoot = document.querySelector('[data-player="nemotron"]');
   const playPauseBtn = playerRoot.querySelector('[data-action="play-pause"]');
   const prevBtn = playerRoot.querySelector('[data-action="prev"]');
   const nextBtn = playerRoot.querySelector('[data-action="next"]');

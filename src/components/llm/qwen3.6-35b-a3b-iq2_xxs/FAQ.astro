@@ -109,7 +109,7 @@
 
   faqComponent.querySelectorAll(".faq-question").forEach((btn) => {
     const panelId = btn.getAttribute("aria-controls");
-    const panel = document.getElementById(panelId);
+    const panel = faqComponent.querySelector('[id="' + panelId + '"]');
     if (!panel) return;
 
     const toggle = () => {
