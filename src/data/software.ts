@@ -144,7 +144,7 @@ export const voiceSoftware: SoftwareItem[] = [
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/qwen-tts/" },
     ],
     audience: "Quien quiere generar voz en su equipo, clonarla o diseñarla.",
-    pros: ["Clonación desde unos segundos de audio", "Servidor con API compatible con OpenAI", "Modelos pequeños de 0.6B y 1.7B"],
+    pros: ["Clonación desde unos segundos de audio", "Servidor con API compatible con OpenAI"],
     cons: ["Hay que compilarlo"],
   },
     {

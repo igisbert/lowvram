@@ -1,22 +1,30 @@
-**1. Texto corregido:**
-Hola Rubén,
+1. Texto corregido:
+"Hola Rubén,
 
-Te escribo para contarte cómo fue el cierre del proyecto de la tienda online, porque creo que deberíamos hacer balance antes de que se nos olvide. Teníamos que entregárselo al cliente el martes 13 de Octubre, pero al final no lo entregamos hasta el lunes 19. La causa principal fue que la pasarela de pago falló en las pruebas finales y hubo que rehacer casi todo el flujo de compra. Yo ya le avisé a Marcos hace semanas, pero no me hizo caso; le dije que había que probarla antes y él pensaba de que no hacía falta. Además, el presupuesto inicial era de 12.500 € y al final nos pasamos un 8%, sobre todo por las horas extra del equipo de desarrollo. Me alegro que el cliente se haya mostrado comprensivo, aunque sé que no habrá una segunda oportunidad si volvemos a fallar. Si no mejoramos la planificación, tendremos los mismos problemas el próximo trimestre. Por último, quiero proponerte una reunión con todo el equipo, a ser posible la semana que viene, para hablar acerca de cómo evitar que esto se repita. Hay que decidir qué herramientas usamos y quién se encarga de cada tarea, sobre todo en las fases finales. Ya me dirás qué día te viene mejor.
+Te escribo para contarte cómo fue el cierre del proyecto de la tienda online, porque creo que deberíamos hacer balance antes de que se nos olvide. Teníamos que entregárselo al cliente el martes 13 de octubre, pero al final no lo entregamos hasta el lunes 19. La causa principal fue que la pasarela de pago falló en las pruebas finales y hubo que rehacer casi todo el flujo de compra. Yo ya le avisé a Marcos hace semanas, pero no me hizo caso; le dije que había que probarla antes y él pensaba que no hacía falta.
+
+Además, el presupuesto inicial era de 12.500 € y al final nos pasamos un 8 %, sobre todo por las horas extra del equipo de desarrollo. Me alegro que el cliente se haya mostrado comprensivo, aunque sé que no habrá una segunda oportunidad si volvemos a fallar. Si no mejoramos la planificación, tendremos los mismos problemas el próximo trimestre.
+
+Por último, quiero proponerte una reunión con todo el equipo, a ser posible la semana que viene, para hablar acerca de cómo evitar que esto se repita. Hay que decidir qué herramientas usamos y quién se encarga de cada tarea, sobre todo en las fases finales. Ya me dirás qué día te viene mejor.
 
 Un abrazo,
-Elena
+Elena"
 
-**2. Versión formal:**
-Estimado Rubén:
+2. Versión formal:
+"Estimado Rubén:
 
-Le escribo para informarle sobre el cierre del proyecto de la tienda online. La fecha de entrega prevista era el martes 13 de octubre, pero la entrega se concretó el lunes 19 de octubre. La razón principal fue la incidencia de la pasarela de pago durante las pruebas finales, lo cual requirió rehacer gran parte del flujo de compra. A pesar de haber notificado a Marcos hace semanas sobre la necesidad de pruebas previas, la recomendación no fue acatada. El presupuesto inicial era de 12.500 €, y el coste final superó este monto en un 8%, principalmente debido a las horas extraordinarias del equipo de desarrollo. Agradezco la comprensión del cliente, aunque es crucial mejorar la planificación para asegurar el éxito en el próximo trimestre. Por ello, propongo una reunión con todo el equipo la próxima semana para definir herramientas y responsabilidades, especialmente en las fases finales. Por favor, indíqueme qué día le resulta más conveniente.
+Me dirijo a usted para informarle sobre el cierre del proyecto de la tienda online, y considero pertinente realizar un balance antes de que el tema se desvanezca. La fecha prevista de entrega para el cliente era el martes 13 de octubre, aunque la entrega se concretó el lunes 19 de octubre. El motivo principal fue que la pasarela de pago presentó un inconveniente en las pruebas finales, lo que requirió la reconstrucción casi total del flujo de compra. Le comuniqué esta situación a Marcos hace semanas, pero no tomó las medidas necesarias, a pesar de mi indicación de probarla previamente.
+
+Adicionalmente, el presupuesto inicial de 12.500 € se superó en un 8 %, principalmente debido a las horas extraordinarias del equipo de desarrollo. Afortunadamente, el cliente se ha mostrado comprensivo; no obstante, reconozco que una repetición de estos sucesos afectaría futuras oportunidades. Si no optimizamos la planificación, enfrentaremos desafíos similares el próximo trimestre.
+
+Finalmente, propongo una reunión con todo el equipo la próxima semana para discutir estrategias de prevención. Es crucial definir las herramientas a utilizar y asignar responsables de cada tarea, especialmente en las fases finales. Agradeceré me indique qué día le resulta más conveniente.
 
 Atentamente,
-Elena
+Elena"
 
-**3. Resumen:**
-La tienda online finalizó su implementación en octubre. La fecha de entrega se ajustó a la planificación inicial. Se requiere optimizar los procesos para futuros trimestres.
+3. Resumen:
+El proyecto de la tienda online concluyó con la superación del presupuesto inicial. La conclusión de la obra requiere una reunión de equipo urgente. Es fundamental mejorar la planificación para el futuro.
 
-**4. Preguntas sobre el texto:**
-a) **Días pasados:** 6 días naturales (14 al 19) y 4 días laborables (14, 15, 16 y 19). (Operación: 19 - 13 = 6 días).
-b) **Coste final:** 13.500 €. (Operación: 12.500 € \* 1.08).
+4. Preguntas sobre el texto:
+a) Días naturales: 6; Días laborables: 4 (Operación: 19 - 13 = 6 naturales; Contando L-V: 14, 15, 16, 19)
+b) Aproximadamente el coste final del proyecto: 13.500 € (Operación: 12.500 € * 1.08)

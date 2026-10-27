@@ -12,6 +12,7 @@ import LandingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Landing.astro";
 import WritingLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Writing.astro";
 import WritingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Writing.astro";
 import WritingMiMo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/Writing.astro";
+import WritingNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Writing.astro";
 import WritingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Writing.astro";
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import FAQQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/FAQ.astro";
@@ -33,6 +34,7 @@ import { verdicts } from "@/data/verdicts";
 import invoiceLfm from "@/data/invoices/lfm2.5-24b-a2b.json?raw";
 import invoiceLing from "@/data/invoices/ling-3.0-tiny.json?raw";
 import invoiceMiMo from "@/data/invoices/mimo-v2.6-distill-qwen-9b.json";
+import invoiceNemotron from "@/data/invoices/nvidia-nemotron-3.5-bolt-e4b.json?raw";
 import invoiceQwen from "@/data/invoices/qwen3.6-35b-a3b.json?raw";
 import invoicePrompt from "@/data/invoices/prompt.txt?raw";
 import Layout from "@/layouts/Layout.astro";
@@ -216,6 +218,17 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         <WritingLing />
       </Trial>
       <Trial
+        title="Correo: corrección, formal y resumen"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="llama-server"
+        tokens="1.893 tokens"
+        duration="29 s"
+        speed="63,28 t/s"
+      >
+        <WritingNemotron />
+      </Trial>
+      <Trial
         title="Factura a JSON"
         model="LFM2.5-24B-A2B"
         fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
@@ -275,6 +288,22 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           pdfName="invoice.pdf"
           prompt={invoicePrompt.trim()}
           output={invoiceMiMoJson}
+        />
+      </Trial>
+      <Trial
+        title="Factura a JSON"
+        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+        runner="llama-server"
+        tokens="1.042 tokens"
+        duration="15 s"
+        speed="65,28 t/s"
+      >
+        <InvoiceDemo
+          pdf="/invoices/invoice.pdf"
+          pdfName="invoice.pdf"
+          prompt={invoicePrompt.trim()}
+          output={invoiceNemotron.trim()}
         />
       </Trial>
       <Trial
@@ -338,9 +367,17 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         {verdicts.map((verdict) => <Verdict verdict={verdict} />)}
       </div>
       <TextBox title="Conclusión">
-        La forma de trabajar con LLM locales es diferente a la de los modelos
-        cloud. No puedes lanzar una tarea gigante y esperar que el modelo haga
-        un 'one shot'. Tienes que dividir las tareas e ir ayudando al agente.
+        <p>
+          La forma de programar con LLM locales es diferente a la de los modelos
+          cloud. No puedes lanzar una tarea gigante y esperar que el agente lo
+          resuelva en un “one shot”. Tienes que dividir las tareas e ir ayudando
+          al agente.
+        </p>
+        <p>
+          Para procesar datos y escribir texto, en cambio, funcionan realmente
+          bien. Puedes extraer información de documentos, redactar, reescribir o
+          corregir textos, y revisar el resultado por partes.
+        </p>
       </TextBox>
     </Section>
   </main>
