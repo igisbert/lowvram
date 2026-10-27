@@ -1,411 +1,451 @@
 ---
+
 ---
 
-<!-- calculadora.astro -->
-<div class="calculadora" data-qwencalc role="application" aria-label="Calculadora">
-  <div class="calculadora__display">
-    <span class="calculadora__expresion" aria-hidden="true"></span>
-    <span class="calculadora__resultado" aria-live="polite">0</span>
-  </div>
-
-  <div class="calculadora__teclas">
-    <button class="calculadora__tecla calculadora__tecla--accion" data-action="clear" aria-label="Limpiar">C</button>
-    <button class="calculadora__tecla calculadora__tecla--accion" data-action="backspace" aria-label="Borrar último dígito">⌫</button>
-    <button class="calculadora__tecla calculadora__tecla--operador" data-value="%">%</button>
-    <button class="calculadora__tecla calculadora__tecla--operador" data-value="/">÷</button>
-
-    <button class="calculadora__tecla" data-value="7">7</button>
-    <button class="calculadora__tecla" data-value="8">8</button>
-    <button class="calculadora__tecla" data-value="9">9</button>
-    <button class="calculadora__tecla calculadora__tecla--operador" data-value="×">×</button>
-
-    <button class="calculadora__tecla" data-value="4">4</button>
-    <button class="calculadora__tecla" data-value="5">5</button>
-    <button class="calculadora__tecla" data-value="6">6</button>
-    <button class="calculadora__tecla calculadora__tecla--operador" data-value="-">−</button>
-
-    <button class="calculadora__tecla" data-value="1">1</button>
-    <button class="calculadora__tecla" data-value="2">2</button>
-    <button class="calculadora__tecla" data-value="3">3</button>
-    <button class="calculadora__tecla calculadora__tecla--operador" data-value="+">+</button>
-
-    <button class="calculadora__tecla calculadora__tecla--ampliado" data-value="0">0</button>
-    <button class="calculadora__tecla" data-value=".">.</button>
-    <button class="calculadora__tecla calculadora__tecla--igual" data-action="equals">=</button>
-  </div>
-</div>
-
 <style>
-  .calculadora {
-    --cc-bg: #1a1a1a;
-    --cc-surface: #2a2a2a;
-    --cc-text: #f0f0f0;
-    --cc-muted: #888;
-    --cc-accent: #ff9f43;
-    --cc-accent-hover: #e68a35;
-    --cc-operator: #6c6c6c;
-    --cc-operator-hover: #8a8a8a;
-    --cc-equal: #ff9f43;
-    --cc-equal-hover: #e68a35;
-    --cc-danger: #ff6b6b;
-    --cc-danger-hover: #e05555;
-    --cc-radius: 12px;
-    --cc-gap: 8px;
-    --cc-btn-size: 52px;
-    --cc-display-height: 120px;
-
-    font-family: system-ui, -apple-system, sans-serif;
-    background: var(--cc-bg);
-    border-radius: var(--cc-radius);
+  .calc {
+    background: #1c1c1c;
     padding: 20px;
-    width: 360px;
+    border-radius: 16px;
+    width: 340px;
     max-width: 100%;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    color: var(--cc-text);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  @media (max-width: 420px) {
-    .calculadora {
-      width: 100vw;
-      max-width: 100%;
-      padding: 16px;
-      border-radius: 0;
-    }
-  }
-
-  .calculadora__display {
-    height: var(--cc-display-height);
+  .calc__display {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 16px;
-    background: var(--cc-surface);
-    border-radius: 8px;
+    align-items: flex-end;
+    padding: 16px 12px;
+    background: #000;
+    border-radius: 12px;
     margin-bottom: 16px;
-    overflow: hidden;
-    word-break: break-all;
+    overflow-x: auto;
   }
 
-  .calculadora__expresion {
-    display: block;
-    font-size: 14px;
-    color: var(--cc-muted);
-    text-align: right;
+  .calc__expr {
+    color: #888;
+    font-size: 16px;
     min-height: 20px;
-    margin-bottom: 4px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .calculadora__resultado {
-    display: block;
-    font-size: 36px;
-    font-weight: 300;
+    word-break: break-all;
     text-align: right;
+    margin-bottom: 4px;
     line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transition: font-size 0.15s ease;
   }
 
-  .calculadora__teclas {
+  .calc__result {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .calc__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--cc-gap);
+    gap: 8px;
   }
 
-  .calculadora__tecla {
-    height: var(--cc-btn-size);
+  .calc__btn {
+    background: #2a2a2a;
+    color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 50%;
     font-size: 20px;
-    font-family: inherit;
+    font-weight: 400;
+    min-height: 48px;
+    min-width: 48px;
     cursor: pointer;
-    background: var(--cc-surface);
-    color: var(--cc-text);
-    transition: background 0.15s ease, transform 0.1s ease;
-    outline-offset: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background 0.15s,
+      transform 0.1s;
+    outline: none;
+    touch-action: manipulation;
   }
 
-  .calculadora__tecla:focus-visible {
-    box-shadow: 0 0 0 3px rgba(255, 159, 67, 0.5);
+  .calc__btn:hover {
+    background: #3a3a3a;
   }
 
-  .calculadora__tecla:hover {
-    filter: brightness(1.1);
-  }
-
-  .calculadora__tecla:active {
+  .calc__btn:active {
     transform: scale(0.95);
+    background: #4a4a4a;
   }
 
-  .calculadora__tecla--accion {
-    background: var(--cc-danger);
-    color: white;
+  .calc__btn:focus-visible {
+    box-shadow: 0 0 0 2px #ff9500;
   }
 
-  .calculadora__tecla--accion:hover {
-    background: var(--cc-danger-hover);
+  .calc__btn--clear {
+    background: #ff6b6b;
+  }
+  .calc__btn--clear:hover {
+    background: #ff5252;
+  }
+  .calc__btn--clear:active {
+    background: #d32f2f;
   }
 
-  .calculadora__tecla--operador {
-    background: var(--cc-operator);
-    color: white;
+  .calc__btn--op,
+  .calc__btn--eq {
+    background: #ff9f00;
+  }
+  .calc__btn--op:hover,
+  .calc__btn--eq:hover {
+    background: #ff8c00;
+  }
+  .calc__btn--op:active,
+  .calc__btn--eq:active {
+    background: #d97700;
   }
 
-  .calculadora__tecla--operador:hover {
-    background: var(--cc-operator-hover);
-  }
-
-  .calculadora__tecla--operador[data-value="%"] {
-    background: var(--cc-accent);
-  }
-
-  .calculadora__tecla--operador[data-value="%"]:hover {
-    background: var(--cc-accent-hover);
-  }
-
-  .calculadora__tecla--igual {
-    background: var(--cc-equal);
-    color: white;
-  }
-
-  .calculadora__tecla--igual:hover {
-    background: var(--cc-equal-hover);
-  }
-
-  .calculadora__tecla--ampliado {
+  .calc__btn--wide {
     grid-column: span 2;
+    border-radius: 24px;
+    min-width: 100%;
+  }
+
+  @media (max-width: 400px) {
+    .calc {
+      width: 100%;
+      padding: 16px;
+    }
+    .calc__btn {
+      min-height: 44px;
+      min-width: 44px;
+      font-size: 18px;
+    }
+    .calc__result {
+      font-size: 28px;
+    }
   }
 </style>
 
+<div class="calc">
+  <div class="calc__display">
+    <div class="calc__expr" aria-hidden="true"></div>
+    <div class="calc__result" aria-live="polite">0</div>
+  </div>
+  <div class="calc__grid" role="grid">
+    <button
+      class="calc__btn calc__btn--clear"
+      data-type="clear"
+      aria-label="Limpiar">C</button
+    >
+    <button
+      class="calc__btn calc__btn--back"
+      data-type="back"
+      aria-label="Borrar último dígito">⌫</button
+    >
+    <button
+      class="calc__btn calc__btn--op"
+      data-type="operator"
+      data-value="/"
+      aria-label="Dividir">÷</button
+    >
+    <button
+      class="calc__btn calc__btn--op"
+      data-type="operator"
+      data-value="*"
+      aria-label="Multiplicar">×</button
+    >
+
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="7"
+      aria-label="7">7</button
+    >
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="8"
+      aria-label="8">8</button
+    >
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="9"
+      aria-label="9">9</button
+    >
+    <button
+      class="calc__btn calc__btn--op"
+      data-type="operator"
+      data-value="-"
+      aria-label="Restar">−</button
+    >
+
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="4"
+      aria-label="4">4</button
+    >
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="5"
+      aria-label="5">5</button
+    >
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="6"
+      aria-label="6">6</button
+    >
+    <button
+      class="calc__btn calc__btn--op"
+      data-type="operator"
+      data-value="+"
+      aria-label="Sumar">+</button
+    >
+
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="1"
+      aria-label="1">1</button
+    >
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="2"
+      aria-label="2">2</button
+    >
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="digit"
+      data-value="3"
+      aria-label="3">3</button
+    >
+    <button
+      class="calc__btn calc__btn--eq"
+      data-type="equals"
+      aria-label="Igual">=</button
+    >
+
+    <button
+      class="calc__btn calc__btn--num calc__btn--wide"
+      data-type="digit"
+      data-value="0"
+      aria-label="0">0</button
+    >
+    <button
+      class="calc__btn calc__btn--num"
+      data-type="decimal"
+      aria-label="Punto decimal">.</button
+    >
+    <button
+      class="calc__btn calc__btn--eq"
+      data-type="equals"
+      aria-label="Igual">=</button
+    >
+  </div>
+</div>
+
 <script>
-  // @ts-nocheck
-  for (const root of document.querySelectorAll("[data-qwencalc]")) {
-    const display = root.querySelector(".calculadora__display");
-    const expresionEl = display.querySelector(".calculadora__expresion");
-    const resultadoEl = display.querySelector(".calculadora__resultado");
-    const teclas = root.querySelectorAll(".calculadora__tecla");
+  (() => {
+    const root = document.querySelector(".calc");
+    if (!root) return;
 
-    let currentInput = "0";
-    let expression = "";
-    let waitingForOperand = false;
-    let lastResult = null;
-    let lastOperator = null;
+    let current = "";
+    let result = "0";
+    let isNewNum = true;
+    let hasError = false;
 
-    function formatNumber(num) {
-      if (num === Infinity || num === -Infinity) {
-        return "∞";
+    const displayExpr = root.querySelector(".calc__expr");
+    const displayRes = root.querySelector(".calc__result");
+    const grid = root.querySelector(".calc__grid");
+
+    function updateDisplay() {
+      displayExpr.textContent = current;
+      displayRes.textContent = result;
+    }
+
+    function clear() {
+      current = "";
+      result = "0";
+      isNewNum = true;
+      hasError = false;
+      updateDisplay();
+    }
+
+    function backspace() {
+      if (hasError) {
+        clear();
+        return;
       }
-      if (Number.isNaN(num)) {
-        return "Error";
+      if (isNewNum) {
+        if (current.length > 0) {
+          current = current.slice(0, -1);
+          isNewNum = current.length === 0;
+        }
+      } else {
+        current = current.slice(0, -1);
+        if (current === "" || current === "-") isNewNum = true;
+      }
+      updateDisplay();
+    }
+
+    function addDigit(d) {
+      if (hasError) clear();
+      // Corrección crítica: no sobrescribir 'current' si isNewNum es true, sino concatenar.
+      // Esto permite que tras "9+", pulsar "2" dé "9+2" en lugar de solo "2".
+      if (current === "0" || current === "-") {
+        current = d;
+      } else {
+        current += d;
+      }
+      isNewNum = false;
+      updateDisplay();
+    }
+
+    function addDecimal() {
+      if (hasError) clear();
+      if (isNewNum) {
+        // Corrección: concatenar en lugar de sobrescribir
+        current += ".";
+        isNewNum = false;
+      } else if (!current.includes(".")) {
+        current += ".";
+      }
+      updateDisplay();
+    }
+
+    function addOperator(op) {
+      if (hasError) clear();
+      const last = current.slice(-1);
+      if ("+-*/".includes(last) && "+-*/".includes(op)) {
+        current = current.slice(0, -1) + op;
+      } else {
+        current += op;
+        isNewNum = true;
+      }
+      updateDisplay();
+    }
+
+    function equals() {
+      if (hasError) clear();
+      if (!current) return;
+
+      let expr = current;
+      // Gestión de expresión incompleta al pulsar igual (ej: "5+")
+      if ("+-*/".includes(expr.slice(-1))) {
+        expr = expr.slice(0, -1);
       }
 
-      const rounded = roundFloat(num);
-      const str = rounded.toString();
+      try {
+        const val = evaluate(expr);
+        result = formatResult(val);
+        current = result;
+        isNewNum = true;
+        hasError = false;
+      } catch (e) {
+        hasError = true;
+        result = "Error";
+        current = "";
+        isNewNum = true;
+      }
+      updateDisplay();
+    }
 
-      if (str.replace(/[^0-9.]/g, "").length > 14) {
-        const exp = rounded.toExponential(10);
-        return exp.replace(/e\+?0*/, "e+");
+    function evaluate(expr) {
+      let s = expr.replace(/\s/g, "");
+      // Gestión de operadores consecutivos (ej: "5++3", "5+-3")
+      s = s.replace(/([\+\-\*\/])([\+\-\*\/])/g, "$2");
+
+      let tokens = [];
+      let num = "";
+      for (let c of s) {
+        if ("0123456789.".includes(c)) num += c;
+        else {
+          if (num) tokens.push(parseFloat(num));
+          num = "";
+          tokens.push(c);
+        }
+      }
+      if (num) tokens.push(parseFloat(num));
+
+      let i = 0;
+
+      function parseExpr() {
+        let res = parseTerm();
+        while (i < tokens.length) {
+          const op = tokens[i];
+          if (op === "+" || op === "-") {
+            i++;
+            const r = parseTerm();
+            res = op === "+" ? res + r : res - r;
+          } else break;
+        }
+        return res;
       }
 
+      function parseTerm() {
+        let res = parseFactor();
+        while (i < tokens.length) {
+          const op = tokens[i];
+          if (op === "*" || op === "/") {
+            i++;
+            const r = parseFactor();
+            res = op === "*" ? res * r : res / r;
+          } else break;
+        }
+        return res;
+      }
+
+      function parseFactor() {
+        if (tokens[i] === "-") {
+          i++;
+          return -parseTerm();
+        }
+        if (tokens[i] === "+") {
+          i++;
+          return parseTerm();
+        }
+        if (typeof tokens[i] === "number") return tokens[i++];
+        return 0;
+      }
+
+      return parseExpr();
+    }
+
+    function formatResult(n) {
+      // Evita errores de coma flotante en resultados habituales (0.1+0.2 -> 0.3)
+      let str = n.toPrecision(14);
+      if (Math.abs(n) < 1e15 && Math.abs(n) > 0) {
+        str = parseFloat(str).toString();
+      }
       return str;
     }
 
-    function roundFloat(num) {
-      if (typeof num !== "number") return num;
-      return Math.round(num * 1e12) / 1e12;
+    function handleKey(e) {
+      if (hasError) clear();
     }
 
-    function updateDisplay() {
-      resultadoEl.textContent = formatNumber(currentInput);
+    grid.addEventListener("click", (e) => {
+      handleKey(e);
+      const btn = e.target.closest(".calc__btn");
+      if (!btn) return;
+      const type = btn.dataset.type;
+      const val = btn.dataset.value;
 
-      const fontSize = resultadoEl.textContent.length > 12 ? 28 : resultadoEl.textContent.length > 8 ? 32 : 36;
-      resultadoEl.style.fontSize = fontSize + "px";
-
-      if (expresionEl.textContent !== expression) {
-        expresionEl.textContent = expression;
-      }
-    }
-
-    function handleNumber(value) {
-      if (waitingForOperand) {
-        currentInput = value;
-        waitingForOperand = false;
-      } else {
-        if (value === ".") {
-          if (currentInput.includes(".")) return;
-          currentInput += ".";
-        } else {
-          if (currentInput === "0" && value === "0") return;
-          if (currentInput === "0") {
-            currentInput = value;
-          } else {
-            currentInput += value;
-          }
-        }
-      }
-      updateDisplay();
-    }
-
-    function handleOperator(op) {
-      if (currentInput === "Error") {
-        return;
-      }
-
-      const current = parseFloat(currentInput);
-
-      if (lastResult !== null && lastOperator !== null && !waitingForOperand) {
-        const result = calculate(lastResult, current, lastOperator);
-        expression = formatNumber(result) + " " + op;
-        currentInput = formatNumber(result);
-        lastResult = result;
-      } else {
-        expression = currentInput + " " + op;
-        lastResult = current;
-      }
-
-      lastOperator = op;
-      waitingForOperand = true;
-      updateDisplay();
-    }
-
-    function calculate(a, b, op) {
-      switch (op) {
-        case "+":
-          return roundFloat(a + b);
-        case "-":
-          return roundFloat(a - b);
-        case "×":
-          return roundFloat(a * b);
-        case "÷":
-          if (b === 0) {
-            currentInput = "Error";
-            expression = "";
-            lastResult = null;
-            lastOperator = null;
-            waitingForOperand = false;
-            updateDisplay();
-            return NaN;
-          }
-          return roundFloat(a / b);
-        case "%":
-          return roundFloat(a % b);
-        default:
-          return b;
-      }
-    }
-
-    function handleEquals() {
-      if (lastResult === null) {
-        return;
-      }
-
-      const current = parseFloat(currentInput);
-      const result = calculate(lastResult, current, lastOperator);
-
-      if (Number.isNaN(result)) {
-        return;
-      }
-
-      expression = formatNumber(lastResult) + " " + lastOperator + " " + currentInput + " =";
-      currentInput = formatNumber(result);
-      lastResult = result;
-      lastOperator = null;
-      waitingForOperand = true;
-      updateDisplay();
-    }
-
-    function handleClear() {
-      currentInput = "0";
-      expression = "";
-      waitingForOperand = false;
-      lastResult = null;
-      lastOperator = null;
-      updateDisplay();
-    }
-
-    function handleBackspace() {
-      if (waitingForOperand) return;
-
-      if (currentInput.length === 1 || (currentInput.length === 2 && currentInput.startsWith("-"))) {
-        currentInput = "0";
-      } else {
-        currentInput = currentInput.slice(0, -1);
-      }
-      updateDisplay();
-    }
-
-    function evaluate(key) {
-      if (key === "Escape") {
-        handleClear();
-      } else if (key === "Backspace") {
-        handleBackspace();
-      } else if (key === "Enter" || key === "=") {
-        handleEquals();
-      } else if (key === "%") {
-        handleOperator("%");
-      } else if (key === "+") {
-        handleOperator("+");
-      } else if (key === "-") {
-        handleOperator("-");
-      } else if (key === "*") {
-        handleOperator("×");
-      } else if (key === "/") {
-        handleOperator("÷");
-      } else if (key === ".") {
-        handleNumber(".");
-      } else if (key >= "0" && key <= "9") {
-        handleNumber(key);
-      }
-    }
-
-    document.addEventListener("keydown", (e) => {
-      if (!(e.target instanceof Element) || !e.target.closest("[data-qwencalc]")) return;
-      if (e.key === "Escape" || e.key === "Backspace" || e.key === "Enter" ||
-          e.key === "=" || e.key === "%" || e.key === "+" ||
-          e.key === "-" || e.key === "*" || e.key === "/" ||
-          e.key === ".") {
-        e.preventDefault();
-        evaluate(e.key);
-      } else if (e.key >= "0" && e.key <= "9") {
-        e.preventDefault();
-        evaluate(e.key);
-      }
+      if (type === "digit") addDigit(val);
+      else if (type === "decimal") addDecimal();
+      else if (type === "operator") addOperator(val);
+      else if (type === "equals") equals();
+      else if (type === "clear") clear();
+      else if (type === "back") backspace();
     });
-
-    teclas.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const action = btn.dataset.action;
-        const value = btn.dataset.value;
-
-        if (action === "clear") {
-          handleClear();
-        } else if (action === "backspace") {
-          handleBackspace();
-        } else if (action === "equals") {
-          handleEquals();
-        } else if (value) {
-          if (value === "%") {
-            handleOperator("%");
-          } else if (value === "+") {
-            handleOperator("+");
-          } else if (value === "-") {
-            handleOperator("-");
-          } else if (value === "×") {
-            handleOperator("×");
-          } else if (value === "÷") {
-            handleOperator("÷");
-          } else {
-            handleNumber(value);
-          }
-        }
-      });
-    });
-
-    updateDisplay();
-  }
+  })();
 </script>

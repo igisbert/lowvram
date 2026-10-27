@@ -1,185 +1,202 @@
 ---
-
+// components/FAQ.astro
 ---
 
-<!-- FAQ.astro -->
-<div class="faq" role="region" aria-label="Preguntas frecuentes">
-  <div class="faq__header">
-    <h2 class="faq__title">Preguntas frecuentes</h2>
-    <p class="faq__subtitle">Resolvemos las dudas más comunes para que empieces con confianza.</p>
+<div class="faq-component">
+  <div class="faq-item" data-faq-item="1">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-1"
+      id="faq-btn-1"
+    >
+      <span class="faq-question-text">¿Qué es este componente?</span>
+      <span class="faq-indicator" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="faq-panel-1" role="region">
+      <p>
+        Este es un componente de preguntas frecuentes construido con Astro,
+        JavaScript vanilla y CSS nativo. Está diseñado para ser accesible,
+        moderno y ligero, sin dependencias externas.
+      </p>
+    </div>
   </div>
 
-  <div class="faq__list">
-    <!-- Item 1 -->
-    <div class="faq__item">
-      <button
-        class="faq__trigger"
-        aria-expanded="false"
-        aria-controls="faq-1"
-      >
-        <span class="faq__question">¿Qué es Astro y para quién es ideal?</span>
-        <span class="faq__icon" aria-hidden="true"></span>
-      </button>
-      <div
-        class="faq__panel"
-        id="faq-1"
-        role="region"
-      >
-        <div class="faq__content">
-          <p>Astro es un framework de construcción para sitios web que prioriza la velocidad y la simplicidad. Genera tu sitio como HTML estático por defecto, pero añade interactividad con componentes JavaScript solo cuando los necesitas. Es perfecto para blogs, sitios corporativos, documentación, portfolios y cualquier web donde la velocidad de carga y el SEO sean prioritarios.</p>
-        </div>
-      </div>
+  <div class="faq-item" data-faq-item="2">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-2"
+      id="faq-btn-2"
+    >
+      <span class="faq-question-text">¿Cómo se implementa la animación?</span>
+      <span class="faq-indicator" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="faq-panel-2" role="region">
+      <p>
+        La animación se logra midiendo la altura natural del contenido con
+        `scrollHeight` y usando `transition` en CSS. Respetamos
+        `prefers-reduced-motion` desactivando las animaciones cuando el usuario
+        lo prefiere.
+      </p>
     </div>
+  </div>
 
-    <!-- Item 2 -->
-    <div class="faq__item">
-      <button
-        class="faq__trigger"
-        aria-expanded="false"
-        aria-controls="faq-2"
-      >
-        <span class="faq__question">¿Necesito instalar dependencias para empezar?</span>
-        <span class="faq__icon" aria-hidden="true"></span>
-      </button>
-      <div
-        class="faq__panel"
-        id="faq-2"
-        role="region"
-      >
-        <div class="faq__content">
-          <p>No. Astro funciona con JavaScript vanilla y CSS nativo, sin necesidad de librerías externas ni frameworks pesados. Si prefieres usar React, Vue, Svelte o Solid, puedes hacerlo, pero no es obligatorio. El proyecto incluye todo lo necesario para crear componentes funcionales y accesibles sin dependencias adicionales.</p>
-        </div>
-      </div>
+  <div class="faq-item" data-faq-item="3">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-3"
+      id="faq-btn-3"
+    >
+      <span class="faq-question-text">¿Es accesible?</span>
+      <span class="faq-indicator" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="faq-panel-3" role="region">
+      <p>
+        Sí. Usa botones semánticos con `aria-expanded` y `aria-controls`. El
+        foco es visible y la estructura respeta los patrones de diseño accesible
+        para acordeones.
+      </p>
     </div>
+  </div>
 
-    <!-- Item 3 -->
-    <div class="faq__item">
-      <button
-        class="faq__trigger"
-        aria-expanded="false"
-        aria-controls="faq-3"
-      >
-        <span class="faq__question">¿Cómo se manejan los estilos y el aislamiento de componentes?</span>
-        <span class="faq__icon" aria-hidden="true"></span>
-      </button>
-      <div
-        class="faq__panel"
-        id="faq-3"
-        role="region"
-      >
-        <div class="faq__content">
-          <p>Cada componente incluye sus propios estilos en un bloque <code>&lt;style&gt;</code> y su lógica en <code>&lt;script&gt;</code>, encapsulados con clases BEM (como <code>.faq__trigger</code>) que no afectan a nada fuera del componente. No hay selectores globales, ni IDs, ni variables CSS que se filtren. El CSS nativo se usa con <code>:where()</code> o prefijos de clase para máxima compatibilidad.</p>
-        </div>
-      </div>
+  <div class="faq-item" data-faq-item="4">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-4"
+      id="faq-btn-4"
+    >
+      <span class="faq-question-text">¿Puedo personalizar los estilos?</span>
+      <span class="faq-indicator" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="faq-panel-4" role="region">
+      <p>
+        Los estilos están encapsulados bajo la clase `.faq-component`. Puedes
+        modificar variables CSS personalizadas para ajustar colores, espaciados
+        y tamaños sin romper el diseño.
+      </p>
     </div>
+  </div>
 
-    <!-- Item 4 -->
-    <div class="faq__item">
-      <button
-        class="faq__trigger"
-        aria-expanded="false"
-        aria-controls="faq-4"
-      >
-        <span class="faq__question">¿Los componentes son accesibles?</span>
-        <span class="faq__icon" aria-hidden="true"></span>
-      </button>
-      <div
-        class="faq__panel"
-        id="faq-4"
-        role="region"
-      >
-        <div class="faq__content">
-          <p>Sí. Todos los botones usan <code>aria-expanded</code> y <code>aria-controls</code> para vincularse con su panel, los iconos tienen <code>aria-hidden="true"</code> y los paneles usan <code>role="region"</code>. La navegación con teclado funciona: Tab/Shift+Tab entre triggers, Enter/Space para abrir y cerrar, y Escape para cerrar el último abierto. Los focos visibles con <code>:focus-visible</code> aseguran que el usuario siempre sepa dónde está.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Item 5 -->
-    <div class="faq__item">
-      <button
-        class="faq__trigger"
-        aria-expanded="false"
-        aria-controls="faq-5"
-      >
-        <span class="faq__question">¿Puedo usar este patrón en otros frameworks?</span>
-        <span class="faq__icon" aria-hidden="true"></span>
-      </button>
-      <div
-        class="faq__panel"
-        id="faq-5"
-        role="region"
-      >
-        <div class="faq__content">
-          <p>Absolutamente. La estructura HTML semántico, el uso de atributos ARIA y el JavaScript encapsulado en IIFE son patrones universales. Puedes replicar este mismo enfoque en React, Vue, Svelte o cualquier framework: HTML accesible, CSS scoped con clases, y JS autocontenido sin variables globales. La idea es que cada componente sea autónomo y portable.</p>
-        </div>
-      </div>
+  <div class="faq-item" data-faq-item="5">
+    <button
+      class="faq-question"
+      aria-expanded="false"
+      aria-controls="faq-panel-5"
+      id="faq-btn-5"
+    >
+      <span class="faq-question-text">¿Funciona en móvil?</span>
+      <span class="faq-indicator" aria-hidden="true"></span>
+    </button>
+    <div class="faq-answer" id="faq-panel-5" role="region">
+      <p>
+        Sí. El diseño es totalmente responsive y se adapta a cualquier tamaño de
+        pantalla, desde escritorio hasta dispositivos móviles pequeños.
+      </p>
     </div>
   </div>
 </div>
 
+<script>
+  // @ts-nocheck
+  const faqComponent = document.querySelector(".faq-component");
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  faqComponent.querySelectorAll(".faq-question").forEach((btn) => {
+    const panelId = btn.getAttribute("aria-controls");
+    const panel = document.getElementById(panelId);
+    if (!panel) return;
+
+    const toggle = () => {
+      const isExpanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!isExpanded));
+
+      if (!isExpanded) {
+        const targetHeight = panel.scrollHeight;
+        panel.style.height = prefersReducedMotion
+          ? "auto"
+          : `${targetHeight}px`;
+        panel.style.overflow = "hidden";
+        panel.style.opacity = "1";
+        panel.setAttribute("aria-hidden", "false");
+      } else {
+        panel.style.height = "0px";
+        panel.style.overflow = "hidden";
+        panel.style.opacity = "0";
+        panel.setAttribute("aria-hidden", "true");
+      }
+    };
+
+    btn.addEventListener("click", toggle);
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        const next = btn.closest(".faq-item").nextElementSibling;
+        if (next) {
+          e.preventDefault();
+          next.querySelector(".faq-question").focus();
+        }
+      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        const prev = btn.closest(".faq-item").previousElementSibling;
+        if (prev) {
+          e.preventDefault();
+          prev.querySelector(".faq-question").focus();
+        }
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        faqComponent.querySelector(".faq-question").focus();
+      } else if (e.key === "End") {
+        e.preventDefault();
+        const lastBtn = faqComponent
+          .querySelectorAll(".faq-question")
+          .item(faqComponent.querySelectorAll(".faq-question").length - 1);
+        if (lastBtn) lastBtn.focus();
+      }
+    });
+  });
+</script>
+
 <style>
-  .faq {
-    --faq-bg: #111111;
-    --faq-surface: #1a1a1a;
-    --faq-border: #2a2a2a;
-    --faq-text: #e8e8e8;
-    --faq-muted: #888888;
-    --faq-accent: #6c63ff;
-    --faq-accent-soft: rgba(108, 99, 255, 0.12);
-    --faq-icon-color: #999;
-    --faq-icon-active: #6c63ff;
-    --faq-radius: 10px;
-    --faq-gap: 2px;
-    --faq-padding: 20px 24px;
-    --faq-duration: 320ms;
+  .faq-component {
+    --faq-color-bg: #121212;
+    --faq-color-surface: #1a1a1a;
+    --faq-color-text: #e0e0e0;
+    --faq-color-text-muted: #a0a0a0;
+    --faq-color-border: #2a2a2a;
+    --faq-color-accent: #ffffff;
+    --faq-color-focus: #4a9eff;
+    --faq-font-size: 1rem;
+    --faq-font-size-lg: 1.125rem;
+    --faq-padding: 1.25rem 1.5rem;
+    --faq-transition-duration: 300ms;
+    --faq-transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --faq-border-radius: 8px;
 
-    font-family: system-ui, -apple-system, sans-serif;
-    background: var(--faq-bg);
-    border-radius: var(--faq-radius);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-    color: var(--faq-text);
-    overflow: hidden;
-    max-width: 720px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 32px 24px;
+    background: var(--faq-color-bg);
+    border-radius: var(--faq-border-radius);
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+    font-size: var(--faq-font-size);
+    color: var(--faq-color-text);
   }
 
-  .faq__header {
-    text-align: center;
-    margin-bottom: 28px;
-    padding: 0 4px;
+  .faq-component .faq-item {
+    border-bottom: 1px solid var(--faq-color-border);
   }
 
-  .faq__title {
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    margin: 0 0 8px;
-    color: #ffffff;
-  }
-
-  .faq__subtitle {
-    font-size: 15px;
-    color: var(--faq-muted);
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  .faq__list {
-    border-top: 1px solid var(--faq-border);
-    margin: 0;
-    padding: 0;
-  }
-
-  .faq__item {
-    border-bottom: 1px solid var(--faq-border);
-  }
-
-  .faq__item:last-child {
+  .faq-component .faq-item:last-child {
     border-bottom: none;
   }
 
-  .faq__trigger {
+  .faq-component .faq-question {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -187,259 +204,119 @@
     padding: var(--faq-padding);
     background: transparent;
     border: none;
-    color: var(--faq-text);
-    font-size: 16px;
-    font-weight: 500;
-    font-family: inherit;
-    text-align: left;
+    color: var(--faq-color-text);
+    font-size: var(--faq-font-size-lg);
+    font-weight: 600;
     cursor: pointer;
-    transition: background var(--faq-duration) ease;
+    text-align: left;
+    transition: color var(--faq-transition-duration) var(--faq-transition-ease);
+    outline: none;
+  }
+
+  .faq-component .faq-question:hover {
+    color: var(--faq-color-accent);
+  }
+
+  .faq-component .faq-question:focus-visible {
+    outline: 2px solid var(--faq-color-focus);
     outline-offset: -2px;
-    gap: 16px;
+    border-radius: var(--faq-border-radius);
   }
 
-  .faq__trigger:hover {
-    background: var(--faq-surface);
+  .faq-component .faq-question:focus {
+    outline: 2px solid var(--faq-color-focus);
+    outline-offset: -2px;
+    border-radius: var(--faq-border-radius);
   }
 
-  .faq__trigger:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--faq-accent);
-  }
-
-  .faq__trigger[aria-expanded="true"] {
-    background: var(--faq-surface);
-  }
-
-  .faq__trigger[aria-expanded="true"] .faq__icon {
-    transform: rotate(45deg);
-  }
-
-  .faq__question {
+  .faq-component .faq-question-text {
     flex: 1;
-    line-height: 1.4;
+    padding-right: 1rem;
   }
 
-  .faq__icon {
+  .faq-component .faq-indicator {
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     position: relative;
-    transition: transform var(--faq-duration) ease;
+    transition: transform var(--faq-transition-duration)
+      var(--faq-transition-ease);
   }
 
-  .faq__icon::before,
-  .faq__icon::after {
+  .faq-component .faq-indicator::before,
+  .faq-component .faq-indicator::after {
     content: "";
     position: absolute;
-    background: var(--faq-icon-color);
+    background: var(--faq-color-text-muted);
     border-radius: 2px;
-    transition: background var(--faq-duration) ease;
+    transition:
+      background var(--faq-transition-duration) var(--faq-transition-ease),
+      transform var(--faq-transition-duration) var(--faq-transition-ease);
   }
 
-  .faq__icon::before {
-    width: 100%;
+  .faq-component .faq-indicator::before {
+    width: 14px;
     height: 2px;
-    top: 50%;
+    top: 6px;
     left: 0;
-    transform: translateY(-50%);
   }
 
-  .faq__icon::after {
+  .faq-component .faq-indicator::after {
     width: 2px;
-    height: 100%;
-    left: 50%;
+    height: 14px;
     top: 0;
-    transform: translateX(-50%);
+    left: 6px;
   }
 
-  .faq__trigger[aria-expanded="true"] .faq__icon::before,
-  .faq__trigger[aria-expanded="true"] .faq__icon::after {
-    background: var(--faq-accent);
+  .faq-component .faq-question[aria-expanded="true"] .faq-indicator::after {
+    transform: rotate(90deg);
+    background: var(--faq-color-accent);
   }
 
-  .faq__panel {
-    display: grid;
-    grid-template-rows: 0fr;
+  .faq-component .faq-question[aria-expanded="true"] .faq-indicator::before {
+    background: var(--faq-color-accent);
+  }
+
+  .faq-component .faq-answer {
+    padding: 0 1.5rem;
     overflow: hidden;
-    transition: grid-template-rows var(--faq-duration) ease, opacity var(--faq-duration) ease;
+    transition:
+      height var(--faq-transition-duration) var(--faq-transition-ease),
+      opacity var(--faq-transition-duration) var(--faq-transition-ease);
+    height: 0;
     opacity: 0;
   }
 
-  .faq__panel[hidden] {
-    display: none;
-    opacity: 0;
+  .faq-component .faq-answer[aria-hidden="false"] {
+    padding: 0 1.5rem 1.25rem;
   }
 
-  .faq__panel[hidden].is-open {
-    display: grid;
-    opacity: 0;
-  }
-
-  .faq__panel.is-open {
-    grid-template-rows: 1fr;
-    opacity: 1;
-  }
-
-  .faq__content {
-    padding: 0 24px var(--faq-padding);
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--faq-muted);
-  }
-
-  .faq__content p {
+  .faq-component .faq-answer p {
     margin: 0;
+    padding-top: 1rem;
+    color: var(--faq-color-text-muted);
+    line-height: 1.6;
   }
 
-  .faq__content code {
-    background: var(--faq-surface);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.88em;
-    color: var(--faq-accent);
+  @media (prefers-reduced-motion: reduce) {
+    .faq-component .faq-question,
+    .faq-component .faq-indicator,
+    .faq-component .faq-indicator::before,
+    .faq-component .faq-indicator::after,
+    .faq-component .faq-answer {
+      transition: none;
+    }
   }
 
-  @media (max-width: 480px) {
-    .faq {
-      padding: 20px 16px;
-      border-radius: 8px;
+  @media (max-width: 640px) {
+    .faq-component {
+      --faq-font-size: 0.95rem;
+      --faq-font-size-lg: 1.05rem;
+      --faq-padding: 1rem 1.25rem;
     }
 
-    .faq__header {
-      margin-bottom: 20px;
-      padding: 0 2px;
-    }
-
-    .faq__title {
-      font-size: 22px;
-    }
-
-    .faq__subtitle {
-      font-size: 14px;
-    }
-
-    .faq__trigger {
-      padding: 16px 12px;
-      font-size: 15px;
-      gap: 10px;
-    }
-
-    .faq__content {
-      padding: 0 12px 16px;
-      font-size: 14px;
+    .faq-component .faq-answer p {
+      font-size: 0.95rem;
     }
   }
 </style>
-
-<script>
-  (function () {
-    "use strict";
-
-    const triggers = document.querySelectorAll(".faq__trigger");
-
-    function openPanel(trigger) {
-      const panelId = trigger.getAttribute("aria-controls");
-      const panel = document.getElementById(panelId);
-      if (!panel) return;
-
-      trigger.setAttribute("aria-expanded", "true");
-      panel.removeAttribute("hidden");
-
-      requestAnimationFrame(() => {
-        panel.classList.add("is-open");
-      });
-
-      setTimeout(() => {
-        panel.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      }, 50);
-    }
-
-    function closePanel(trigger) {
-      const panelId = trigger.getAttribute("aria-controls");
-      const panel = document.getElementById(panelId);
-      if (!panel) return;
-
-      trigger.setAttribute("aria-expanded", "false");
-      panel.classList.remove("is-open");
-
-      setTimeout(() => {
-        panel.setAttribute("hidden", "");
-      }, 320);
-    }
-
-    function togglePanel(trigger) {
-      const isOpen = trigger.getAttribute("aria-expanded") === "true";
-      if (isOpen) {
-        closePanel(trigger);
-      } else {
-        openPanel(trigger);
-      }
-    }
-
-    triggers.forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        togglePanel(trigger);
-      });
-
-      trigger.addEventListener("keydown", (e) => {
-        switch (e.key) {
-          case "ArrowDown":
-            e.preventDefault();
-            {
-              const next = trigger.closest(".faq__item").nextElementSibling;
-              if (next) {
-                const nextTrigger = next.querySelector(".faq__trigger");
-                if (nextTrigger) {
-                  nextTrigger.focus();
-                  openPanel(nextTrigger);
-                }
-              }
-            }
-            break;
-
-          case "ArrowUp":
-            e.preventDefault();
-            {
-              const prev = trigger.closest(".faq__item").previousElementSibling;
-              if (prev) {
-                const prevTrigger = prev.querySelector(".faq__trigger");
-                if (prevTrigger) {
-                  prevTrigger.focus();
-                  openPanel(prevTrigger);
-                }
-              }
-            }
-            break;
-
-          case "Home":
-            e.preventDefault();
-            triggers[0].focus();
-            break;
-
-          case "End":
-            e.preventDefault();
-            triggers[triggers.length - 1].focus();
-            break;
-
-          case "Escape": {
-            const openTrigger = document.querySelector(".faq__trigger[aria-expanded=\"true\"]");
-            if (openTrigger && openTrigger !== trigger) {
-              closePanel(openTrigger);
-              openTrigger.focus();
-            }
-            break;
-          }
-
-          case " ":
-          case "Enter":
-            e.preventDefault();
-            togglePanel(trigger);
-            break;
-        }
-      });
-    });
-  })();
-</script>

@@ -4,8 +4,9 @@ import Header from "@/components/Header.astro";
 import Info from "@/components/Info.astro";
 import InvoiceDemo from "@/components/InvoiceDemo.astro";
 import CalculadoraLing from "@/components/llm/ling-3.0-tiny-q5_k_m/calculadora.astro";
-import CalculadoraQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/calculadora.astro";
+import CalculadoraQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Calculadora.astro";
 import MusicPlayerQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/MusicPlayer.astro";
+import Test from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/test.astro";
 import LandingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Landing.astro";
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
 import LandingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Landing.astro";
@@ -83,10 +84,20 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
 
     <Section eyebrow="En acción" title="Pruebas">
       <Trial
+        title="TEST"
+        model="Qwen3.6-35B"
+        runner="Pi"
+        tokens="21.683 tokens"
+        duration="8 min 40 s"
+        speed="30 t/s"
+      >
+        <Test />
+      </Trial>
+      <Trial
         title="Calculadora"
         model="Qwen3.6-35B"
         runner="Pi"
-        tokens="35.683 tokens"
+        tokens="21.683 tokens"
         duration="8 min 40 s"
         speed="30 t/s"
       >
@@ -139,19 +150,20 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         title="MusicPlayer"
         runner="llama-server"
         model="Qwen3.6-35B"
-        tokens="12.383 tokens"
-        duration="6 min 48 s"
-        speed="39,19 t/s"
+        tokens="5461 tokens"
+        duration="2 min 30 s"
+        speed="36,18 t/s"
       >
         <MusicPlayerQwen />
       </Trial>
+
       <Trial
         title="FAQ"
         runner="Pi"
         model="Qwen3.6-35B"
-        tokens="18.321 tokens"
-        duration="2 min 24 s"
-        speed="39,11 t/s"
+        tokens="3.036 tokens"
+        duration="1 min 17 s"
+        speed="37,11 t/s"
       >
         <FAQQwen />
       </Trial>
@@ -159,9 +171,9 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         title="Landing Page"
         runner="Pi"
         model="Qwen3.6-35B"
-        tokens="13.187 tokens"
-        duration="3 min 4 s"
-        speed="41 t/s"
+        tokens="6.736 tokens"
+        duration="2 min 49 s"
+        speed="38 t/s"
       >
         <LandingQwen />
       </Trial>
@@ -169,9 +181,9 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         title="Landing Page"
         runner="Pi"
         model="Ling 3.0 Tiny"
-        tokens="101.051 tokens"
-        duration="9 min 3 s"
-        speed="92 t/s"
+        tokens="25.684 tokens"
+        duration="4 min 6 s"
+        speed="104 t/s"
       >
         <LandingLing />
       </Trial>

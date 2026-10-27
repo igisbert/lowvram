@@ -1,327 +1,583 @@
 ---
+// MusicPlayer.astro
 ---
-<div class="mp-player" role="region" aria-label="Music Player">
-  <audio class="mp-audio" preload="none" playsinline></audio>
-  
-  <div class="mp-controls">
-    <button class="mp-btn mp-btn-prev" aria-label="Previous track">
-      <svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 7l-5 5 5 5 1.41-1.41L10.66 12z"/></svg>
-    </button>
-    <button class="mp-btn mp-btn-play" aria-label="Play">
-      <svg class="mp-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      <svg class="mp-icon-pause" viewBox="0 0 24 24" hidden><path d="M6 19h4V5H6zm10-14v14h4V5z"/></svg>
-    </button>
-    <button class="mp-btn mp-btn-next" aria-label="Next track">
-      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13 12l-4.41 4.59L10 18l6-6z"/></svg>
-    </button>
-  </div>
 
-  <div class="mp-progress-container" role="slider" aria-label="Progress" tabindex="0">
-    <div class="mp-progress">
-      <div class="mp-progress-fill"></div>
+<div class="music-player">
+  <div class="player-header">
+    <div class="track-info">
+      <div class="track-title">Selecciona una pista</div>
+      <div class="track-artist">Music Player</div>
     </div>
   </div>
 
-  <div class="mp-time">
-    <span class="mp-time-current">0:00</span>
-    <span class="mp-time-total">0:00</span>
+  <div class="progress-container">
+    <div
+      class="progress-bar"
+      role="slider"
+      aria-label="Barra de progreso"
+      tabindex="0"
+    >
+      <div class="progress-fill"></div>
+    </div>
+    <div class="time-info">
+      <span class="current-time">0:00</span>
+      <span class="duration">0:00</span>
+    </div>
   </div>
 
-  <div class="mp-volume">
-    <button class="mp-btn mp-btn-vol" aria-label="Volume">
-      <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c1.46-1.82 2.5-4.16 2.5-6.5 0-2.34-1.04-4.68-2.5-6.5H17v13h-0.5z"/></svg>
+  <div class="controls">
+    <button class="control-btn prev-btn" aria-label="Pista anterior">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+        ><path d="M6 6h2v12H6zm3.5 3l8.5 6V6l-8.5 6z"></path></svg
+      >
     </button>
-    <input type="range" class="mp-volume-slider" min="0" max="1" step="0.05" value="0.8" aria-label="Volume slider">
+    <button class="control-btn play-pause-btn" aria-label="Reproducir">
+      <svg
+        class="play-icon"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        fill="currentColor"><path d="M8 5v14l11-7z"></path></svg
+      >
+      <svg
+        class="pause-icon"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        fill="currentColor"
+        style="display:none"><path d="M6 19h4V5H6zm10-14v14h4V5z"></path></svg
+      >
+    </button>
+    <button class="control-btn next-btn" aria-label="Siguiente pista">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"
+        ><path d="M16 6h2v12h-2zm-3.5 6l-8.5 6V6l8.5 6z"></path></svg
+      >
+    </button>
+    <div class="volume-container">
+      <button class="volume-btn" aria-label="Silenciar">
+        <svg
+          class="volume-icon"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          fill="currentColor"
+          ><path
+            d="M3 9v6h4l5 5V4L7 9zm15 0c0-3.07-1.64-5.64-4-5-1.45.3-2.66 1.25-3.3 2.54l-.34.76.34.76c.66 1.3 1.85 2.25 3.3 2.54 2.36.62 4-1.93 4-5z"
+          ></path></svg
+        >
+      </button>
+      <input
+        type="range"
+        class="volume-slider"
+        min="0"
+        max="100"
+        value="100"
+        aria-label="Volumen"
+      />
+    </div>
   </div>
 
-  <ul class="mp-playlist">
-    <li class="mp-playlist-item" tabindex="0" data-index="0" aria-current="false">Free To Use 1</li>
-    <li class="mp-playlist-item" tabindex="0" data-index="1" aria-current="false">Free To Use 2</li>
-    <li class="mp-playlist-item" tabindex="0" data-index="2" aria-current="false">Free To Use 5</li>
-  </ul>
+  <div class="playlist">
+    <ul>
+      <li class="playlist-item" data-index="0">Free To Use 1</li>
+      <li class="playlist-item" data-index="1">Free To Use 2</li>
+      <li class="playlist-item" data-index="2">Free To Use 5</li>
+    </ul>
+  </div>
 
-  <div class="mp-error" hidden>Error al cargar la pista.</div>
+  <div class="error-message" role="alert" aria-live="assertive"></div>
+
+  <audio src="" preload="none"></audio>
 </div>
 
 <style>
-.mp-player {
-  --mp-bg: #121212;
-  --mp-primary: #bb86cf;
-  --mp-text: #e0e0e0;
-  --mp-text-muted: #a0a0a0;
-  --mp-focus: #a37df5;
-  --mp-radius: 8px;
-  --mp-btn-size: 48px;
-}
-.mp-player {
-  background: var(--mp-bg);
-  color: var(--mp-text);
-  font-family: system-ui, -apple-system, sans-serif;
-  border-radius: var(--mp-radius);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 400px;
-  margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
-.mp-controls { display: flex; justify-content: center; gap: 16px; }
-.mp-btn {
-  width: var(--mp-btn-size);
-  height: var(--mp-btn-size);
-  border: none;
-  background: transparent;
-  color: var(--mp-text);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-.mp-btn:hover { background: rgba(255,255,255,0.1); }
-.mp-btn:focus-visible { outline: 2px solid var(--mp-focus); outline-offset: 2px; }
-.mp-btn svg { width: 24px; height: 24px; fill: currentColor; }
+  .music-player {
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    user-select: none;
+  }
 
-.mp-progress-container {
-  height: 44px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  touch-action: pan-x;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.mp-progress-container:focus-visible { outline: 2px solid var(--mp-focus); outline-offset: -2px; border-radius: 4px; }
+  .player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.mp-progress {
-  width: 100%;
-  height: 12px;
-  background: #333;
-  border-radius: 6px;
-  overflow: hidden;
-}
-.mp-progress-fill {
-  height: 100%;
-  background: var(--mp-primary);
-  width: 0%;
-  border-radius: 6px;
-  pointer-events: none;
-}
+  .track-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 
-.mp-time {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--mp-text-muted);
-  font-variant-numeric: tabular-nums;
-}
+  .track-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
 
-.mp-volume { display: flex; align-items: center; gap: 8px; }
-.mp-volume-slider {
-  width: 100px;
-  height: 4px;
-  background: transparent;
-  cursor: pointer;
-  appearance: none;
-}
-.mp-volume-slider::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--mp-primary); cursor: pointer; }
-.mp-volume-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--mp-primary); cursor: pointer; border: none; }
-.mp-volume-slider:focus-visible { outline: 2px solid var(--mp-focus); outline-offset: 2px; }
+  .track-artist {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+  }
 
-.mp-playlist {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.mp-playlist-item {
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-}
-.mp-playlist-item:hover { background: rgba(255,255,255,0.05); }
-.mp-playlist-item:focus-visible { outline: 2px solid var(--mp-focus); outline-offset: -2px; }
-.mp-playlist-item[aria-current="true"] { background: rgba(187, 134, 207, 0.15); color: var(--mp-primary); font-weight: 600; }
+  .progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-.mp-error {
-  margin-top: 10px;
-  padding: 8px;
-  background: rgba(255,0,0,0.2);
-  border-radius: 4px;
-  font-size: 13px;
-  text-align: center;
-}
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #333333;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    touch-action: none;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background-color: #1db957;
+    border-radius: 4px;
+    width: 0%;
+    pointer-events: none;
+  }
+
+  .time-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #a0a0a0;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .control-btn {
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .control-btn:hover {
+    background-color: #2a2a2a;
+  }
+
+  .control-btn:focus-visible {
+    outline: 2px solid #1db957;
+    outline-offset: 2px;
+  }
+
+  .play-pause-btn {
+    background-color: #1db957;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+  .play-pause-btn:hover {
+    background-color: #169945;
+  }
+
+  .volume-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .volume-btn {
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    cursor: pointer;
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .volume-btn:hover {
+    background-color: #2a2a2a;
+  }
+
+  .volume-btn:focus-visible {
+    outline: 2px solid #1db957;
+    outline-offset: 2px;
+  }
+
+  .volume-slider {
+    -webkit-appearance: none;
+    width: 80px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #1db957;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #1db957;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+  }
+
+  .volume-slider:focus-visible {
+    outline: 2px solid #1db957;
+    outline-offset: 2px;
+  }
+
+  .playlist {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .playlist ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .playlist-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    font-size: 0.95rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .playlist-item:hover {
+    background-color: #2a2a2a;
+  }
+
+  .playlist-item:focus-visible {
+    outline: 2px solid #1db957;
+    outline-offset: -2px;
+  }
+
+  .playlist-item.active {
+    background-color: #2a2a2a;
+    color: #1db957;
+    font-weight: 600;
+  }
+
+  .error-message {
+    color: #ff5252;
+    font-size: 0.85rem;
+    text-align: center;
+    display: none;
+    padding: 8px;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+  }
+
+  .error-message.visible {
+    display: block;
+  }
 </style>
 
 <script>
-(function() {
-  const root = document.querySelector('.mp-player');
-  if (!root) return;
+  // @ts-nocheck
+  (() => {
+    const root = document.querySelector(".music-player");
+    if (!root) return;
 
-  const audio = root.querySelector('.mp-audio');
-  const btnPrev = root.querySelector('.mp-btn-prev');
-  const btnPlay = root.querySelector('.mp-btn-play');
-  const btnNext = root.querySelector('.mp-btn-next');
-  const btnVol = root.querySelector('.mp-btn-vol');
-  const volSlider = root.querySelector('.mp-volume-slider');
-  const progContainer = root.querySelector('.mp-progress-container');
-  const progFill = root.querySelector('.mp-progress-fill');
-  const timeCurrent = root.querySelector('.mp-time-current');
-  const timeTotal = root.querySelector('.mp-time-total');
-  const playlistItems = root.querySelectorAll('.mp-playlist-item');
-  const errorDiv = root.querySelector('.mp-error');
-  const iconPlay = btnPlay.querySelector('.mp-icon-play');
-  const iconPause = btnPlay.querySelector('.mp-icon-pause');
+    const audio = root.querySelector("audio");
+    const playPauseBtn = root.querySelector(".play-pause-btn");
+    const prevBtn = root.querySelector(".prev-btn");
+    const nextBtn = root.querySelector(".next-btn");
+    const volumeBtn = root.querySelector(".volume-btn");
+    const volumeSlider = root.querySelector(".volume-slider");
+    const progressContainer = root.querySelector(".progress-bar");
+    const progressFill = root.querySelector(".progress-fill");
+    const currentTimeEl = root.querySelector(".current-time");
+    const durationEl = root.querySelector(".duration");
+    const trackTitle = root.querySelector(".track-title");
+    const trackArtist = root.querySelector(".track-artist");
+    const playlistItems = root.querySelectorAll(".playlist-item");
+    const errorMessage = root.querySelector(".error-message");
 
-  const tracks = [
-    'https://upload.wikimedia.org/wikipedia/commons/b/b6/Monplaisir_-_01_-_Free_To_Use_1.ogg',
-    'https://upload.wikimedia.org/wikipedia/commons/8/84/Monplaisir_-_02_-_Free_To_Use_2.ogg',
-    'https://upload.wikimedia.org/wikipedia/commons/9/9c/Monplaisir_-_05_-_Free_To_Use_5.ogg'
-  ];
+    const tracks = [
+      {
+        title: "Free To Use 1",
+        artist: "Monplaisir",
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Monplaisir_-_01_-_Free_To_Use_1.ogg",
+      },
+      {
+        title: "Free To Use 2",
+        artist: "Monplaisir",
+        src: "https://upload.wikimedia.org/wikipedia/commons/8/84/Monplaisir_-_02_-_Free_To_Use_2.ogg",
+      },
+      {
+        title: "Free To Use 5",
+        artist: "Monplaisir",
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Monplaisir_-_05_-_Free_To_Use_5.ogg",
+      },
+    ];
 
-  let currentIndex = 0;
-  let isDragging = false;
+    let currentIndex = 0;
+    let isPlaying = false;
+    let isMuted = false;
+    let savedVolume = 1;
+    let volumeValue = 100;
 
-  function updatePlayIcon() {
-    iconPlay.hidden = !audio.paused;
-    iconPause.hidden = audio.paused;
-    btnPlay.setAttribute('aria-label', audio.paused ? 'Play' : 'Pause');
-  }
+    function formatTime(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+    }
 
-  function loadTrack(index, autoPlay = false) {
-    currentIndex = index;
-    audio.src = tracks[index];
-    audio.load();
-    
-    playlistItems.forEach((item, i) => {
-      item.setAttribute('aria-current', i === index ? 'true' : 'false');
+    function updateUI() {
+      const currentTrack = tracks[currentIndex];
+      trackTitle.textContent = currentTrack.title;
+      trackArtist.textContent = currentTrack.artist;
+
+      playlistItems.forEach((item, i) => {
+        if (i === currentIndex) {
+          item.classList.add("active");
+        } else {
+          item.classList.remove("active");
+        }
+      });
+
+      const playIcon = playPauseBtn.querySelector(".play-icon");
+      const pauseIcon = playPauseBtn.querySelector(".pause-icon");
+
+      if (isPlaying) {
+        playIcon.style.display = "none";
+        pauseIcon.style.display = "block";
+        playPauseBtn.setAttribute("aria-label", "Pausar");
+      } else {
+        playIcon.style.display = "block";
+        pauseIcon.style.display = "none";
+        playPauseBtn.setAttribute("aria-label", "Reproducir");
+      }
+
+      if (isMuted || volumeValue === 0) {
+        volumeSlider.value = 0;
+        volumeIcon.style.opacity = "0.5";
+      } else {
+        volumeSlider.value = volumeValue;
+        volumeIcon.style.opacity = "1";
+      }
+    }
+
+    const volumeIcon = volumeBtn.querySelector("svg");
+
+    function loadTrack(index) {
+      audio.src = tracks[index].src;
+      audio.load();
+      errorMessage.classList.remove("visible");
+      errorMessage.textContent = "";
+      updateUI();
+      progressFill.style.width = "0%";
+      currentTimeEl.textContent = "0:00";
+      durationEl.textContent = "0:00";
+    }
+
+    function playTrack() {
+      if (audio.src) {
+        audio
+          .play()
+          .then(() => {
+            isPlaying = true;
+            updateUI();
+          })
+          .catch((err) => {
+            console.error("Error al reproducir:", err);
+            showError("Error al reproducir la pista.");
+          });
+      }
+    }
+
+    function pauseTrack() {
+      audio.pause();
+      isPlaying = false;
+      updateUI();
+    }
+
+    function nextTrack() {
+      currentIndex = (currentIndex + 1) % tracks.length;
+      loadTrack(currentIndex);
+      if (isPlaying) playTrack();
+    }
+
+    function prevTrack() {
+      currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
+      loadTrack(currentIndex);
+      if (isPlaying) playTrack();
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorMessage.classList.add("visible");
+    }
+
+    function setVolume(val) {
+      volumeValue = val;
+      audio.volume = val / 100;
+      if (val === 0) {
+        isMuted = true;
+        audio.muted = true;
+      } else {
+        isMuted = false;
+        audio.muted = false;
+      }
+      updateUI();
+    }
+
+    // Event Listeners
+    playPauseBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        pauseTrack();
+      } else {
+        playTrack();
+      }
     });
 
-    if (autoPlay) {
-      audio.play().catch(() => {});
-      updatePlayIcon();
-    }
-  }
+    prevBtn.addEventListener("click", prevTrack);
+    nextBtn.addEventListener("click", nextTrack);
 
-  function seekByProgress(e) {
-    const rect = progContainer.getBoundingClientRect();
-    const x = e.touches ? e.touches[0].clientX : e.clientX;
-    const ratio = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
-    if (audio.duration) {
-      audio.currentTime = ratio * audio.duration;
-      progFill.style.width = (ratio * 100) + '%';
-    }
-  }
+    volumeBtn.addEventListener("click", () => {
+      isMuted = !isMuted;
+      if (isMuted) {
+        audio.muted = true;
+        volumeValue = 0;
+      } else {
+        audio.muted = false;
+        volumeValue = savedVolume;
+      }
+      updateUI();
+    });
 
-  function formatTime(seconds) {
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    return `${m}:${s.toString().padStart(2, '0')}`;
-  }
+    volumeSlider.addEventListener("input", (e) => {
+      savedVolume = e.target.value;
+      setVolume(savedVolume);
+    });
 
-  btnPlay.addEventListener('click', () => {
-    if (audio.paused) audio.play().catch(() => {});
-    else audio.pause();
-    updatePlayIcon();
-  });
+    progressContainer.addEventListener("click", (e) => {
+      const rect = progressContainer.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const width = rect.width;
+      const percentage = clickX / width;
+      const duration = audio.duration;
 
-  btnPrev.addEventListener('click', () => {
-    const newIndex = (currentIndex - 1 + tracks.length) % tracks.length;
-    loadTrack(newIndex, true);
-  });
+      if (!isNaN(duration)) {
+        audio.currentTime = percentage * duration;
+      }
+    });
 
-  btnNext.addEventListener('click', () => {
-    const newIndex = (currentIndex + 1) % tracks.length;
-    loadTrack(newIndex, true);
-  });
+    progressContainer.addEventListener(
+      "touchstart",
+      (e) => {
+        e.preventDefault();
+        const rect = progressContainer.getBoundingClientRect();
+        const touchX = e.touches[0].clientX - rect.left;
+        const width = rect.width;
+        const percentage = touchX / width;
+        const duration = audio.duration;
 
-  btnVol.addEventListener('click', () => {
-    audio.muted = !audio.muted;
-  });
+        if (!isNaN(duration)) {
+          audio.currentTime = percentage * duration;
+        }
+      },
+      { passive: false },
+    );
 
-  volSlider.addEventListener('input', (e) => {
-    audio.volume = parseFloat(e.target.value);
-    audio.muted = false;
-  });
+    playlistItems.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        currentIndex = index;
+        loadTrack(currentIndex);
+        playTrack();
+      });
+    });
 
-  progContainer.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    seekByProgress(e);
-  });
+    audio.addEventListener("timeupdate", () => {
+      if (!isNaN(audio.duration)) {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${percent}%`;
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        durationEl.textContent = formatTime(audio.duration);
+      }
+    });
 
-  progContainer.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    seekByProgress(e);
-  }, { passive: true });
+    audio.addEventListener("ended", () => {
+      nextTrack();
+    });
 
-  document.addEventListener('mousemove', (e) => {
-    if (isDragging) seekByProgress(e);
-  });
+    audio.addEventListener("error", () => {
+      showError("Error al cargar la pista.");
+      pauseTrack();
+    });
 
-  document.addEventListener('mouseup', () => isDragging = false);
+    root.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp" && e.target === volumeSlider) {
+        e.preventDefault();
+        const newVol = Math.min(100, volumeValue + 5);
+        volumeSlider.value = newVol;
+        setVolume(newVol);
+      } else if (e.key === "ArrowDown" && e.target === volumeSlider) {
+        e.preventDefault();
+        const newVol = Math.max(0, volumeValue - 5);
+        volumeSlider.value = newVol;
+        setVolume(newVol);
+      } else if (e.key === " " && e.target === progressContainer) {
+        e.preventDefault();
+        if (isPlaying) {
+          pauseTrack();
+        } else {
+          playTrack();
+        }
+      }
+    });
 
-  document.addEventListener('touchmove', (e) => {
-    if (isDragging) seekByProgress(e);
-  }, { passive: true });
-
-  document.addEventListener('touchend', () => isDragging = false);
-
-  progContainer.addEventListener('click', (e) => {
-    if (isDragging) e.stopPropagation();
-  });
-
-  playlistItems.forEach((item, i) => {
-    item.addEventListener('click', () => loadTrack(i, true));
-  });
-
-  audio.addEventListener('play', updatePlayIcon);
-  audio.addEventListener('pause', updatePlayIcon);
-
-  audio.addEventListener('timeupdate', () => {
-    if (!isDragging && audio.duration) {
-      const ratio = audio.currentTime / audio.duration;
-      progFill.style.width = (ratio * 100) + '%';
-      timeCurrent.textContent = formatTime(audio.currentTime);
-      timeTotal.textContent = formatTime(audio.duration);
-    }
-  });
-
-  audio.addEventListener('ended', () => {
-    const nextIndex = (currentIndex + 1) % tracks.length;
-    loadTrack(nextIndex, true);
-  });
-
-  audio.addEventListener('error', () => {
-    errorDiv.hidden = false;
-    errorDiv.textContent = 'Error al cargar la pista. Verifica la conexión.';
-    btnPlay.disabled = true;
-    btnPrev.disabled = true;
-    btnNext.disabled = true;
-  });
-
-  root.addEventListener('keydown', (e) => {
-    const active = document.activeElement;
-    if (!root.contains(active)) return;
-
-    if (e.key === 'ArrowLeft' && active === progContainer) {
-      audio.currentTime = Math.max(0, audio.currentTime - 5);
-    } else if (e.key === 'ArrowRight' && active === progContainer) {
-      audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 5);
-    } else if (e.key === 'Space' && active === progContainer) {
-      audio.paused ? audio.play().catch(() => {}) : audio.pause();
-      updatePlayIcon();
-    } else if (e.key === 'Enter' && active === progContainer) {
-      audio.paused ? audio.play().catch(() => {}) : audio.pause();
-      updatePlayIcon();
-    }
-  });
-
-  loadTrack(0, false);
-})();
+    // Initialize
+    loadTrack(0);
+    setVolume(100);
+  })();
 </script>

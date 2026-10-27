@@ -1,617 +1,469 @@
----
-// AURA — Landing Component
-// Identidad visual: estética editorial, paleta limitada, tipografía expresiva
-// Sin elementos externos, sin frameworks, sin JavaScript
----
-
-<!-- Sección 1: Hero -->
-<section class="section hero">
-  <div class="hero__bg">
-    <div class="hero__circle hero__circle--1"></div>
-    <div class="hero__circle hero__circle--2"></div>
-    <div class="hero__shape hero__shape--1"></div>
-  </div>
-  <div class="hero__content">
-    <h1 class="hero__title">AURA</h1>
-    <p class="hero__tagline">Luz que define</p>
-    <p class="hero__subtitle">Presencia lumínica en cada punto de contacto</p>
-    <a class="hero__cta">Descubrir la diferencia</a>
-  </div>
-</section>
-
-<!-- Sección 2: Valor -->
-<section class="section valor">
-  <div class="valor__grid">
-    <div class="valor__block valor__block--1">
-      <div class="valor__circle"></div>
-      <h2 class="valor__title">Presencia</h2>
-      <p class="valor__desc">Alguien en cada rincón que se siente</p>
+<header>
+  <nav class="nav" aria-label="Navegación principal">
+    <div class="brand">
+      <a class="brand-link">ORIGEN</a>
     </div>
-    <div class="valor__block valor__block--2">
-      <div class="valor__triangle"></div>
-      <h2 class="valor__title">Eficiencia</h2>
-      <p class="valor__desc">Respuesta inmediata a cada necesidad</p>
-    </div>
-    <div class="valor__block valor__block--3">
-      <div class="valor__diamond"></div>
-      <h2 class="valor__title">Innovación</h2>
-      <p class="valor__desc">Novedad que redefine cada paso</p>
-    </div>
-  </div>
-</section>
+    <ul class="nav-list">
+      <li><a>Productos</a></li>
+      <li><a>Nuestro proceso</a></li>
+      <li><a>Contacto</a></li>
+    </ul>
+  </nav>
+</header>
 
-<!-- Sección 3: Concepto -->
-<section class="section concepto">
-  <div class="concepto__grid">
-    <div class="concepto__text">
-      <h2 class="concepto__heading">La idea que nos define</h2>
-      <p class="concepto__body">AURA es un lenguaje visual que trasciende lo convencional. Nace de la observación de lo que importa: la presencia de cada detalle, la intensidad de cada gesto, la claridad de cada decisión.</p>
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">ORIGEN</h1>
+      <h2 class="hero-tagline">Donde cada detalle es un poema</h2>
+      <p class="hero-desc">
+        Calidad, precisión y visión. Nace en la periferia, se eleva en el
+        centro.
+      </p>
+      <a class="btn-cta">Descubre más</a>
     </div>
-    <div class="concepto__shape"></div>
-  </div>
-</section>
+    <div class="hero-visual">
+      <div class="hero-shape"></div>
+    </div>
+  </section>
 
-<!-- Sección 4: Visual -->
-<section class="section visual">
-  <div class="visual__poster">
-    <div class="visual__layer visual__layer--1"></div>
-    <div class="visual__layer visual__layer--2"></div>
-    <div class="visual__layer visual__layer--3"></div>
-    <div class="visual__shape visual__shape--1"></div>
-    <div class="visual__shape visual__shape--2"></div>
-    <div class="visual__shape visual__shape--3"></div>
-    <h2 class="visual__title">Un lenguaje sin límites</h2>
-    <p class="visual__subtitle">Donde lo geométrico encuentra lo emocional</p>
-  </div>
-</section>
+  <section class="value">
+    <h2 class="section-title">Nuestra propuesta</h2>
+    <div class="value-grid">
+      <article class="value-card">
+        <div class="value-icon circle"></div>
+        <h3>Materiales excepcionales</h3>
+        <p>
+          Cada pieza es creada con materiales seleccionados y acabados que
+          cuentan historia.
+        </p>
+      </article>
+      <article class="value-card">
+        <div class="value-icon diamond"></div>
+        <h3>Diseño pensado en cada detalle</h3>
+        <p>
+          Un proceso riguroso de creación donde cada gesto cuenta con precisión.
+        </p>
+      </article>
+      <article class="value-card">
+        <div class="value-icon triangle"></div>
+        <h3>Experiencia humana por encima de todo</h3>
+        <p>
+          Una relación humana con cada producto que se convierte en un vínculo.
+        </p>
+      </article>
+    </div>
+  </section>
 
-<!-- Sección 5: Cierre -->
-<section class="section cierre">
-  <div class="cierre__content">
-    <p class="cierre__message">Tu transformación comienza aquí</p>
-    <a class="cierre__cta">Iniciar ahora</a>
-  </div>
-</section>
+  <section class="concept">
+    <h2 class="section-title">La filosofía</h2>
+    <div class="concept-layout">
+      <div class="concept-text">
+        <p>
+          ORIGEN no es solo un nombre. Es la memoria de un lugar donde todo
+          comienza, donde las líneas se abren y la historia se escribe. Cada
+          proyecto nace de un impulso, se transforma en algo único y se eleva.
+        </p>
+      </div>
+      <div class="concept-shape"></div>
+    </div>
+  </section>
+
+  <section class="aesthetic">
+    <div class="poster">
+      <div class="poster-inner">
+        <h1 class="poster-title">ORIGEN</h1>
+        <div class="poster-shape circle"></div>
+        <div class="poster-shape diamond"></div>
+        <div class="poster-shape triangle"></div>
+        <div class="poster-line"></div>
+        <div class="poster-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <h2 class="section-title">Únete a nosotros</h2>
+    <p class="close-text">
+      La oportunidad de participar en lo que realmente importa.
+    </p>
+    <a class="btn-cta">Comienza ahora</a>
+  </section>
+</main>
 
 <style>
-/* ========== RESET ========== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #0d0d12;
-  --bg-deep: #08080f;
-  --accent: #c8965a;
-  --accent-dark: #8a6a3a;
-  --accent-light: #e8c88c;
-  --emerald: #2a6a4a;
-  --emerald-dark: #1a4a3a;
-  --coral: #d45d3e;
-  --coral-dark: #a03a2a;
-  --white: #fafaf9;
-  --gray: #6a6a7a;
-  --gray-dark: #3a3a4a;
-  --card-bg: #12121a;
-  --border: rgba(200,150,90,0.12);
-  --nav-h: 96px;
-}
-
-/* ========== SECCIÓN 1: HERO ========== */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  scroll-margin-top: 96px;
-}
-
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,150,90,0.06) 0%, transparent 70%);
-}
-
-.hero__circle {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(200,150,90,0.08);
-  animation: float 8s ease-in-out infinite;
-}
-
-.hero__circle--1 {
-  width: 400px;
-  height: 400px;
-  top: -100px;
-  right: -100px;
-  background: radial-gradient(circle, rgba(200,150,90,0.12) 0%, transparent 70%);
-}
-
-.hero__circle--2 {
-  width: 250px;
-  height: 250px;
-  bottom: -50px;
-  left: -50px;
-  background: radial-gradient(circle, rgba(200,150,90,0.08) 0%, transparent 70%);
-  animation-delay: -3s;
-}
-
-.hero__shape {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  transform: rotate(45deg);
-  background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
-  opacity: 0.08;
-  animation: pulse 4s ease-in-out infinite;
-}
-
-.hero__shape--1 { top: 10%; left: 5%; }
-.hero__shape--2 { bottom: 20%; right: 10%; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-15px) translateX(10px); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.05; transform: scale(1); }
-  50% { opacity: 0.12; transform: scale(1.05); }
-}
-
-.hero__content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 640px;
-  padding: 0 2rem;
-}
-
-.hero__title {
-  font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  font-size: clamp(4rem, 12vw, 8rem);
-  font-weight: 200;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-.hero__tagline {
-  font-size: 1.4rem;
-  font-weight: 300;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  margin-bottom: 0.75rem;
-}
-
-.hero__subtitle {
-  font-size: 1rem;
-  color: var(--gray);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.hero__cta {
-  display: inline-block;
-  padding: 0.85rem 2.5rem;
-  background: var(--accent);
-  color: var(--bg);
-  font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 0% 100%);
-}
-
-.hero__cta:hover {
-  background: var(--accent-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(200,150,90,0.3);
-}
-
-.hero__cta:focus { outline: 2px solid var(--white); outline-offset: 4px; }
-
-/* ========== SECCIÓN 2: VALOR ========== */
-.valor {
-  padding: 8rem 2rem;
-  background: var(--bg);
-  scroll-margin-top: 96px;
-}
-
-.valor__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.valor__block {
-  position: relative;
-  padding: 2.5rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
-  transition: transform 0.4s ease, border-color 0.4s ease;
-}
-
-.valor__block:hover {
-  transform: translateY(-4px);
-  border-color: rgba(200,150,90,0.3);
-}
-
-.valor__block::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(200,150,90,0.03) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.valor__block--1 {
-  background: linear-gradient(135deg, #12121a 0%, #0d0d12 100%);
-}
-
-.valor__block--2 {
-  background: linear-gradient(135deg, #12121a 0%, #0d0d12 100%);
-}
-
-.valor__block--3 {
-  background: linear-gradient(135deg, #12121a 0%, #0d0d12 100%);
-}
-
-.valor__circle,
-.valor__triangle,
-.valor__diamond {
-  position: absolute;
-  opacity: 0.08;
-  background: var(--accent);
-}
-
-.valor__circle {
-  width: 60px;
-  height: 60px;
-  top: -10px;
-  right: -10px;
-  border-radius: 50%;
-}
-
-.valor__triangle {
-  width: 0;
-  height: 0;
-  border-left: 35px solid transparent;
-  border-right: 35px solid transparent;
-  border-bottom: 70px solid var(--emerald);
-  bottom: -15px;
-  left: 10px;
-}
-
-.valor__diamond {
-  width: 0;
-  height: 0;
-  border-left: 35px solid transparent;
-  border-right: 35px solid transparent;
-  border-bottom: 50px solid var(--coral);
-  top: -10px;
-  right: 10px;
-}
-
-.valor__title {
-  font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: var(--white);
-  margin-bottom: 0.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.valor__desc {
-  font-size: 0.9rem;
-  color: var(--gray);
-  line-height: 1.5;
-  position: relative;
-  z-index: 1;
-}
-
-/* ========== SECCIÓN 3: CONCEPTO ========== */
-.concepto {
-  padding: 8rem 2rem;
-  background: var(--bg);
-  position: relative;
-  overflow: hidden;
-  scroll-margin-top: 96px;
-}
-
-.concepto__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  align-items: center;
-}
-
-.concepto__text h2 {
-  font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--white);
-  letter-spacing: 0.05em;
-  margin-bottom: 1.5rem;
-}
-
-.concepto__body {
-  font-size: 1.05rem;
-  color: var(--gray);
-  line-height: 1.8;
-  max-width: 520px;
-}
-
-.concepto__shape {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(200,150,90,0.06) 0%, transparent 70%);
-  border-radius: 50%;
-}
-
-.concepto__shape::before {
-  content: '';
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--accent);
-  opacity: 0.05;
-  border-radius: 50%;
-}
-
-.concepto__shape::after {
-  content: '';
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--emerald);
-  opacity: 0.04;
-  border-radius: 50%;
-}
-
-/* ========== SECCIÓN 4: VISUAL ========== */
-.visual {
-  padding: 8rem 2rem;
-  background: var(--bg);
-  position: relative;
-  scroll-margin-top: 96px;
-}
-
-.visual__poster {
-  position: relative;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1000px;
-}
-
-.visual__layer {
-  position: absolute;
-  inset: 0;
-  transition: transform 0.5s ease;
-}
-
-.visual__layer--1 {
-  background: linear-gradient(135deg, var(--accent) 0%, #2a1a1a 100%);
-  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 60% 100%, 0% 100%);
-}
-
-.visual__layer--2 {
-  background: linear-gradient(225deg, var(--coral) 0%, #1a0d0d 100%);
-  clip-path: polygon(100% 0%, 0% 100%, 100% 100%, 0% 0%);
-  opacity: 0.15;
-}
-
-.visual__layer--3 {
-  background: radial-gradient(ellipse at 30% 20%, var(--emerald) 0%, transparent 50%),
-              radial-gradient(ellipse at 70% 80%, var(--accent) 0%, transparent 50%);
-  opacity: 0.25;
-}
-
-.visual__shape {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  opacity: 0.12;
-}
-
-.visual__shape--1 {
-  top: 10%;
-  left: 15%;
-  background: var(--accent);
-  border-radius: 36px;
-  transform: rotate(15deg) scale(0.8);
-}
-
-.visual__shape--2 {
-  bottom: 20%;
-  right: 20%;
-  background: var(--coral);
-  border-radius: 50%;
-  transform: rotate(-20deg) scale(0.9);
-}
-
-.visual__shape--3 {
-  top: 50%;
-  left: 30%;
-  background: var(--emerald);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  transform: rotate(45deg) scale(0.7);
-}
-
-.visual__title {
-  position: relative;
-  z-index: 2;
-  font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  font-size: 3.5rem;
-  font-weight: 200;
-  color: var(--white);
-  letter-spacing: 0.08em;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
-
-.visual__subtitle {
-  font-size: 1rem;
-  color: var(--accent);
-  letter-spacing: 0.2em;
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-/* ========== SECCIÓN 5: CIERRE ========== */
-.cierre {
-  padding: 8rem 2rem;
-  background: var(--bg);
-  text-align: center;
-  scroll-margin-top: 96px;
-}
-
-.cierre__content {
-  position: relative;
-  z-index: 2;
-  max-width: 560px;
-  margin: 0 auto;
-}
-
-.cierre__message {
-  font-size: 1.15rem;
-  color: var(--gray);
-  line-height: 1.7;
-  margin-bottom: 2rem;
-  letter-spacing: 0.03em;
-}
-
-.cierre__cta {
-  display: inline-block;
-  padding: 0.85rem 2.5rem;
-  background: var(--coral);
-  color: var(--white);
-  font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 0% 100%);
-}
-
-.cierre__cta:hover {
-  background: var(--coral-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(212,93,62,0.3);
-}
-
-.cierre__cta:focus { outline: 2px solid var(--white); outline-offset: 4px; }
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-  .valor__grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: #0d0d0d;
   }
 
-  .concepto__grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .brand-link {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #f0f0f0;
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
 
-  .concepto__body {
+  .brand-link:hover {
+    color: #ff6b35;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list a {
+    color: #555555;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+
+  .nav-list a:hover {
+    color: #ff6b35;
+  }
+
+  .hero {
+    background: #0d0d0d;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 8% 4rem;
+    position: relative;
+  }
+
+  .hero-content {
+    max-width: 600px;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 8rem;
+    font-weight: 300;
+    line-height: 1.1;
+    color: #f0f0f0;
+    margin: 0 0 0.5rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.5rem;
+    color: #ff6b35;
+    margin: 0 0 1.5rem;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: #555555;
+    margin: 0 0 2rem;
+    max-width: 500px;
+  }
+
+  .btn-cta {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: #ff6b35;
+    color: #0d0d0d;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition:
+      background 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .btn-cta:hover {
+    background: #e85d1c;
+    transform: translateY(-2px);
+  }
+
+  .hero-visual {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    background: #ff6b35;
+    opacity: 0.1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    pointer-events: none;
+  }
+
+  .value {
+    padding: 5rem 5% 3rem;
+    background: #111111;
+  }
+
+  .section-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2rem;
+    color: #f0f0f0;
+    margin: 0 0 3rem;
+    text-align: center;
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .value-card {
+    background: #1a1a1a;
+    padding: 2rem;
+    text-align: center;
+    border-left: 4px solid #ff6b35;
+    transition: transform 0.3s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .value-card h3 {
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem;
+    color: #f0f0f0;
+  }
+
+  .value-card p {
+    color: #555555;
     font-size: 0.95rem;
+    margin: 0;
   }
 
-  .visual__poster {
+  .concept {
+    padding: 5rem 5% 3rem;
+    background: #0d0d0d;
+  }
+
+  .concept-layout {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .concept-text {
+    flex: 1;
+    font-size: 1.1rem;
+    color: #555555;
+    line-height: 1.8;
+  }
+
+  .concept-shape {
+    flex: 1;
+    width: 400px;
+    height: 400px;
+    background: #ff6b35;
+    opacity: 0.05;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  }
+
+  .aesthetic {
+    padding: 5rem 5% 3rem;
+    background: #111111;
+  }
+
+  .poster {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     min-height: 500px;
   }
 
-  .visual__title {
-    font-size: 2rem;
+  .poster-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #0d0d0d;
+    overflow: hidden;
   }
 
-  .visual__shape {
-    transform: scale(0.7);
+  .poster-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12rem;
+    font-weight: 300;
+    color: #f0f0f0;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    margin: 0;
+    z-index: 2;
   }
 
-  .hero__content {
-    padding: 0 1rem;
+  .poster-shape {
+    position: absolute;
   }
 
-  .hero__title {
-    font-size: 3rem;
+  .poster-shape.circle {
+    width: 400px;
+    height: 400px;
+    background: #ff6b35;
+    opacity: 0.15;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
-  .hero__tagline {
-    font-size: 1.1rem;
+  .poster-shape.diamond {
+    width: 250px;
+    height: 250px;
+    background: #f4a261;
+    opacity: 0.1;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
-  .hero__subtitle {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .visual__title {
-    font-size: 1.6rem;
-  }
-
-  .visual__poster {
-    min-height: 400px;
+  .poster-shape.triangle {
+    width: 300px;
+    height: 300px;
+    background: #ff6b35;
+    opacity: 0.12;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    bottom: 10%;
+    right: 5%;
   }
 
-  .visual__shape--1 { width: 80px; height: 80px; }
-  .visual__shape--2 { width: 70px; height: 70px; }
-  .visual__shape--3 { width: 60px; height: 60px; }
-
-  .concepto__text h2 {
-    font-size: 1.8rem;
+  .poster-line {
+    position: absolute;
+    height: 2px;
+    background: #ff6b35;
+    opacity: 0.5;
   }
 
-  .valor__block {
-    padding: 1.5rem;
+  .poster-line.line-1 {
+    width: 80%;
+    top: 50%;
+    left: 10%;
   }
 
-  .hero__title {
-    font-size: 2.2rem;
-  }
-}
-
-/* ========== REDUCED MOTION ========== */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .poster-line.line-2 {
+    width: 60%;
+    top: 60%;
+    left: 30%;
+    transform: rotate(45deg);
   }
 
-  .hero__circle { animation: none; }
-  .visual__layer { transition: none; }
-}
+  .poster-line.line-3 {
+    width: 40%;
+    top: 40%;
+    left: 60%;
+    transform: rotate(-30deg);
+  }
+
+  .close {
+    padding: 5rem 5% 3rem;
+    background: #0d0d0d;
+  }
+
+  .btn-cta.close-btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: #ff6b35;
+    color: #0d0d0d;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition:
+      background 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .btn-cta.close-btn:hover {
+    background: #e85d1c;
+    transform: translateY(-2px);
+  }
+
+  a:focus-visible {
+    outline: 2px solid #ff6b35;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 5rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.2rem;
+    }
+
+    .hero {
+      padding: 4rem 5% 2rem;
+    }
+
+    .value-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .concept-layout {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .poster-title {
+      font-size: 8rem;
+      letter-spacing: 4px;
+    }
+
+    .poster-shape.circle {
+      width: 250px;
+      height: 250px;
+    }
+
+    .poster-shape.diamond {
+      width: 180px;
+      height: 180px;
+    }
+
+    .poster-shape.triangle {
+      width: 200px;
+      height: 200px;
+    }
+
+    .nav {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 5%;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
 </style>

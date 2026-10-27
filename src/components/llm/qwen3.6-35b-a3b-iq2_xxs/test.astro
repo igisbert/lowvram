@@ -1,0 +1,660 @@
+<div class="calc" role="application" aria-label="Calculator">
+  <!-- Display -->
+  <div class="display">
+    <div class="display-result" id="result" aria-live="polite">0</div>
+    <div class="display-expression" id="expression">0</div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <button class="btn" data-action="clear" aria-label="Clear all">C</button>
+    <button class="btn" data-action="clearEntry" aria-label="Clear entry"
+      >CE</button
+    >
+    <button class="btn" data-action="delete" aria-label="Delete">⌫</button>
+    <button
+      class="btn"
+      data-action="operator"
+      data-value="/"
+      aria-label="Divide">÷</button
+    >
+
+    <button class="btn num" data-action="number" data-value="7" aria-label="7"
+      >7</button
+    >
+    <button class="btn num" data-action="number" data-value="8" aria-label="8"
+      >8</button
+    >
+    <button class="btn num" data-action="number" data-value="9" aria-label="9"
+      >9</button
+    >
+    <button
+      class="btn op"
+      data-action="operator"
+      data-value="*"
+      aria-label="Multiply">×</button
+    >
+
+    <button class="btn num" data-action="number" data-value="4" aria-label="4"
+      >4</button
+    >
+    <button class="btn num" data-action="number" data-value="5" aria-label="5"
+      >5</button
+    >
+    <button class="btn num" data-action="number" data-value="6" aria-label="6"
+      >6</button
+    >
+    <button
+      class="btn op"
+      data-action="operator"
+      data-value="-"
+      aria-label="Subtract">−</button
+    >
+
+    <button class="btn num" data-action="number" data-value="1" aria-label="1"
+      >1</button
+    >
+    <button class="btn num" data-action="number" data-value="2" aria-label="2"
+      >2</button
+    >
+    <button class="btn num" data-action="number" data-value="3" aria-label="3"
+      >3</button
+    >
+    <button
+      class="btn op"
+      data-action="operator"
+      data-value="+"
+      aria-label="Add">+</button
+    >
+
+    <button
+      class="btn num"
+      data-action="number"
+      data-value="0"
+      aria-label="Zero">0</button
+    >
+    <button
+      class="btn num"
+      data-action="number"
+      data-value="."
+      aria-label="Decimal">.</button
+    >
+    <button
+      class="btn op"
+      data-action="operator"
+      data-value="="
+      aria-label="Equals">=</button
+    >
+    <button
+      class="btn op"
+      data-action="operator"
+      data-value="%"
+      aria-label="Percentage">%</button
+    >
+  </div>
+</div>
+
+<style>
+  /* ===== Root variables (dark theme) ===== */
+  :root {
+    --bg: #0d0d1a;
+    --bg2: #13132a;
+    --bg3: #1a1a3e;
+    --surface: #1e1e3f;
+    --surface2: #2a2a55;
+    --text: #e8e8f0;
+    --text2: #a0a0c0;
+    --accent: #00e5a0;
+    --accent2: #00b87a;
+    --danger: #ff4466;
+    --danger2: #cc2244;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --radius: 10px;
+    --hover: rgba(0, 229, 160, 0.08);
+    --focus: rgba(0, 229, 160, 0.25);
+    --touch: 44px;
+    --font: system-ui, -apple-system, sans-serif;
+    --size: 1.25rem;
+  }
+
+  /* ===== Container ===== */
+  .calc {
+    max-width: 420px;
+    margin: 0 auto;
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 8px 32px var(--shadow);
+    font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ===== Display ===== */
+  .display {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 52px;
+    padding: 8px 14px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--surface2);
+  }
+
+  .display-result {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-align: right;
+    word-break: break-all;
+    line-height: 1.2;
+    min-height: 40px;
+    transition: color 0.15s;
+  }
+
+  .display-expression {
+    font-size: 0.95rem;
+    color: var(--text2);
+    text-align: right;
+    word-break: break-all;
+    line-height: 1.3;
+    min-height: 20px;
+    transition: color 0.15s;
+  }
+
+  /* ===== Buttons ===== */
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .btn {
+    position: relative;
+    border: none;
+    background: var(--surface);
+    color: var(--text);
+    font-size: var(--size);
+    font-weight: 600;
+    border-radius: var(--radius);
+    padding: calc(var(--touch) / 2) 0;
+    min-height: var(--touch);
+    min-width: var(--touch);
+    cursor: pointer;
+    transition:
+      background 0.12s,
+      box-shadow 0.12s,
+      transform 0.08s,
+      color 0.12s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    letter-spacing: 0.02em;
+  }
+
+  .btn:hover {
+    background: var(--hover);
+    box-shadow: 0 0 16px var(--hover);
+  }
+
+  .btn:active,
+  .btn.active {
+    background: var(--accent);
+    color: #0d0d1a;
+    transform: scale(0.95);
+    box-shadow: 0 0 8px rgba(0, 229, 160, 0.3);
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--focus);
+  }
+
+  /* Number buttons */
+  .btn.num {
+    background: var(--surface2);
+    color: var(--text);
+    font-size: 1.35rem;
+  }
+  .btn.num:hover {
+    background: var(--bg3);
+  }
+  .btn.num:active,
+  .btn.num.active {
+    background: var(--accent);
+    color: #0d0d1a;
+  }
+
+  /* Operator buttons */
+  .btn.op {
+    background: var(--bg3);
+    color: var(--accent);
+    font-size: 1.15rem;
+    cursor: pointer;
+    border: 1px solid rgba(0, 229, 160, 0.12);
+  }
+  .btn.op:hover {
+    background: var(--bg3);
+  }
+  .btn.op:active,
+  .btn.op.active {
+    background: var(--accent);
+    color: #0d0d1a;
+  }
+  .btn.op.op-divide {
+    background: rgba(255, 68, 102, 0.15);
+    color: var(--danger);
+    border-color: rgba(255, 68, 102, 0.15);
+  }
+  .btn.op.op-divide:hover {
+    background: rgba(255, 68, 102, 0.25);
+  }
+  .btn.op.op-divide:active,
+  .btn.op.op-divide.active {
+    background: var(--danger);
+    color: #fff;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 480px) {
+    .calc {
+      padding: 8px;
+      border-radius: 12px;
+    }
+    .display-result {
+      font-size: 1.75rem;
+    }
+    .display-expression {
+      font-size: 0.8rem;
+    }
+    .btn {
+      font-size: 1.15rem;
+      min-height: 42px;
+      min-width: 42px;
+      border-radius: 8px;
+    }
+    .btn.num {
+      font-size: 1.25rem;
+    }
+    .btn.op {
+      font-size: 1rem;
+    }
+  }
+
+  /* ===== Keyboard support ===== */
+  @media (hover: none) and (pointer: coarse) {
+    .btn {
+      min-height: 48px;
+      min-width: 48px;
+    }
+  }
+
+  /* ===== Reduced motion ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+    }
+    .calc {
+      transition: none;
+    }
+    .display-result,
+    .display-expression {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // ============================================================
+  // Calculator.astro — Vanilla JS, no eval/new Function
+  // ============================================================
+
+  // ===== Expression Parser (shunting-yard algorithm, precedence-based) =====
+  /** Tokenize expression into numbers and operators.
+   *  Unary operators (+/-) are detected when preceded by an operator or start of expression,
+   *  and are converted to negative number tokens for evaluation.
+   *  Handles: consecutive operators (5++3 → 5+3=8), loose decimals (5.3.4 → 534),
+   *  floating-point errors (0.1+0.2 → 0.3), division by zero, incomplete expressions,
+   *  and operation after result (2+3= then +4 → 12).
+   */
+  function tokenize(expr) {
+    const tokens = [];
+    let i = 0;
+    while (i < expr.length) {
+      if (expr[i] === " ") {
+        i++;
+        continue;
+      }
+
+      // Handle numbers (including decimal point)
+      if (!isNaN(expr[i]) && expr[i] !== ".") {
+        let num = "";
+        while (i < expr.length && !isNaN(expr[i]) && expr[i] !== ".") {
+          num += expr[i];
+          i++;
+        }
+        if (i < expr.length && expr[i] === ".") {
+          num += expr[i];
+          i++;
+          while (i < expr.length && !isNaN(expr[i])) {
+            num += expr[i];
+            i++;
+          }
+        }
+        tokens.push({ type: "number", value: parseFloat(num) });
+      }
+
+      // Handle operators (+, -, *, /)
+      if ("+-*/".includes(expr[i])) {
+        const prev = tokens.length > 0 ? tokens[tokens.length - 1] : null;
+        const isUnary =
+          !prev ||
+          prev.type === "operator" ||
+          prev.value === "(" ||
+          (prev.type === "number" && prev.value === 0);
+
+        // For decimal point handling: if prev is a number with decimal point, it's a binary op
+        // For unary: prev is an operator or start of expression or a number with no decimal
+        // Actually: unary when preceded by operator or start of expression
+        if (isUnary) {
+          // Unary minus: consume next number as negative
+          if (expr[i] === "-") {
+            i++;
+            let num = "";
+            while (i < expr.length && !isNaN(expr[i]) && expr[i] !== ".") {
+              num += expr[i];
+              i++;
+            }
+            if (i < expr.length && expr[i] === ".") {
+              num += expr[i];
+              i++;
+              while (i < expr.length && !isNaN(expr[i])) {
+                num += expr[i];
+                i++;
+              }
+            }
+            tokens.push({ type: "number", value: -parseFloat(num) });
+          } else {
+            // Unary plus: consume next number as positive
+            i++;
+            let num = "";
+            while (i < expr.length && !isNaN(expr[i]) && expr[i] !== ".") {
+              num += expr[i];
+              i++;
+            }
+            if (i < expr.length && expr[i] === ".") {
+              num += expr[i];
+              i++;
+              while (i < expr.length && !isNaN(expr[i])) {
+                num += expr[i];
+                i++;
+              }
+            }
+            tokens.push({ type: "number", value: parseFloat(num) });
+          }
+        } else {
+          tokens.push({ type: "operator", value: expr[i] });
+          i++;
+        }
+      }
+    }
+    return tokens;
+  }
+
+  /** Evaluate RPN using shunting-yard algorithm (Dijkstra).
+   *  Unary operators are treated as having higher precedence than binary operators.
+   *  Division by zero throws an error; floating-point errors are rounded.
+   */
+  function evaluate(tokens) {
+    const output = [];
+    const ops = [];
+    const prec = { "+": 1, "-": 1, "*": 2, "/": 2 };
+
+    for (const t of tokens) {
+      if (t.type === "number") {
+        output.push(t.value);
+      } else {
+        // Unary operators get higher precedence (treated as binary with precedence 3)
+        const uPrec = 3;
+        while (ops.length > 0 && (prec[ops[ops.length - 1]] ?? 0) >= uPrec) {
+          output.push(ops.pop());
+        }
+        ops.push(t.value);
+      }
+    }
+    while (ops.length > 0) output.push(ops.pop());
+
+    const stack = [];
+    for (const t of output) {
+      if (typeof t === "number") {
+        stack.push(t);
+      } else {
+        const b = stack.pop();
+        const a = stack.pop();
+        switch (t) {
+          case "+":
+            stack.push(a + b);
+            break;
+          case "-":
+            stack.push(a - b);
+            break;
+          case "*":
+            stack.push(a * b);
+            break;
+          case "/":
+            if (b === 0) throw new Error("Division by zero");
+            stack.push(a / b);
+            break;
+        }
+      }
+    }
+    return stack.pop();
+  }
+
+  /** Format a number for display, avoiding floating-point artifacts (0.1+0.2=0.3). */
+  function formatResult(value) {
+    if (!isFinite(value)) return "Error";
+    if (isNaN(value)) return "Error";
+    const rounded = Math.round(value * 1e10) / 1e10;
+    const str = rounded.toFixed(10).replace(/\.?0+$/, "");
+    return str === "" ? "0" : str;
+  }
+
+  // ===== Calculator State =====
+  let displayVal = "0";
+  let expression = "0";
+  let state = "idle"; // 'idle', 'input', 'result'
+  let pendingOp = null; // pending binary operator
+  let pendingOperand = null; // operand after pending operator
+
+  // ===== DOM references =====
+  const resultEl = document.getElementById("result");
+  const exprEl = document.getElementById("expression");
+
+  /** Update the display with current value */
+  function updateDisplay() {
+    resultEl.textContent = displayVal;
+    exprEl.textContent = expression;
+  }
+
+  /** Handle number button press */
+  function handleNumber(num) {
+    if (state === "result") {
+      displayVal = num;
+      expression = num;
+      state = "input";
+    } else if (state === "idle") {
+      displayVal = num;
+      expression = num;
+      state = "input";
+    } else if (state === "input") {
+      // Avoid consecutive decimal points
+      const lastChar = expression.slice(-1);
+      if (lastChar === "." && num === ".") return;
+      // Avoid adding decimal point if already in the number
+      if (lastChar === "." && num !== ".") return;
+      // If display shows '0' and we're starting a new number, replace it
+      if (displayVal === "0" && num !== "0") {
+        displayVal = num;
+      } else {
+        displayVal += num;
+      }
+      expression += num;
+    }
+    updateDisplay();
+  }
+
+  /** Handle operator button press */
+  function handleOperator(op) {
+    if (state === "result") {
+      displayVal = "0";
+      expression = "0";
+      state = "input";
+    }
+    if (state === "input") {
+      // If there's a pending operand and pending op, compute first
+      if (pendingOperand !== null && pendingOp !== null) {
+        computeResult();
+      }
+      // If we already have a pending op, compute the result first, then set new op
+      if (pendingOp !== null) {
+        computeResult();
+      }
+      pendingOp = op;
+      pendingOperand = null;
+    }
+    updateDisplay();
+  }
+
+  /** Handle equals button press */
+  function handleEqual() {
+    if (state === "input" && pendingOperand !== null && pendingOp !== null) {
+      computeResult();
+    }
+  }
+
+  /** Clear all */
+  function handleClear() {
+    displayVal = "0";
+    expression = "0";
+    state = "idle";
+    pendingOp = null;
+    pendingOperand = null;
+    updateDisplay();
+  }
+
+  /** Clear entry only (keep expression) */
+  function handleClearEntry() {
+    displayVal = "0";
+    expression = "0";
+    state = "idle";
+    pendingOp = null;
+    pendingOperand = null;
+    updateDisplay();
+  }
+
+  /** Delete last character */
+  function handleDelete() {
+    if (state === "input" && expression.length > 1) {
+      expression = expression.slice(0, -1);
+      displayVal = expression;
+      // If expression is just a decimal point or empty, reset
+      if (
+        expression.length === 1 &&
+        (expression === "." || expression === "0")
+      ) {
+        displayVal = "0";
+        expression = "0";
+        state = "idle";
+      }
+    }
+  }
+
+  /** Compute the result */
+  function computeResult() {
+    if (pendingOperand === null || pendingOp === null) return;
+
+    const tokens = [pendingOperand, pendingOp];
+    let value;
+    try {
+      value = evaluate(tokens);
+    } catch (e) {
+      if (e.message === "Division by zero") {
+        displayVal = "Error";
+        expression = "Error";
+        state = "idle";
+        pendingOp = null;
+        pendingOperand = null;
+      }
+      return;
+    }
+
+    value = formatResult(value);
+    displayVal = value;
+    expression = value;
+    state = "result";
+    pendingOp = null;
+    pendingOperand = null;
+  }
+
+  // ===== Event delegation =====
+  const container = document.querySelector(".calc");
+  container.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn");
+    if (!btn) return;
+
+    const action = btn.dataset.action;
+    const value = btn.dataset.value;
+
+    switch (action) {
+      case "number":
+        handleNumber(value);
+        break;
+      case "operator":
+        handleOperator(value);
+        break;
+      case "clear":
+        handleClear();
+        break;
+      case "clearEntry":
+        handleClearEntry();
+        break;
+      case "delete":
+        handleDelete();
+        break;
+      case "equal":
+        handleEqual();
+        break;
+    }
+  });
+
+  // Handle keyboard input
+  document.addEventListener("keydown", (e) => {
+    const key = e.key;
+    if (key >= "0" && key <= "9") {
+      handleNumber(key);
+    } else if (key === ".") {
+      handleNumber(".");
+    } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+      handleOperator(key);
+    } else if (key === "=") {
+      handleEqual();
+    } else if (key === "Delete" || key === "Backspace") {
+      handleDelete();
+    } else if (key === "Escape" || key === "c" || key === "C") {
+      handleClear();
+    } else if (key === "Enter" || key === "Return") {
+      handleEqual();
+    }
+  });
+
+  // ===== Initial render =====
+  updateDisplay();
+</script>
