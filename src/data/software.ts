@@ -275,6 +275,7 @@ export const ocrSoftware: SoftwareItem[] = [
     ],
     audience: "Quien ya lo usa para LLM y quiere OCR sin instalar nada más.",
     pros: ["Nada más que instalar si ya lo usas", "Mismo flujo que ya conoces del texto"],
+    recommended: true
   },
 ];
 
@@ -300,6 +301,7 @@ export const classifierSoftware: SoftwareItem[] = [
     audience: "Quien ya lo usa para LLM y quiere probar decisión.",
     pros: ["Ya instalado si vienes de LLM", "Sirve los GGUF por API con llama-server"],
     cons: ["Más pesado que un clasificador dedicado"],
+    recommended: true
   },
 ];
 
@@ -313,7 +315,8 @@ export const embeddingSoftware: SoftwareItem[] = [
     ],
     audience: "Quien ya lo usa para LLM y quiere añadir búsqueda semántica sin instalar nada más.",
     pros: ["Nada más que instalar si ya lo usas", "Mismo flujo que ya conoces del texto", "Endpoint de embeddings integrado en llama-server"],
-    cons: ["Solo terminal, sin interfaz"],
+    cons: ["Solo terminal, sin interfaz"], 
+    recommended: true
   },
 ];
 

@@ -23,10 +23,15 @@ const pct = (value: number) =>
     <p class="demo-model">{model}</p>
   </header>
 
-  <p class="prompt mono">prompt: {prompt || '""'}</p>
+  <div class="prompt">
+    <p class="demo-label">Prompt</p>
+    <p class="prompt-text mono">{prompt || '""'}</p>
+  </div>
 
-  <p class="demo-label">Frase de referencia</p>
-  <p class="reference">{reference}</p>
+  <div class="reference">
+    <p class="demo-label">Frase de referencia</p>
+    <p class="reference-text">{reference}</p>
+  </div>
 
   <ul class="comparisons">
     {
@@ -53,14 +58,27 @@ const pct = (value: number) =>
 
   .reference {
     margin: 0;
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .reference-text {
+    margin: 0;
     font-weight: 600;
     color: var(--ink);
   }
 
   .prompt {
     margin: 0;
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .prompt-text {
+    margin: 0;
     font-size: 0.8125rem;
     color: var(--mute);
+    overflow-wrap: anywhere;
   }
 
   .comparisons {
