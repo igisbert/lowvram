@@ -10,6 +10,7 @@ import Test from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/test.astro";
 import LandingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Landing.astro";
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
 import LandingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Landing.astro";
+import LandingMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/Landing.astro";
 import WritingLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Writing.astro";
 import WritingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Writing.astro";
 import WritingMiMo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/Writing.astro";
@@ -24,6 +25,7 @@ import MusicPlayerNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q
 import FAQNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/FAQ.astro";
 import LandingNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Landing.astro";
 import Trial from "@/components/Trial.astro";
+import TrialGroup from "@/components/TrialGroup.astro";
 import TextBox from "@/components/TextBox.astro";
 import Verdict from "@/components/Verdict.astro";
 import ModelTable from "@/components/ModelTable.astro";
@@ -95,287 +97,282 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
       </Trial>
 
       <h3 class="group">Artefactos</h3>
-      <Trial
-        title="Calculadora"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="Pi"
-        tokens="4.234 tokens"
-        duration="1 min 1 s"
-        speed="63 t/s"
-      >
-        <CalculadoraNemotron />
-      </Trial>
-      <Trial
-        title="Calculadora"
-        model="Ling 3.0 Tiny"
-        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
-        runner="llama-server"
-        tokens="24.503 tokens"
-        duration="3 min 58 s"
-        speed="102,79 t/s"
-      >
-        <CalculadoraLing />
-      </Trial>
-      <Trial
-        title="Calculadora"
-        model="Qwen3.6-35B"
-        runner="Pi"
-        tokens="21.683 tokens"
-        duration="8 min 40 s"
-        speed="30 t/s"
-      >
-        <CalculadoraQwen />
-      </Trial>
-      <Trial
-        title="MusicPlayer"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="llama-server"
-        tokens="4.163 tokens"
-        duration="1 min 10 s"
-        speed="60 t/s"
-      >
-        <MusicPlayerNemotron />
-      </Trial>
-      <Trial
-        title="MusicPlayer"
-        model="Ling 3.0 Tiny"
-        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
-        runner="OpenCode"
-        tokens="27.795 tokens"
-        duration="3 min 47 s"
-        speed="103 t/s"
-      >
-        <MusicPlayerLing />
-      </Trial>
-      <Trial
-        title="MusicPlayer"
-        runner="llama-server"
-        model="Qwen3.6-35B"
-        tokens="5461 tokens"
-        duration="2 min 30 s"
-        speed="36,18 t/s"
-      >
-        <MusicPlayerQwen />
-      </Trial>
-      <Trial
-        title="FAQ"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="Pi"
-        tokens="2.829 tokens"
-        duration="41 s"
-        speed="63 t/s"
-      >
-        <FAQNemotron />
-      </Trial>
-      <Trial
-        title="FAQ"
-        model="MiMo 2.6"
-        runner="Pi"
-        tokens="42.143 tokens"
-        duration="9 min 21 s"
-        speed="42 t/s"
-      >
-        <FAQMimo />
-      </Trial>
-      <Trial
-        title="FAQ"
-        model="Ling 3.0 Tiny"
-        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
-        runner="llama-server"
-        tokens="22.459 tokens"
-        duration="3 min 25 s"
-        speed="109,52 t/s"
-      >
-        <FAQLing />
-      </Trial>
-      <Trial
-        title="FAQ"
-        runner="Pi"
-        model="Qwen3.6-35B"
-        tokens="3.036 tokens"
-        duration="1 min 17 s"
-        speed="37,11 t/s"
-      >
-        <FAQQwen />
-      </Trial>
-      <Trial
-        title="Landing Page"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="llama-server"
-        tokens="3.794 tokens"
-        duration="1 min 5 s"
-        speed="58 t/s"
-      >
-        <LandingNemotron />
-      </Trial>
-      <Trial
-        title="Landing Page"
-        runner="Pi"
-        model="Ling 3.0 Tiny"
-        tokens="25.684 tokens"
-        duration="4 min 6 s"
-        speed="104 t/s"
-      >
-        <LandingLing />
-      </Trial>
-      <Trial
-        title="Landing Page"
-        runner="Pi"
-        model="Qwen3.6-35B"
-        tokens="6.736 tokens"
-        duration="2 min 49 s"
-        speed="38 t/s"
-      >
-        <LandingQwen />
-      </Trial>
-      <Trial
-        title="Snake"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="Pi"
-        tokens="4.300 tokens"
-        duration="1 min 11 s"
-        speed="61 t/s"
-      >
-        <SnakeNemotron />
-      </Trial>
+      <TrialGroup title="Calculadora" count={3}>
+        <Trial
+          model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+          fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+          runner="Pi"
+          tokens="4.234 tokens"
+          duration="1 min 1 s"
+          speed="63 t/s"
+        >
+          <CalculadoraNemotron />
+        </Trial>
+        <Trial
+          model="Ling 3.0 Tiny"
+          fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+          runner="llama-server"
+          tokens="24.503 tokens"
+          duration="3 min 58 s"
+          speed="102,79 t/s"
+        >
+          <CalculadoraLing />
+        </Trial>
+        <Trial
+          model="Qwen3.6-35B"
+          runner="Pi"
+          tokens="21.683 tokens"
+          duration="8 min 40 s"
+          speed="30 t/s"
+        >
+          <CalculadoraQwen />
+        </Trial>
+      </TrialGroup>
+      <TrialGroup title="MusicPlayer" count={3}>
+        <Trial
+          model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+          fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+          runner="llama-server"
+          tokens="4.163 tokens"
+          duration="1 min 10 s"
+          speed="60 t/s"
+        >
+          <MusicPlayerNemotron />
+        </Trial>
+        <Trial
+          model="Ling 3.0 Tiny"
+          fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+          runner="OpenCode"
+          tokens="27.795 tokens"
+          duration="3 min 47 s"
+          speed="103 t/s"
+        >
+          <MusicPlayerLing />
+        </Trial>
+        <Trial
+          runner="llama-server"
+          model="Qwen3.6-35B"
+          tokens="5461 tokens"
+          duration="2 min 30 s"
+          speed="36,18 t/s"
+        >
+          <MusicPlayerQwen />
+        </Trial>
+      </TrialGroup>
+      <TrialGroup title="FAQ" count={4}>
+        <Trial
+          model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+          fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+          runner="Pi"
+          tokens="2.829 tokens"
+          duration="41 s"
+          speed="63 t/s"
+        >
+          <FAQNemotron />
+        </Trial>
+        <Trial
+          model="MiMo-V2.6-Distill-Qwen-9B"
+          runner="Pi"
+          tokens="42.143 tokens"
+          duration="9 min 21 s"
+          speed="42 t/s"
+        >
+          <FAQMimo />
+        </Trial>
+        <Trial
+          model="Ling 3.0 Tiny"
+          fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+          runner="llama-server"
+          tokens="22.459 tokens"
+          duration="3 min 25 s"
+          speed="109,52 t/s"
+        >
+          <FAQLing />
+        </Trial>
+        <Trial
+          runner="Pi"
+          model="Qwen3.6-35B"
+          tokens="3.036 tokens"
+          duration="1 min 17 s"
+          speed="37,11 t/s"
+        >
+          <FAQQwen />
+        </Trial>
+      </TrialGroup>
+      <TrialGroup title="Landing Page" count={4}>
+        <Trial
+          model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+          fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+          runner="llama-server"
+          tokens="3.794 tokens"
+          duration="1 min 5 s"
+          speed="58 t/s"
+        >
+          <LandingNemotron />
+        </Trial>
+        <Trial
+          model="MiMo-V2.6-Distill-Qwen-9B"
+        >
+          <LandingMimo />
+        </Trial>
+        <Trial
+          runner="Pi"
+          model="Ling 3.0 Tiny"
+          tokens="25.684 tokens"
+          duration="4 min 6 s"
+          speed="104 t/s"
+        >
+          <LandingLing />
+        </Trial>
+        <Trial
+          runner="Pi"
+          model="Qwen3.6-35B"
+          tokens="6.736 tokens"
+          duration="2 min 49 s"
+          speed="38 t/s"
+        >
+          <LandingQwen />
+        </Trial>
+      </TrialGroup>
+      <TrialGroup title="Snake" count={1}>
+        <Trial
+          model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+          fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+          runner="Pi"
+          tokens="4.300 tokens"
+          duration="1 min 11 s"
+          speed="61 t/s"
+        >
+          <SnakeNemotron />
+        </Trial>
+      </TrialGroup>
 
       <h3 class="group">Texto y datos</h3>
-      <Trial
-        title="Correo: corrección, formal y resumen"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="llama-server"
-        tokens="1.893 tokens"
-        duration="29 s"
-        speed="63,28 t/s"
-      >
-        <WritingNemotron />
-      </Trial>
-      <Trial
-        title="Correo: corrección, formal y resumen"
-        model="MiMo 2.6"
-        runner="Pi"
-        tokens="1.304 tokens"
-        duration="27 s"
-        speed="49 t/s"
-      >
-        <WritingMiMo />
-      </Trial>
-      <Trial
-        title="Correo: corrección, formal y resumen"
-        model="Ling 3.0 Tiny"
-        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
-        runner="Pi"
-        tokens="7.804 tokens"
-        duration="1 min 9 s"
-        speed="113 t/s"
-      >
-        <WritingLing />
-      </Trial>
-      <Trial
-        title="Correo: corrección, formal y resumen"
-        model="Qwen3.6-35B"
-        runner="Pi"
-        tokens="4.367 tokens"
-        duration="1 min 7 s"
-        speed="33 t/s"
-      >
-        <WritingQwen />
-      </Trial>
-      <Trial
-        title="Correo: corrección, formal y resumen"
-        model="LFM2.5-24B-A2B"
-        fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
-        runner="Pi"
-        tokens="5.508 tokens"
-        duration="2 min 2 s"
-        speed="42 t/s"
-      >
-        <WritingLfm />
-      </Trial>
-      <Trial
-        title="Factura a JSON"
-        model="NVIDIA-Nemotron-3.5-Bolt-E4B"
-        fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
-        runner="llama-server"
-        tokens="1.042 tokens"
-        duration="15 s"
-        speed="65,28 t/s"
-      >
-        <InvoiceDemo
-          pdf="/invoices/invoice.pdf"
-          pdfName="invoice.pdf"
-          prompt={invoicePrompt.trim()}
-          output={invoiceNemotron.trim()}
-        />
-      </Trial>
-      <Trial
-        title="Factura a JSON"
-        model="MiMo 2.6"
-        runner="llama-server"
-        tokens="526 tokens"
-        duration="10 s"
-        speed="48,09 t/s"
-      >
-        <InvoiceDemo
-          pdf="/invoices/invoice.pdf"
-          pdfName="invoice.pdf"
-          prompt={invoicePrompt.trim()}
-          output={invoiceMiMoJson}
-        />
-      </Trial>
-      <Trial
-        title="Factura a JSON"
-        model="Ling 3.0 Tiny"
-        fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
-        runner="llama-server"
-        tokens="618 tokens"
-        duration="6,0 s"
-        speed="103,58 t/s"
-      >
-        <InvoiceDemo
-          pdf="/invoices/invoice.pdf"
-          pdfName="invoice.pdf"
-          prompt={invoicePrompt.trim()}
-          output={invoiceLing.trim()}
-        />
-      </Trial>
-      <Trial
-        title="Factura a JSON"
-        model="Qwen3.6-35B"
-        runner="llama-server"
-        tokens="947 tokens"
-        duration="24 s"
-        speed="39,33 t/s"
-      >
-        <InvoiceDemo
-          pdf="/invoices/invoice.pdf"
-          pdfName="invoice.pdf"
-          prompt={invoicePrompt.trim()}
-          output={invoiceQwen.trim()}
-        />
-      </Trial>
-      <Trial
-        title="Factura a JSON"
-        model="LFM2.5-24B-A2B"
-        fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
-        runner="llama-server"
-        tokens="600 tokens"
-        duration="14 s"
-        speed="40,93 t/s"
-      >
-        <InvoiceDemo
-          pdf="/invoices/invoice.pdf"
-          pdfName="invoice.pdf"
-          prompt={invoicePrompt.trim()}
-          output={invoiceLfm.trim()}
-        />
-      </Trial>
+      <TrialGroup title="Correo: corrección, formal y resumen" count={5}>
+        <Trial
+          model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+          fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+          runner="llama-server"
+          tokens="1.893 tokens"
+          duration="29 s"
+          speed="63,28 t/s"
+        >
+          <WritingNemotron />
+        </Trial>
+        <Trial
+          model="MiMo-V2.6-Distill-Qwen-9B"
+          runner="Pi"
+          tokens="1.304 tokens"
+          duration="27 s"
+          speed="49 t/s"
+        >
+          <WritingMiMo />
+        </Trial>
+        <Trial
+          model="Ling 3.0 Tiny"
+          fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+          runner="Pi"
+          tokens="7.804 tokens"
+          duration="1 min 9 s"
+          speed="113 t/s"
+        >
+          <WritingLing />
+        </Trial>
+        <Trial
+          model="Qwen3.6-35B"
+          runner="Pi"
+          tokens="4.367 tokens"
+          duration="1 min 7 s"
+          speed="33 t/s"
+        >
+          <WritingQwen />
+        </Trial>
+        <Trial
+          model="LFM2.5-24B-A2B"
+          fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+          runner="Pi"
+          tokens="5.508 tokens"
+          duration="2 min 2 s"
+          speed="42 t/s"
+        >
+          <WritingLfm />
+        </Trial>
+      </TrialGroup>
+      <TrialGroup title="Factura a JSON" count={5}>
+        <Trial
+          model="NVIDIA-Nemotron-3.5-Bolt-E4B"
+          fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+          runner="llama-server"
+          tokens="1.042 tokens"
+          duration="15 s"
+          speed="65,28 t/s"
+        >
+          <InvoiceDemo
+            pdf="/invoices/invoice.pdf"
+            pdfName="invoice.pdf"
+            prompt={invoicePrompt.trim()}
+            output={invoiceNemotron.trim()}
+          />
+        </Trial>
+        <Trial
+          model="MiMo-V2.6-Distill-Qwen-9B"
+          runner="llama-server"
+          tokens="526 tokens"
+          duration="10 s"
+          speed="48,09 t/s"
+        >
+          <InvoiceDemo
+            pdf="/invoices/invoice.pdf"
+            pdfName="invoice.pdf"
+            prompt={invoicePrompt.trim()}
+            output={invoiceMiMoJson}
+          />
+        </Trial>
+        <Trial
+          model="Ling 3.0 Tiny"
+          fullModel="Ling 3.0 Tiny Q5_K_M.gguf"
+          runner="llama-server"
+          tokens="618 tokens"
+          duration="6,0 s"
+          speed="103,58 t/s"
+        >
+          <InvoiceDemo
+            pdf="/invoices/invoice.pdf"
+            pdfName="invoice.pdf"
+            prompt={invoicePrompt.trim()}
+            output={invoiceLing.trim()}
+          />
+        </Trial>
+        <Trial
+          model="Qwen3.6-35B"
+          runner="llama-server"
+          tokens="947 tokens"
+          duration="24 s"
+          speed="39,33 t/s"
+        >
+          <InvoiceDemo
+            pdf="/invoices/invoice.pdf"
+            pdfName="invoice.pdf"
+            prompt={invoicePrompt.trim()}
+            output={invoiceQwen.trim()}
+          />
+        </Trial>
+        <Trial
+          model="LFM2.5-24B-A2B"
+          fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+          runner="llama-server"
+          tokens="600 tokens"
+          duration="14 s"
+          speed="40,93 t/s"
+        >
+          <InvoiceDemo
+            pdf="/invoices/invoice.pdf"
+            pdfName="invoice.pdf"
+            prompt={invoicePrompt.trim()}
+            output={invoiceLfm.trim()}
+          />
+        </Trial>
+      </TrialGroup>
       <TextBox title="Sobre los artefactos interactivos">
         <p>
           Los artefactos interactivos se han aislado entre sí para que cada uno

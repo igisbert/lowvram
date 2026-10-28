@@ -3,7 +3,7 @@ import { ChevronDown, Clock, Cpu, Gauge, ScrollText } from "@lucide/astro";
 import type { TrialRunner } from "@/types";
 
 interface Props {
-  title: string;
+  title?: string;
   model?: string;
   fullModel?: string;
   runner?: TrialRunner;
@@ -12,47 +12,68 @@ interface Props {
   speed?: string;
 }
 
-const { title, model, fullModel, runner, tokens, duration, speed } = Astro.props;
+const { title, model, fullModel, runner, tokens, duration, speed } =
+  Astro.props;
 ---
 
 <details class="trial">
   <summary>
-    <span class="t">{title}{model ? ` · ${model}` : ""}</span>
+    <span class="t"
+      >{title && <span class="t-title">{title}</span>}{
+        title && model && <span class="t-sep"> · </span>
+      }{model && <span class="t-model">{model}</span>}</span
+    >
     <ChevronDown size={18} class="chev" />
   </summary>
   <div class="body">
-    {(fullModel || runner || tokens || duration || speed) && (
-      <div class="trial-head">
-        {fullModel && <p class="mono eyebrow">Modelo · {fullModel}</p>}
-        <div class="facts mono">
-          {runner && (
-            <span><Cpu size={14} />{runner}</span>
-          )}
-          {tokens && (
-            <span><ScrollText size={14} />{tokens}</span>
-          )}
-          {duration && (
-            <span><Clock size={14} />{duration}</span>
-          )}
-          {speed && (
-            <span><Gauge size={14} />{speed}</span>
-          )}
+    {
+      (fullModel || runner || tokens || duration || speed) && (
+        <div class="trial-head">
+          {fullModel && <p class="mono eyebrow">Modelo · {fullModel}</p>}
+          <div class="facts mono">
+            {runner && (
+              <span>
+                <Cpu size={14} />
+                {runner}
+              </span>
+            )}
+            {tokens && (
+              <span>
+                <ScrollText size={14} />
+                {tokens}
+              </span>
+            )}
+            {duration && (
+              <span>
+                <Clock size={14} />
+                {duration}
+              </span>
+            )}
+            {speed && (
+              <span>
+                <Gauge size={14} />
+                {speed}
+              </span>
+            )}
+          </div>
         </div>
-      </div>
-    )}
+      )
+    }
     <slot />
   </div>
 </details>
 
 <style>
   .trial {
-    background: var(--canvas-card);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
+    background: var(--trial-bg, var(--canvas-card));
+    border: var(--trial-border, 1px solid var(--hairline));
+    border-radius: var(--trial-radius, var(--radius));
+    overflow: hidden;
   }
 
   .trial + .trial {
-    margin-top: var(--space-lg);
+    margin-top: var(--trial-gap, var(--space-lg));
+    border-top: 1px solid var(--hairline);
   }
 
   summary {
@@ -72,6 +93,10 @@ const { title, model, fullModel, runner, tokens, duration, speed } = Astro.props
 
   .t {
     margin-right: auto;
+  }
+
+  .t-sep {
+    color: var(--mute);
   }
 
   .chev {

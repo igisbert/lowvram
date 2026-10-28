@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  count?: number;
+}
+
+const { title, count } = Astro.props;
+const countLabel = count === 1 ? "1 modelo" : `${count} modelos`;
+---
+
+<div class="trial-group">
+  <div class="trial-group__head">
+    <h4>{title}</h4>
+    {count !== undefined && <span class="mono count">{countLabel}</span>}
+  </div>
+  <div class="trial-group__list">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .trial-group {
+    --trial-bg: transparent;
+    --trial-border: 0;
+    --trial-radius: 0;
+    --trial-gap: 0;
+
+    background: var(--canvas-card);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+  }
+
+  .trial-group + .trial-group {
+    margin-top: var(--space-md);
+  }
+
+  .trial-group__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    background: var(--canvas-soft);
+    border-bottom: 1px solid var(--hairline);
+    border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+  }
+
+  h4 {
+    margin: 0;
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+  }
+
+  .count {
+    flex-shrink: 0;
+    color: var(--mute);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>

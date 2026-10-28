@@ -1,660 +1,1127 @@
-<div class="calc" role="application" aria-label="Calculator">
-  <!-- Display -->
-  <div class="display">
-    <div class="display-result" id="result" aria-live="polite">0</div>
-    <div class="display-expression" id="expression">0</div>
-  </div>
+---
+define: {
+}
+---
 
-  <!-- Buttons -->
-  <div class="buttons">
-    <button class="btn" data-action="clear" aria-label="Clear all">C</button>
-    <button class="btn" data-action="clearEntry" aria-label="Clear entry"
-      >CE</button
-    >
-    <button class="btn" data-action="delete" aria-label="Delete">⌫</button>
-    <button
-      class="btn"
-      data-action="operator"
-      data-value="/"
-      aria-label="Divide">÷</button
-    >
+<div class="pliego">
+  <header class="pliego__nav">
+    <a class="pliego__logo" aria-label="Pliego, inicio">PLIEGO<sup>®</sup></a>
+    <nav class="pliego__navlinks" aria-label="Navegación principal">
+      <a class="pliego__navlink" aria-label="Colección">Colección</a>
+      <a class="pliego__navlink" aria-label="Idea">Idea</a>
+      <a class="pliego__navlink" aria-label="Estética">Estética</a>
+      <a class="pliego__navlink" aria-label="Contacto">Contacto</a>
+    </nav>
+    <span class="pliego__navstamp">Ed. 04</span>
+  </header>
 
-    <button class="btn num" data-action="number" data-value="7" aria-label="7"
-      >7</button
-    >
-    <button class="btn num" data-action="number" data-value="8" aria-label="8"
-      >8</button
-    >
-    <button class="btn num" data-action="number" data-value="9" aria-label="9"
-      >9</button
-    >
-    <button
-      class="btn op"
-      data-action="operator"
-      data-value="*"
-      aria-label="Multiply">×</button
-    >
+  <main>
+    <section class="pliego__hero">
+      <div class="pliego__grid">
+        <div class="pliego__hero__text">
+          <p class="pliego__eyebrow">Estudio de impresos · Madrid</p>
+          <h1 class="pliego__hero__title">Papel<br />que <em>recuerda</em>.</h1>
+          <p class="pliego__hero__lead">
+            Pliego fabrica objetos impresos en tirajes cortos: libros, carteles
+            y señalética hechos a mano, en papel reciclado y con tintas
+            vegetales.
+          </p>
+          <div class="pliego__hero__actions">
+            <a
+              class="pliego__link pliego__link--solid"
+              aria-label="Ver la colección"
+            >
+              <span class="pliego__link__label">Ver la colección</span>
+              <span class="pliego__link__arrow" aria-hidden="true">→</span>
+            </a>
+            <a
+              class="pliego__link pliego__link--line"
+              aria-label="Escribir al estudio"
+            >
+              <span class="pliego__link__label">Escribir al estudio</span>
+            </a>
+          </div>
+          <p class="pliego__hero__meta">
+            Tirajes de 20 a 500 ejemplares · Offset y serigrafía · Entrega en 3
+            semanas
+          </p>
+        </div>
 
-    <button class="btn num" data-action="number" data-value="4" aria-label="4"
-      >4</button
-    >
-    <button class="btn num" data-action="number" data-value="5" aria-label="5"
-      >5</button
-    >
-    <button class="btn num" data-action="number" data-value="6" aria-label="6"
-      >6</button
-    >
-    <button
-      class="btn op"
-      data-action="operator"
-      data-value="-"
-      aria-label="Subtract">−</button
-    >
+        <div class="pliego__hero__visual" aria-hidden="true">
+          <div class="pliego__sheet">
+            <span class="pliego__sheet__layer pliego__sheet__layer--back"
+            ></span>
+            <span class="pliego__sheet__layer pliego__sheet__layer--mid"></span>
+            <span class="pliego__sheet__layer pliego__sheet__layer--front">
+              <span class="pliego__sheet__rule"></span>
+              <span class="pliego__sheet__crease"></span>
+              <span class="pliego__sheet__label">PLIEGO</span>
+              <span class="pliego__sheet__label pliego__sheet__label--sub"
+                >EDICIÓN 04</span
+              >
+              <span class="pliego__sheet__corner"></span>
+            </span>
+          </div>
+          <span class="pliego__sheet__shadow"></span>
+          <span class="pliego__hero__axis"></span>
+        </div>
+      </div>
+    </section>
 
-    <button class="btn num" data-action="number" data-value="1" aria-label="1"
-      >1</button
-    >
-    <button class="btn num" data-action="number" data-value="2" aria-label="2"
-      >2</button
-    >
-    <button class="btn num" data-action="number" data-value="3" aria-label="3"
-      >3</button
-    >
-    <button
-      class="btn op"
-      data-action="operator"
-      data-value="+"
-      aria-label="Add">+</button
-    >
+    <section class="pliego__valor" aria-labelledby="pliego__valor-title">
+      <div class="pliego__sectionhead">
+        <p class="pliego__sectionindex">01</p>
+        <h2 class="pliego__sectiontitle" id="pliego__valor-title">
+          Tres razones para imprimirla
+        </h2>
+      </div>
 
-    <button
-      class="btn num"
-      data-action="number"
-      data-value="0"
-      aria-label="Zero">0</button
-    >
-    <button
-      class="btn num"
-      data-action="number"
-      data-value="."
-      aria-label="Decimal">.</button
-    >
-    <button
-      class="btn op"
-      data-action="operator"
-      data-value="="
-      aria-label="Equals">=</button
-    >
-    <button
-      class="btn op"
-      data-action="operator"
-      data-value="%"
-      aria-label="Percentage">%</button
-    >
-  </div>
+      <article class="pliego__row">
+        <p class="pliego__row__index">01</p>
+        <div class="pliego__row__body">
+          <h3 class="pliego__row__title">Pequeños tirajes</h3>
+          <p>
+            Cada edición se imprime en cantidades limitadas, entre veinte y
+            quinientos ejemplares. Cuando se agota, no se reedita: el objeto se
+            queda en el mundo.
+          </p>
+        </div>
+        <span
+          class="pliego__row__glyph pliego__glyph--square"
+          aria-hidden="true"></span>
+      </article>
+
+      <article class="pliego__row pliego__row--reverse">
+        <p class="pliego__row__index">02</p>
+        <div class="pliego__row__body">
+          <h3 class="pliego__row__title">Papel que se agradece</h3>
+          <p>
+            Trabajamos solo con papeles reciclados y de origen certificado,
+            entre 80 y 400 g. La textura del papel es parte del diseño, no un
+            añadido.
+          </p>
+        </div>
+        <span
+          class="pliego__row__glyph pliego__glyph--circle"
+          aria-hidden="true"></span>
+      </article>
+
+      <article class="pliego__row pliego__row--center">
+        <p class="pliego__row__index">03</p>
+        <div class="pliego__row__body">
+          <h3 class="pliego__row__title">Impresión que dura</h3>
+          <p>
+            Tintas vegetales y barnices mate. Los colores envejecen igual que un
+            libro viejo, sin perder nitidez. Pensado para durar años, no
+            temporadas.
+          </p>
+        </div>
+        <span class="pliego__row__glyph pliego__glyph--tri" aria-hidden="true"
+        ></span>
+      </article>
+    </section>
+
+    <section class="pliego__concepto" aria-labelledby="pliego__concepto-title">
+      <div class="pliego__grid">
+        <div class="pliego__concepto__text">
+          <p class="pliego__sectionindex">02</p>
+          <h2 class="pliego__sectiontitle" id="pliego__concepto-title">
+            El pliegue es el origen del objeto
+          </h2>
+
+          <p class="pliego__concepto__lead">
+            Todo lo que hacemos empieza doblado. Una hoja partida en dos, un
+            bloque de color plegado sobre otro, una forma que sólo existe porque
+            algo la ha doblado. El pliegue no es un gesto decorativo: es la
+            estructura que sostiene la imagen.
+          </p>
+
+          <ol class="pliego__principles">
+            <li>
+              <span class="pliego__principles__num">A</span>
+              <span class="pliego__principles__item">
+                <strong>Duplicar.</strong> Cada elemento tiene un doble que lo acompaña.
+              </span>
+            </li>
+            <li>
+              <span class="pliego__principles__num">B</span>
+              <span class="pliego__principles__item">
+                <strong>Ocultar.</strong> Algo queda bajo la superficie a propósito.
+              </span>
+            </li>
+            <li>
+              <span class="pliego__principles__num">C</span>
+              <span class="pliego__principles__item">
+                <strong>Revelar.</strong> El objeto se entiende cuando se le quita
+                una cara.
+              </span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="pliego__fold" aria-hidden="true">
+          <span class="pliego__fold__half pliego__fold__half--left"></span>
+          <span class="pliego__fold__half pliego__fold__half--right"></span>
+          <span class="pliego__fold__crease"></span>
+          <span class="pliego__fold__label pliego__fold__label--left"
+            >DOBLE</span
+          >
+          <span class="pliego__fold__label pliego__fold__label--right"
+            >PLIEGO</span
+          >
+          <span class="pliego__fold__measure"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="pliego__estetica" aria-labelledby="pliego__estetica-title">
+      <p class="pliego__poster__top">PLIEGO · EDICIÓN 04 · 2024</p>
+
+      <h2 class="pliego__poster__title" id="pliego__estetica-title">
+        <span class="pliego__poster__line">IMPRESO</span>
+        <span class="pliego__poster__line pliego__poster__line--outline"
+          >A MANO</span
+        >
+        <span class="pliego__poster__line pliego__poster__line--short"
+          >EN SERIE</span
+        >
+      </h2>
+
+      <div class="pliego__poster__shapes" aria-hidden="true">
+        <span class="pliego__poster__shape pliego__poster__shape--disc"></span>
+        <span class="pliego__poster__shape pliego__poster__shape--block"></span>
+        <span class="pliego__poster__shape pliego__poster__shape--tri"></span>
+        <span class="pliego__poster__shape pliego__poster__shape--ring"></span>
+        <span class="pliego__poster__shape pliego__poster__shape--band"></span>
+      </div>
+
+      <div class="pliego__poster__base">
+        <p class="pliego__poster__caption">
+          Objetos impresos en tirajes cortos, en papel reciclado y con tintas
+          vegetales.
+        </p>
+        <p class="pliego__poster__mark">PLIEGO<sup>®</sup></p>
+      </div>
+    </section>
+
+    <section class="pliego__cierre" aria-labelledby="pliego__cierre-title">
+      <div class="pliego__cierre__inner">
+        <h2 class="pliego__cierre__title" id="pliego__cierre-title">
+          Cada objeto empieza<br />por una <em>hoja</em>.
+        </h2>
+        <p class="pliego__cierre__lead">
+          Contanos qué quieres imprimir y te decimos cómo lo pliegamos.
+        </p>
+        <div class="pliego__cierre__actions">
+          <a
+            class="pliego__link pliego__link--solid pliego__link--big"
+            aria-label="Escribir al estudio"
+          >
+            <span class="pliego__link__label">Escribir al estudio</span>
+            <span class="pliego__link__arrow" aria-hidden="true">→</span>
+          </a>
+          <a
+            class="pliego__link pliego__link--line pliego__link--big"
+            aria-label="Ver la colección"
+          >
+            <span class="pliego__link__label">Ver la colección</span>
+          </a>
+        </div>
+        <p class="pliego__cierre__foot">
+          hola@pliego.studio · Madrid · Edición 04
+        </p>
+      </div>
+    </section>
+  </main>
 </div>
 
 <style>
-  /* ===== Root variables (dark theme) ===== */
-  :root {
-    --bg: #0d0d1a;
-    --bg2: #13132a;
-    --bg3: #1a1a3e;
-    --surface: #1e1e3f;
-    --surface2: #2a2a55;
-    --text: #e8e8f0;
-    --text2: #a0a0c0;
-    --accent: #00e5a0;
-    --accent2: #00b87a;
-    --danger: #ff4466;
-    --danger2: #cc2244;
-    --shadow: rgba(0, 0, 0, 0.4);
-    --radius: 10px;
-    --hover: rgba(0, 229, 160, 0.08);
-    --focus: rgba(0, 229, 160, 0.25);
-    --touch: 44px;
-    --font: system-ui, -apple-system, sans-serif;
-    --size: 1.25rem;
+  .pliego {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #16130f;
+    background: #efe9de;
+    padding-top: 0;
   }
 
-  /* ===== Container ===== */
-  .calc {
-    max-width: 420px;
-    margin: 0 auto;
-    background: var(--bg);
-    border-radius: 16px;
-    padding: 12px;
-    box-shadow: 0 8px 32px var(--shadow);
-    font-family: var(--font);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* ===== Display ===== */
-  .display {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-height: 52px;
-    padding: 8px 14px;
-    background: var(--surface);
-    border-radius: var(--radius);
-    border: 1px solid var(--surface2);
-  }
-
-  .display-result {
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-align: right;
-    word-break: break-all;
-    line-height: 1.2;
-    min-height: 40px;
-    transition: color 0.15s;
-  }
-
-  .display-expression {
-    font-size: 0.95rem;
-    color: var(--text2);
-    text-align: right;
-    word-break: break-all;
-    line-height: 1.3;
-    min-height: 20px;
-    transition: color 0.15s;
-  }
-
-  /* ===== Buttons ===== */
-  .buttons {
+  .pliego__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 28px;
+    width: min(100% - 48px, 1440px);
+    margin-inline: auto;
   }
 
-  .btn {
-    position: relative;
-    border: none;
-    background: var(--surface);
-    color: var(--text);
-    font-size: var(--size);
-    font-weight: 600;
-    border-radius: var(--radius);
-    padding: calc(var(--touch) / 2) 0;
-    min-height: var(--touch);
-    min-width: var(--touch);
-    cursor: pointer;
-    transition:
-      background 0.12s,
-      box-shadow 0.12s,
-      transform 0.08s,
-      color 0.12s;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    display: flex;
+  .pliego__link {
+    display: inline-flex;
     align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .pliego__link--solid {
+    background: #e1421f;
+    color: #f7f3ec;
+    padding: 16px 22px;
+  }
+
+  .pliego__link--line {
+    border-bottom: 2px solid #16130f;
+    padding: 0 0 6px;
+  }
+
+  .pliego__link--big {
+    font-size: 15px;
+    padding: 20px 28px;
+  }
+
+  .pliego__link--big.pliego__link--line {
+    border-bottom-width: 3px;
+  }
+
+  .pliego__link__label {
+    display: block;
+  }
+
+  .pliego__link__arrow {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .pliego__link:focus-visible,
+  .pliego__logo:focus-visible,
+  .pliego__navlink:focus-visible {
+    outline: 3px solid #e1421f;
+    outline-offset: 4px;
+  }
+
+  .pliego__nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 68px;
+    background: #efe9de;
+    border-bottom: 2px solid #16130f;
+  }
+
+  .pliego__logo {
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: #16130f;
+    line-height: 1;
+  }
+
+  .pliego__logo sup {
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .pliego__navlinks {
+    display: flex;
+    justify-content: flex-end;
+    gap: 28px;
+  }
+
+  .pliego__navlink {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #16130f;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .pliego__navlink:hover,
+  .pliego__navlink:focus-visible {
+    border-bottom-color: #e1421f;
+  }
+
+  .pliego__navstamp {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    border: 2px solid #16130f;
+    padding: 5px 8px;
+    margin-left: 20px;
+  }
+
+  .pliego__hero {
+    padding: 84px 0 96px;
+    border-bottom: 2px solid #16130f;
+  }
+
+  .pliego__eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0 0 26px;
+  }
+
+  .pliego__hero__text {
+    grid-column: 1 / span 6;
+  }
+
+  .pliego__hero__title {
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    font-size: clamp(58px, 9vw, 124px);
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    margin: 0 0 32px;
+    text-transform: uppercase;
+  }
+
+  .pliego__hero__title em {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    text-transform: none;
+    color: #e1421f;
+    letter-spacing: -0.02em;
+  }
+
+  .pliego__hero__lead {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(19px, 2.1vw, 25px);
+    line-height: 1.4;
+    max-width: 30em;
+    margin: 0 0 38px;
+  }
+
+  .pliego__hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 28px;
+    align-items: center;
+  }
+
+  .pliego__hero__meta {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
+    max-width: 24em;
+    margin: 28px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid #16130f;
+  }
+
+  .pliego__hero__visual {
+    grid-column: 8 / span 5;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
     justify-content: center;
+    min-height: 460px;
+  }
+
+  .pliego__sheet {
+    position: relative;
+    width: min(100%, 330px);
+    aspect-ratio: 3 / 4;
+  }
+
+  .pliego__sheet__layer {
+    position: absolute;
+    inset: 0;
+  }
+
+  .pliego__sheet__layer--back {
+    background: #123f46;
+    transform: translate(-16px, -20px) rotate(5deg);
+  }
+
+  .pliego__sheet__layer--mid {
+    background: #e1421f;
+    transform: translate(12px, 12px) rotate(-3deg);
+  }
+
+  .pliego__sheet__layer--front {
+    background: #f7f3ec;
+    border: 2px solid #16130f;
+    transform: rotate(-1deg);
+    box-shadow: 0 26px 44px -22px rgba(22, 19, 15, 0.45);
+  }
+
+  .pliego__sheet__rule {
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    top: 13%;
+    height: 2px;
+    background: #16130f;
+  }
+
+  .pliego__sheet__crease {
+    position: absolute;
+    top: 14%;
+    bottom: 14%;
+    left: 46%;
+    width: 1px;
+    background: #16130f;
+  }
+
+  .pliego__sheet__label {
+    position: absolute;
+    left: 14%;
+    top: 20%;
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+  }
+
+  .pliego__sheet__label--sub {
+    left: 14%;
+    top: 42%;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: #123f46;
+  }
+
+  .pliego__sheet__corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32%;
+    height: 32%;
+    background: #e1421f;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+
+  .pliego__sheet__corner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: #16130f;
+    transform: rotate(45deg);
+    transform-origin: right top;
+  }
+
+  .pliego__sheet__shadow {
+    position: absolute;
+    left: 18px;
+    bottom: -22px;
+    width: calc(100% + 44px);
+    height: 22px;
+    background: rgba(22, 19, 15, 0.16);
+    filter: blur(12px);
+  }
+
+  .pliego__hero__axis {
+    position: absolute;
+    top: -20px;
+    left: -12%;
+    width: 124%;
+    height: 1px;
+    background: repeating-linear-gradient(
+      90deg,
+      #16130f 0 22px,
+      transparent 22px 44px
+    );
+    transform: rotate(-4deg);
+  }
+
+  .pliego__sectionhead {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 44px;
+    padding-top: 40px;
+    border-top: 2px solid #16130f;
+  }
+
+  .pliego__sectionindex,
+  .pliego__sectiontitle {
+    margin: 0;
+  }
+
+  .pliego__sectionindex {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+
+  .pliego__sectiontitle {
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    font-size: clamp(34px, 5vw, 68px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .pliego__valor {
+    padding: 72px 0 96px;
+  }
+
+  .pliego__row {
+    display: grid;
+    grid-template-columns: 72px 1fr 120px;
+    gap: 28px;
+    align-items: start;
+    padding: 44px 0;
+    border-top: 1px solid #16130f;
+  }
+
+  .pliego__row:last-child {
+    border-bottom: 1px solid #16130f;
+  }
+
+  .pliego__row__index {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    padding-top: 10px;
+  }
+
+  .pliego__row__title {
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    font-size: clamp(30px, 4.4vw, 58px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+
+  .pliego__row__body {
+    align-self: center;
+  }
+
+  .pliego__row--reverse .pliego__row__body {
+    text-align: right;
+  }
+
+  .pliego__row--reverse .pliego__row__glyph {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .pliego__row--center .pliego__row__body {
     text-align: center;
-    overflow: hidden;
+  }
+
+  .pliego__row__body p {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(17px, 1.7vw, 21px);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .pliego__row__glyph {
+    display: block;
+    width: 76px;
+    height: 76px;
+    margin-top: 6px;
+  }
+
+  .pliego__glyph--square {
+    background: #16130f;
+  }
+
+  .pliego__glyph--circle {
+    border: 8px solid #123f46;
+    border-radius: 50%;
+  }
+
+  .pliego__glyph--tri {
+    width: 0;
+    height: 0;
+    border-left: 42px solid transparent;
+    border-right: 42px solid transparent;
+    border-bottom: 76px solid #e1421f;
+  }
+
+  .pliego__concepto {
+    padding: 88px 0 96px;
+    background: #f7f3ec;
+    border-top: 2px solid #16130f;
+    border-bottom: 2px solid #16130f;
+  }
+
+  .pliego__concepto__text {
+    grid-column: 1 / span 6;
+  }
+
+  .pliego__concepto__lead {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(19px, 2vw, 25px);
+    line-height: 1.45;
+    margin: 30px 0 46px;
+  }
+
+  .pliego__principles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #16130f;
+  }
+
+  .pliego__principles li {
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+    border-bottom: 1px solid #16130f;
+  }
+
+  .pliego__principles__num {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px;
+  }
+
+  .pliego__principles__item {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .pliego__principles__item strong {
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
     letter-spacing: 0.02em;
   }
 
-  .btn:hover {
-    background: var(--hover);
-    box-shadow: 0 0 16px var(--hover);
+  .pliego__fold {
+    grid-column: 8 / span 5;
+    position: relative;
+    min-height: 360px;
   }
 
-  .btn:active,
-  .btn.active {
-    background: var(--accent);
-    color: #0d0d1a;
-    transform: scale(0.95);
-    box-shadow: 0 0 8px rgba(0, 229, 160, 0.3);
+  .pliego__fold__half {
+    position: absolute;
+    top: 44px;
+    bottom: 44px;
+    width: 50%;
   }
 
-  .btn:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 4px var(--focus);
+  .pliego__fold__half--left {
+    left: 0;
+    background: #123f46;
   }
 
-  /* Number buttons */
-  .btn.num {
-    background: var(--surface2);
-    color: var(--text);
-    font-size: 1.35rem;
-  }
-  .btn.num:hover {
-    background: var(--bg3);
-  }
-  .btn.num:active,
-  .btn.num.active {
-    background: var(--accent);
-    color: #0d0d1a;
+  .pliego__fold__half--right {
+    right: 0;
+    background: #e1421f;
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
   }
 
-  /* Operator buttons */
-  .btn.op {
-    background: var(--bg3);
-    color: var(--accent);
-    font-size: 1.15rem;
-    cursor: pointer;
-    border: 1px solid rgba(0, 229, 160, 0.12);
-  }
-  .btn.op:hover {
-    background: var(--bg3);
-  }
-  .btn.op:active,
-  .btn.op.active {
-    background: var(--accent);
-    color: #0d0d1a;
-  }
-  .btn.op.op-divide {
-    background: rgba(255, 68, 102, 0.15);
-    color: var(--danger);
-    border-color: rgba(255, 68, 102, 0.15);
-  }
-  .btn.op.op-divide:hover {
-    background: rgba(255, 68, 102, 0.25);
-  }
-  .btn.op.op-divide:active,
-  .btn.op.op-divide.active {
-    background: var(--danger);
-    color: #fff;
+  .pliego__fold__crease {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: #16130f;
   }
 
-  /* ===== Responsive ===== */
-  @media (max-width: 480px) {
-    .calc {
-      padding: 8px;
-      border-radius: 12px;
+  .pliego__fold__label {
+    position: absolute;
+    top: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
+
+  .pliego__fold__label--left {
+    left: 8%;
+  }
+
+  .pliego__fold__label--right {
+    right: 8%;
+  }
+
+  .pliego__fold__measure {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: 18px;
+    height: 1px;
+    background: repeating-linear-gradient(
+      90deg,
+      #16130f 0 14px,
+      transparent 14px 28px
+    );
+  }
+
+  .pliego__estetica {
+    position: relative;
+    min-height: 680px;
+    background: #16130f;
+    color: #f7f3ec;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0 44px;
+  }
+
+  .pliego__poster__top {
+    position: relative;
+    z-index: 3;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    margin: 0 0 28px;
+    color: #efe9de;
+  }
+
+  .pliego__poster__title {
+    position: relative;
+    z-index: 3;
+    margin: 0;
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    font-size: clamp(74px, 15vw, 220px);
+    line-height: 0.82;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+  }
+
+  .pliego__poster__line {
+    display: block;
+  }
+
+  .pliego__poster__line--outline {
+    color: transparent;
+    -webkit-text-stroke: 2px #f7f3ec;
+  }
+
+  .pliego__poster__line--short {
+    color: #e1421f;
+  }
+
+  .pliego__poster__shapes {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .pliego__poster__shape {
+    position: absolute;
+  }
+
+  .pliego__poster__shape--disc {
+    top: 12%;
+    right: 8%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    border: 2px solid #f7f3ec;
+  }
+
+  .pliego__poster__shape--block {
+    top: 34%;
+    right: 21%;
+    width: 96px;
+    height: 96px;
+    background: #e1421f;
+    transform: rotate(45deg);
+  }
+
+  .pliego__poster__shape--tri {
+    right: 44%;
+    bottom: 12%;
+    width: 0;
+    height: 0;
+    border-left: 130px solid transparent;
+    border-right: 130px solid transparent;
+    border-bottom: 220px solid #efe9de;
+  }
+
+  .pliego__poster__shape--ring {
+    left: 6%;
+    bottom: 15%;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #e1421f;
+    border-radius: 50%;
+  }
+
+  .pliego__poster__shape--band {
+    left: 0;
+    right: 0;
+    top: 52%;
+    height: 18px;
+    background: #e1421f;
+  }
+
+  .pliego__poster__base {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-top: 34px;
+    padding-top: 18px;
+    border-top: 1px solid #f7f3ec;
+  }
+
+  .pliego__poster__caption {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    line-height: 1.4;
+    max-width: 26em;
+    margin: 0;
+    color: #efe9de;
+  }
+
+  .pliego__poster__mark {
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .pliego__poster__mark sup {
+    font-size: 9px;
+  }
+
+  .pliego__cierre {
+    padding: 104px 0 92px;
+    background: #efe9de;
+  }
+
+  .pliego__cierre__inner {
+    width: min(100% - 48px, 1440px);
+    margin-inline: auto;
+  }
+
+  .pliego__cierre__title {
+    font-family:
+      Arial Narrow,
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    font-weight: 800;
+    font-size: clamp(48px, 8vw, 116px);
+    line-height: 0.88;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    margin: 0 0 34px;
+  }
+
+  .pliego__cierre__title em {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    text-transform: none;
+    color: #e1421f;
+  }
+
+  .pliego__cierre__lead {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.4;
+    max-width: 24em;
+    margin: 0 0 40px;
+  }
+
+  .pliego__cierre__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 32px;
+    align-items: center;
+    margin-bottom: 34px;
+  }
+
+  .pliego__cierre__foot {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    margin: 0;
+    padding-top: 18px;
+    border-top: 1px solid #16130f;
+  }
+
+  @media (max-width: 900px) {
+    .pliego__hero__text {
+      grid-column: 1 / span 7;
     }
-    .display-result {
-      font-size: 1.75rem;
+
+    .pliego__hero__visual {
+      grid-column: 8 / span 5;
+      min-height: 380px;
     }
-    .display-expression {
-      font-size: 0.8rem;
+
+    .pliego__concepto__text {
+      grid-column: 1 / span 7;
     }
-    .btn {
-      font-size: 1.15rem;
-      min-height: 42px;
-      min-width: 42px;
-      border-radius: 8px;
+
+    .pliego__fold {
+      grid-column: 8 / span 5;
     }
-    .btn.num {
-      font-size: 1.25rem;
+
+    .pliego__row {
+      grid-template-columns: 52px 1fr 90px;
+      gap: 20px;
     }
-    .btn.op {
-      font-size: 1rem;
+
+    .pliego__row__glyph {
+      width: 60px;
+      height: 60px;
+    }
+
+    .pliego__row--reverse .pliego__row__glyph {
+      grid-column: 2;
     }
   }
 
-  /* ===== Keyboard support ===== */
-  @media (hover: none) and (pointer: coarse) {
-    .btn {
-      min-height: 48px;
-      min-width: 48px;
+  @media (max-width: 680px) {
+    .pliego__grid {
+      grid-template-columns: 1fr;
+      gap: 22px;
+      width: min(100% - 32px, 1440px);
+    }
+
+    .pliego__navlinks {
+      gap: 16px;
+    }
+
+    .pliego__navstamp {
+      display: none;
+    }
+
+    .pliego__hero {
+      padding: 52px 0 64px;
+    }
+
+    .pliego__hero__text,
+    .pliego__hero__visual,
+    .pliego__concepto__text,
+    .pliego__fold {
+      grid-column: 1 / -1;
+    }
+
+    .pliego__hero__visual {
+      min-height: 300px;
+      margin-top: 40px;
+    }
+
+    .pliego__row {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .pliego__row--reverse .pliego__row__body,
+    .pliego__row--center .pliego__row__body {
+      text-align: left;
+    }
+
+    .pliego__row--reverse .pliego__row__glyph {
+      grid-column: 1;
+    }
+
+    .pliego__sectionhead {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pliego__concepto,
+    .pliego__valor {
+      padding: 56px 0 68px;
+    }
+
+    .pliego__fold {
+      min-height: 300px;
+    }
+
+    .pliego__estetica {
+      min-height: 540px;
+      padding: 44px 0 34px;
+    }
+
+    .pliego__poster__shape--disc {
+      width: 130px;
+      height: 130px;
+      top: 6%;
+      right: 4%;
+    }
+
+    .pliego__poster__shape--block {
+      width: 64px;
+      height: 64px;
+      top: 40%;
+      right: 12%;
+    }
+
+    .pliego__poster__shape--tri {
+      bottom: 8%;
+      border-left-width: 80px;
+      border-right-width: 80px;
+      border-bottom-width: 130px;
+    }
+
+    .pliego__poster__shape--ring {
+      width: 100px;
+      height: 100px;
+      bottom: 8%;
+    }
+
+    .pliego__poster__base {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .pliego__cierre {
+      padding: 72px 0 64px;
     }
   }
 
-  /* ===== Reduced motion ===== */
   @media (prefers-reduced-motion: reduce) {
-    .btn {
-      transition: none;
-    }
-    .calc {
-      transition: none;
-    }
-    .display-result,
-    .display-expression {
-      transition: none;
+    .pliego * {
+      animation: none !important;
+      transition: none !important;
     }
   }
 </style>
-
-<script>
-  // ============================================================
-  // Calculator.astro — Vanilla JS, no eval/new Function
-  // ============================================================
-
-  // ===== Expression Parser (shunting-yard algorithm, precedence-based) =====
-  /** Tokenize expression into numbers and operators.
-   *  Unary operators (+/-) are detected when preceded by an operator or start of expression,
-   *  and are converted to negative number tokens for evaluation.
-   *  Handles: consecutive operators (5++3 → 5+3=8), loose decimals (5.3.4 → 534),
-   *  floating-point errors (0.1+0.2 → 0.3), division by zero, incomplete expressions,
-   *  and operation after result (2+3= then +4 → 12).
-   */
-  function tokenize(expr) {
-    const tokens = [];
-    let i = 0;
-    while (i < expr.length) {
-      if (expr[i] === " ") {
-        i++;
-        continue;
-      }
-
-      // Handle numbers (including decimal point)
-      if (!isNaN(expr[i]) && expr[i] !== ".") {
-        let num = "";
-        while (i < expr.length && !isNaN(expr[i]) && expr[i] !== ".") {
-          num += expr[i];
-          i++;
-        }
-        if (i < expr.length && expr[i] === ".") {
-          num += expr[i];
-          i++;
-          while (i < expr.length && !isNaN(expr[i])) {
-            num += expr[i];
-            i++;
-          }
-        }
-        tokens.push({ type: "number", value: parseFloat(num) });
-      }
-
-      // Handle operators (+, -, *, /)
-      if ("+-*/".includes(expr[i])) {
-        const prev = tokens.length > 0 ? tokens[tokens.length - 1] : null;
-        const isUnary =
-          !prev ||
-          prev.type === "operator" ||
-          prev.value === "(" ||
-          (prev.type === "number" && prev.value === 0);
-
-        // For decimal point handling: if prev is a number with decimal point, it's a binary op
-        // For unary: prev is an operator or start of expression or a number with no decimal
-        // Actually: unary when preceded by operator or start of expression
-        if (isUnary) {
-          // Unary minus: consume next number as negative
-          if (expr[i] === "-") {
-            i++;
-            let num = "";
-            while (i < expr.length && !isNaN(expr[i]) && expr[i] !== ".") {
-              num += expr[i];
-              i++;
-            }
-            if (i < expr.length && expr[i] === ".") {
-              num += expr[i];
-              i++;
-              while (i < expr.length && !isNaN(expr[i])) {
-                num += expr[i];
-                i++;
-              }
-            }
-            tokens.push({ type: "number", value: -parseFloat(num) });
-          } else {
-            // Unary plus: consume next number as positive
-            i++;
-            let num = "";
-            while (i < expr.length && !isNaN(expr[i]) && expr[i] !== ".") {
-              num += expr[i];
-              i++;
-            }
-            if (i < expr.length && expr[i] === ".") {
-              num += expr[i];
-              i++;
-              while (i < expr.length && !isNaN(expr[i])) {
-                num += expr[i];
-                i++;
-              }
-            }
-            tokens.push({ type: "number", value: parseFloat(num) });
-          }
-        } else {
-          tokens.push({ type: "operator", value: expr[i] });
-          i++;
-        }
-      }
-    }
-    return tokens;
-  }
-
-  /** Evaluate RPN using shunting-yard algorithm (Dijkstra).
-   *  Unary operators are treated as having higher precedence than binary operators.
-   *  Division by zero throws an error; floating-point errors are rounded.
-   */
-  function evaluate(tokens) {
-    const output = [];
-    const ops = [];
-    const prec = { "+": 1, "-": 1, "*": 2, "/": 2 };
-
-    for (const t of tokens) {
-      if (t.type === "number") {
-        output.push(t.value);
-      } else {
-        // Unary operators get higher precedence (treated as binary with precedence 3)
-        const uPrec = 3;
-        while (ops.length > 0 && (prec[ops[ops.length - 1]] ?? 0) >= uPrec) {
-          output.push(ops.pop());
-        }
-        ops.push(t.value);
-      }
-    }
-    while (ops.length > 0) output.push(ops.pop());
-
-    const stack = [];
-    for (const t of output) {
-      if (typeof t === "number") {
-        stack.push(t);
-      } else {
-        const b = stack.pop();
-        const a = stack.pop();
-        switch (t) {
-          case "+":
-            stack.push(a + b);
-            break;
-          case "-":
-            stack.push(a - b);
-            break;
-          case "*":
-            stack.push(a * b);
-            break;
-          case "/":
-            if (b === 0) throw new Error("Division by zero");
-            stack.push(a / b);
-            break;
-        }
-      }
-    }
-    return stack.pop();
-  }
-
-  /** Format a number for display, avoiding floating-point artifacts (0.1+0.2=0.3). */
-  function formatResult(value) {
-    if (!isFinite(value)) return "Error";
-    if (isNaN(value)) return "Error";
-    const rounded = Math.round(value * 1e10) / 1e10;
-    const str = rounded.toFixed(10).replace(/\.?0+$/, "");
-    return str === "" ? "0" : str;
-  }
-
-  // ===== Calculator State =====
-  let displayVal = "0";
-  let expression = "0";
-  let state = "idle"; // 'idle', 'input', 'result'
-  let pendingOp = null; // pending binary operator
-  let pendingOperand = null; // operand after pending operator
-
-  // ===== DOM references =====
-  const resultEl = document.getElementById("result");
-  const exprEl = document.getElementById("expression");
-
-  /** Update the display with current value */
-  function updateDisplay() {
-    resultEl.textContent = displayVal;
-    exprEl.textContent = expression;
-  }
-
-  /** Handle number button press */
-  function handleNumber(num) {
-    if (state === "result") {
-      displayVal = num;
-      expression = num;
-      state = "input";
-    } else if (state === "idle") {
-      displayVal = num;
-      expression = num;
-      state = "input";
-    } else if (state === "input") {
-      // Avoid consecutive decimal points
-      const lastChar = expression.slice(-1);
-      if (lastChar === "." && num === ".") return;
-      // Avoid adding decimal point if already in the number
-      if (lastChar === "." && num !== ".") return;
-      // If display shows '0' and we're starting a new number, replace it
-      if (displayVal === "0" && num !== "0") {
-        displayVal = num;
-      } else {
-        displayVal += num;
-      }
-      expression += num;
-    }
-    updateDisplay();
-  }
-
-  /** Handle operator button press */
-  function handleOperator(op) {
-    if (state === "result") {
-      displayVal = "0";
-      expression = "0";
-      state = "input";
-    }
-    if (state === "input") {
-      // If there's a pending operand and pending op, compute first
-      if (pendingOperand !== null && pendingOp !== null) {
-        computeResult();
-      }
-      // If we already have a pending op, compute the result first, then set new op
-      if (pendingOp !== null) {
-        computeResult();
-      }
-      pendingOp = op;
-      pendingOperand = null;
-    }
-    updateDisplay();
-  }
-
-  /** Handle equals button press */
-  function handleEqual() {
-    if (state === "input" && pendingOperand !== null && pendingOp !== null) {
-      computeResult();
-    }
-  }
-
-  /** Clear all */
-  function handleClear() {
-    displayVal = "0";
-    expression = "0";
-    state = "idle";
-    pendingOp = null;
-    pendingOperand = null;
-    updateDisplay();
-  }
-
-  /** Clear entry only (keep expression) */
-  function handleClearEntry() {
-    displayVal = "0";
-    expression = "0";
-    state = "idle";
-    pendingOp = null;
-    pendingOperand = null;
-    updateDisplay();
-  }
-
-  /** Delete last character */
-  function handleDelete() {
-    if (state === "input" && expression.length > 1) {
-      expression = expression.slice(0, -1);
-      displayVal = expression;
-      // If expression is just a decimal point or empty, reset
-      if (
-        expression.length === 1 &&
-        (expression === "." || expression === "0")
-      ) {
-        displayVal = "0";
-        expression = "0";
-        state = "idle";
-      }
-    }
-  }
-
-  /** Compute the result */
-  function computeResult() {
-    if (pendingOperand === null || pendingOp === null) return;
-
-    const tokens = [pendingOperand, pendingOp];
-    let value;
-    try {
-      value = evaluate(tokens);
-    } catch (e) {
-      if (e.message === "Division by zero") {
-        displayVal = "Error";
-        expression = "Error";
-        state = "idle";
-        pendingOp = null;
-        pendingOperand = null;
-      }
-      return;
-    }
-
-    value = formatResult(value);
-    displayVal = value;
-    expression = value;
-    state = "result";
-    pendingOp = null;
-    pendingOperand = null;
-  }
-
-  // ===== Event delegation =====
-  const container = document.querySelector(".calc");
-  container.addEventListener("click", (e) => {
-    const btn = e.target.closest(".btn");
-    if (!btn) return;
-
-    const action = btn.dataset.action;
-    const value = btn.dataset.value;
-
-    switch (action) {
-      case "number":
-        handleNumber(value);
-        break;
-      case "operator":
-        handleOperator(value);
-        break;
-      case "clear":
-        handleClear();
-        break;
-      case "clearEntry":
-        handleClearEntry();
-        break;
-      case "delete":
-        handleDelete();
-        break;
-      case "equal":
-        handleEqual();
-        break;
-    }
-  });
-
-  // Handle keyboard input
-  document.addEventListener("keydown", (e) => {
-    const key = e.key;
-    if (key >= "0" && key <= "9") {
-      handleNumber(key);
-    } else if (key === ".") {
-      handleNumber(".");
-    } else if (key === "+" || key === "-" || key === "*" || key === "/") {
-      handleOperator(key);
-    } else if (key === "=") {
-      handleEqual();
-    } else if (key === "Delete" || key === "Backspace") {
-      handleDelete();
-    } else if (key === "Escape" || key === "c" || key === "C") {
-      handleClear();
-    } else if (key === "Enter" || key === "Return") {
-      handleEqual();
-    }
-  });
-
-  // ===== Initial render =====
-  updateDisplay();
-</script>
