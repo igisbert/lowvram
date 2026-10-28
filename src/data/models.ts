@@ -348,3 +348,22 @@ export const classifierModels: ModelItem[] = [
     url: "https://huggingface.co/ggml-org/Kev-4B-GGUF",
   },
 ];
+
+export const embeddingModels: ModelItem[] = [
+  {
+    name: "EmbeddingGemma-2-GGUF",
+    size: "558 MB",
+    params: "0.3B",
+    quantization: "F16",
+    use: "",
+    url: "https://huggingface.co/unsloth/embeddinggemma-2-GGUF",
+  },
+  {
+    name: "Qwen3-Embedding-0.6B-GGUF",
+    size: "1.2 GB",
+    params: "0.6B",
+    quantization: "F16",
+    use: "",
+    url: "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B-GGUF",
+  },
+];

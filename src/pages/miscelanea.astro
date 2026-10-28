@@ -9,8 +9,12 @@ import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import SubNav from "@/components/SubNav.astro";
 import Info from "@/components/Info.astro";
-import { classifierModels, ocrModels } from "@/data/models";
-import { classifierSoftware, ocrSoftware } from "@/data/software";
+import { classifierModels, embeddingModels, ocrModels } from "@/data/models";
+import {
+  classifierSoftware,
+  embeddingSoftware,
+  ocrSoftware,
+} from "@/data/software";
 import cuchilloOutput from "@/data/ocr/un-carnivoro-cuchillo.txt?raw";
 import emosidoOutput from "@/data/ocr/emosido.txt?raw";
 import ticketOutput from "@/data/ocr/ticket.txt?raw";
@@ -23,6 +27,7 @@ import Layout from "@/layouts/Layout.astro";
 const anchors = [
   { label: "OCR", href: "#ocr" },
   { label: "Clasificadores", href: "#clasificadores" },
+  { label: "Embeddings", href: "#embeddings" },
 ];
 ---
 
@@ -133,6 +138,17 @@ const anchors = [
         duration="<1s"
         conclusion="Kev es el que menos seguridad tiene en la respuesta correcta. Al igual que Laya, al eliminar la palabra 'shot' del criterio fallaba más, prácticamente igualando las tres puntuaciones. "
       />
+    </Section>
+
+    <Section
+      eyebrow="Convertir texto en vectores"
+      title="Embeddings"
+      id="embeddings"
+    >
+      <h3 class="group">Software</h3>
+      <SoftwareList items={embeddingSoftware} />
+      <h3 class="group">Modelos que he probado</h3>
+      <ModelTable items={embeddingModels} />
     </Section>
   </main>
   <Footer />

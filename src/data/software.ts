@@ -303,6 +303,20 @@ export const classifierSoftware: SoftwareItem[] = [
   },
 ];
 
+export const embeddingSoftware: SoftwareItem[] = [
+  {
+    name: "llama.cpp",
+    description: "Motor de inferencia en C++ que también carga modelos de embeddings en GGUF y los sirve por HTTP con llama-server.",
+    links: [
+      { label: "Ver en GitHub", href: "https://github.com/ggml-org/llama.cpp" },
+      { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
+    ],
+    audience: "Quien ya lo usa para LLM y quiere añadir búsqueda semántica sin instalar nada más.",
+    pros: ["Nada más que instalar si ya lo usas", "Mismo flujo que ya conoces del texto", "Endpoint de embeddings integrado en llama-server"],
+    cons: ["Solo terminal, sin interfaz"],
+  },
+];
+
 export const appSoftware: SoftwareItem[] = [
   {
     name: "Pinokio",
