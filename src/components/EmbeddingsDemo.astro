@@ -1,0 +1,127 @@
+---
+import type { EmbeddingTest } from "@/data/embeddings";
+
+interface Props {
+  test: EmbeddingTest;
+}
+
+const { test } = Astro.props;
+const { model = "EmbeddingGemma-2-GGUF", prompt = "", reference, comparisons } = test;
+
+const format = (value: number) =>
+  value.toLocaleString("es-ES", {
+    minimumFractionDigits: 4,
+    maximumFractionDigits: 4,
+  });
+
+const pct = (value: number) =>
+  Math.max(0, Math.min(100, Math.round(value * 100)));
+---
+
+<article class="demo-card embeddings-demo">
+  <header class="demo-head">
+    <p class="demo-model">{model}</p>
+  </header>
+
+  <p class="prompt mono">prompt: {prompt || '""'}</p>
+
+  <p class="demo-label">Frase de referencia</p>
+  <p class="reference">{reference}</p>
+
+  <ul class="comparisons">
+    {
+      comparisons.map(({ text, similarity }) => (
+        <li>
+          <div class="row">
+            <p class="text">{text}</p>
+            <p class="sim mono">{format(similarity)}</p>
+          </div>
+          <div class="meter" style={`--pct: ${pct(similarity)}%`} aria-hidden="true">
+            <span class="dot" />
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</article>
+
+<style>
+  .embeddings-demo {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .reference {
+    margin: 0;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .prompt {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--mute);
+  }
+
+  .comparisons {
+    display: grid;
+    gap: var(--space-xl);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  .text {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--body);
+  }
+
+  .sim {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 2px var(--space-sm);
+    background: var(--canvas-soft);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    color: var(--ink);
+  }
+
+  .meter {
+    position: relative;
+    height: 3px;
+    margin-top: var(--space-sm);
+    background: var(--canvas-mid);
+    border-radius: var(--radius-pill);
+  }
+
+  .meter::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 0 auto;
+    width: var(--pct);
+    background: var(--accent);
+    opacity: 0.28;
+    border-radius: inherit;
+  }
+
+  .dot {
+    position: absolute;
+    top: 50%;
+    left: var(--pct);
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: var(--radius-pill);
+    transform: translate(-50%, -50%);
+  }
+</style>

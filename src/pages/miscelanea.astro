@@ -8,7 +8,9 @@ import TextBox from "@/components/TextBox.astro";
 import Section from "@/components/Section.astro";
 import SoftwareList from "@/components/SoftwareList.astro";
 import SubNav from "@/components/SubNav.astro";
+import EmbeddingsDemo from "@/components/EmbeddingsDemo.astro";
 import Info from "@/components/Info.astro";
+import { embeddingTests } from "@/data/embeddings";
 import { classifierModels, embeddingModels, ocrModels } from "@/data/models";
 import {
   classifierSoftware,
@@ -149,6 +151,8 @@ const anchors = [
       <SoftwareList items={embeddingSoftware} />
       <h3 class="group">Modelos que he probado</h3>
       <ModelTable items={embeddingModels} />
+      <h3 class="group">Pruebas reales</h3>
+      {embeddingTests.map((test) => <EmbeddingsDemo test={test} />)}
     </Section>
   </main>
   <Footer />
