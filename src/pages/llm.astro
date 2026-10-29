@@ -16,6 +16,8 @@ import WritingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Writing.astro";
 import WritingMiMo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/Writing.astro";
 import WritingNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Writing.astro";
 import WritingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Writing.astro";
+import CalculadoraLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Calculadora.astro";
+import MusicPlayerLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/MusicPlayer.astro";
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import FAQQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
@@ -106,7 +108,7 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
       </Trial>
 
       <h3 class="group">Artefactos</h3>
-      <TrialGroup title="Calculadora" count={3}>
+      <TrialGroup title="Calculadora" count={4}>
         <Trial
           model="NVIDIA-Nemotron-3.5-Bolt-E4B"
           fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
@@ -136,8 +138,18 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         >
           <CalculadoraQwen />
         </Trial>
+        <Trial
+          model="LFM2.5-24B-A2B"
+          fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+          runner="llama-server"
+          tokens="7.651 tokens"
+          duration="4 min 35 s"
+          speed="27,77 t/s"
+        >
+          <CalculadoraLfm />
+        </Trial>
       </TrialGroup>
-      <TrialGroup title="MusicPlayer" count={3}>
+      <TrialGroup title="MusicPlayer" count={4}>
         <Trial
           model="NVIDIA-Nemotron-3.5-Bolt-E4B"
           fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
@@ -166,6 +178,16 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           speed="36,18 t/s"
         >
           <MusicPlayerQwen />
+        </Trial>
+        <Trial
+          model="LFM2.5-24B-A2B"
+          fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+          runner="llama-server"
+          tokens="6.165 tokens"
+          duration="3 min 30 s"
+          speed="29,30 t/s"
+        >
+          <MusicPlayerLfm />
         </Trial>
       </TrialGroup>
       <TrialGroup title="FAQ" count={4}>

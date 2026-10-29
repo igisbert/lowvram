@@ -1,0 +1,239 @@
+<div class="lfm-player" data-player="lfm">
+  <audio class="lfm-player__audio" preload="metadata"></audio>
+  <ul class="lfm-player__track-list" role="list">
+    <li>
+      <button
+        class="lfm-player__track-btn lfm-player__track-btn--active"
+        data-index="0"
+        aria-label="Play Monplaisir - 1">Monplaisir - 1</button
+      >
+    </li>
+    <li>
+      <button
+        class="lfm-player__track-btn"
+        data-index="1"
+        aria-label="Play Monplaisir - 2">Monplaisir - 2</button
+      >
+    </li>
+    <li>
+      <button
+        class="lfm-player__track-btn"
+        data-index="2"
+        aria-label="Play Monplaisir - 5">Monplaisir - 5</button
+      >
+    </li>
+  </ul>
+  <div
+    class="lfm-player__progress-wrapper"
+    role="region"
+    aria-label="Progress"
+  >
+    <div
+      class="lfm-player__progress-bar"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      aria-label="Progress"
+    >
+    </div>
+  </div>
+  <button
+    class="lfm-player__control-btn lfm-player__play"
+    aria-label="Play">Play</button
+  >
+  <button
+    class="lfm-player__control-btn lfm-player__pause"
+    aria-label="Pause">Pause</button
+  >
+  <button
+    class="lfm-player__control-btn lfm-player__prev"
+    aria-label="Previous track">Prev</button
+  >
+  <button
+    class="lfm-player__control-btn lfm-player__next"
+    aria-label="Next track">Next</button
+  >
+  <input
+    class="lfm-player__volume"
+    type="range"
+    min="0"
+    max="1"
+    step="0.01"
+    aria-label="Volume"
+  />
+  <p class="lfm-player__error" aria-live="assertive"></p>
+</div>
+
+<script>
+  // @ts-nocheck
+  (function () {
+    const root = document.querySelector('[data-player="lfm"]');
+    const player = root.querySelector(".lfm-player__audio");
+    const playBtn = root.querySelector(".lfm-player__play");
+    const pauseBtn = root.querySelector(".lfm-player__pause");
+    const prevBtn = root.querySelector(".lfm-player__prev");
+    const nextBtn = root.querySelector(".lfm-player__next");
+    const progressBar = root.querySelector(".lfm-player__progress-bar");
+    const volumeSlider = root.querySelector(".lfm-player__volume");
+    const errorMsg = root.querySelector(".lfm-player__error");
+
+    const tracks = [
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Monplaisir_-_01_-_Free_To_Use_1.ogg",
+        title: "Monplaisir - 1",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/8/84/Monplaisir_-_02_-_Free_To_Use_2.ogg",
+        title: "Monplaisir - 2",
+      },
+      {
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Monplaisir_-_05_-_Free_To_Use_5.ogg",
+        title: "Monplaisir - 5",
+      },
+    ];
+
+    let currentIndex = 0;
+    let isPlaying = false;
+
+    function loadTrack(index) {
+      player.src = tracks[index].src;
+      player.load();
+      progressBar.style.width = "0%";
+      errorMsg.style.display = "none";
+    }
+
+    function play() {
+      player.play();
+      isPlaying = true;
+      playBtn.textContent = "Pause";
+    }
+    function pause() {
+      player.pause();
+      isPlaying = false;
+      playBtn.textContent = "Play";
+    }
+
+    playBtn.addEventListener("click", () => {
+      if (isPlaying) pause();
+      else play();
+    });
+    pauseBtn.addEventListener("click", () => {
+      if (!isPlaying) play();
+      else pause();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
+      loadTrack(currentIndex);
+      play();
+    });
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % tracks.length;
+      loadTrack(currentIndex);
+      play();
+    });
+
+    player.addEventListener("ended", () => {
+      const nextIdx = (currentIndex + 1) % tracks.length;
+      loadTrack(nextIdx);
+      play();
+    });
+
+    player.addEventListener("error", () => {
+      errorMsg.style.display = "block";
+    });
+
+    progressBar.addEventListener("click", (e) => {
+      const rect = progressBar.getBoundingClientRect();
+      const percent = ((e.clientX - rect.left) / rect.width) * 100;
+      player.currentTime = (percent / 100) * player.duration;
+    });
+    progressBar.addEventListener("touchstart", (e) => {
+      const rect = progressBar.getBoundingClientRect();
+      const percent = ((e.touches[0].clientX - rect.left) / rect.width) * 100;
+      player.currentTime = (percent / 100) * player.duration;
+    });
+
+    player.addEventListener("timeupdate", () => {
+      if (player.duration) {
+        const percent = (player.currentTime / player.duration) * 100;
+        progressBar.style.width = `${percent}%`;
+      }
+    });
+
+    volumeSlider.addEventListener("input", () => {
+      player.volume = parseFloat(volumeSlider.value);
+    });
+
+    loadTrack(currentIndex);
+  })();
+</script>
+
+<style>
+  .lfm-player {
+    background: #222;
+    color: #eee;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: auto;
+  }
+  .lfm-player__track-list {
+    list-style: none;
+    padding: 0;
+  }
+  .lfm-player__track-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .lfm-player__track-btn--active {
+    background: #444;
+    font-weight: bold;
+  }
+  .lfm-player__control-btn {
+    width: 100%;
+    margin: 0.3rem 0;
+    padding: 0.5rem;
+    background: #444;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .lfm-player__progress-wrapper {
+    width: 100%;
+    height: 8px;
+    background: #555;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+    cursor: pointer;
+  }
+  .lfm-player__progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #0f0;
+    border-radius: 4px;
+  }
+  .lfm-player input[type="range"] {
+    width: 100%;
+    margin: 0.3rem 0;
+  }
+  .lfm-player__error {
+    color: #f88;
+    padding: 0.5rem;
+    display: none;
+  }
+  .lfm-player button:focus,
+  .lfm-player input:focus {
+    outline: 2px solid #ff0;
+  }
+</style>

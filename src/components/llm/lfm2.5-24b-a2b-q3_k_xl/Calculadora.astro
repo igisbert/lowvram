@@ -1,0 +1,208 @@
+<style>
+  .calc-lfm {
+    background: #222;
+    color: #eee;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 300px;
+    font-family: sans-serif;
+  }
+  .calc-lfm__display {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    min-height: 1.2rem;
+  }
+  .calc-lfm__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .calc-lfm__btn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .calc-lfm__btn:hover {
+    background: #444;
+  }
+  .calc-lfm__btn:active {
+    background: #555;
+  }
+  .calc-lfm__btn:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+</style>
+
+<div class="calc-lfm" data-calc="lfm">
+  <div class="calc-lfm__display">0</div>
+  <div class="calc-lfm__buttons">
+    <button class="calc-lfm__btn" data-action="clear">C</button>
+    <button class="calc-lfm__btn" data-action="delete">⌫</button>
+    <button class="calc-lfm__btn" data-action="operator" data-value="*">*</button>
+    <button class="calc-lfm__btn" data-action="operator" data-value="/">/</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="7">7</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="8">8</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="9">9</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="4">4</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="5">5</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="6">6</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="1">1</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="2">2</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="3">3</button>
+    <button class="calc-lfm__btn" data-action="digit" data-value="0">0</button>
+    <button class="calc-lfm__btn" data-action="decimal">.</button>
+    <button class="calc-lfm__btn" data-action="operator" data-value="+">+</button>
+    <button class="calc-lfm__btn" data-action="operator" data-value="-">-</button>
+    <button class="calc-lfm__btn" data-action="equals">=</button>
+  </div>
+</div>
+
+<script type="module">
+  const root = document.querySelector('[data-calc="lfm"]');
+  const display = root.querySelector(".calc-lfm__display");
+  let expr = "";
+  let result = null;
+
+  function updateDisplay() {
+    if (result !== null) {
+      display.textContent = `${expr} = ${result}`;
+    } else {
+      display.textContent = expr || "0";
+    }
+  }
+
+  function formatNumber(num) {
+    const rounded = Math.round(num * 1e12) / 1e12;
+    let str = rounded.toFixed(12);
+    if (str.includes(".")) {
+      str = str.replace(/\.?0+$/, "");
+    }
+    return str;
+  }
+
+  function evaluate(exprStr) {
+    const tokens = [];
+    let cur = "";
+    for (let i = 0; i < exprStr.length; i++) {
+      const ch = exprStr[i];
+      if (ch >= "0" && ch <= "9") {
+        cur += ch;
+      } else if (ch === ".") {
+        cur += ch;
+      } else if (["+", "-", "*", "/"].includes(ch)) {
+        if (cur !== "") {
+          tokens.push(Number(cur));
+          cur = "";
+        }
+        tokens.push(ch);
+      }
+    }
+    if (cur !== "") tokens.push(Number(cur));
+
+    // Pass 1: * and /
+    const pass1 = [];
+    let i = 0;
+    while (i < tokens.length) {
+      if (
+        typeof tokens[i] === "number" &&
+        i + 1 < tokens.length &&
+        typeof tokens[i + 1] === "string"
+      ) {
+        const op = tokens[i + 1];
+        const a = tokens[i];
+        const b = tokens[i + 2];
+        let res;
+        if (op === "*") {
+          res = a * b;
+        } else if (op === "/") {
+          if (b === 0) throw new Error("divZero");
+          res = a / b;
+        }
+        pass1.push(res);
+        i += 3;
+      } else {
+        pass1.push(tokens[i]);
+        i++;
+      }
+    }
+
+    // Pass 2: + and -
+    let finalResult = pass1[0];
+    for (let j = 1; j < pass1.length; j++) {
+      if (typeof pass1[j] === "string") {
+        const op = pass1[j];
+        const b = pass1[j + 1];
+        if (op === "+") finalResult += b;
+        else if (op === "-") finalResult -= b;
+      }
+    }
+    return finalResult;
+  }
+
+  function handleBtn(btn) {
+    const action = btn.dataset.action;
+    const value = btn.dataset.value;
+
+    switch (action) {
+      case "digit":
+        expr += value;
+        break;
+      case "decimal":
+        if (expr === "" || expr.endsWith(".")) {
+          expr += ".";
+        }
+        break;
+      case "operator":
+        // Replace consecutive operators
+        if (expr !== "" && /[+\-*/]/.test(expr.slice(-1))) {
+          expr = expr.slice(0, -1) + value;
+        } else {
+          expr += value;
+        }
+        break;
+      case "clear":
+        expr = "";
+        result = null;
+        break;
+      case "delete":
+        if (expr.length > 0) {
+          expr = expr.slice(0, -1);
+        }
+        break;
+      case "equals":
+        try {
+          if (expr === "" || /[+\-*/]$/.test(expr)) {
+            display.textContent = "Error: Incomplete expression";
+            return;
+          }
+          const res = evaluate(expr);
+          if (isNaN(res)) throw new Error("invalid");
+          result = formatNumber(res);
+          expr = String(result);
+          updateDisplay();
+        } catch (e) {
+          if (e.message === "divZero") {
+            display.textContent = "Error: Division by zero";
+          } else {
+            display.textContent = "Error";
+          }
+        }
+        break;
+    }
+    updateDisplay();
+  }
+
+  document
+    .querySelectorAll(".calc-lfm__btn")
+    .forEach((b) => b.addEventListener("click", () => handleBtn(b)));
+</script>
