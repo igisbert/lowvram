@@ -152,6 +152,14 @@ const anchors = [
       <h3 class="group">Modelos que he probado</h3>
       <ModelTable items={embeddingModels} />
       <h3 class="group">Pruebas reales</h3>
+      <TextBox title="Sobre la prueba">
+        <p>
+          Cada modelo convierte la frase de referencia y cada frase de prueba en
+          un vector. La puntuación es el coseno entre ambos vectores. Cerca de 1
+          significa que comparten significado, lejos de 1 que son
+          independientes.
+        </p>
+      </TextBox>
       {embeddingTests.map((test) => <EmbeddingsDemo test={test} />)}
     </Section>
   </main>
