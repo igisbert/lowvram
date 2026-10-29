@@ -1,5 +1,5 @@
 <style>
-  .snake-game {
+  .nemotron-snake {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,7 +105,7 @@
   }
 </style>
 
-<div class="snake-game" tabindex="0" role="application">
+<div class="nemotron-snake" tabindex="0" role="application">
   <div class="game-container">
     <div class="score-board">
       Score: <span data-score>0</span> | High Score: <span data-high-score
@@ -135,7 +135,7 @@
 <script>
   // @ts-nocheck
   // Component state variables, isolated from global scope
-  let snakeGameRoot = document.querySelector(".snake-game");
+  let snakeGameRoot = document.querySelector(".nemotron-snake");
   let canvas = document.querySelector(".game-canvas");
   let ctx = canvas.getContext("2d");
   let messageDisplay = document.querySelector(".message");

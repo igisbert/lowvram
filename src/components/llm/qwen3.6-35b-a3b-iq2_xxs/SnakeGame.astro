@@ -2,39 +2,39 @@
 
 ---
 
-<div class="snake-game">
-  <div class="snake-game__header">
-    <div class="snake-game__score">
-      Puntos: <span class="snake-game__score-value">0</span>
+<div class="qwen-snake">
+  <div class="qwen-snake__header">
+    <div class="qwen-snake__score">
+      Puntos: <span class="qwen-snake__score-value">0</span>
     </div>
-    <div class="snake-game__high-score">
-      Mejor: <span class="snake-game__high-score-value">0</span>
+    <div class="qwen-snake__high-score">
+      Mejor: <span class="qwen-snake__high-score-value">0</span>
     </div>
   </div>
 
-  <div class="snake-game__canvas-wrap">
-    <canvas class="snake-game__canvas"></canvas>
-    <div class="snake-game__overlay" aria-hidden="true"></div>
+  <div class="qwen-snake__canvas-wrap">
+    <canvas class="qwen-snake__canvas"></canvas>
+    <div class="qwen-snake__overlay" aria-hidden="true"></div>
   </div>
 
-  <div class="snake-game__controls" aria-label="Controles táctiles">
-    <button class="snake-game__btn snake-game__btn--up" aria-label="Subir"
+  <div class="qwen-snake__controls" aria-label="Controles táctiles">
+    <button class="qwen-snake__btn qwen-snake__btn--up" aria-label="Subir"
       >▲</button
     >
-    <button class="snake-game__btn snake-game__btn--down" aria-label="Bajar"
+    <button class="qwen-snake__btn qwen-snake__btn--down" aria-label="Bajar"
       >▼</button
     >
-    <button class="snake-game__btn snake-game__btn--left" aria-label="Izquierda"
+    <button class="qwen-snake__btn qwen-snake__btn--left" aria-label="Izquierda"
       >◀</button
     >
-    <button class="snake-game__btn snake-game__btn--right" aria-label="Derecha"
+    <button class="qwen-snake__btn qwen-snake__btn--right" aria-label="Derecha"
       >▶</button
     >
   </div>
 </div>
 
 <style>
-  .snake-game {
+  .qwen-snake {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +49,7 @@
     touch-action: manipulation;
   }
 
-  .snake-game__header {
+  .qwen-snake__header {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -58,27 +58,27 @@
     line-height: 1.4;
   }
 
-  .snake-game__score,
-  .snake-game__high-score {
+  .qwen-snake__score,
+  .qwen-snake__high-score {
     background: #1a1a1a;
     padding: 6px 12px;
     border-radius: 6px;
   }
 
-  .snake-game__score-value,
-  .snake-game__high-score-value {
+  .qwen-snake__score-value,
+  .qwen-snake__high-score-value {
     font-weight: 700;
     color: #4ade80;
   }
 
-  .snake-game__canvas-wrap {
+  .qwen-snake__canvas-wrap {
     position: relative;
     width: 100%;
     max-width: 400px;
     aspect-ratio: 1;
   }
 
-  .snake-game__canvas {
+  .qwen-snake__canvas {
     display: block;
     width: 100%;
     height: 100%;
@@ -88,11 +88,11 @@
     outline: none;
   }
 
-  .snake-game__canvas:focus-visible {
+  .qwen-snake__canvas:focus-visible {
     box-shadow: 0 0 0 3px #4ade80;
   }
 
-  .snake-game__overlay {
+  .qwen-snake__overlay {
     position: absolute;
     inset: 0;
     display: flex;
@@ -109,12 +109,12 @@
     transition: opacity 0.2s;
   }
 
-  .snake-game__overlay--visible {
+  .qwen-snake__overlay--visible {
     opacity: 1;
     pointer-events: none;
   }
 
-  .snake-game__controls {
+  .qwen-snake__controls {
     display: none;
     grid-template-areas:
       ".  up  ."
@@ -126,7 +126,7 @@
     justify-content: center;
   }
 
-  .snake-game__btn {
+  .qwen-snake__btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,42 +143,42 @@
     touch-action: manipulation;
   }
 
-  .snake-game__btn:focus-visible {
+  .qwen-snake__btn:focus-visible {
     box-shadow: 0 0 0 3px #4ade80;
   }
 
-  .snake-game__btn:active {
+  .qwen-snake__btn:active {
     background: #2a2a2a;
   }
 
-  .snake-game__btn--up {
+  .qwen-snake__btn--up {
     grid-area: up;
   }
 
-  .snake-game__btn--down {
+  .qwen-snake__btn--down {
     grid-area: down;
   }
 
-  .snake-game__btn--left {
+  .qwen-snake__btn--left {
     grid-area: left;
   }
 
-  .snake-game__btn--right {
+  .qwen-snake__btn--right {
     grid-area: right;
   }
 
   @media (pointer: coarse) {
-    .snake-game__controls {
+    .qwen-snake__controls {
       display: grid;
     }
   }
 
   @media (max-width: 480px) {
-    .snake-game {
+    .qwen-snake {
       padding: 8px;
     }
 
-    .snake-game__controls {
+    .qwen-snake__controls {
       display: grid;
     }
   }
@@ -187,16 +187,16 @@
 <script>
   // @ts-nocheck
   (() => {
-    const game = document.querySelector(".snake-game");
-    const canvas = game.querySelector(".snake-game__canvas");
+    const game = document.querySelector(".qwen-snake");
+    const canvas = game.querySelector(".qwen-snake__canvas");
     const ctx = canvas.getContext("2d");
-    const overlay = game.querySelector(".snake-game__overlay");
-    const scoreEl = game.querySelector(".snake-game__score-value");
-    const highScoreEl = game.querySelector(".snake-game__high-score-value");
-    const btnUp = game.querySelector(".snake-game__btn--up");
-    const btnDown = game.querySelector(".snake-game__btn--down");
-    const btnLeft = game.querySelector(".snake-game__btn--left");
-    const btnRight = game.querySelector(".snake-game__btn--right");
+    const overlay = game.querySelector(".qwen-snake__overlay");
+    const scoreEl = game.querySelector(".qwen-snake__score-value");
+    const highScoreEl = game.querySelector(".qwen-snake__high-score-value");
+    const btnUp = game.querySelector(".qwen-snake__btn--up");
+    const btnDown = game.querySelector(".qwen-snake__btn--down");
+    const btnLeft = game.querySelector(".qwen-snake__btn--left");
+    const btnRight = game.querySelector(".qwen-snake__btn--right");
 
     const GRID = 20;
     let tileSize, tileCount;
@@ -242,9 +242,9 @@
       lastDirectionChange = null;
       scoreEl.textContent = "0";
       highScoreEl.textContent = highScore;
-      overlay.classList.remove("snake-game__overlay--visible");
+      overlay.classList.remove("qwen-snake__overlay--visible");
       overlay.textContent = "Haz clic o pulsa una tecla para empezar";
-      overlay.classList.add("snake-game__overlay--visible");
+      overlay.classList.add("qwen-snake__overlay--visible");
       placeFood();
       draw();
     }
@@ -373,7 +373,7 @@
         loopTimer = null;
       }
       overlay.textContent = `Game Over — Puntos: ${score}`;
-      overlay.classList.add("snake-game__overlay--visible");
+      overlay.classList.add("qwen-snake__overlay--visible");
     }
 
     function gameTick() {
@@ -391,14 +391,14 @@
         direction = { x: 0, y: -1 };
         nextDirection = { x: 0, y: -1 };
         lastDirectionChange = { x: 0, y: -1 };
-        overlay.classList.remove("snake-game__overlay--visible");
+        overlay.classList.remove("qwen-snake__overlay--visible");
         gameTick();
         return;
       }
 
       if (gamePaused) {
         gamePaused = false;
-        overlay.classList.remove("snake-game__overlay--visible");
+        overlay.classList.remove("qwen-snake__overlay--visible");
         gameTick();
       }
     }
@@ -457,9 +457,9 @@
           gamePaused = !gamePaused;
           if (gamePaused) {
             overlay.textContent = "Pausado";
-            overlay.classList.add("snake-game__overlay--visible");
+            overlay.classList.add("qwen-snake__overlay--visible");
           } else {
-            overlay.classList.remove("snake-game__overlay--visible");
+            overlay.classList.remove("qwen-snake__overlay--visible");
             gameTick();
           }
         }
@@ -525,7 +525,7 @@
       if (gameRunning && !gamePaused && !gameOver) {
         gamePaused = true;
         overlay.textContent = "Pausado";
-        overlay.classList.add("snake-game__overlay--visible");
+        overlay.classList.add("qwen-snake__overlay--visible");
       }
     });
 
@@ -533,7 +533,7 @@
     canvas.addEventListener("focus", () => {
       if (gamePaused && !gameOver) {
         gamePaused = false;
-        overlay.classList.remove("snake-game__overlay--visible");
+        overlay.classList.remove("qwen-snake__overlay--visible");
         gameTick();
       }
     });

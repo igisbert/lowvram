@@ -20,6 +20,7 @@ import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro
 import FAQQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
 import SnakeNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Snake.astro";
+import SnakeGame from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/SnakeGame.astro";
 import CalculadoraNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Calculadora.astro";
 import MusicPlayerNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/MusicPlayer.astro";
 import FAQNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/FAQ.astro";
@@ -85,6 +86,14 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
     </Section>
 
     <Section eyebrow="En acción" title="Pruebas">
+      <TextBox title="Cómo se han hecho las pruebas">
+        <p>
+          Cada prueba se generó entre 3 y 5 veces usándose en un solo prompt y
+          se eligió la que mejor funcionaba. Solo se han renombrado clases y
+          eliminado IDs para evitar colisiones, algo que no es culpa de los
+          modelos ni cambia el comportamiento del artefacto.
+        </p>
+      </TextBox>
       <Trial
         title="TEST"
         model="Qwen3.6-35B"
@@ -238,7 +247,7 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           <LandingQwen />
         </Trial>
       </TrialGroup>
-      <TrialGroup title="Snake" count={1}>
+      <TrialGroup title="Snake" count={2}>
         <Trial
           model="NVIDIA-Nemotron-3.5-Bolt-E4B"
           fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
@@ -248,6 +257,15 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           speed="61 t/s"
         >
           <SnakeNemotron />
+        </Trial>
+        <Trial
+          model="Qwen3.6-35B"
+          runner="Pi"
+          tokens="16.320 tokens"
+          duration="6 min 15 s"
+          speed="32 t/s"
+        >
+          <SnakeGame />
         </Trial>
       </TrialGroup>
 
