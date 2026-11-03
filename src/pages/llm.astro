@@ -8,6 +8,7 @@ import CalculadoraQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Calculador
 import MusicPlayerQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/MusicPlayer.astro";
 import Test from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/test.astro";
 import LandingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Landing.astro";
+import LandingLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Landing.astro";
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
 import LandingLing from "@/components/llm/ling-3.0-tiny-q5_k_m/Landing.astro";
 import LandingMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/Landing.astro";
@@ -20,6 +21,7 @@ import CalculadoraLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Calculadora.
 import MusicPlayerLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/MusicPlayer.astro";
 import FAQMimo from "@/components/llm/mimo-v2.6-distill-qwen-9b-q4_k_s/FAQ.astro";
 import FAQQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/FAQ.astro";
+import FAQLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
 import SnakeNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Snake.astro";
 import SnakeGame from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/SnakeGame.astro";
@@ -190,7 +192,7 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           <MusicPlayerLfm />
         </Trial>
       </TrialGroup>
-      <TrialGroup title="FAQ" count={4}>
+      <TrialGroup title="FAQ" count={5}>
         <Trial
           model="NVIDIA-Nemotron-3.5-Bolt-E4B"
           fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
@@ -229,8 +231,18 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
         >
           <FAQQwen />
         </Trial>
+        <Trial
+          model="LFM2.5-24B-A2B"
+          fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+          runner="Pi"
+          tokens="8.8k tokens"
+          duration="4 min 30 s"
+          speed="35 t/s"
+        >
+          <FAQLfm />
+        </Trial>
       </TrialGroup>
-      <TrialGroup title="Landing Page" count={4}>
+      <TrialGroup title="Landing Page" count={5}>
         <Trial
           model="NVIDIA-Nemotron-3.5-Bolt-E4B"
           fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
@@ -267,6 +279,15 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           speed="38 t/s"
         >
           <LandingQwen />
+        </Trial>
+        <Trial
+          runner="Pi"
+          model="LFM2.5-24B-A2B"
+          tokens="13k tokens"
+          duration="6 min 11 s"
+          speed="35 t/s"
+        >
+          <LandingLfm />
         </Trial>
       </TrialGroup>
       <TrialGroup title="Snake" count={2}>
