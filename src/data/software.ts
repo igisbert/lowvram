@@ -328,7 +328,6 @@ export const appSoftware: SoftwareItem[] = [
     audience: "Quien quiere probar herramientas sin pelearse con Python u otras herramientas.",
     pros: ["Puedes ejecutar aplicaciones de IA sin complicaciones", "Un catálogo enorme donde elegir"],
     cons: ["Consume mucho espacio en disco", "Consume más recursos que los motores de inferencia sueltos", "Las aplicaciones no verificadas pueden contener malware"],
-    recommended: true
   },
   {
     name: "Voicebox",
@@ -345,6 +344,14 @@ export const appSoftware: SoftwareItem[] = [
     audience: "Quien quiere jugar agrandar imágenes sin complicarse.",
     pros:["No te preocupas por qué modelos utilizas", "Interfaz gráfica muy simple"],
     cons: ["No controlas el modelo que utilizas", "Algunos modelos que incluyen tienen licencia para uso comercial"]
+  },
+  {
+    name: "Hex",
+    description: "Aplicación de escritorio para escribir texto mediante dictado por voz.",
+    links: [{ label: "Sitio web", href: "https://anoma.ly/hex/" }],
+    audience: "Quien quiere hablar con la máquina usando la voz.",
+    pros:["Autodetección de hardware e idioma", "Muchos modelos para utilizar y se descargan automáticamente", "Muy transparente al usuario, simplemente funciona"],
+    cons: ["Siempre tienes un modelo cargado en memoria", "Tiene un consumo de recursos considerable"]
   },
 ];
 

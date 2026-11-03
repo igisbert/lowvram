@@ -13,11 +13,7 @@ import {
   diffusionResults,
   upscaleResults,
 } from "@/data/image-results";
-import {
-  bgModels,
-  diffusionModels,
-  upscaleModels,
-} from "@/data/models";
+import { bgModels, diffusionModels, upscaleModels } from "@/data/models";
 import {
   bgSoftware,
   diffusionSoftware,
@@ -68,17 +64,20 @@ const anchors = [
       </Info>
       <ModelTable items={diffusionModels} />
       <div class="lora-note">
-        <Info title="Modificar comportamiento del modelo">
+        <Info title="Modificar estilo del modelo">
           <p>
             Una LoRA es un parche pequeño que modifica un modelo sin
             reentrenarlo. Puede darle un estilo o una capacidad que no tiene, o
             acelerarlo para que funcione en pocos pasos (por ejemplo, una LoRA
-            megaturbo).
+            turbo).
           </p>
         </Info>
       </div>
       <h3 class="group" id="resultados-difusion">Resultados conseguidos</h3>
-      <ResultShowcase sets={diffusionResults} scrollTarget="resultados-difusion" />
+      <ResultShowcase
+        sets={diffusionResults}
+        scrollTarget="resultados-difusion"
+      />
     </Section>
 
     <Section eyebrow="Ampliar sin inventar" title="Upscale" id="upscale">
