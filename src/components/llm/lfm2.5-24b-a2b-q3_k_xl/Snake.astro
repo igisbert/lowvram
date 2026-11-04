@@ -1,0 +1,275 @@
+<style>
+  .lfm-snake {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    background: #111;
+    color: #fff;
+    border: 2px solid #444;
+    font-family: sans-serif;
+    padding: 10px;
+    outline: none;
+  }
+  .lfm-snake:focus-within {
+    outline: 2px solid #0ff;
+  }
+  .lfm-snake__canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .lfm-snake__row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .lfm-snake__message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .lfm-snake__message.visible {
+    opacity: 1;
+  }
+  .lfm-snake__message--start {
+    color: #8f8;
+  }
+  .lfm-snake__message--over {
+    color: #f88;
+  }
+  .lfm-snake__btn {
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin: 4px;
+    background: #222;
+    border: 2px solid #555;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    touch-action: none;
+  }
+  .lfm-snake__btn:active {
+    background: #0a0;
+  }
+  @media (max-width: 600px) {
+    .lfm-snake__btn {
+      width: 60px;
+      height: 60px;
+      font-size: 1.8rem;
+    }
+  }
+</style>
+
+<div class="lfm-snake" data-lfm-snake tabindex="0">
+  <canvas class="lfm-snake__canvas" id="lfm-snake-canvas"></canvas>
+  <div class="lfm-snake__row">
+    <div>Puntos: <span id="lfm-snake-score">0</span></div>
+    <div>Mejor: <span id="lfm-snake-high-score">0</span></div>
+  </div>
+  <div class="lfm-snake__message lfm-snake__message--start" id="lfm-snake-start">
+    Haz clic o pulsa una tecla para empezar
+  </div>
+  <div class="lfm-snake__message lfm-snake__message--over" id="lfm-snake-over"
+    >Game Over</div
+  >
+  <button class="lfm-snake__btn" data-dir="up" tabindex="0">↑</button>
+  <button class="lfm-snake__btn" data-dir="down" tabindex="0">↓</button>
+  <button class="lfm-snake__btn" data-dir="left" tabindex="0">←</button>
+  <button class="lfm-snake__btn" data-dir="right" tabindex="0">→</button>
+</div>
+
+<script>
+  // @ts-nocheck
+  const root = document.querySelector("[data-lfm-snake]");
+  const canvas = root.querySelector("canvas");
+  const scoreEl = root.querySelector("#lfm-snake-score");
+  const highScoreEl = root.querySelector("#lfm-snake-high-score");
+  const startMsg = root.querySelector("#lfm-snake-start");
+  const gameOverMsg = root.querySelector("#lfm-snake-over");
+
+  const grid = 20;
+  const cellSize = 20;
+  canvas.width = canvas.height = grid * cellSize;
+  const ctx = canvas.getContext("2d");
+
+  let snake = [];
+  let direction = { x: 1, y: 0 };
+  let nextDirection = { x: 1, y: 0 };
+  let food = null;
+  let score = 0;
+  let highScore = 0;
+  let gameOver = false;
+  let paused = false;
+  let intervalId = null;
+  let tickInterval = 150;
+
+  function placeFood() {
+    while (true) {
+      const fx = Math.floor(Math.random() * grid);
+      const fy = Math.floor(Math.random() * grid);
+      if (!snake.some((s) => s.x === fx && s.y === fy)) {
+        food = { x: fx, y: fy };
+        break;
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#0f0";
+    for (const seg of snake) {
+      ctx.fillRect(
+        seg.x * cellSize,
+        seg.y * cellSize,
+        cellSize - 1,
+        cellSize - 1,
+      );
+    }
+    if (food) {
+      ctx.fillStyle = "#f00";
+      ctx.fillRect(
+        food.x * cellSize,
+        food.y * cellSize,
+        cellSize - 1,
+        cellSize - 1,
+      );
+    }
+  }
+
+  function gameLoop() {
+    if (paused || gameOver) return;
+    const dir = nextDirection;
+    direction = dir;
+    const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+    if (head.x < 0 || head.x >= grid || head.y < 0 || head.y >= grid) {
+      endGame();
+      return;
+    }
+    for (let i = 0; i < snake.length; i++) {
+      if (snake[i].x === head.x && snake[i].y === head.y) {
+        endGame();
+        return;
+      }
+    }
+    snake.unshift(head);
+    if (food && head.x === food.x && head.y === food.y) {
+      score++;
+      if (score > highScore) highScore = score;
+      scoreEl.textContent = score;
+      highScoreEl.textContent = highScore;
+      placeFood();
+      if (score % 5 === 0 && tickInterval > 50) {
+        tickInterval -= 10;
+        clearInterval(intervalId);
+        intervalId = setInterval(gameLoop, tickInterval);
+      }
+    } else {
+      snake.pop();
+    }
+    draw();
+    requestAnimationFrame(gameLoop);
+  }
+
+  function endGame() {
+    gameOver = true;
+    paused = true;
+    clearInterval(intervalId);
+    startMsg.classList.add("visible");
+    gameOverMsg.classList.add("visible");
+  }
+
+  function restartGame() {
+    gameOver = false;
+    paused = false;
+    score = 0;
+    snake = [
+      { x: Math.floor(grid / 2), y: Math.floor(grid / 2) },
+      { x: Math.floor(grid / 2) - 1, y: Math.floor(grid / 2) },
+      { x: Math.floor(grid / 2) - 2, y: Math.floor(grid / 2) },
+    ];
+    direction = { x: 1, y: 0 };
+    nextDirection = { x: 1, y: 0 };
+    scoreEl.textContent = "0";
+    highScoreEl.textContent = highScore;
+    startMsg.classList.remove("visible");
+    gameOverMsg.classList.remove("visible");
+    placeFood();
+    startGame();
+  }
+
+  function startGame() {
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(gameLoop, tickInterval);
+  }
+
+  function setDir(dir) {
+    if (dir.x === -direction.x && dir.y === -direction.y) return;
+    nextDirection = dir;
+  }
+
+  root.addEventListener("keydown", (e) => {
+    if (root !== document.activeElement) return;
+    if (e.key === "Enter") {
+      if (gameOver) restartGame();
+      return;
+    }
+    if (e.key === " ") {
+      paused = !paused;
+      return;
+    }
+    let dir;
+    if (e.key === "ArrowUp" || e.key === "w" || e.key === "W")
+      dir = { x: 0, y: -1 };
+    else if (e.key === "ArrowDown" || e.key === "s" || e.key === "S")
+      dir = { x: 0, y: 1 };
+    else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A")
+      dir = { x: -1, y: 0 };
+    else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D")
+      dir = { x: 1, y: 0 };
+    else return;
+    setDir(dir);
+  });
+
+  root.addEventListener("click", (e) => {
+    const btn = e.target.closest(".lfm-snake__btn");
+    if (!btn) return;
+    const dir = btn.dataset.dir;
+    if (dir === "up") setDir({ x: 0, y: -1 });
+    else if (dir === "down") setDir({ x: 0, y: 1 });
+    else if (dir === "left") setDir({ x: -1, y: 0 });
+    else if (dir === "right") setDir({ x: 1, y: 0 });
+  });
+
+  root.addEventListener("blur", () => {
+    if (!gameOver) paused = true;
+  });
+
+  root.addEventListener("focusin", () => {
+    if (!gameOver) {
+      paused = false;
+      startGame();
+    }
+  });
+
+  // init
+  snake = [
+    { x: Math.floor(grid / 2), y: Math.floor(grid / 2) },
+    { x: Math.floor(grid / 2) - 1, y: Math.floor(grid / 2) },
+    { x: Math.floor(grid / 2) - 2, y: Math.floor(grid / 2) },
+  ];
+  direction = { x: 1, y: 0 };
+  nextDirection = { x: 1, y: 0 };
+  scoreEl.textContent = "0";
+  highScoreEl.textContent = highScore;
+  startMsg.classList.remove("visible");
+  gameOverMsg.classList.remove("visible");
+  placeFood();
+  startGame();
+</script>

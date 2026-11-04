@@ -58,4 +58,34 @@ export const verdicts: Verdict[] = [
       "Inusable en mi equipo (~4 t/s).",
     ],
   },
+  {
+    model: "NVIDIA-Nemotron-3.5-Bolt-E4B",
+    fullModel: "NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf",
+    avgSpeed: "~61 t/s de media",
+    strengths: [
+      "Muy rápido para su tamaño.",
+      "Los artefactos que genera suelen estar completos y funcionan bien.",
+      "En texto y datos es estable.",
+    ],
+    issues: [
+      "Le cuesta seguir todas las restricciones del prompt.",
+      "Deja detalles sin pulir en algunos artefactos.",
+      "No es el modelo más agudo en razonamiento complejo.",
+    ],
+  },
+  {
+    model: "LFM2.5-24B-A2B",
+    fullModel: "LFM2.5-24B-A2B-UD-Q3_K_XL.gguf",
+    avgSpeed: "~35 t/s de media",
+    strengths: [
+      "Buen equilibrio entre rapidez y calidad.",
+      "Los artefactos suelen llegar completos.",
+      "Fiable en texto y datos en tareas cortas.",
+    ],
+    issues: [
+      "Ignora restricciones explícitas del prompt.",
+      "Puede dejar detalles de interacción sin pulir.",
+      "Menos fino que modelos más grandes en razonamiento complejo.",
+    ],
+  },
 ];

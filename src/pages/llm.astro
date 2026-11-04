@@ -6,7 +6,6 @@ import InvoiceDemo from "@/components/InvoiceDemo.astro";
 import CalculadoraLing from "@/components/llm/ling-3.0-tiny-q5_k_m/calculadora.astro";
 import CalculadoraQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Calculadora.astro";
 import MusicPlayerQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/MusicPlayer.astro";
-import Test from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/test.astro";
 import LandingQwen from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/Landing.astro";
 import LandingLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Landing.astro";
 import FAQLing from "@/components/llm/ling-3.0-tiny-q5_k_m/FAQ.astro";
@@ -25,6 +24,7 @@ import FAQLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/FAQ.astro";
 import MusicPlayerLing from "@/components/llm/ling-3.0-tiny-q5_k_m/MusicPlayer.astro";
 import SnakeNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Snake.astro";
 import SnakeGame from "@/components/llm/qwen3.6-35b-a3b-iq2_xxs/SnakeGame.astro";
+import SnakeLfm from "@/components/llm/lfm2.5-24b-a2b-q3_k_xl/Snake.astro";
 import CalculadoraNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/Calculadora.astro";
 import MusicPlayerNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/MusicPlayer.astro";
 import FAQNemotron from "@/components/llm/nvidia-nemotron-3.5-bolt-e4b-q4_k_xl/FAQ.astro";
@@ -98,16 +98,6 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           modelos ni cambia el comportamiento del artefacto.
         </p>
       </TextBox>
-      <Trial
-        title="TEST"
-        model="Qwen3.6-35B"
-        runner="Pi"
-        tokens="21.683 tokens"
-        duration="8 min 40 s"
-        speed="30 t/s"
-      >
-        <Test />
-      </Trial>
 
       <h3 class="group">Artefactos</h3>
       <TrialGroup title="Calculadora" count={4}>
@@ -290,7 +280,7 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           <LandingLfm />
         </Trial>
       </TrialGroup>
-      <TrialGroup title="Snake" count={2}>
+      <TrialGroup title="Snake" count={3}>
         <Trial
           model="NVIDIA-Nemotron-3.5-Bolt-E4B"
           fullModel="NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
@@ -309,6 +299,16 @@ const invoiceMiMoJson = JSON.stringify(invoiceMiMo, null, 2);
           speed="32 t/s"
         >
           <SnakeGame />
+        </Trial>
+        <Trial
+          model="LFM2.5-24B-A2B"
+          fullModel="LFM2.5-24B-A2B-UD-Q3_K_XL.gguf"
+          runner="llama-server"
+          tokens="12.167 tokens"
+          duration="5 min 34 s"
+          speed="36,33 t/s"
+        >
+          <SnakeLfm />
         </Trial>
       </TrialGroup>
 
