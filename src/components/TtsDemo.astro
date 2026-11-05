@@ -1,0 +1,53 @@
+---
+import AudioPlayer from "@/components/AudioPlayer.astro";
+import { Clock, Cpu } from "@lucide/astro";
+
+interface Props {
+  text: string;
+  src: string;
+  runner: string;
+  duration: string;
+  model?: string;
+  label?: string;
+}
+
+const { text, src, runner, duration, model, label } = Astro.props;
+---
+
+<figure class="tts demo-card">
+  {(model || runner || duration) && (
+    <header class="demo-head">
+      {model && <p class="demo-model">{model}</p>}
+      <div class="demo-facts">
+        {runner && (
+          <span>
+            <Cpu size={14} />
+            {runner}
+          </span>
+        )}
+        {duration && (
+          <span>
+            <Clock size={14} />
+            {duration}
+          </span>
+        )}
+      </div>
+    </header>
+  )}
+
+  <div class="tts-text">
+    <p class="demo-label">Texto</p>
+    <pre class="demo-output">{text}</pre>
+  </div>
+
+  <AudioPlayer
+    src={src}
+    label={label ?? `Audio generado con ${model ?? "tts"}`}
+  />
+</figure>
+
+<style>
+  .tts-text {
+    margin-bottom: var(--space-lg);
+  }
+</style>

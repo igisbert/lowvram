@@ -8,6 +8,7 @@ import SoftwareList from "@/components/SoftwareList.astro";
 import SubNav from "@/components/SubNav.astro";
 import TextBox from "@/components/TextBox.astro";
 import TranscriptionDemo from "@/components/TranscriptionDemo.astro";
+import TtsDemo from "@/components/TtsDemo.astro";
 import { musicModels, transcriptionModels, voiceModels } from "@/data/models";
 import {
   musicSoftware,
@@ -23,6 +24,8 @@ import industrialCaption from "@/data/music/industrialmetal/caption.txt?raw";
 import industrialLyrics from "@/data/music/industrialmetal/lyrics.txt?raw";
 import punkCaption from "@/data/music/punk/caption.txt?raw";
 import punkLyrics from "@/data/music/punk/lyrics.txt?raw";
+import qwenTtsText from "@/data/audios/qwen-tts-1.7b.txt?raw";
+import qwenCustomVoiceText from "@/data/audios/qwen-tts-1.7b-customvoice.txt?raw";
 
 const anchors = [
   { label: "Transcripción", href: "#transcripcion" },
@@ -76,10 +79,22 @@ const anchors = [
       <h3 class="group">Software</h3>
       <SoftwareList items={voiceSoftware} />
       <h3 class="group">Modelos que he probado</h3>
-      <p>
-        <span class="todo-flag">TODO: sustituir por datos reales</span>
-      </p>
       <ModelTable items={voiceModels} />
+      <h3 class="group">Pruebas reales</h3>
+      <TtsDemo
+        text={qwenTtsText.trim()}
+        src="/audios/qwen-tts-1.7b.mp3"
+        model="Qwen3-TTS-12Hz-1.7B"
+        runner="Voicebox"
+        duration="3 m 7 s"
+      />
+      <TtsDemo
+        text={qwenCustomVoiceText.trim()}
+        src="/audios/qwen-tts-1.7b-customvoice.mp3"
+        model="Qwen3-TTS-12Hz-1.7B-CustomVoice"
+        runner="Voicebox"
+        duration="1 m 57 s"
+      />
     </Section>
 
     <Section eyebrow="Sonido generado" title="Música" id="musica">

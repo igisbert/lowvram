@@ -125,12 +125,20 @@ export const transcriptionModels: ModelItem[] = [
 
 export const voiceModels: ModelItem[] = [
   {
-    name: "Modelo de voz de ejemplo",
-    size: "1 GB",
-    params: "TODO",
-    quantization: "TODO",
+    name: "Qwen3-TTS-12Hz-1.7B",
+    size: "4.23 GB",
+    params: "1.7B",
+    quantization: "BF16",
     use: "",
-    url: "https://huggingface.co",
+    url: "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+  },
+  {
+    name: "Qwen3-TTS-12Hz-1.7B-CustomVoice",
+    size: "4.21 GB",
+    params: "1.7B",
+    quantization: "BF16",
+    use: "",
+    url: "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
   },
 ];
 

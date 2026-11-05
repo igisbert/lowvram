@@ -1,10 +1,25 @@
 ---
+import { Quote } from "@lucide/astro";
+
+const jokes = [
+  "No hagáis más carteles con ChatGPT, por favor",
+  "Hay vida más allá de los modelos frontera",
+  "Nos comen los chinos, los chinos nos comen",
+  "Sam Altman, suéltame el brazo",
+];
+
+const joke = jokes[Math.floor(Math.random() * jokes.length)];
 ---
 
 <footer class="site-footer">
   <div class="container inner">
     <p class="mono note">lowvram · IA local en hardware modesto</p>
-    <p class="hint">TODO: revisar texto del pie antes de publicar.</p>
+    <blockquote class="joke">
+      <span class="quote open" aria-hidden="true"
+        ><Quote size={24} stroke-width={1} /></span
+      >
+      <p class="text">{joke}</p>
+    </blockquote>
   </div>
 </footer>
 
@@ -31,9 +46,29 @@
     margin: 0;
   }
 
-  .hint {
-    color: var(--mute);
+  .joke {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
     margin: 0;
     max-width: var(--measure);
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .text {
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .quote {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  .quote.open {
+    transform: rotate(180deg);
   }
 </style>
