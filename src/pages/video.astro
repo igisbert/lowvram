@@ -15,6 +15,7 @@ import Layout from "@/layouts/Layout.astro";
 <Layout
   title="Modelos de vídeo"
   description="Software, modelos recomendados y resultados de generación de vídeo ejecutada en local en una RTX 2070 con 8 GB de VRAM."
+  seoTitle="Generación de vídeo en local · IA local con 8 GB de VRAM"
 >
   <Header />
   <main id="main">
@@ -30,8 +31,8 @@ import Layout from "@/layouts/Layout.astro";
     <Section eyebrow="Aviso honesto" title="Imposible generar vídeo de calidad">
       <p>
         Generar vídeo de calidad es imposible con 8 GB de VRAM. Los modelos
-        capaces de clips largos, con resolución y coherencia decentes, piden
-        mucha más memoria de la que hay en este equipo.
+        capaces de crear clips largos, con resolución y coherencia decentes,
+        piden mucha más memoria de la que hay en este equipo.
       </p>
       <p>
         Lo que sí sale: clips muy cortos, a resolución baja, como prueba o
@@ -39,7 +40,7 @@ import Layout from "@/layouts/Layout.astro";
         entender cómo funciona la generación de vídeo en local.
       </p>
       <p>
-        Esta página recoge ese escenario real: con qué intentarlo y qué sale de
+        Esta página recoge el escenario real. Con qué intentarlo y qué sale de
         verdad, sin prometer lo que el hardware no da.
       </p>
     </Section>
@@ -56,7 +57,7 @@ import Layout from "@/layouts/Layout.astro";
       <Info title="No compensa">
         <p>
           Generar 2 segundos de vídeo puede pasar de los 30 minutos de
-          inferencia. Para ese coste, el resultado no merece la pena.
+          inferencia. Para ese coste el resultado no merece la pena.
         </p>
       </Info>
       <VideoResults items={videoResults} />

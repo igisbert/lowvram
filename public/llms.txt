@@ -1,0 +1,28 @@
+# lowvram
+
+> Pruebas reales de IA local ejecutada en un PC de sobremesa con una RTX 2070 de 8 GB de VRAM (2018): qué modelos caben, a qué velocidad funcionan y qué resultados dan. Todo en castellano, sin nube ni suscripciones.
+
+Realizado por Inaki en un equipo modesto con Ryzen 7 5800X, 16 GB de RAM y una RTX 2070 de 8 GB. Cada sección recoge el software usado, los modelos concretos probados (nombre, tamaño cuantizado y consumo) y ejemplos reales con sus resultados: imágenes generadas, audio, vídeo, transcripciones, OCR y artefactos interactivos creados por LLM.
+
+## Páginas
+
+- [Inicio](https://lowvram.pages.dev/): presentación del proyecto, por qué usar IA local y el hardware del equipo.
+- [Modelos de texto (LLM)](https://lowvram.pages.dev/llm/): software y LLM probados en 8 GB de VRAM, con artefactos interactivos reales (calculadora, reproductor de música, FAQ, landing, Snake, corrección de correo y factura a JSON) y veredictos por modelo.
+- [Modelos de imagen](https://lowvram.pages.dev/imagen/): difusión (Stable Diffusion), upscale y borrado de fondo, con galerías comparativas por modelo y cuantización.
+- [Vídeo](https://lowvram.pages.dev/video/): realidad de la generación de vídeo en 8 GB de VRAM y clip de ejemplo con Wan2.2-TI2V-5B.
+- [Audio](https://lowvram.pages.dev/audio/): transcripción de voz a texto, síntesis de voz (TTS con Qwen3-TTS) y música generada, con audio real de muestra.
+- [Miscelánea](https://lowvram.pages.dev/miscelanea/): OCR, clasificadores y tests de embeddings con resultados reales.
+- [Aplicaciones](https://lowvram.pages.dev/aplicaciones/): apps de IA local listas para usar sin configurar nada, incluidas las recomendadas dentro de Pinokio.
+- [Glosario](https://lowvram.pages.dev/glosario/): términos de IA local (VRAM, cuantización, GGUF, difusión...) explicados en lenguaje sencillo.
+
+## Datos del equipo
+
+- GPU: RTX 2070 8 GB (448 GB/s), de 2018.
+- RAM: 16 GB DDR4 a 3600 MHz.
+- CPU: Ryzen 7 5800X.
+- SSD: Samsung 980 PRO 1 TB.
+- Sistema: Windows.
+
+## Cómo citar los datos
+
+Los tiempos, tamaños y veredictos publicados corresponden a generaciones y ejecuciones reales y únicas del autor; no son cifras promediadas ni teóricas. Si enlazas una medición, usa la página de la sección correspondiente.
