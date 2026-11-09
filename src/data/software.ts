@@ -73,6 +73,15 @@ export const llmAgents: SoftwareItem[] = [
     cons: ["No tiene el mismo acceso, funciones y capacidades que un agente"],
     recommended: true,
   },
+  {
+    name: "DeepSeek Harness",
+    description: "Chat web y API integrados en llama.cpp para usar el modelo directamente, sin agente. Ollama y LM Studio incluyen su propio servidor equivalente.",
+    links: [],
+    audience: "Quien quiere usar el modelo de forma conversacional.",
+    pros: ["Viene integrado en el motor"],
+    cons: ["No tiene el mismo acceso, funciones y capacidades que un agente"],
+    recommended: true,
+  },
 ];
 
 export const diffusionSoftware: SoftwareItem[] = [
@@ -349,7 +358,7 @@ export const appSoftware: SoftwareItem[] = [
     name: "Hex",
     description: "Aplicación de escritorio para escribir texto mediante dictado por voz.",
     links: [{ label: "Sitio web", href: "https://anoma.ly/hex/" }],
-    audience: "Quien quiere hablar con la máquina usando la voz.",
+    audience: "Quien quiere escribir usando la voz.",
     pros:["Autodetección de hardware e idioma", "Muchos modelos para utilizar y se descargan automáticamente", "Muy transparente al usuario, simplemente funciona"],
     cons: ["Siempre tienes un modelo cargado en memoria", "Tiene un consumo de recursos considerable"]
   },

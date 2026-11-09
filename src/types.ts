@@ -69,16 +69,6 @@ export type ModelItem = {
   observations?: string[];
 };
 
-export type LlmResultRow = {
-  model: string;
-  quantization: string;
-  context: string;
-  genSpeed: string;
-  promptSpeed: string;
-  vramUsed: string;
-  gpuLayers: string;
-};
-
 export type ResultImage = {
   src: string;
   model: string;
