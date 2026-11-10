@@ -1,6 +1,5 @@
 import type { NavItem } from "@/types";
 
-/* TODO: sustituir por datos reales (revisar etiquetas y orden). */
 export const navigation: NavItem[] = [
   { label: "Inicio", href: "/" },
   { label: "LLM", href: "/llm" },

@@ -15,24 +15,31 @@ const { verdict } = Astro.props;
     {verdict.avgSpeed && <span class="mono avg">{verdict.avgSpeed}</span>}
   </div>
   {verdict.fullModel && <p class="mono full">{verdict.fullModel}</p>}
-  <div class="cols">
-    <div>
-      <p class="mono kicker good">Lo bueno</p>
-      <ul class="points">
-        {verdict.strengths.map((item) => (
-          <li class="pro"><Plus size={14} /><span>{item}</span></li>
-        ))}
-      </ul>
+  {verdict.note && <p class="note">{verdict.note}</p>}
+  {(verdict.strengths || verdict.issues) && (
+    <div class="cols">
+      {verdict.strengths && (
+        <div>
+          <p class="mono kicker good">Lo bueno</p>
+          <ul class="points">
+            {verdict.strengths.map((item) => (
+              <li class="pro"><Plus size={14} /><span>{item}</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {verdict.issues && (
+        <div>
+          <p class="mono kicker bad">Lo malo</p>
+          <ul class="points">
+            {verdict.issues.map((item) => (
+              <li class="con"><Minus size={14} /><span>{item}</span></li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
-    <div>
-      <p class="mono kicker bad">Lo malo</p>
-      <ul class="points">
-        {verdict.issues.map((item) => (
-          <li class="con"><Minus size={14} /><span>{item}</span></li>
-        ))}
-      </ul>
-    </div>
-  </div>
+  )}
 </article>
 
 <style>
@@ -69,6 +76,13 @@ const { verdict } = Astro.props;
     color: var(--mute);
     margin: 0 0 var(--space-lg);
     overflow-wrap: anywhere;
+  }
+
+  .note {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--body);
   }
 
   .cols {

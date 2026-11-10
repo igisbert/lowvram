@@ -1,7 +1,6 @@
 import type { Verdict } from "@/types";
 
-/* Veredictos cualitativos por modelo, redactados desde errors.md y las t/s
-   medidas en las pruebas. Añadir un veredicto = añadir una entrada. */
+
 export const verdicts: Verdict[] = [
   {
     model: "Ling 3.0 Tiny",
@@ -9,47 +8,44 @@ export const verdicts: Verdict[] = [
     avgSpeed: "~105 t/s de media",
     strengths: [
       "Con varios intentos llega a generar artefactos funcionales completos.",
-      "Bastante rápido.",
+      "Muy rápido.",
     ],
     issues: [
-      "Ignora restricciones explícitas del prompt.",
-      "A veces deja botones sin cablear: están en el markup pero no hacen nada.",
-      "A veces se interrumpte y tienes que decirle que siga",
-      "Construye HTML con template strings, que Astro pinta como texto.",
-      "Alucina con seguridad total (sintaxis de otros frameworks, siglas inventadas).",
-      "Confunde Svelte (y hasta Vue) con Astro aunque se le pida un componente Astro.",
+      "Consume y genera muchísimos tokens, así que parte de su velocidad se pierde en respuestas larguísimas.",
+      "Ignora restricciones explícitas del prompt y a veces se interrumpe y hay que decirle que siga.",
+      "Se inventa sintaxis con total seguridad y mezcla frameworks. En mis pruebas confunde Svelte y Vue con Astro.",
     ],
   },
   {
     model: "MiMo 2.6",
-    fullModel: "MiMo-V2.6-Distill-Qwen-9B-Q4_K_S",
+    fullModel: "MiMo-V2.6-Distill-Qwen-9B-Q4_K_S.gguf",
     avgSpeed: "~43 t/s de media",
     strengths: [
       "Crea estilos bastante decentes."
     ],
     issues: [
-      "Ignora restricciones explícitas del prompt.",
-      "Le cuesta mucho usar tools y ejecutar comandos, al menos en Windows.",
-      "A veces se interrumpte y tienes que decirle que siga",
-      "Le cuesta mucho cumplir tareas sin cometer errores",
-      "Entrega componentes sin ni un listener: nada responde.",
-      "Inventa APIs (useState, createContext…) y mezcla sintaxis Svelte en componentes de Astro.",
+      "Ignora restricciones explícitas del prompt, comete errores con frecuencia y a veces se interrumpe.",
+      "Le cuesta usar herramientas y ejecutar comandos, al menos en Windows.",
+      "Entrega componentes sin eventos y nada responde al hacer clic.",
+      "Mezcla APIs y sintaxis de otros frameworks (React, Svelte) en componentes de Astro.",
     ],
   },
   {
     model: "Qwen3.6-35B",
+    fullModel: "Qwen3.6-35B-A3B-UD-IQ2_XXS.gguf",
     avgSpeed: "~30 t/s de media",
     strengths: [
-      "Artefactos funcionales completos, no suele equivocarse. ",
-      "En razonamiento es superior a otros modelos que se pueden usar en un equipo como el mío.",
+      "Artefactos funcionales y completos, casi siempre a la primera.",
+      "En razonamiento es el mejor de los que he podido probar en mi equipo.",
     ],
     issues: [
-      "Enorme incluso en Q2: hace offload y no cabe en 8 GB, por lo que la velocidad no es óptima.",
-      "Al tener una cuantización muy agresiva puede cometer pequeños errores o entrar en bucle. ",
+      "Ni cuantizado a dos bits cabe entero en 8 GB así que parte del modelo pasa a la RAM y la velocidad baja.",
+      "Con una cuantización tan agresiva puede cometer pequeños errores o entrar en bucle.",
     ],
   },
   {
     model: "Qwen3.8-27B",
+    fullModel: "Qwen3.8-27B-UD-IQ2_XXS.gguf",
     avgSpeed: "~4 t/s de media",
     strengths: [
       "Es de los mejores modelos que se pueden utilizar en local.",
@@ -59,18 +55,22 @@ export const verdicts: Verdict[] = [
     ],
   },
   {
+    model: "Qwen3.6-35B-A3B-MTP",
+    fullModel: "Qwen3.6-35B-A3B-MTP-UD-IQ2_XXS.gguf",
+    avgSpeed: "~10 t/s de media",
+    note: "El MTP (Multi-Token Prediction) permite que el modelo prediga varios tokens a la vez, así que en teoría debería generar más tokens por segundo. Pero aquí, además de que el modelo MTP pesa 1 GB más que el normal, al hacer offload a la RAM y pasarle parte de los expertos, la velocidad se desploma.",
+  },
+  {
     model: "NVIDIA-Nemotron-3.5-Bolt-E4B",
     fullModel: "NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf",
     avgSpeed: "~61 t/s de media",
     strengths: [
-      "Muy rápido para su tamaño.",
+      "Bastante rápido",
       "Los artefactos que genera suelen estar completos y funcionan bien.",
-      "En texto y datos es estable.",
+      "Mucho mejor en tareas agénticas que el Gemma 4 del que parte.",
     ],
     issues: [
-      "Le cuesta seguir todas las restricciones del prompt.",
-      "Deja detalles sin pulir en algunos artefactos.",
-      "No es el modelo más agudo en razonamiento complejo.",
+      "Menos fino que modelos más grandes en razonamiento complejo.",
     ],
   },
   {
@@ -78,14 +78,13 @@ export const verdicts: Verdict[] = [
     fullModel: "LFM2.5-24B-A2B-UD-Q3_K_XL.gguf",
     avgSpeed: "~35 t/s de media",
     strengths: [
-      "Buen equilibrio entre rapidez y calidad.",
-      "Los artefactos suelen llegar completos.",
+      "Algo más rápido que Qwen3.6-35B (~5 t/s más), porque activa menos parámetros por token.",
       "Fiable en texto y datos en tareas cortas.",
+      "Los artefactos suelen llegar completos...",
     ],
     issues: [
-      "Ignora restricciones explícitas del prompt.",
-      "Puede dejar detalles de interacción sin pulir.",
-      "Menos fino que modelos más grandes en razonamiento complejo.",
+      "...pero a veces sin pulir detalles de interacción.",
+      "En mis pruebas queda por debajo de Qwen3.6-35B y esos ~5 t/s extra no compensan.",
     ],
   },
 ];

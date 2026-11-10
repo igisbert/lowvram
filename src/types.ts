@@ -32,8 +32,9 @@ export type Verdict = {
   model: string;
   fullModel?: string;
   avgSpeed?: string;
-  strengths: string[];
-  issues: string[];
+  strengths?: string[];
+  issues?: string[];
+  note?: string;
   links?: SoftwareLink[];
 };
 export type SoftwareItem = {

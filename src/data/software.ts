@@ -1,55 +1,55 @@
 import type { PinokioApp, SoftwareItem } from "@/types";
 
 export const llmSoftware: SoftwareItem[] = [
-  {
+    {
     name: "Ollama",
-    description: "Ejecuta LLM locales con un solo comando y API compatible con OpenAI. Tiene su propio catálogo de modelos y ofrece nube de pago por si un modelo no cabe en tu equipo.",
+    description: "Ejecuta modelos de lenguaje en local con un solo comando y ofrece una API compatible con OpenAI. Tiene su propio catálogo de modelos y una nube de pago por si alguno no cabe en tu equipo.",
     links: [{ label: "Sitio web", href: "https://ollama.com" }],
     audience: "Quien quiere empezar rápido sin configurar nada.",
-    pros: ["Instalación simple", "Catálogo propio: un pull y listo", "Buena API local"],
+    pros: ["Instalación simple", "Descargas y ejecutas un modelo con un solo comando", "Se conecta fácil con otras aplicaciones"],
     cons: ["Menos control fino que llama.cpp"],
   },
   {
     name: "LM Studio",
-    description: "App de escritorio para buscar, descargar y probar modelos de Hugging Face con chat integrado, y servirlos en red local con API compatible con OpenAI.",
+    description: "App de escritorio para buscar, descargar y probar modelos de Hugging Face con un chat integrado. También puede servirlos en tu red local con una API compatible con OpenAI.",
     links: [{ label: "Sitio web", href: "https://lmstudio.ai" }],
-    audience: "Quien prefiere GUI antes que terminal.",
+    audience: "Quien prefiere una interfaz gráfica antes que la terminal.",
     pros: ["Interfaz cuidada, ideal para empezar", "Servidor local con un clic"],
-    cons: ["Más pesado que Ollama", "Menos control fino que llama.cpp"],
+    cons: ["Consume más recursos que Ollama", "Menos control fino que llama.cpp"],
   },
   {
     name: "llama.cpp",
-    description: "Motor de inferencia en C++ que ejecuta modelos GGUF en CPU y GPU, con descarga parcial por capas para exprimir la VRAM disponible.",
+    description: "Motor en C++ que ejecuta modelos GGUF en CPU y GPU, y reparte las capas entre ambas para aprovechar al máximo la VRAM disponible.",
     links: [
-      { label: "Ver en GitHub", href: "https://github.com/ggerganov/llama.cpp" },
+      { label: "Ver en GitHub", href: "https://github.com/ggml-org/llama.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
     ],
-    audience: "Quien quiere exprimir VRAM y medir t/s de verdad.",
-    pros: ["Offload por capas: decide qué cabe en GPU y qué va a RAM", "Mide t/s reales de generación y de prompt", "Control total sobre parámetros y cuantización"],
-    cons: ["Más difícil de usar que Ollama o LM Studio"],
+    audience: "Quien quiere exprimir la VRAM y medir los t/s reales.",
+    pros: ["Decides qué capas van a la GPU y cuáles a la RAM", "Mide los t/s reales, tanto de generación como de procesamiento del prompt", "Control total sobre parámetros y cuantización"],
+    cons: ["Curva de aprendizaje mayor, pues se maneja desde la terminal y con muchos parámetros"],
     recommended: true,
   },
   {
     name: "vLLM",
-    description: "Motor para servir modelos en servidor, con API compatible con OpenAI y alto rendimiento ante muchas peticiones concurrentes.",
+    description: "Motor para servir modelos desde un servidor, con una API compatible con OpenAI y un rendimiento muy alto cuando recibe muchas peticiones a la vez.",
     links: [{ label: "Ver en GitHub", href: "https://github.com/vllm-project/vllm" }],
     audience: "Quien quiere montar un servidor local para varias apps o usuarios a la vez.",
-    pros: ["Rendimiento muy alto", "Ideal para servir modelos en red local o nube"],
-    cons: ["Sobredimensionado para hardware doméstico", "Mucho más complejo de instalar y configurar que llama.cpp"],
+    pros: ["Rendimiento muy alto con peticiones simultáneas", "Ideal para servir modelos en red local o en la nube"],
+    cons: ["Sobredimensionado para un equipo doméstico", "Mucho más complejo de instalar y configurar que llama.cpp"],
   },
 ];
 
 export const llmAgents: SoftwareItem[] = [
   {
     name: "Pi",
-    description: "Agente de terminal mínimo y extensible que funciona con decenas de proveedores, tanto en local como en nube.",
+    description: "Agente de terminal mínimo y extensible que funciona con decenas de proveedores, tanto en local como en la nube.",
     links: [
       { label: "Sitio web", href: "https://pi.dev" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/pi/" },
     ],
     audience: "Quien quiere un agente ligero y moldeable para programar con sus modelos.",
-    pros: ["Núcleo mínimo que adaptas a tu flujo", "Al ser tan mínimo, apenas consume contexto de serie"],
-    cons: ["No incluye, de serie, características que otros agentes sí traen"],
+    pros: ["Núcleo pequeño que adaptas a tu flujo", "Gasta muy poco contexto al arrancar, lo que se agradece con modelos locales"],
+    cons: ["Le faltan, de serie, funciones que otros agentes traen listas para usar"],
     recommended: true,
   },
   {
@@ -66,20 +66,23 @@ export const llmAgents: SoftwareItem[] = [
   },
   {
     name: "llama-server",
-    description: "Chat web y API integrados en llama.cpp para usar el modelo directamente, sin agente. Ollama y LM Studio incluyen su propio servidor equivalente.",
+    description: "Chat web integrado en llama.cpp para usar el modelo directamente, sin agente. Ollama y LM Studio traen su propia versión.",
     links: [],
-    audience: "Quien quiere usar el modelo de forma conversacional.",
-    pros: ["Viene integrado en el motor"],
-    cons: ["No tiene el mismo acceso, funciones y capacidades que un agente"],
+    audience: "Quien solo quiere chatear con el modelo.",
+    pros: ["Viene integrado en el motor", "Incluye también una API compatible con OpenAI para conectar otras apps"],
+    cons: ["No ofrece de serie el flujo de trabajo autónomo y especializado de un agente"],
     recommended: true,
   },
   {
     name: "DeepSeek Harness",
-    description: "Chat web y API integrados en llama.cpp para usar el modelo directamente, sin agente. Ollama y LM Studio incluyen su propio servidor equivalente.",
-    links: [],
-    audience: "Quien quiere usar el modelo de forma conversacional.",
-    pros: ["Viene integrado en el motor"],
-    cons: ["No tiene el mismo acceso, funciones y capacidades que un agente"],
+    description: "Agente completo con interfaz visual, al estilo de Codex o Antigravity.",
+    links: [
+      { label: "Sitio web", href: "https://www.deepseek.com/en/harness/" },
+      { label: "Ver en GitHub", href: "https://github.com/deepseek-ai/deepseek-harness" },
+    ],
+    audience: "Quien quiere un agente completo desde el primer momento y prefiere una interfaz gráfica.",
+    pros: ["Viene completo de serie, con soporte a búsquedas en Internet, ejecutar comandos y editar archivos", "Interfaz visual", "Funciona con muchos proveedores, también con modelos en local"],
+    cons: ["Está en preview, por lo que le faltan funciones y pueden cambiar cosas con el tiempo"],
     recommended: true,
   },
 ];
@@ -92,35 +95,35 @@ export const diffusionSoftware: SoftwareItem[] = [
       { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/stablediffusioncpp/" },
     ],
-    audience: "Quien solo quiere generar imágenes rápidamente. ",
-    pros: ["Ligero y rápido, binarios compilados", "No necesita ejecutar Python", "Soporte para CUDA, Vulkan, Metal y CPU"],
+    audience: "Quien solo quiere generar imágenes rápidamente.",
+    pros: ["Binarios compilados", "No necesita ejecutar Python", "Soporte para CUDA, Vulkan, Metal y CPU"],
     cons: ["Solo terminal, sin interfaz"],
     recommended: true,
   },
   {
     name: "ComfyUI",
-    description: "Interfaz por nodos para generar imagen con casi cualquier modelo: montas el flujo a mano, lo guardas y lo reutilizas. Con ComfyUI Desktop viene todo configurado de serie.",
+    description: "Interfaz por nodos para generar imágenes con casi cualquier modelo. Montas el flujo a mano, lo guardas y lo reutilizas. Con ComfyUI Desktop viene todo configurado de serie.",
     links: [
       { label: "Sitio web", href: "https://www.comfy.org" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/comfyui/" },
     ],
     audience: "Quien quiere controlar cada paso del pipeline.",
-    pros: ["Flujos reproducibles y compartibles", "Flujos complejos encadenando pasos, no solo generar la foto y ya"],
-    cons: ["Curva de aprendizaje", "Consume más recursos que Stable Diffusion.cpp"],
+    pros: ["Flujos reproducibles y compartibles", "Permite encadenar pasos (generar, reescalar, retocar) en un mismo flujo"],
+    cons: ["Curva de aprendizaje", "Consume más recursos que stable-diffusion.cpp"],
   },
 ];
 
 export const transcriptionSoftware: SoftwareItem[] = [
   {
     name: "whisper.cpp",
-    description: "Motor de transcripción de audio en local: convierte voz a texto sin nube.",
+    description: "Motor de transcripción de audio en local. Convierte voz a texto sin nube.",
     links: [
       { label: "Repositorio", href: "https://github.com/ggml-org/whisper.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/whispercpp/" },
     ],
     audience: "Quien necesita transcribir un volumen considerable de audio en su propio equipo.",
-    pros: ["Funciona sin conexión", "Con acceso a todos los modelos de Whisper"],
-    cons: ["Solo acepta WAV de 16 bits, hay que convertir antes"],
+    pros: ["Con acceso a todos los modelos de Whisper"],
+    cons: ["Requiere archivos WAV de 16 bits, otros formatos necesitan conversión previa"],
     recommended: true,
   },
   {
@@ -140,7 +143,7 @@ export const transcriptionSoftware: SoftwareItem[] = [
     ],
     audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
     pros: ["Sin dependencias, es un binario precompilado", "Interfaz web", "Muchos modelos que se descargan con un clic"],
-    cons: ["La interfaz gráfica es horrible y poco clara.", "Cero información o contexto sobre los modelos disponibles"],
+    cons: ["Interfaz gráfica poco cuidada y confusa", "Cero información o contexto sobre los modelos disponibles"],
   },
 ];
 
@@ -153,7 +156,7 @@ export const voiceSoftware: SoftwareItem[] = [
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/qwen-tts/" },
     ],
     audience: "Quien quiere generar voz en su equipo, clonarla o diseñarla.",
-    pros: ["Clonación desde unos segundos de audio", "Servidor con API compatible con OpenAI"],
+    pros: ["Clonación a partir de un audio de referencia", "Servidor con API compatible con OpenAI"],
     cons: ["Hay que compilarlo"],
   },
     {
@@ -173,7 +176,7 @@ export const voiceSoftware: SoftwareItem[] = [
     ],
     audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
     pros: ["Sin dependencias, es un binario precompilado", "Interfaz web", "Muchos modelos que se descargan con un clic"],
-    cons: ["La interfaz gráfica es horrible y poco clara.", "Cero información o contexto sobre los modelos disponibles"],
+    cons: ["Interfaz gráfica poco cuidada y confusa", "Cero información o contexto sobre los modelos disponibles"],
   },
 ];
 
@@ -186,7 +189,7 @@ export const musicSoftware: SoftwareItem[] = [
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/acestepcpp/" },
     ],
     audience: "Quien quiere generar canciones sin depender de la nube.",
-    pros: ["Prompt, letra, BPM e idioma configurables", "Web local con todos los pasos"],
+    pros: ["Prompt, letra, BPM e idioma configurables"],
     cons: ["Hay que compilarlo", "Necesita varios modelos cargados por separado"],
     recommended: true,
   },
@@ -198,7 +201,7 @@ export const musicSoftware: SoftwareItem[] = [
     ],
     audience: "Quien quiere un solo motor para todo lo relacionado con audio.",
     pros: ["Sin dependencias, es un binario precompilado", "Interfaz web", "Muchos modelos que se descargan con un clic"],
-    cons: ["La interfaz gráfica es horrible y poco clara.", "Cero información o contexto sobre los modelos disponibles"],
+    cons: ["Interfaz gráfica poco cuidada y confusa", "Cero información o contexto sobre los modelos disponibles"],
   },
 ];
 
@@ -216,7 +219,7 @@ export const upscaleSoftware: SoftwareItem[] = [
     recommended: true,
   },
   {
-    name: "stable-diffusion.cpp ",
+    name: "stable-diffusion.cpp",
     description: "Reescalado integrado en la herramienta que genera tus imágenes.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
@@ -238,16 +241,16 @@ export const bgSoftware: SoftwareItem[] = [
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/bgremove/" },
     ],
     audience: "Quien quiere la mayor variedad de modelos y más control.",
-    pros: ["Mínimo consumo de memoria", "Muchos modelos disponibles"],
+    pros: ["Muchos modelos disponibles"],
     recommended: true,
   },
   {
     name: "imodify-cli",
-    description: "CLI para optimizar y retocar imágenes por lotes que quita fondos con ONNX: modo fast con BEN2 o hq con BiRefNet_512x512.",
+    description: "CLI para retocar imágenes por lotes y quitarles el fondo.",
     links: [
       { label: "Ver en npm", href: "https://www.npmjs.com/package/imodify-cli" },
     ],
-    audience: "Quien quiera una herramienta sencilla para retocar en lote.",
+    audience: "Quien quiere una herramienta sencilla para retocar en lote.",
     pros: ["Modelos automáticos, cero descargas manuales", "También sirve para recortar, redimensionar y convertir formatos"],
     cons: ["Requiere Node.js", "Solo dos modelos disponibles"],
   },
@@ -256,7 +259,7 @@ export const bgSoftware: SoftwareItem[] = [
 export const videoSoftware: SoftwareItem[] = [
   {
     name: "ComfyUI",
-    description: "Interfaz por nodos que también sirve flujos de vídeo.",
+    description: "Interfaz por nodos que también permite ejecutar flujos de vídeo.",
     links: [
       { label: "Sitio web", href: "https://www.comfy.org" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/comfyui/" },
@@ -265,7 +268,7 @@ export const videoSoftware: SoftwareItem[] = [
   },
   {
     name: "stable-diffusion.cpp",
-    description: "El mismo motor que puedes usar para generar fotos también genera vídeos.",
+    description: "El mismo motor que puedes usar para generar fotos también permite generar vídeos.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/sdcpp-i2v/" },
@@ -279,7 +282,7 @@ export const ocrSoftware: SoftwareItem[] = [
     name: "llama.cpp",
     description: "No solo sirve para texto: carga modelos multimodales que entienden imágenes, y también modelos dedicados solo a OCR.",
     links: [
-      { label: "Ver en GitHub", href: "https://github.com/ggerganov/llama.cpp" },
+      { label: "Ver en GitHub", href: "https://github.com/ggml-org/llama.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
     ],
     audience: "Quien ya lo usa para LLM y quiere OCR sin instalar nada más.",
@@ -307,7 +310,7 @@ export const classifierSoftware: SoftwareItem[] = [
       { label: "Ver en GitHub", href: "https://github.com/ggml-org/llama.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
     ],
-    audience: "Quien ya lo usa para LLM y quiere probar decisión.",
+    audience: "Quien ya lo usa para LLM y quiere probar modelos de decisión.",
     pros: ["Ya instalado si vienes de LLM", "Sirve los GGUF por API con llama-server"],
     cons: ["Más pesado que un clasificador dedicado"],
     recommended: true
@@ -324,7 +327,7 @@ export const embeddingSoftware: SoftwareItem[] = [
     ],
     audience: "Quien ya lo usa para LLM y quiere añadir búsqueda semántica sin instalar nada más.",
     pros: ["Nada más que instalar si ya lo usas", "Mismo flujo que ya conoces del texto", "Endpoint de embeddings integrado en llama-server"],
-    cons: ["Solo terminal, sin interfaz"], 
+    cons: ["Solo terminal, sin interfaz"],
     recommended: true
   },
 ];
@@ -334,13 +337,13 @@ export const appSoftware: SoftwareItem[] = [
     name: "Pinokio",
     description: "Lanzador que instala y ejecuta apps de IA con un clic. Automatiza toda la instalación y te olvidas de las dependencias.",
     links: [{ label: "Sitio web", href: "https://pinokio.co" }],
-    audience: "Quien quiere probar herramientas sin pelearse con Python u otras herramientas.",
+    audience: "Quien quiere probar aplicaciones de IA sin pelearse con Python u otras herramientas.",
     pros: ["Puedes ejecutar aplicaciones de IA sin complicaciones", "Un catálogo enorme donde elegir"],
-    cons: ["Consume mucho espacio en disco", "Consume más recursos que los motores de inferencia sueltos", "Las aplicaciones no verificadas pueden contener malware"],
+    cons: ["Utiliza mucho espacio en disco", "Consume más recursos que los motores de inferencia sueltos", "Las aplicaciones no verificadas pueden contener malware"],
   },
   {
     name: "Voicebox",
-    description: "App que automatiza el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
+    description: "App que facilita el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
     links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
     audience: "Quien quiere jugar con su voz sin tocar modelos.",
     pros:["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar", "Incluye una API para automatizar creaciones con la terminal"],
@@ -350,9 +353,9 @@ export const appSoftware: SoftwareItem[] = [
     name: "Upscayl Desktop",
     description: "Programa que permite usar modelos de reescalado sin configurar nada.",
     links: [{ label: "Sitio web", href: "https://upscayl.org/download" }],
-    audience: "Quien quiere jugar agrandar imágenes sin complicarse.",
-    pros:["No te preocupas por qué modelos utilizas", "Interfaz gráfica muy simple"],
-    cons: ["No controlas el modelo que utilizas", "Algunos modelos que incluyen tienen licencia para uso comercial"]
+    audience: "Quien quiere agrandar imágenes sin complicarse.",
+    pros:["Descarga de modelos automática", "Interfaz gráfica muy simple"],
+    cons: ["No controlas el modelo que utilizas", "Algunos modelos que incluyen no tienen licencia para uso comercial"]
   },
   {
     name: "Hex",
