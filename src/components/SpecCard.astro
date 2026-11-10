@@ -1,5 +1,4 @@
 ---
-import Placeholder from "@/components/Placeholder.astro";
 import type { SpecItem } from "@/types";
 
 interface Props {
@@ -10,13 +9,18 @@ const { item } = Astro.props;
 ---
 
 <article class="spec">
-  {item.photo ? (
-    <div class="photo">
-      <img src={item.photo} alt={item.photoAlt} loading="lazy" decoding="async" />
-    </div>
-  ) : (
-    <Placeholder label="TODO: foto real" ratio="4 / 3" />
-  )}
+  {
+    item.photo && (
+      <div class="photo">
+        <img
+          src={item.photo}
+          alt={item.photoAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    )
+  }
   <p class="eyebrow label">{item.label}</p>
   <p class="mono value">{item.value}</p>
   {item.detail && <p class="detail">{item.detail}</p>}
