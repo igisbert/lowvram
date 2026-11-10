@@ -36,4 +36,11 @@ const { title } = Astro.props;
   .textbox :global(p:not(.name) + p:not(.name)) {
     margin-top: var(--space-md);
   }
+
+  .textbox :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
 </style>
