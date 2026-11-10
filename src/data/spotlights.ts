@@ -1,6 +1,5 @@
 import type { SpotlightItem } from "@/types";
 
-/* UIs propias destacadas. Añadir una = añadir una entrada, sin tocar componentes. */
 export const diffusionSpotlights: SpotlightItem[] = [
   {
     name: "StableDiffusionUI",

@@ -1,6 +1,5 @@
 import type { VideoResult } from "@/types";
 
-/* Clip real de Wan2.2 sin datos de tiempo: no se va a repetir la generación. */
 export const videoResults: VideoResult[] = [
   {
     id: "wan2-2-ti2v-5b",

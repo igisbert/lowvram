@@ -20,7 +20,6 @@ import peliQwenQ6Csv from "@/data/charts/pelirroja/qwen2-1-q6-k.csv?raw";
 import peliZCsv from "@/data/charts/pelirroja/z-image.csv?raw";
 import peliZTurboCsv from "@/data/charts/pelirroja/z-image-turbo.csv?raw";
 
-/* Galería real: un prompt, una foto por modelo. */
 export const diffusionResults: ResultSet[] = [
   {
     id: "cobain-cat",
@@ -320,7 +319,6 @@ export const diffusionResults: ResultSet[] = [
   },
 ];
 
-/* Galería real: original + una ampliación por modelo. */
 export const upscaleResults: ResultSet[] = [
   {
     id: "upscale-gato-violin",
@@ -388,7 +386,6 @@ export const upscaleResults: ResultSet[] = [
   },
 ];
 
-/* Galería real: original + un recorte por modelo, con fondo de cuadros. */
 export const bgResults: ResultSet[] = [
   {
     id: "fondo-stalker",
