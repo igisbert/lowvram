@@ -1,6 +1,5 @@
 import type { SpecItem } from "@/types";
 
-/* Real specs del equipo. Fotos pendientes: sustituir el placeholder. */
 export const specs: SpecItem[] = [
   {
     id: "gpu",

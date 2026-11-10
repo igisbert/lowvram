@@ -1,10 +1,13 @@
 import type { PinokioApp, SoftwareItem } from "@/types";
 
 export const llmSoftware: SoftwareItem[] = [
-    {
+  {
     name: "Ollama",
     description: "Ejecuta modelos de lenguaje en local con un solo comando y ofrece una API compatible con OpenAI. Tiene su propio catálogo de modelos y una nube de pago por si alguno no cabe en tu equipo.",
-    links: [{ label: "Sitio web", href: "https://ollama.com" }],
+    links: [
+      { label: "Sitio web", href: "https://ollama.com" },
+      { label: "Ver en GitHub", href: "https://github.com/ollama/ollama" },
+    ],
     audience: "Quien quiere empezar rápido sin configurar nada.",
     pros: ["Instalación simple", "Descargas y ejecutas un modelo con un solo comando", "Se conecta fácil con otras aplicaciones"],
     cons: ["Menos control fino que llama.cpp"],
@@ -32,7 +35,10 @@ export const llmSoftware: SoftwareItem[] = [
   {
     name: "vLLM",
     description: "Motor para servir modelos desde un servidor, con una API compatible con OpenAI y un rendimiento muy alto cuando recibe muchas peticiones a la vez.",
-    links: [{ label: "Ver en GitHub", href: "https://github.com/vllm-project/vllm" }],
+    links: [
+      { label: "Sitio web", href: "https://vllm.ai" },
+      { label: "Ver en GitHub", href: "https://github.com/vllm-project/vllm" },
+    ],
     audience: "Quien quiere montar un servidor local para varias apps o usuarios a la vez.",
     pros: ["Rendimiento muy alto con peticiones simultáneas", "Ideal para servir modelos en red local o en la nube"],
     cons: ["Sobredimensionado para un equipo doméstico", "Mucho más complejo de instalar y configurar que llama.cpp"],
@@ -62,7 +68,7 @@ export const llmAgents: SoftwareItem[] = [
     audience: "Quien quiere más funciones y usar modelos en nube.",
     pros: ["Muchas más funciones que Pi", "Modelos cloud gratuitos incluidos"],
     cons: ["Menos ligero que Pi", "Consume más contexto de serie"],
-    recommended: true
+    recommended: true,
   },
   {
     name: "llama-server",
@@ -90,7 +96,7 @@ export const llmAgents: SoftwareItem[] = [
 export const diffusionSoftware: SoftwareItem[] = [
   {
     name: "stable-diffusion.cpp",
-    description: "Inferencia de difusión en C++: ligera y rápida, compatible con multitud de modelos y formatos, con cuantización opcional.",
+    description: "Inferencia de difusión en C++, ligera y rápida, compatible con multitud de modelos y formatos, con cuantización opcional.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/leejet/stable-diffusion.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/stablediffusioncpp/" },
@@ -116,14 +122,21 @@ export const diffusionSoftware: SoftwareItem[] = [
 export const transcriptionSoftware: SoftwareItem[] = [
   {
     name: "whisper.cpp",
-    description: "Motor de transcripción de audio en local. Convierte voz a texto sin nube.",
+    description: "Motor de transcripción en C++ sin dependencias, con aceleración por CUDA, Vulkan o CPU. Transcribe en cientos de idiomas con marcas de tiempo y también traduce.",
     links: [
       { label: "Repositorio", href: "https://github.com/ggml-org/whisper.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/whispercpp/" },
     ],
     audience: "Quien necesita transcribir un volumen considerable de audio en su propio equipo.",
-    pros: ["Con acceso a todos los modelos de Whisper"],
-    cons: ["Requiere archivos WAV de 16 bits, otros formatos necesitan conversión previa"],
+    pros: [
+      "Todos los modelos de Whisper, con cuantización opcional",
+      "100% offline y automatizable por scripts para audios largos",
+      "Incluye servidor HTTP con API tipo OpenAI y transcripción en tiempo real desde el micrófono",
+    ],
+    cons: [
+      "Requiere archivos WAV de 16 bits, otros formatos necesitan conversión previa",
+      "Binarios precompilados solo para CUDA, Vulkan toca compilarlo",
+    ],
     recommended: true,
   },
   {
@@ -133,7 +146,7 @@ export const transcriptionSoftware: SoftwareItem[] = [
     audience: "Quien quiere transcribir cosas pequeñas sin descargar nada manualmente.",
     pros: ["Cero instalación, todo en el navegador", "Modelos pequeños y rápidos"],
     cons: ["Anclado a las limitaciones de los navegadores", "Sin acceso a los modelos más grandes y precisos"],
-    recommended: true
+    recommended: true,
   },
   {
     name: "audio.cpp",
@@ -150,7 +163,7 @@ export const transcriptionSoftware: SoftwareItem[] = [
 export const voiceSoftware: SoftwareItem[] = [
   {
     name: "qwentts.cpp",
-    description: "Motor de inferencia para pasar texto a voz en local con el modelo Qwen3-TTS: clonar una voz, usar voces integradas o diseñar una desde una descripción.",
+    description: "Motor de inferencia para pasar texto a voz en local con el modelo Qwen3-TTS, para clonar una voz, usar voces integradas o diseñar una desde una descripción.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/ServeurpersoCom/qwentts.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/qwen-tts/" },
@@ -159,16 +172,16 @@ export const voiceSoftware: SoftwareItem[] = [
     pros: ["Clonación a partir de un audio de referencia", "Servidor con API compatible con OpenAI"],
     cons: ["Hay que compilarlo"],
   },
-    {
+  {
     name: "Voicebox",
-    description: "App que automatiza el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
+    description: "App que facilita el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
     links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
     audience: "Quien quiere jugar con su voz sin tocar modelos.",
     pros: ["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar", "Incluye una API para automatizar creaciones con la terminal"],
-    cons: ["Dependencia de terceros: si sale un modelo mejor, no puedes usarlo hasta que lo actualicen"],
-    recommended: true
+    cons: ["Depende de terceros, así que si sale un modelo mejor, no puedes usarlo hasta que lo actualicen"],
+    recommended: true,
   },
-{
+  {
     name: "audio.cpp",
     description: "Motor todo en uno para modelos de audio. Incluye transcripción, generación de música y voz, con UI web y sin configurar nada.",
     links: [
@@ -208,14 +221,14 @@ export const musicSoftware: SoftwareItem[] = [
 export const upscaleSoftware: SoftwareItem[] = [
   {
     name: "upscayl-bin",
-    description: "CLI de reescalado del proyecto Upscayl: usa modelos Real-ESRGAN sobre ncnn con aceleración Vulkan, todo en local.",
+    description: "CLI de reescalado del proyecto Upscayl que usa modelos Real-ESRGAN sobre ncnn con aceleración Vulkan, todo en local.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/upscayl/upscayl-ncnn" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/upscaler/" },
     ],
     audience: "Quien necesita máximo control sobre el reescalado.",
     pros: ["Multitud de modelos disponibles", "Modo TTA para máxima calidad"],
-    cons: ["Solo terminal"],
+    cons: ["Solo terminal, sin interfaz"],
     recommended: true,
   },
   {
@@ -235,13 +248,14 @@ export const upscaleSoftware: SoftwareItem[] = [
 export const bgSoftware: SoftwareItem[] = [
   {
     name: "vision.cpp",
-    description: "Visión por computador en C++ al estilo llama.cpp: ejecuta modelos GGUF en GPU o CPU con la mínima memoria.",
+    description: "Visión por computador en C++ al estilo llama.cpp que ejecuta modelos GGUF en GPU o CPU con la mínima memoria.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/Acly/vision.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/bgremove/" },
     ],
     audience: "Quien quiere la mayor variedad de modelos y más control.",
     pros: ["Muchos modelos disponibles"],
+    cons: ["Sin backend CUDA nativo"],
     recommended: true,
   },
   {
@@ -280,21 +294,21 @@ export const videoSoftware: SoftwareItem[] = [
 export const ocrSoftware: SoftwareItem[] = [
   {
     name: "llama.cpp",
-    description: "No solo sirve para texto: carga modelos multimodales que entienden imágenes, y también modelos dedicados solo a OCR.",
+    description: "No solo sirve para texto, también carga modelos multimodales que entienden imágenes y modelos dedicados solo a OCR.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/ggml-org/llama.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
     ],
     audience: "Quien ya lo usa para LLM y quiere OCR sin instalar nada más.",
     pros: ["Nada más que instalar si ya lo usas", "Mismo flujo que ya conoces del texto"],
-    recommended: true
+    recommended: true,
   },
 ];
 
 export const classifierSoftware: SoftwareItem[] = [
   {
     name: "laya.cpp",
-    description: "Motor para clasificar y decidir, no para generar texto: le pasas un estado y preguntas tipadas y devuelve probabilidades calibradas.",
+    description: "Motor para clasificar y decidir, no para generar texto, que recibe un estado y preguntas tipadas y devuelve probabilidades calibradas.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/lkarlslund/laya.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/layacpp/" },
@@ -313,7 +327,7 @@ export const classifierSoftware: SoftwareItem[] = [
     audience: "Quien ya lo usa para LLM y quiere probar modelos de decisión.",
     pros: ["Ya instalado si vienes de LLM", "Sirve los GGUF por API con llama-server"],
     cons: ["Más pesado que un clasificador dedicado"],
-    recommended: true
+    recommended: true,
   },
 ];
 
@@ -328,7 +342,7 @@ export const embeddingSoftware: SoftwareItem[] = [
     audience: "Quien ya lo usa para LLM y quiere añadir búsqueda semántica sin instalar nada más.",
     pros: ["Nada más que instalar si ya lo usas", "Mismo flujo que ya conoces del texto", "Endpoint de embeddings integrado en llama-server"],
     cons: ["Solo terminal, sin interfaz"],
-    recommended: true
+    recommended: true,
   },
 ];
 
@@ -346,24 +360,24 @@ export const appSoftware: SoftwareItem[] = [
     description: "App que facilita el uso de modelos como Qwen3-TTS, Whisper o Chatterbox. Permite crear y clonar voces.",
     links: [{ label: "Sitio web", href: "https://voicebox.sh" }],
     audience: "Quien quiere jugar con su voz sin tocar modelos.",
-    pros:["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar", "Incluye una API para automatizar creaciones con la terminal"],
-    cons: ["Dependencia de terceros. Si se lanza un modelo mejor no lo puedes utilizar hasta que los creadores actualicen"]
+    pros: ["Descarga de modelos automática", "Guarda perfiles de voz para reutilizarlos", "Interfaz gráfica muy fácil de usar", "Incluye una API para automatizar creaciones con la terminal"],
+    cons: ["Depende de terceros, así que si sale un modelo mejor, no puedes usarlo hasta que lo actualicen"],
   },
   {
     name: "Upscayl Desktop",
     description: "Programa que permite usar modelos de reescalado sin configurar nada.",
     links: [{ label: "Sitio web", href: "https://upscayl.org/download" }],
     audience: "Quien quiere agrandar imágenes sin complicarse.",
-    pros:["Descarga de modelos automática", "Interfaz gráfica muy simple"],
-    cons: ["No controlas el modelo que utilizas", "Algunos modelos que incluyen no tienen licencia para uso comercial"]
+    pros: ["Descarga de modelos automática", "Interfaz gráfica muy simple"],
+    cons: ["No controlas el modelo que utilizas", "Algunos modelos que incluyen no tienen licencia para uso comercial"],
   },
   {
     name: "Hex",
     description: "Aplicación de escritorio para escribir texto mediante dictado por voz.",
     links: [{ label: "Sitio web", href: "https://anoma.ly/hex/" }],
     audience: "Quien quiere escribir usando la voz.",
-    pros:["Autodetección de hardware e idioma", "Muchos modelos para utilizar y se descargan automáticamente", "Muy transparente al usuario, simplemente funciona"],
-    cons: ["Siempre tienes un modelo cargado en memoria", "Tiene un consumo de recursos considerable"]
+    pros: ["Autodetección de hardware e idioma", "Muchos modelos para utilizar y se descargan automáticamente", "Muy transparente al usuario, simplemente funciona"],
+    cons: ["Siempre tienes un modelo cargado en memoria", "Tiene un consumo de recursos considerable"],
   },
 ];
 
@@ -383,14 +397,14 @@ export const pinokioApps: PinokioApp[] = [
   {
     name: "RMBG-2-Studio",
     purpose:
-      "Borra el fondo de una imagen con BRIA-RMBG-2.0 (licencia no comercial). ",
+      "Borra el fondo de una imagen con BRIA-RMBG-2.0 (licencia no comercial).",
     url: "https://pinokio.co/apps/github-com-pinokiofactory-rmbg-2-studio",
   },
   {
     name: "Whisper-WebUI",
     purpose:
-      "Utiliza Whisper en local.",
-    url: "https://beta.pinokio.co/apps/github-com-pinokiofactory-whisper-webui",
+      "Transcribe audio en local con Whisper.",
+    url: "https://pinokio.co/apps/github-com-pinokiofactory-whisper-webui",
   },
   {
     name: "Clarity Refiners UI",
