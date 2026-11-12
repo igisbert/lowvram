@@ -21,7 +21,7 @@ export const verdicts: Verdict[] = [
     fullModel: "MiMo-V2.6-Distill-Qwen-9B-Q4_K_S.gguf",
     avgSpeed: "~43 t/s de media",
     strengths: [
-      "Crea estilos bastante decentes."
+      "Crea estilos CSS bastante decentes."
     ],
     issues: [
       "Ignora restricciones explícitas del prompt, comete errores con frecuencia y a veces se interrumpe.",
@@ -39,7 +39,7 @@ export const verdicts: Verdict[] = [
       "En razonamiento es el mejor de los que he podido probar en mi equipo.",
     ],
     issues: [
-      "Ni cuantizado a dos bits cabe entero en 8 GB así que parte del modelo pasa a la RAM y la velocidad baja.",
+      "Ni cuantizado a dos bits cabe entero en 8 GB, así que parte del modelo pasa a la RAM y la velocidad baja.",
       "Con una cuantización tan agresiva puede cometer pequeños errores o entrar en bucle.",
     ],
   },

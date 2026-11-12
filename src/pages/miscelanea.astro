@@ -58,7 +58,7 @@ const anchors = [
         <p>
           Al adjuntar un fichero PDF para el OCR, llama-server lo convierte
           automáticamente a imagen para procesarlo. Si los PDF tienen más de una
-          página, prácticamente todas los intentos me ha devuelto el contenido
+          página, prácticamente todos los intentos me han devuelto el contenido
           de una página o, en algunas ocasiones, se ha quedado en bucle
           infinito.
         </p>
@@ -99,7 +99,7 @@ const anchors = [
         <p>
           Para fotos con texto legible, en general, todos cumplen. En fotos muy
           complicadas (texto en espiral, papeles arrugados, fuentes
-          ininteligibles) fallan. Y en documentos de varias páginas funciona
+          ilegibles) fallan. Y en documentos de varias páginas funciona
           regular.
         </p>
       </TextBox>
@@ -122,15 +122,15 @@ const anchors = [
         output={juliaOutput.trim()}
         model="Julia-1-BF16"
         runner="llama-server"
-        duration="<1s"
-        conclusion="Julia es el que más seguridad tiene en la opción correcta. Además, ha sido consistente al eleminar la palabra 'shot' del criterio 'three shot'. "
+        duration="<1 s"
+        conclusion="Julia es el que más seguridad tiene en la opción correcta. Además, ha sido consistente al eliminar la palabra 'shot' del criterio 'three shot'. "
       />
       <DecisionDemo
         input={decisionInput.trim()}
         output={layaOutput.trim()}
         model="Laya-BF16"
         runner="llama-server"
-        duration="<1s"
+        duration="<1 s"
         conclusion="Laya, aunque acierta, no tiene la seguridad de Julia. Además, al eliminar la palabra 'shot' del criterio 'three shot', la probabilidad se desplomaba, subiendo mucho la probabilidad de las opciones que no son correctas. "
       />
       <DecisionDemo
@@ -138,7 +138,7 @@ const anchors = [
         output={kevOutput.trim()}
         model="Kev-4B-Q4_K_M"
         runner="llama-server"
-        duration="<1s"
+        duration="<1 s"
         conclusion="Kev es el que menos seguridad tiene en la respuesta correcta. Al igual que Laya, al eliminar la palabra 'shot' del criterio fallaba más, prácticamente igualando las tres puntuaciones. "
       />
     </Section>

@@ -9,36 +9,24 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-{
-  items.length === 0 ? (
-    <div class="empty" role="status">
-      <p class="mono">Sin resultados todavía</p>
-      <p>
-        TODO: sustituir por datos reales. Cuando generes tus vídeos, añade una
-        entrada al array y aparecerá aquí.
-      </p>
-    </div>
-  ) : (
-    <div class="videos">
-      {items.map((item) => (
-        <article class="card">
-          <div class="frame">
-            <video
-              src={item.src}
-              controls
-              preload="metadata"
-              aria-label={item.label}
-            >
-              Tu navegador no soporta vídeo HTML5.
-            </video>
-            <span class="mono badge">{item.model}</span>
-          </div>
-          {item.prompt ? <p class="mono prompt">{item.prompt}</p> : null}
-        </article>
-      ))}
-    </div>
-  )
-}
+<div class="videos">
+  {items.map((item) => (
+    <article class="card">
+      <div class="frame">
+        <video
+          src={item.src}
+          controls
+          preload="metadata"
+          aria-label={item.label}
+        >
+          Tu navegador no soporta vídeo HTML5.
+        </video>
+        <span class="mono badge">{item.model}</span>
+      </div>
+      {item.prompt ? <p class="mono prompt">{item.prompt}</p> : null}
+    </article>
+  ))}
+</div>
 
 <style>
   .videos {
@@ -97,24 +85,4 @@ const { items } = Astro.props;
     overflow-wrap: anywhere;
   }
 
-  .empty {
-    background: var(--canvas-soft);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
-    padding: var(--space-3xl);
-    text-align: center;
-
-    p:first-child {
-      color: var(--ink);
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-    }
-
-    p:last-child {
-      color: var(--mute);
-      font-size: 0.875rem;
-      margin-inline: auto;
-    }
-  }
 </style>

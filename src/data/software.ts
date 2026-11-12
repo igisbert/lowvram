@@ -135,7 +135,7 @@ export const transcriptionSoftware: SoftwareItem[] = [
     ],
     cons: [
       "Requiere archivos WAV de 16 bits, otros formatos necesitan conversión previa",
-      "Binarios precompilados solo para CUDA, Vulkan toca compilarlo",
+      "Binarios precompilados solo para CUDA, para Vulkan toca compilarlo",
     ],
     recommended: true,
   },
@@ -314,19 +314,29 @@ export const classifierSoftware: SoftwareItem[] = [
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/layacpp/" },
     ],
     audience: "Quien necesita decisiones automáticas rápidas sin gastar tokens de un LLM.",
-    pros: ["Modelos de menos de 1 GB", "API compatible con Jev"],
-    cons: ["Sin binarios precompilados, hay que compilarlo"],
+    pros: [
+      "Modelos de menos de 1 GB",
+      "Binarios precompilados para Windows, Linux y macOS",
+      "API compatible con Jev",
+    ],
+    cons: [
+      "Solo los tres modelos de Laya, no puede cargar otros modelos clasificadores",
+      "Las entradas que exceden el límite de tokens las rechaza, no las trunca",
+    ],
+    recommended: true,
   },
   {
     name: "llama.cpp",
-    description: "Motor usado en las pruebas con los modelos GGUF de decisión.",
+    description: "Motor generalista de LLM que también carga modelos de decisión en GGUF.",
     links: [
       { label: "Ver en GitHub", href: "https://github.com/ggml-org/llama.cpp" },
       { label: "Guía", href: "https://ai.manz.dev/learn/setup/llamacpp/" },
     ],
     audience: "Quien ya lo usa para LLM y quiere probar modelos de decisión.",
-    pros: ["Ya instalado si vienes de LLM", "Sirve los GGUF por API con llama-server"],
-    cons: ["Más pesado que un clasificador dedicado"],
+    pros: [
+      "Ya instalado si lo usar para LLMs u otras tareas",
+      "Acepta cualquier modelo de decisión en GGUF",
+    ],
     recommended: true,
   },
 ];
@@ -369,7 +379,7 @@ export const appSoftware: SoftwareItem[] = [
     links: [{ label: "Sitio web", href: "https://upscayl.org/download" }],
     audience: "Quien quiere agrandar imágenes sin complicarse.",
     pros: ["Descarga de modelos automática", "Interfaz gráfica muy simple"],
-    cons: ["No controlas el modelo que utilizas", "Algunos modelos que incluyen no tienen licencia para uso comercial"],
+    cons: ["No controlas el modelo que utilizas", "Algunos modelos que incluidos no tienen licencia para uso comercial"],
   },
   {
     name: "Hex",

@@ -28,13 +28,7 @@ const columns = [
 ] as const;
 ---
 
-{items.length === 0 ? (
-  <div class="empty" role="status">
-    <p class="mono">Sin modelos todavía</p>
-    <p>TODO: sustituir por datos reales. Añade una entrada al array y aparecerá aquí.</p>
-  </div>
-) : (
-  <div class="scroller" tabindex="0" role="region" aria-label="Modelos, tabla con scroll horizontal">
+<div class="scroller" tabindex="0" role="region" aria-label="Modelos, tabla con scroll horizontal">
     <table class="models mono" data-sortable>
       <thead>
         <tr>
@@ -79,7 +73,6 @@ const columns = [
       </tbody>
     </table>
   </div>
-)}
 
 <script>
   for (const table of document.querySelectorAll<HTMLTableElement>("table[data-sortable]")) {
@@ -198,24 +191,4 @@ const columns = [
     }
   }
 
-  .empty {
-    background: var(--canvas-soft);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius);
-    padding: var(--space-3xl);
-    text-align: center;
-
-    p:first-child {
-      color: var(--ink);
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-    }
-
-    p:last-child {
-      color: var(--mute);
-      font-size: 0.875rem;
-      margin-inline: auto;
-    }
-  }
 </style>

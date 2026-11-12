@@ -1,5 +1,6 @@
 ---
 import Footer from "@/components/Footer.astro";
+import Faq from "@/components/Faq.astro";
 import Header from "@/components/Header.astro";
 import Info from "@/components/Info.astro";
 import Section from "@/components/Section.astro";
@@ -43,7 +44,7 @@ import Layout from "@/layouts/Layout.astro";
       <p>
         Tus datos no salen de tu equipo. Sin cuentas, sin telemetría, sin
         entrenamiento, sin que tus textos o tus fotos acaben en un servidor
-        ajeno. Si trabajas con datos sensibles o valoras tu privacidad es un
+        ajeno. Si trabajas con datos sensibles o valoras tu privacidad, es un
         argumento de peso.
       </p>
       <p>
@@ -85,17 +86,7 @@ import Layout from "@/layouts/Layout.astro";
       </p>
     </Section>
 
-    <section class="band">
-      <div class="container">
-        <aside class="disclaimer">
-          <p>
-            Soy un aficionado trasteando con estas herramientas, no soy un
-            experto. Lo que muestro puede no ser del todo correcto y las pruebas
-            que hago pueden no ser ideales.
-          </p>
-        </aside>
-      </div>
-    </section>
+    <Faq />
 
     <Section eyebrow="Mi equipo" title="Mis especificaciones">
       <p>
@@ -121,17 +112,5 @@ import Layout from "@/layouts/Layout.astro";
     font-size: 1.125rem;
     color: var(--body);
     margin: 0;
-  }
-
-  .disclaimer {
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
-    border: 1px solid var(--accent);
-    border-radius: var(--radius);
-    padding: var(--space-lg) var(--space-xl);
-
-    p {
-      margin: 0;
-      font-size: 1.25em;
-    }
   }
 </style>

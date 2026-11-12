@@ -15,6 +15,32 @@ const siteName = "lowvram · IA local con 8 GB de VRAM";
 const fullTitle = seoTitle ?? `${title} · ${siteName}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/og.png", Astro.site);
+
+const website = {
+  "@type": "WebSite",
+  "@id": new URL("/", Astro.site).href,
+  name: "lowvram",
+  url: Astro.site?.href,
+  inLanguage: "es-ES",
+  author: { "@type": "Person", name: "Inaki" },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    website,
+    {
+      "@type": "WebPage",
+      "@id": canonical.href,
+      url: canonical.href,
+      name: fullTitle,
+      description,
+      inLanguage: "es-ES",
+      isPartOf: { "@id": website["@id"] },
+      primaryImageOfPage: { "@type": "ImageObject", contentUrl: ogImage.href },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -40,6 +66,7 @@ const ogImage = new URL("/og.png", Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{fullTitle}</title>
   </head>
