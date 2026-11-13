@@ -49,12 +49,21 @@ const { sets, scrollTarget } = Astro.props;
     if (panels.length < 2) continue;
 
     const show = (next: number) => {
-      panels.forEach((panel, i) => {
-        panel.hidden = i !== next;
-      });
-      thumbs.forEach((thumb, i) => {
-        thumb.setAttribute("aria-pressed", String(i === next));
-      });
+      const apply = () => {
+        panels.forEach((panel, i) => {
+          panel.hidden = i !== next;
+        });
+        thumbs.forEach((thumb, i) => {
+          thumb.setAttribute("aria-pressed", String(i === next));
+        });
+      };
+      // Take the panel's first image off lazy-loading so its fetch starts
+      // (hidden panels never intersect), then decode it before the swap so it
+      // doesn't flash an empty frame.
+      const img = panels[next]?.querySelector("img");
+      if (img) img.loading = "eager";
+      const ready = img ? img.decode().catch(() => {}) : Promise.resolve();
+      ready.then(apply);
     };
 
     thumbs.forEach((thumb, i) => {

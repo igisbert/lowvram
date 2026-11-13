@@ -101,6 +101,67 @@ const charts = set.images.map((image) =>
 </figure>
 
 <script>
+  // Cache warming: gallery images are original PNGs (up to 8 MB), so they are
+  // loaded one by one during idle time, without competing with the page load.
+  const connection = (navigator as any).connection;
+  const slow =
+    connection?.saveData || ["slow-2g", "2g", "3g"].includes(connection?.effectiveType);
+
+  const warmed = new Set<string>();
+  let queue: Promise<unknown> = Promise.resolve();
+
+  const warm = (src: string): Promise<void> => {
+    const url = new URL(src, location.href).href;
+    if (warmed.has(url)) return Promise.resolve();
+    warmed.add(url);
+    return new Promise<void>((resolve) => {
+      const img = new Image();
+      img.onload = img.onerror = () => resolve();
+      img.setAttribute("fetchpriority", "low");
+      img.src = url;
+    });
+  };
+
+  const whenIdle = (cb: () => void) => {
+    if ("requestIdleCallback" in window) window.requestIdleCallback(cb);
+    else setTimeout(cb, 200);
+  };
+
+  const enqueue = (root: Element) => {
+    const imgs = [...root.querySelectorAll<HTMLImageElement>("img")];
+    for (const img of imgs) {
+      const src = img.currentSrc || img.src;
+      queue = queue.then(() => new Promise<void>((r) => whenIdle(() => warm(src).then(r))));
+    }
+  };
+
+  const start = () => {
+    if (slow) return;
+    const first = document.querySelector<HTMLImageElement>("[data-carousel] img");
+    first?.setAttribute("fetchpriority", "high");
+
+    const io = new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.unobserve(entry.target);
+          enqueue(entry.target);
+        }
+      },
+      { rootMargin: "800px 0px" },
+    );
+
+    for (const el of document.querySelectorAll("[data-showcase], [data-carousel]")) {
+      // Showcases already warm their nested carousels; standalone carousels are
+      // observed directly. Hidden panels have no box, so they can't be observed.
+      if (!el.hasAttribute("data-showcase") && el.closest("[data-showcase]") !== null) continue;
+      io.observe(el);
+    }
+  };
+
+  if (document.readyState === "complete") start();
+  else window.addEventListener("load", start, { once: true });
+
   for (const root of document.querySelectorAll<HTMLElement>("[data-carousel]")) {
     const slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
     const dots = [...root.querySelectorAll<HTMLButtonElement>("[data-dot]")];
@@ -110,16 +171,40 @@ const charts = set.images.map((image) =>
     const next = root.querySelector<HTMLButtonElement>("[data-next]");
     let index = 0;
 
-    const show = (nextIndex: number) => {
-      index = (nextIndex + slides.length) % slides.length;
+    let commitChain: Promise<void> = Promise.resolve();
+
+    const commit = (target: number) => {
+      index = target;
       slides.forEach((slide, i) => {
-        slide.hidden = i !== index;
+        slide.hidden = i !== target;
       });
       dots.forEach((dot, i) => {
-        dot.setAttribute("aria-selected", String(i === index));
-        dot.classList.toggle("current", i === index);
+        dot.setAttribute("aria-selected", String(i === target));
+        dot.classList.toggle("current", i === target);
       });
-      if (position) position.textContent = `${index + 1} / ${slides.length}`;
+      if (position) position.textContent = `${target + 1} / ${slides.length}`;
+    };
+
+    const show = (nextIndex: number) => {
+      const target = (nextIndex + slides.length) % slides.length;
+      // Take the next image off lazy-loading so its fetch actually starts
+      // (display:none slides never intersect), then decode it before
+      // revealing, so a big PNG never paints an empty frame.
+      const img = slides[target]?.querySelector("img");
+      commitChain = commitChain.then(async () => {
+        if (img) img.loading = "eager";
+        await img?.decode().catch(() => {});
+        commit(target);
+        // Warm the neighbours just in time, in case the idle queue hasn't
+        // reached them yet.
+        for (const offset of [-1, 1]) {
+          const neighbour = slides[
+            (target + offset + slides.length) % slides.length
+          ]?.querySelector("img");
+          const src = neighbour?.getAttribute("src");
+          if (src) queue = queue.then(() => warm(src));
+        }
+      });
     };
 
     prev?.addEventListener("click", () => show(index - 1));
