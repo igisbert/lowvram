@@ -1,15 +1,5 @@
 ---
 import { Quote } from "@lucide/astro";
-
-const jokes = [
-  "No hagáis más carteles con ChatGPT, por favor",
-  "Hay vida más allá de los modelos frontera",
-  "Nos comen los chinos",
-  "Sam Altman, suéltame el brazo",
-  "Tranquilo, Jensen Huang, amar no es delito",
-];
-
-const joke = jokes[Math.floor(Math.random() * jokes.length)];
 ---
 
 <footer class="site-footer">
@@ -19,10 +9,24 @@ const joke = jokes[Math.floor(Math.random() * jokes.length)];
       <span class="quote open" aria-hidden="true"
         ><Quote size={24} stroke-width={1} /></span
       >
-      <p class="text">{joke}</p>
+      <p class="text">Hay vida más allá de los modelos frontera</p>
     </blockquote>
   </div>
 </footer>
+
+<script>
+  // Pick a random footer joke on every page load, so it varies in real time.
+  const jokes = [
+    "No hagáis más carteles con ChatGPT, por favor",
+    "Hay vida más allá de los modelos frontera",
+    "Nos comen los chinos",
+    "Sam Altman, suéltame el brazo",
+    "Tranquilo, Jensen Huang, amar no es delito",
+  ];
+
+  const text = document.querySelector(".site-footer .joke .text");
+  if (text) text.textContent = jokes[Math.floor(Math.random() * jokes.length)];
+</script>
 
 <style>
   .site-footer {
